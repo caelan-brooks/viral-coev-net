@@ -70,8 +70,8 @@ class Population:
         self.gamma = gamma  # Recover rate
         self.D = D  # Mutation rate (diffusion rate)
         self.Nh = Nh  # Number of hosts in this population
-        self.viral_density = viral_density # viral density in this population at t = 0
-        self.immune_density = immune_density # immune density in this population at t=0
+        self.viral_density = viral_density.copy() # viral density in this population at t = 0
+        self.immune_density = immune_density.copy() # immune density in this population at t=0
         self.stochastic = stochastic # is the simulation stochastic? 
 
         self.xs = np.arange(-L/2, L/2, dx)  # Vector of antigenic points
