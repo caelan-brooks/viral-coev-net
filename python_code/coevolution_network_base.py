@@ -5,6 +5,41 @@ import matplotlib.pyplot as plt
 plt.rcParams['text.usetex'] = True
 plt.rcParams['font.family'] = 'serif'
 
+import numpy as np
+
+class Simulation:
+    def __init__(self, network, dt, final_time, start_time=0):
+        """
+        Initializes a new instance of the Simulation class.
+
+        :param network: The initial network configuration for the simulation.
+        :param dt: The time step size for the simulation.
+        :param final_time: The final time point for the simulation.
+        :param start_time: The start time for the simulation, default is 0.
+        """
+        self.network = network
+        self.results = [network.copy()]  # Initializing the results list with the initial network configuration as the first element
+        self.dt = dt  # Setting the time step size
+        self.final_time = final_time  # Setting the final time of the simulation
+        self.start_time = start_time  # Setting the start time of the simulation
+
+        # Creating an array of time points from start_time to final_time with a step size of dt
+        self.times = np.arange(start_time, final_time, dt)  
+
+        # Calculating the number of time points in the simulation
+        self.num_time_points = len(self.times)  
+    
+    def run_simulation(self):
+        """
+        Runs the simulation over the specified time period, with each step incrementing by dt.
+        At each step, it evolves the network state by calling the single_step_evolve_network method
+        of the network object and saves the new network state in the results list.
+        """
+        for time in self.times:
+            self.network.single_step_evolve_network(self.dt)
+            self.results.append(self.network.copy())
+
+
 class Network:
     def __init__(self, populations, migration_matrix):
         """
@@ -44,6 +79,23 @@ class Network:
         # Assign the new viral densities back to the populations
         for i, pop in enumerate(self.populations):
             pop.viral_density = new_viral_densities[i]
+    def copy(self):
+        """
+        Creates a deep copy of the Network instance.
+
+        :return: A new Network instance with the same properties as the current instance.
+        """
+        # Create deep copies of each population in the populations list
+        populations_copy = [population.copy() for population in self.populations]
+        
+        # Create a deep copy of the migration_matrix
+        migration_matrix_copy = self.migration_matrix.copy()
+        
+        # Create a new Network instance with the copied data and return it
+        return Network(populations_copy, migration_matrix_copy)
+
+
+    
     
 
 
@@ -113,6 +165,28 @@ class Population:
         ax2.legend(loc='upper right')
 
         plt.show()
+
+    def copy(self):
+        """
+        Creates a deep copy of the Population instance.
+
+        :return: A new Population instance with the same properties as the current instance.
+        """
+        return Population(
+            L=self.L,
+            dx=self.dx,
+            r=self.r,
+            M=self.M,
+            beta=self.beta,
+            alpha=self.alpha,
+            gamma=self.gamma,
+            D=self.D,
+            Nh=self.Nh,
+            viral_density=self.viral_density,
+            immune_density=self.immune_density,
+            stochastic=self.stochastic,
+            time_stamp=self.time_stamp
+        )
 
 @jit(nopython=True)
 def cross_reactive_convolution(num_antigen_points, immune_density, dx, r):
