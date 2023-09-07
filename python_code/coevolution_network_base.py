@@ -60,7 +60,7 @@ class Population:
     This class holds all the data, viral densities and immune densities for a given deme. We will use this class to construct
     a Network object as a collection of Population objects
     '''
-    def __init__(self, L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density, stochastic=True):
+    def __init__(self, L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density, stochastic=True, time_stamp=0.0):
         self.L = L  # Length of antigenic space
         self.dx = dx  # Discretization of antigenic space
         self.r = r  # Cross-reactivity
@@ -73,6 +73,7 @@ class Population:
         self.viral_density = viral_density.copy() # viral density in this population at t = 0
         self.immune_density = immune_density.copy() # immune density in this population at t=0
         self.stochastic = stochastic # is the simulation stochastic? 
+        self.time_stamp = time_stamp
 
         self.xs = np.arange(-L/2, L/2, dx)  # Vector of antigenic points
         self.num_antigen_points = np.size(self.xs)  # Number of antigenic points
@@ -95,6 +96,8 @@ class Population:
             cross_reactive_convolution_func=cross_reactive_convolution,
             stochastic = self.stochastic
         )
+
+        self.time_stamp += dt
 
     def plot(self, ax1=None, ax2=None, color1='tab:blue', color2='tab:red'):
         if ax1 is None and ax2 is None:
