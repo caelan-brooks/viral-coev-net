@@ -49,7 +49,8 @@ def run_single_simulation(args):
         pickle.dump(result_dict, file)
 
 if __name__ == '__main__':
-    migration_rates = np.logspace(-6,-0.5,8)  # Example migration rates to sweep over
+    # migration_rates = np.logspace(-6,-0.5,8)  # Example migration rates to sweep over
+    migration_rates = np.logspace(-6,0.5,9)  # Example migration rates to sweep over
     start_rep = 0
     num_replicates = 1000
 

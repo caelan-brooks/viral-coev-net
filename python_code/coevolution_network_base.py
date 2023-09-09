@@ -8,36 +8,41 @@ plt.rcParams['font.family'] = 'serif'
 import numpy as np
 
 class Simulation:
-    def __init__(self, network, dt, final_time, start_time=0):
+    def __init__(self, initial_network, dt, duration):
         """
         Initializes a new instance of the Simulation class.
 
         :param network: The initial network configuration for the simulation.
         :param dt: The time step size for the simulation.
-        :param final_time: The final time point for the simulation.
-        :param start_time: The start time for the simulation, default is 0.
+        :param duration: The total duration for the new simulation to run.
         """
-        self.network = network
-        self.results = [network.copy()]  # Initializing the results list with the initial network configuration as the first element
-        self.dt = dt  # Setting the time step size
-        self.final_time = final_time  # Setting the final time of the simulation
-        self.start_time = start_time  # Setting the start time of the simulation
+        self.network = initial_network.copy()
+        self.trajectory = [self.network.copy()]
+        self.dt = dt
+        self.duration = duration
+        self.duration_times = np.arange(0, self.duration, dt)
+        
+        self.simulation_complete = False  # Initializing simulation_complete as False
 
-        # Creating an array of time points from start_time to final_time with a step size of dt
-        self.times = np.arange(start_time, final_time, dt)  
-
-        # Calculating the number of time points in the simulation
-        self.num_time_points = len(self.times)  
-    
     def run_simulation(self):
         """
         Runs the simulation over the specified time period, with each step incrementing by dt.
-        At each step, it evolves the network state by calling the single_step_evolve_network method
-        of the network object and saves the new network state in the results list.
         """
-        for time in self.times:
+        if self.simulation_complete:
+            raise RuntimeError("Simulation has already been run and cannot be run again.")  # Raise an error if simulation has already been completed
+
+        for time in self.duration_times:
             self.network.single_step_evolve_network(self.dt)
-            self.results.append(self.network.copy())
+            self.trajectory.append(self.network.copy())
+
+        # Updating the times list with the new time stamps
+        self.times = [network.populations[0].time_stamp for network in self.trajectory]
+        self.num_time_points = len(self.times)
+
+        self.simulation_complete = True  # Set simulation_complete to True at the end of the simulation
+
+
+
 
 
 class Network:
@@ -71,7 +76,7 @@ class Network:
             pop.single_step_evolve(dt)
         
         # Then, calculate the change in viral densities due to migration
-        new_viral_densities = [pop.viral_density for pop in self.populations]  # Create a copy to store new densities
+        new_viral_densities = [np.copy(pop.viral_density) for pop in self.populations]  # Create a copy to store new densities
         for i, pop in enumerate(self.populations):
             migration_effect = calculate_migration_effect(self.populations, self.migration_matrix, i)
             new_viral_densities[i] += dt * migration_effect
@@ -79,6 +84,7 @@ class Network:
         # Assign the new viral densities back to the populations
         for i, pop in enumerate(self.populations):
             pop.viral_density = new_viral_densities[i]
+            
     def copy(self):
         """
         Creates a deep copy of the Network instance.
@@ -236,7 +242,8 @@ def single_step_evolve(dt, D, dx, viral_density, beta, alpha, gamma, M, num_anti
     Returns:
     tuple: The updated viral and immune densities.
     """
-    
+    viral_density = np.copy(viral_density); immune_density = np.copy(immune_density)
+
     # Compute the change in viral density due to mutation (diffusion)
     dndt_mutation = compute_mutation_effect(D, dx, viral_density)
     
@@ -266,6 +273,7 @@ def single_step_evolve(dt, D, dx, viral_density, beta, alpha, gamma, M, num_anti
     
     # Apply stochastic variations to the viral densities if stochastic parameter is True
     if stochastic:
+        viral_density[viral_density < 0] = 0 # Setting negative values to zero
         viral_density = apply_stochasticity(dx, num_antigen_points, viral_density)
     
     return viral_density, immune_density  # Return the updated viral and immune densities
@@ -309,6 +317,17 @@ def calculate_migration_effect(populations, migration_matrix, idx):
     migration_effect = np.zeros_like(populations[idx].viral_density)
     for j, other_pop in enumerate(populations):
         if idx != j:
-            migration_rate = migration_matrix[idx, j]
-            migration_effect += migration_rate * other_pop.viral_density
+            migration_rate_in = migration_matrix[idx, j]
+            migration_rate_out = migration_matrix[j,idx]
+            migration_effect += migration_rate_in * other_pop.viral_density - migration_rate_out * populations[idx].viral_density
     return migration_effect
+
+def calculate_total_infected(simulation):
+    '''
+    Calculates the total number of infected individuals, summed across all demes
+    '''
+    total_infected = np.zeros(len(simulation.trajectory))
+    for i, network in enumerate(simulation.trajectory):
+        for population in network.populations:
+            total_infected[i] += np.sum(population.viral_density * population.dx)
+    return total_infected
