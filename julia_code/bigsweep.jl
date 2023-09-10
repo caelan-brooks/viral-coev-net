@@ -60,8 +60,8 @@ end
 
 function main()
     migration_rates = exp10.(LinRange(-6, 0.5, 9)) # Example migration rates to sweep over
-    start_rep = 0
-    num_replicates = 1000
+    start_rep = 1000
+    num_replicates = 5000
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in start_rep:(start_rep + num_replicates - 1)]

@@ -68,6 +68,8 @@ function main()
          legend=false)
          
     display(plotvar)
+    
+    # Save the plot as a PNG file
+    savefig(plotvar, "probability_of_survival.png")
 end
-
 main()
