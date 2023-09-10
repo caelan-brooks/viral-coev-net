@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 plt.rcParams['text.usetex'] = True
 plt.rcParams['font.family'] = 'serif'
 
-import numpy as np
 
 class Simulation:
     def __init__(self, initial_network, dt, duration):
@@ -331,3 +330,4 @@ def calculate_total_infected(simulation):
         for population in network.populations:
             total_infected[i] += np.sum(population.viral_density * population.dx)
     return total_infected
+    
