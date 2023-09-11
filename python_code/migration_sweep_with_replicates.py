@@ -3,6 +3,7 @@ from multiprocessing import Pool
 from coevolution_network_base import Population, Network, Simulation, calculate_total_infected
 import pickle
 import os
+import time
 
 if not os.path.exists("simresults_largedt"):
     os.makedirs("simresults_largedt")
@@ -27,35 +28,41 @@ def run_single_simulation(args):
     dt = 0.05
     duration = 80
 
-    viral_density = np.where(np.abs(x) <= 0.5 , 100.0, 0)
+    viral_density = np.where(np.abs(x) <= 0.5, 100.0, 0)
     viral_density2 = np.zeros_like(viral_density)
     immune_density = np.zeros_like(viral_density)
 
     population1 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density)
     population2 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density2, immune_density)
-    
+
     migration_matrix = np.array([[0, migration_rate], 
                                  [migration_rate, 0]])
 
     network = Network([population1, population2], migration_matrix)
     simulation = Simulation(network, dt, duration)
+
+    start_time = time.time()
     simulation.run_simulation()
+    end_time = time.time()
+
+    print(f"Simulation time: {end_time - start_time} seconds")
 
     total_infected = calculate_total_infected(simulation)
 
     result_dict = {'times': simulation.times, 'total_infected_number': total_infected}
-    
+
     with open(f'simresults_largedt/simulation_results_migration_{migration_rate}_replicate_{simulation_number}.pkl', 'wb') as file:
         pickle.dump(result_dict, file)
 
 if __name__ == '__main__':
-    # migration_rates = np.logspace(-6,-0.5,8)  # Example migration rates to sweep over
     migration_rates = np.logspace(-6,0.5,9)  # Example migration rates to sweep over
-    start_rep = 0
-    num_replicates = 1000
+    start_rep = 1000
+    num_replicates = 5000
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in range(start_rep, start_rep + num_replicates)]
 
-    with Pool() as pool:
+    # Specify the number of threads to use
+    number_of_threads = 40
+    with Pool(number_of_threads) as pool:
         pool.map(run_single_simulation, simulation_args)
