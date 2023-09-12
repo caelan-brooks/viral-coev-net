@@ -5,8 +5,8 @@ using Serialization
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-if !isdir("simresults_largedt")
-    mkdir("simresults_largedt")
+if !isdir("simresults_singledeme")
+    mkdir("simresults_singledeme")
 end
 
 using Base.Threads
@@ -50,7 +50,7 @@ function run_single_simulation(args)
 
     result_dict = Dict("times" => simulation.duration_times, "total_infected_number" => total_infected)
     
-    open("simresults_singledeme/simulation_results_migration_$(migration_rate)_replicate_$(simulation_number).jld2", "w") do file
+    open("simresults_singledeme/simulation_results_replicate_$(simulation_number).jld2", "w") do file
         serialize(file, result_dict)
     end
 end
