@@ -67,7 +67,10 @@ def main():
     plt.xlabel('Migration Rate')
     plt.ylabel('Probability of Survival')
     plt.title('Probability of Survival as a Function of Migration Rate')
+    plt.axhline(y=0.389,color='r',linestyle='--')
     plt.show()
+    
 
 if __name__ == '__main__':
     main()
+    
