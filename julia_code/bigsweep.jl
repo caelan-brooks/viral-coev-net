@@ -29,11 +29,11 @@ function run_single_simulation(args)
     alpha = 1.0
     gamma = 0.0
     D = 0.01
-    Nh = 1.0 * 10^6
+    Nh = 1 * 10^6
     dt = 0.05
     duration = 80.0
 
-    viral_density = [abs(val) <= 0.5 ? 100.0 : 0 for val in x]
+    viral_density = [abs(val) <= 0.5 ? 100.0 : 0.0 for val in x]
     viral_density2 = zeros(Float64, length(x))
     immune_density = zeros(Float64, length(x))
 
@@ -60,8 +60,8 @@ end
 
 function main()
     migration_rates = exp10.(LinRange(-6, 0.5, 9)) # Example migration rates to sweep over
-    start_rep = 6000
-    num_replicates = 6000
+    start_rep = 0
+    num_replicates = 60
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in start_rep:(start_rep + num_replicates - 1)]

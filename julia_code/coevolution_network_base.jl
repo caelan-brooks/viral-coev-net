@@ -47,6 +47,10 @@ struct Population
     time_stamp::Float64
     xs::Vector{Float64}
     num_antigen_points::Int
+    temporary_data::Vector{Float64}
+    cross_reactive::Vector{Float64}
+    susceptibility::Vector{Float64}
+    fitness::Vector{Float64}
 end
 
 """
@@ -67,10 +71,18 @@ Examples:
     pop = Population(1.0, 0.1, 0.5, 10, 0.3, 0.2, 0.1, 0.05, 100, [0.0 for i in 1:10], [0.0 for i in 1:10])
 
 """
-function Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density; stochastic=true, time_stamp=0.0)
+function Population(L::Float64, dx::Float64, r::Float64, M::Int64, beta::Float64, alpha::Float64, gamma::Float64, D::Float64, Nh::Int64, viral_density::Vector{Float64}, immune_density::Vector{Float64}; stochastic::Bool=true, time_stamp::Float64=0.0)
     xs = collect(-L/2:dx:L/2-dx)  # Creating a vector of spatial discretization points
     num_antigen_points = length(xs)  # Calculating the number of points in the antigen grid
-    return Population(L, dx, r, M, beta, alpha, gamma, D, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points)
+    temporary_data = zeros(num_antigen_points)
+    cross_reactive = zeros(num_antigen_points)
+    susceptibility = zeros(num_antigen_points)
+    fitness = zeros(num_antigen_points)
+
+    @assert length(viral_density) == num_antigen_points "Viral density vector size mismatch"
+    @assert length(immune_density) == num_antigen_points "Immune density vector size mismatch"
+    
+    return Population(L, dx, r, M, beta, alpha, gamma, D, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points, temporary_data,cross_reactive,susceptibility,fitness)
 end
 
 
@@ -190,10 +202,11 @@ Examples:
 """
 function Simulation(initial_network::Network, dt::Float64, duration::Float64)
     # Create a range representing the time points at which the network state will be recorded
-    duration_times = 0:dt:duration
+    duration_times = collect(0:dt:duration)
+    num_time_steps = length(duration_times)
 
     # Initialize the trajectory with the initial network state
-    trajectory = [copy(initial_network)]
+    trajectory = [deepcopy(initial_network) for i in 1:num_time_steps]
 
     # Create and return a new Simulation instance with the initial network, 
     # time step, duration, trajectory, and duration times
@@ -236,21 +249,25 @@ function run_simulation!(sim::Simulation)
     end
     
     # Iteratively evolve the network at each time step in the duration_times (skipping the initial time)
-    for time in sim.duration_times[2:end]
-        # Get the new network state by evolving the current state by one time step
-        new_network = single_step_evolve_network(copy(sim.initial_network), sim.dt)
+    for i in 2:length(sim.duration_times)
+        single_step_evolve_network!(sim.initial_network, sim.dt)
         
-        # Add the new network state to the trajectory
-        push!(sim.trajectory, new_network)
-        
-        # Update the current network state for the next iteration
-        sim.initial_network = new_network
+        copy_network_data!(sim.trajectory[i],sim.initial_network)
     end
 
     # Mark the simulation as completed
     sim.simulation_complete = true
 end
 
+function copy_network_data!(dest::Network, source::Network)
+    # Implement the necessary logic to copy data from the source network to the destination network
+    # For example:
+    for i in 1:length(dest.populations)
+        dest.populations[i].viral_density .= source.populations[i].viral_density
+        dest.populations[i].immune_density .= source.populations[i].immune_density
+        # Copy other fields as necessary
+    end
+end
 
 """
     extract_time_stamps(sim::Simulation)
@@ -324,26 +341,6 @@ function calculate_total_infected(simulation::Simulation)
 end
 
 
-# function single_step_evolve_network(network::Network, dt)
-#     new_populations = [single_step_evolve(copy(pop), dt) for pop in network.populations]
-
-#     # Create a list to store the new viral densities after considering migration effects
-#     new_viral_densities = [copy(pop.viral_density) for pop in new_populations]
-
-#     for i in 1:length(new_populations)
-#         migration_effect = calculate_migration_effect(new_populations, network.migration_matrix, i)
-#         new_viral_densities[i] .+= dt .* migration_effect
-#     end
-
-#     # Assign the new viral densities back to the populations
-#     for i in 1:length(new_populations)
-#         new_populations[i].viral_density = new_viral_densities[i]
-#     end
-
-#     # Return a new Network instance with the updated populations and the same migration matrix
-#     return Network(new_populations, copy(network.migration_matrix))
-# end
-
 """
     single_step_evolve_network(network::Network, dt)
 
@@ -369,44 +366,13 @@ Examples:
     new_network = single_step_evolve_network(init_network, 0.1)
 
 """
-function single_step_evolve_network(network::Network, dt)
+function single_step_evolve_network!(network::Network, dt::Float64)
     # Evolving each population independently using the single_step_evolve function
-    new_populations = [single_step_evolve(copy(pop), dt) for pop in network.populations]
-
-    # Initializing a list to store the new viral densities considering migration effects
-    new_viral_densities = [copy(pop.viral_density) for pop in new_populations]
-
-    # Iterating over each population in the new populations list
-    for i in 1:length(new_populations)
-        # Calculating the migration effect on the current population
-        migration_effect = calculate_migration_effect(new_populations, network.migration_matrix, i)
-        
-        # Updating the viral density of the current population based on the migration effect
-        new_viral_densities[i] .+= dt .* migration_effect
-
-        # Creating a new Population instance with the updated viral density and the same properties 
-        # as the current population in new_populations list
-        new_populations[i] = Population(
-            new_populations[i].L,
-            new_populations[i].dx,
-            new_populations[i].r,
-            new_populations[i].M,
-            new_populations[i].beta,
-            new_populations[i].alpha,
-            new_populations[i].gamma,
-            new_populations[i].D,
-            new_populations[i].Nh,
-            new_viral_densities[i],  # Updated viral density
-            copy(new_populations[i].immune_density),  # Keeping the same immune density
-            new_populations[i].stochastic,
-            new_populations[i].time_stamp,
-            new_populations[i].xs,  # Keeping the same antigenic points
-            new_populations[i].num_antigen_points
-        )
+    for pop in network.populations
+        single_step_evolve!(pop,dt)
     end
 
-    # Returning a new Network instance with the updated populations and the same migration matrix
-    return Network(new_populations, copy(network.migration_matrix))
+    calculate_migration_effect!(network,dt)
 end
 
 
@@ -435,127 +401,90 @@ Example:
     # Evolving the population by a single time step
     new_pop = single_step_evolve(init_pop, 0.1)
 """
-function single_step_evolve(population::Population, dt)
-    viral_density = copy(population.viral_density)
-    immune_density = copy(population.immune_density)
-
+function single_step_evolve!(population::Population, dt::Float64)
     # Computing the change in viral density due to mutation (diffusion)
-    dndt_mutation = compute_mutation_effect(population.D, population.dx, viral_density)
+    compute_mutation_effect!(population)
 
     # Computing the cross-reactive field using the convolution method 
-    cross_reactive = cross_reactive_convolution(population.num_antigen_points, immune_density, population.dx, population.r)
+    cross_reactive_convolution!(population)
 
     # Computing the susceptibility at each antigenic point based on the cross-reactive field
-    susceptibility = compute_susceptibility(population.num_antigen_points, cross_reactive, population.M)
+    compute_susceptibility!(population)
 
     # Computing the fitness at each antigenic point based on the susceptibility
-    fitness = compute_fitness(population.beta, susceptibility, population.alpha, population.gamma)
-
-    # Computing the growth rate of the viral population based on the fitness
-    dndt_growth = compute_growth_rate(fitness, viral_density)
-
-    # Computing the total viral population size
-    total_viral_pop = compute_total_viral_pop(population.dx, viral_density)
-
-    # Computing the change in immune density based on the current viral and immune densities
-    dhdt = compute_immune_density_change(viral_density, total_viral_pop, immune_density, population.M, population.Nh)
-
-    # Updating the viral density using the Euler method
-    viral_density .+= dt .* (dndt_mutation .+ dndt_growth)
+    compute_fitness!(population)
 
     # Updating the immune density using the Euler method
-    immune_density .+= dt .* dhdt
+    total_infected_individuals = sum(population.viral_density) * population.dx
+    population.immune_density .+= dt / population.M / population.Nh .* (population.viral_density .- total_infected_individuals .* population.immune_density)
+    population.viral_density .+= population.fitness .* population.viral_density .* dt
 
     # Applying stochastic variations to the viral densities if the `stochastic` parameter is True
     if population.stochastic
-        viral_density[viral_density .< 0] .= 0  # Ensuring viral densities remain non-negative
-        viral_density = apply_stochasticity(population.dx, viral_density)
+        for i in eachindex(population.viral_density)
+            if population.viral_density[i] < 0.0
+                population.viral_density[i] = 0.0
+            end
+        end
+        
+        apply_stochasticity!(population)
     end
 
-    # Creating a new Population instance with updated attributes
-    new_population = Population(
-        population.L, 
-        population.dx, 
-        population.r, 
-        population.M, 
-        population.beta, 
-        population.alpha, 
-        population.gamma, 
-        population.D, 
-        population.Nh, 
-        viral_density, 
-        immune_density, 
-        stochastic = population.stochastic, 
-        time_stamp = population.time_stamp + dt  # Incrementing the time stamp
-    )
-
-    return new_population
 end
 
 
 # Computes the mutation effect based on the given viral density and other parameters.
-function compute_mutation_effect(D, dx, viral_density)
-    return D / dx^2 * (circshift(viral_density, 1) + circshift(viral_density, -1) - 2 * viral_density)
+function compute_mutation_effect!(population::Population)
+    D_over_dx2 = population.D / population.dx^2
+
+    for i in 2:(population.num_antigen_points-1)
+        population.temporary_data[i] = D_over_dx2 * (population.viral_density[i-1] + population.viral_density[i+1] - 2 * population.viral_density[i])
+    end
+    population.temporary_data[1] = D_over_dx2 * (population.viral_density[2] + population.viral_density[end] - 2 * population.viral_density[1])
+    population.temporary_data[end] = D_over_dx2 * (population.viral_density[1] + population.viral_density[end-1] - 2 * population.viral_density[end])
+    
+    population.viral_density .= population.temporary_data
 end
+
 
 # Computes the susceptibility at each antigenic point based on the cross-reactive convolution and other parameters.
-function compute_susceptibility(num_antigen_points, cross_reactive, M)
-    return (ones(num_antigen_points) - cross_reactive) .^ M
+function compute_susceptibility!(population::Population)
+    population.susceptibility .= (1.0 .- population.cross_reactive) .^ population.M
 end
+
 
 # Computes the fitness at each antigenic point based on susceptibility and other parameters.
-function compute_fitness(beta, susceptibility, alpha, gamma)
-    return beta .* susceptibility - alpha * ones(length(susceptibility)) - gamma * ones(length(susceptibility))
+function compute_fitness!(population::Population)
+    population.fitness .= population.beta .* population.susceptibility .- population.alpha .- population.gamma
 end
 
-# Computes the growth rate of the viral population based on fitness and viral density.
-function compute_growth_rate(fitness, viral_density)
-    return fitness .* viral_density
-end
-
-# Computes the total size of the viral population by summing up the viral densities.
-function compute_total_viral_pop(dx, viral_density)
-    return sum(viral_density) * dx
-end
-
-# Computes the change in immune density based on viral density, total viral population, and other parameters.
-function compute_immune_density_change(viral_density, total_viral_pop, immune_density, M, Nh)
-    return 1/(M * Nh) * (viral_density - total_viral_pop .* immune_density)
-end
-
-# Applies stochastic variations to the viral densities using a Poisson distribution based on given viral density and other parameters.
-function apply_stochasticity(dx, viral_density)
-    new_viral_density = rand.(Poisson.(dx .* viral_density)) ./ dx
-    return new_viral_density
+function apply_stochasticity!(population::Population)
+    for i in eachindex(population.viral_density)
+        population.viral_density[i] = rand(Poisson(population.dx * population.viral_density[i])) / population.dx
+    end
 end
 
 
-function cross_reactive_convolution(num_antigen_points, immune_density, dx, r)
+
+function cross_reactive_convolution!(population::Population)
     """
-    Returns the cross-reactive field c(x,t).
+    Modifies the cross-reactive field c(x,t) in place.
 
     Parameters:
-    num_antigen_points (int): Number of antigenic points.
-    immune_density (Array): The immune density at each antigenic point.
-    dx (float): Discretization of antigenic space.
-    r (float): Cross-reactivity parameter.
-
-    Returns:
-    Array: The cross-reactive field at each antigenic point.
+    population (Population): The population object containing the necessary parameters and fields.
     """
     
-    cross_reactive = zeros(num_antigen_points)  # Initialize an array with zeros to hold the cross-reactive values
-    for i in 1:num_antigen_points  # Loop through each antigenic point (1-indexed in Julia)
-        for j in 1:num_antigen_points  # For each antigenic point, loop through all other antigenic points
+    population.cross_reactive .= 0.0  # Reset the array to zero without creating a new array
+    for i in 1:population.num_antigen_points  # Loop through each antigenic point (1-indexed in Julia)
+        for j in 1:population.num_antigen_points  # For each antigenic point, loop through all other antigenic points
             # Calculate the minimum distance between the current pair of antigenic points, considering the periodic boundary conditions
-            diff = min(abs(i - j), num_antigen_points - abs(i - j)) * dx  
+            diff = min(abs(i - j), population.num_antigen_points - abs(i - j)) * population.dx  
             # Increment the cross-reactive value for the i-th point based on the contribution from the j-th point
-            cross_reactive[i] += immune_density[j] * exp(-diff/r) * dx  
+            population.cross_reactive[i] += population.immune_density[j] * exp(-diff/population.r) * population.dx
         end
     end
-
-    return cross_reactive  # Return the computed cross-reactive field
 end
+
 
 # Function to validate the dimensions of the migration matrix
 function validate_migration_matrix(matrix, populations)
@@ -564,19 +493,28 @@ function validate_migration_matrix(matrix, populations)
     end
 end
 
-# Function to calculate the effect of migration on the viral density of a specific population
-function calculate_migration_effect(populations, migration_matrix, idx)
-    migration_effect = zeros(length(populations[idx].viral_density))
+function calculate_migration_effect!(network::Network, dt::Float64)
+    populations = network.populations
+    migration_matrix = network.migration_matrix
 
-    for j in 1:length(populations)
-        if idx != j
-            migration_rate_in = migration_matrix[idx, j]
-            migration_rate_out = migration_matrix[j, idx]
-            migration_effect .+= migration_rate_in .* populations[j].viral_density - migration_rate_out .* populations[idx].viral_density
+    # First, we calculate the migration effects and store them in temporary_data for each population
+    for i in 1:length(populations)
+        # Resetting the temporary_data before calculating the migration effects
+        populations[i].temporary_data .= 0.0
+
+        for j in 1:length(populations)
+            if i != j
+                migration_rate_in = migration_matrix[i, j]
+                migration_rate_out = migration_matrix[j, i]
+                populations[i].temporary_data .+= migration_rate_in .* populations[j].viral_density - migration_rate_out .* populations[i].viral_density
+            end
         end
     end
 
-    return migration_effect
+    # Then, we update the viral_density with the values stored in temporary_data and scale by dt
+    for i in 1:length(populations)
+        populations[i].viral_density .+= dt .* populations[i].temporary_data
+    end
 end
 
 
