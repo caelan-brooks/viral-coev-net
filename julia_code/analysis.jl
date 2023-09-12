@@ -68,8 +68,9 @@ function main()
          legend=false)
          
     display(plotvar)
-    
+    hline!([0.3892],color=:red, linestyle=:dash)
     # Save the plot as a PNG file
-    savefig(plotvar, "probability_of_survival.png")
+    hline!([0.3892],color=:red, linestyle=:dash)
+    savefig(plotvar, "probability_of_survival_3.png")
 end
 main()
