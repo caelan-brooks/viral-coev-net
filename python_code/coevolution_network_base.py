@@ -5,6 +5,45 @@ import matplotlib.pyplot as plt
 plt.rcParams['text.usetex'] = True
 plt.rcParams['font.family'] = 'serif'
 
+
+class Simulation:
+    def __init__(self, initial_network, dt, duration):
+        """
+        Initializes a new instance of the Simulation class.
+
+        :param network: The initial network configuration for the simulation.
+        :param dt: The time step size for the simulation.
+        :param duration: The total duration for the new simulation to run.
+        """
+        self.network = initial_network.copy()
+        self.trajectory = [self.network.copy()]
+        self.dt = dt
+        self.duration = duration
+        self.duration_times = np.arange(0, self.duration, dt)
+        
+        self.simulation_complete = False  # Initializing simulation_complete as False
+
+    def run_simulation(self):
+        """
+        Runs the simulation over the specified time period, with each step incrementing by dt.
+        """
+        if self.simulation_complete:
+            raise RuntimeError("Simulation has already been run and cannot be run again.")  # Raise an error if simulation has already been completed
+
+        for time in self.duration_times:
+            self.network.single_step_evolve_network(self.dt)
+            self.trajectory.append(self.network.copy())
+
+        # Updating the times list with the new time stamps
+        self.times = [network.populations[0].time_stamp for network in self.trajectory]
+        self.num_time_points = len(self.times)
+
+        self.simulation_complete = True  # Set simulation_complete to True at the end of the simulation
+
+
+
+
+
 class Network:
     def __init__(self, populations, migration_matrix):
         """
@@ -36,21 +75,32 @@ class Network:
             pop.single_step_evolve(dt)
         
         # Then, calculate the change in viral densities due to migration
-        new_viral_densities = [pop.viral_density for pop in self.populations]  # Create a copy to store new densities
+        new_viral_densities = [np.copy(pop.viral_density) for pop in self.populations]  # Create a copy to store new densities
         for i, pop in enumerate(self.populations):
-            migration_effect = np.zeros_like(pop.viral_density)  # Initialize migration effect to zeros
-            
-            for j, other_pop in enumerate(self.populations):
-                if i != j:  # Exclude self-migration
-                    migration_rate = self.migration_matrix[i, j]
-                    migration_effect += migration_rate * other_pop.viral_density  # Summing effect from all other populations
-            
-            # Update the viral density of the ith population with the migration effect
+            migration_effect = calculate_migration_effect(self.populations, self.migration_matrix, i)
             new_viral_densities[i] += dt * migration_effect
         
         # Assign the new viral densities back to the populations
         for i, pop in enumerate(self.populations):
             pop.viral_density = new_viral_densities[i]
+            
+    def copy(self):
+        """
+        Creates a deep copy of the Network instance.
+
+        :return: A new Network instance with the same properties as the current instance.
+        """
+        # Create deep copies of each population in the populations list
+        populations_copy = [population.copy() for population in self.populations]
+        
+        # Create a deep copy of the migration_matrix
+        migration_matrix_copy = self.migration_matrix.copy()
+        
+        # Create a new Network instance with the copied data and return it
+        return Network(populations_copy, migration_matrix_copy)
+
+
+    
     
 
 
@@ -121,6 +171,28 @@ class Population:
 
         plt.show()
 
+    def copy(self):
+        """
+        Creates a deep copy of the Population instance.
+
+        :return: A new Population instance with the same properties as the current instance.
+        """
+        return Population(
+            L=self.L,
+            dx=self.dx,
+            r=self.r,
+            M=self.M,
+            beta=self.beta,
+            alpha=self.alpha,
+            gamma=self.gamma,
+            D=self.D,
+            Nh=self.Nh,
+            viral_density=self.viral_density,
+            immune_density=self.immune_density,
+            stochastic=self.stochastic,
+            time_stamp=self.time_stamp
+        )
+
 @jit(nopython=True)
 def cross_reactive_convolution(num_antigen_points, immune_density, dx, r):
     """
@@ -169,40 +241,93 @@ def single_step_evolve(dt, D, dx, viral_density, beta, alpha, gamma, M, num_anti
     Returns:
     tuple: The updated viral and immune densities.
     """
-    
-    # Compute the change in viral density due to mutation (diffusion) using a finite difference approximation
-    dndt_mutation = D / dx**2 * (np.roll(viral_density,1) + np.roll(viral_density,-1) - 2 * viral_density)
+    viral_density = np.copy(viral_density); immune_density = np.copy(immune_density)
 
+    # Compute the change in viral density due to mutation (diffusion)
+    dndt_mutation = compute_mutation_effect(D, dx, viral_density)
+    
     # Compute the cross-reactive field using the provided function
     cross_reactive = cross_reactive_convolution_func(num_antigen_points, immune_density, dx, r)
-
+    
     # Compute the susceptibility at each antigenic point based on the cross-reactive field
-    susceptibility = np.power(np.ones(num_antigen_points) - cross_reactive, M)
-
+    susceptibility = compute_susceptibility(num_antigen_points, cross_reactive, M)
+    
     # Compute the fitness at each antigenic point based on the susceptibility
-    fitness = beta * susceptibility - alpha - gamma
-
+    fitness = compute_fitness(beta, susceptibility, alpha, gamma)
+    
     # Compute the growth rate of the viral population based on the fitness
-    dndt_growth = fitness * viral_density
-
+    dndt_growth = compute_growth_rate(fitness, viral_density)
+    
     # Compute the total viral population size
-    total_viral_pop = np.sum(viral_density) * dx
-
+    total_viral_pop = compute_total_viral_pop(dx, viral_density)
+    
     # Compute the change in immune density based on the current viral and immune densities
-    dhdt = 1/(M * Nh) * (viral_density - total_viral_pop * immune_density)
-
+    dhdt = compute_immune_density_change(viral_density, total_viral_pop, immune_density, M, Nh)
+    
     # Update the viral density using the Euler method
     viral_density += dt * (dndt_mutation + dndt_growth)
-
+    
     # Update the immune density using the Euler method
     immune_density += dt * dhdt
-
+    
+    # Apply stochastic variations to the viral densities if stochastic parameter is True
     if stochastic:
-        for i in range(num_antigen_points):
-            viral_density[i] = np.random.poisson(dx * viral_density[i]) / dx
-
+        viral_density[viral_density < 0] = 0 # Setting negative values to zero
+        viral_density = apply_stochasticity(dx, num_antigen_points, viral_density)
+    
     return viral_density, immune_density  # Return the updated viral and immune densities
 
+@jit(nopython=True)
+def compute_mutation_effect(D, dx, viral_density):
+    return D / dx**2 * (np.roll(viral_density, 1) + np.roll(viral_density, -1) - 2 * viral_density)
 
+@jit(nopython=True)
+def compute_susceptibility(num_antigen_points, cross_reactive, M):
+    return np.power(np.ones(num_antigen_points) - cross_reactive, M)
 
+@jit(nopython=True)
+def compute_fitness(beta, susceptibility, alpha, gamma):
+    return beta * susceptibility - alpha - gamma
 
+@jit(nopython=True)
+def compute_growth_rate(fitness, viral_density):
+    return fitness * viral_density
+
+@jit(nopython=True)
+def compute_total_viral_pop(dx, viral_density):
+    return np.sum(viral_density) * dx
+
+@jit(nopython=True)
+def compute_immune_density_change(viral_density, total_viral_pop, immune_density, M, Nh):
+    return 1/(M * Nh) * (viral_density - total_viral_pop * immune_density)
+
+@jit(nopython=True)
+def apply_stochasticity(dx, num_antigen_points, viral_density):
+    for i in range(num_antigen_points):
+        viral_density[i] = np.random.poisson(dx * viral_density[i]) / dx
+    return viral_density
+
+# Utility Functions for migration calculation
+def validate_migration_matrix(matrix, populations):
+    if matrix.shape[0] != len(populations) or matrix.shape[1] != len(populations):
+        raise ValueError("Migration matrix dimensions do not match the number of populations.")
+
+def calculate_migration_effect(populations, migration_matrix, idx):
+    migration_effect = np.zeros_like(populations[idx].viral_density)
+    for j, other_pop in enumerate(populations):
+        if idx != j:
+            migration_rate_in = migration_matrix[idx, j]
+            migration_rate_out = migration_matrix[j,idx]
+            migration_effect += migration_rate_in * other_pop.viral_density - migration_rate_out * populations[idx].viral_density
+    return migration_effect
+
+def calculate_total_infected(simulation):
+    '''
+    Calculates the total number of infected individuals, summed across all demes
+    '''
+    total_infected = np.zeros(len(simulation.trajectory))
+    for i, network in enumerate(simulation.trajectory):
+        for population in network.populations:
+            total_infected[i] += np.sum(population.viral_density * population.dx)
+    return total_infected
+    
