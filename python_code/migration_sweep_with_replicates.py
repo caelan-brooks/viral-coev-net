@@ -56,13 +56,13 @@ def run_single_simulation(args):
 
 if __name__ == '__main__':
     migration_rates = np.logspace(-6,0.5,9)  # Example migration rates to sweep over
-    start_rep = 1000
-    num_replicates = 5000
+    start_rep = 0
+    num_replicates = 500
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in range(start_rep, start_rep + num_replicates)]
 
     # Specify the number of threads to use
-    number_of_threads = 40
+    number_of_threads = 4
     with Pool(number_of_threads) as pool:
         pool.map(run_single_simulation, simulation_args)
