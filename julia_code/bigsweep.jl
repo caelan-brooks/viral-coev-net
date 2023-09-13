@@ -5,8 +5,8 @@ using Serialization
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-if !isdir("simresults_largedt")
-    mkdir("simresults_largedt")
+if !isdir("simresults_largedt3")
+    mkdir("simresults_largedt3")
 end
 
 using Base.Threads
@@ -47,7 +47,7 @@ function run_single_simulation(args)
 
     result_dict = Dict("times" => simulation.duration_times, "total_infected_number" => total_infected)
     
-    open("simresults_largedt/simulation_results_migration_$(migration_rate)_replicate_$(simulation_number).jld2", "w") do file
+    open("simresults_largedt3/simulation_results_migration_$(migration_rate)_replicate_$(simulation_number).jld2", "w") do file
         serialize(file, result_dict)
     end
 end
@@ -55,7 +55,7 @@ end
 function main()
     migration_rates = exp10.(LinRange(-6, 0.5, 9)) # Example migration rates to sweep over
     start_rep = 0
-    num_replicates = 6000
+    num_replicates = 12000
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in start_rep:(start_rep + num_replicates - 1)]

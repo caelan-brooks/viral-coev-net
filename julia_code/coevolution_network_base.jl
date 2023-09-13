@@ -1,5 +1,5 @@
 module CoevolutionNetworkBase
-export Population, Network, Simulation, run_simulation!, calculate_total_infected
+export Population, Network, Simulation, run_simulation!, calculate_total_infected, single_step_evolve!
 
 using Random
 using Distributions
@@ -403,7 +403,7 @@ Example:
 """
 function single_step_evolve!(population::Population, dt::Float64)
     # Computing the change in viral density due to mutation (diffusion)
-    compute_mutation_effect!(population)
+    compute_mutation_effect!(population, dt)
 
     # Computing the cross-reactive field using the convolution method 
     cross_reactive_convolution!(population)
@@ -434,16 +434,16 @@ end
 
 
 # Computes the mutation effect based on the given viral density and other parameters.
-function compute_mutation_effect!(population::Population)
+function compute_mutation_effect!(population::Population, dt::Float64)
     D_over_dx2 = population.D / population.dx^2
 
     for i in 2:(population.num_antigen_points-1)
-        population.temporary_data[i] = D_over_dx2 * (population.viral_density[i-1] + population.viral_density[i+1] - 2 * population.viral_density[i])
+        population.temporary_data[i] = D_over_dx2 * dt * (population.viral_density[i-1] + population.viral_density[i+1] - 2 * population.viral_density[i])
     end
-    population.temporary_data[1] = D_over_dx2 * (population.viral_density[2] + population.viral_density[end] - 2 * population.viral_density[1])
-    population.temporary_data[end] = D_over_dx2 * (population.viral_density[1] + population.viral_density[end-1] - 2 * population.viral_density[end])
+    population.temporary_data[1] = D_over_dx2 * dt * (population.viral_density[2] + population.viral_density[end] - 2 * population.viral_density[1])
+    population.temporary_data[end] = D_over_dx2 * dt * (population.viral_density[1] + population.viral_density[end-1] - 2 * population.viral_density[end])
     
-    population.viral_density .= population.temporary_data
+    population.viral_density .+= population.temporary_data
 end
 
 
@@ -484,6 +484,7 @@ function cross_reactive_convolution!(population::Population)
         end
     end
 end
+
 
 
 # Function to validate the dimensions of the migration matrix

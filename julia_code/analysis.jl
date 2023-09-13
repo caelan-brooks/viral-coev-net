@@ -3,7 +3,7 @@ using Serialization
 using Statistics
 using Plots
 
-const DIRECTORY_PATH = "simresults_largedt"
+const DIRECTORY_PATH = "simresults_largedt3"
 
 function calculate_probability_of_survival(migration_rate, cutoff)
     files = glob("simulation_results_migration_$(migration_rate)_replicate_*.jld2", DIRECTORY_PATH)
@@ -66,11 +66,11 @@ function main()
          xlabel="Migration Rate", ylabel="Probability of Survival",
          title="Probability of Survival as a Function of Migration Rate",
          legend=false)
-         
+    
+    hline!([0.42],color=:red, linestyle=:dash)
     display(plotvar)
-    hline!([0.3892],color=:red, linestyle=:dash)
+    
     # Save the plot as a PNG file
-    hline!([0.3892],color=:red, linestyle=:dash)
     savefig(plotvar, "probability_of_survival_3.png")
 end
 main()
