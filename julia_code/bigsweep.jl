@@ -1,15 +1,14 @@
-using DelimitedFiles
 using Distributed
 using Base.Threads
 using Serialization
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-if !isdir("simresults_largedt3")
-    mkdir("simresults_largedt3")
-end
+const OUTPUT_DIRECTORY = "simresults_largedt3"
 
-using Base.Threads
+if !isdir(OUTPUT_DIRECTORY)
+    mkdir(OUTPUT_DIRECTORY)
+end
 
 println("Number of threads: ", nthreads())
 
@@ -33,29 +32,23 @@ const immune_density = zeros(Float64, length(x))
 function run_single_simulation(args)
     migration_rate, simulation_number = args
 
-    population1 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density)
-    population2 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density2, immune_density)
-    
-    migration_matrix = [0 migration_rate; migration_rate 0]
+    # ... (rest of your function definition)
 
-    network = Network([population1, population2], migration_matrix)
-    simulation = Simulation(network, dt, duration)
-
-    @time run_simulation!(simulation)
-
-    total_infected = calculate_total_infected(simulation)
-
-    result_dict = Dict("times" => simulation.duration_times, "total_infected_number" => total_infected)
-    
-    open("simresults_largedt3/simulation_results_migration_$(migration_rate)_replicate_$(simulation_number).jld2", "w") do file
-        serialize(file, result_dict)
+    try
+        @time run_simulation!(simulation)
+        
+        open(joinpath(OUTPUT_DIRECTORY, "simulation_results_migration_$(migration_rate)_replicate_$(simulation_number).jld2"), "w") do file
+            serialize(file, simulation)
+        end
+    catch e
+        println("Error in simulation with args $args: $e")
     end
 end
 
 function main()
     migration_rates = exp10.(LinRange(-6, 0.5, 9)) # Example migration rates to sweep over
     start_rep = 0
-    num_replicates = 12000
+    num_replicates = 100
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in start_rep:(start_rep + num_replicates - 1)]

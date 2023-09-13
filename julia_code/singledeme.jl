@@ -33,7 +33,7 @@ function run_single_simulation(args)
     dt = 0.05
     duration = 80.0
 
-    viral_density = [abs(val) <= 0.5 ? 100.0 : 0.0 for val in x]
+    viral_density = [abs(val) <= 0.5 ? 100.0 : 0.0 m for val in x]
     immune_density = zeros(Float64, length(x))
 
     population1 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density)
