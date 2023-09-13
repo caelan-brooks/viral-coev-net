@@ -10,32 +10,28 @@ if !isdir("simresults_largedt")
 end
 
 using Base.Threads
-ENV["JULIA_NUM_THREADS"] = 12
 
 println("Number of threads: ", nthreads())
 
-# Define function to run a single simulation
+const L = 40.0
+const dx = 0.3
+const x = -L/2:dx:L/2-dx
+const r = 3.0
+const M = 15
+const beta = 2.0
+const alpha = 1.0
+const gamma = 0.0
+const D = 0.01
+const Nh = 1 * 10^6
+const dt = 0.05
+const duration = 80.0
+
+const viral_density = [abs(val) <= 0.5 ? 100.0 : 0.0 for val in x]
+const viral_density2 = zeros(Float64, length(x))
+const immune_density = zeros(Float64, length(x))
+
 function run_single_simulation(args)
-    println(args)
     migration_rate, simulation_number = args
-
-    # The parameters and initializations here are the same as in your original script
-    L = 40.0
-    dx = 0.3
-    x = -L/2:dx:L/2-dx
-    r = 3.0
-    M = 15
-    beta = 2.0
-    alpha = 1.0
-    gamma = 0.0
-    D = 0.01
-    Nh = 1 * 10^6
-    dt = 0.05
-    duration = 80.0
-
-    viral_density = [abs(val) <= 0.5 ? 100.0 : 0.0 for val in x]
-    viral_density2 = zeros(Float64, length(x))
-    immune_density = zeros(Float64, length(x))
 
     population1 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density)
     population2 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density2, immune_density)
@@ -45,9 +41,7 @@ function run_single_simulation(args)
     network = Network([population1, population2], migration_matrix)
     simulation = Simulation(network, dt, duration)
 
-    @time begin
-        run_simulation!(simulation)
-    end
+    @time run_simulation!(simulation)
 
     total_infected = calculate_total_infected(simulation)
 
@@ -61,7 +55,7 @@ end
 function main()
     migration_rates = exp10.(LinRange(-6, 0.5, 9)) # Example migration rates to sweep over
     start_rep = 0
-    num_replicates = 60
+    num_replicates = 6000
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in start_rep:(start_rep + num_replicates - 1)]
