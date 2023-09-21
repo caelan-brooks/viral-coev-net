@@ -1,5 +1,5 @@
 module CoevolutionNetworkBase
-export Population, Network, Simulation, run_simulation!, calculate_total_infected, single_step_evolve!
+export Population, Network, Simulation, run_simulation!, calculate_total_infected, single_step_evolve!, thin_simulation!
 
 using Random
 using Distributions
@@ -518,6 +518,11 @@ function calculate_migration_effect!(network::Network, dt::Float64)
     end
 end
 
+
+function thin_simulation!(sim::Simulation, thin_by::Int64)
+    sim.trajectory = [sim.trajectory[1:thin_by:end-1]; sim.trajectory[end]]
+    sim.duration_times = [sim.duration_times[1:thin_by:end-1]; sim.duration_times[end]]
+end
 
 """
     copy(population::Population)

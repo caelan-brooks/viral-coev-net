@@ -39,10 +39,7 @@ class Simulation:
         self.num_time_points = len(self.times)
 
         self.simulation_complete = True  # Set simulation_complete to True at the end of the simulation
-
-
-
-
+   
 
 class Network:
     def __init__(self, populations, migration_matrix):
