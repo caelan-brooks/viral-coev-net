@@ -7,7 +7,9 @@ using Base.Threads
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const DIRECTORY_PATH = "simresults_newseed/"
+# const DIRECTORY_PATH = "simresults_newseed/"
+
+const DIRECTORY_PATH ="C:/Users/Daniel/Desktop/simresults_newseed"
 
 function calculate_total_infected_per_deme(simulation::Simulation)
     # Get the number of populations (demes)
