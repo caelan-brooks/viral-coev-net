@@ -8,7 +8,8 @@ using Statistics
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const DIRECTORY_PATH = "C:/Users/Daniel/Desktop/simresults_newseed"
+const DIRECTORY_PATH = "C:/Users/Daniel/Desktop/simresults_oneinfected/"
+const OUTPUT_PATH = "plotted_results_oneinfected"
 
 function calculate_total_infected_per_deme(simulation::Simulation)
     # Get the number of populations (demes)
@@ -81,16 +82,16 @@ function main_task_1()
          title="Probability of Deme 2 Population Exceeding $cutoff", legend=false, marker=:circle)
 
     # Check if the "plotted_results" folder exists in the script's directory, if not create it
-    if !isdir("plotted_results")
-        mkdir("plotted_results")
+    if !isdir("$(OUTPUT_PATH)")
+        mkdir("$(OUTPUT_PATH)")
     end
 
     # Save the plot
-    savefig(p, "plotted_results/probability_exceeding_cutoff.png")
+    savefig(p, "$(OUTPUT_PATH)/probability_exceeding_cutoff.png")
 end
 
 print("Starting task 1...\n")
-# main_task_1()
+main_task_1()
 
 function calculate_time_to_max(migration_rate, cutoff)
     # Get the list of files for the given migration rate
@@ -138,12 +139,12 @@ function main_task_2()
          title="Average Time for Deme 2 Population to Reach Max Above $cutoff", legend=false, marker=:circle)
 
     # Check if the "plotted_results" folder exists in the script's directory, if not create it
-    if !isdir("plotted_results")
-        mkdir("plotted_results")
+    if !isdir("$(OUTPUT_PATH)")
+        mkdir("$(OUTPUT_PATH)")
     end
 
     # Save the plot
-    savefig(p, "plotted_results/avg_time_to_max_population.png")
+    savefig(p, "$(OUTPUT_PATH)/avg_time_to_max_population.png")
 end
 
 print("Starting task 2...\n")

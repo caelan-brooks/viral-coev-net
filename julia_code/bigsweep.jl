@@ -4,7 +4,7 @@ using Serialization
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "simresults_newseed"
+const OUTPUT_DIRECTORY = "C:/Users/Daniel/Desktop/simresults_oneinfected"
 
 if !isdir(OUTPUT_DIRECTORY)
     mkdir(OUTPUT_DIRECTORY)
@@ -17,15 +17,23 @@ const dx = 0.3
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
-const beta = 2.0
+const beta = 2.5
 const alpha = 1.0
 const gamma = 0.0
 const D = 0.01
-const Nh = 1 * 10^6
+const Nh = 3 * 10^6
 const dt = 0.05
 const duration = 80.0
 
-const viral_density = [abs(val) <= 0.5 ? 100.0 : 0.0 for val in x]
+# Find the index of the grid point closest to x = 0
+index_closest_to_zero = argmin(abs.(x))
+
+# Initialize viral_density as zeros
+const viral_density = zeros(Float64, length(x))
+
+# Set the value of viral_density at the closest index to 1/dx
+viral_density[index_closest_to_zero] = 1/dx
+
 const viral_density2 = zeros(Float64, length(x))
 const immune_density = zeros(Float64, length(x))
 
@@ -62,8 +70,8 @@ end
 
 function main()
     migration_rates = vcat([0.0], exp10.(LinRange(-6, 0.5, 9))) # Example migration rates to sweep over
-    start_rep = 0
-    num_replicates = 10000
+    start_rep = 3001
+    num_replicates = 15000
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in start_rep:(start_rep + num_replicates - 1)]

@@ -9,7 +9,8 @@ using .CoevolutionNetworkBase
 
 # const DIRECTORY_PATH = "simresults_newseed/"
 
-const DIRECTORY_PATH ="C:/Users/Daniel/Desktop/simresults_newseed"
+const DIRECTORY_PATH ="C:/Users/Daniel/Desktop/simresults_oneinfected"
+const OUTPUT_PATH = "plotted_results_oneinfected"
 
 function calculate_total_infected_per_deme(simulation::Simulation)
     # Get the number of populations (demes)
@@ -37,12 +38,12 @@ function plot_total_infected_per_deme(migration_rate, migration_rate_index)
     
     formatted_migration_rate = @sprintf("%.2e", migration_rate)
 
-    if !isdir("plotted_results")
-        mkdir("plotted_results")
+    if !isdir("$(OUTPUT_PATH)")
+        mkdir("$(OUTPUT_PATH)")
     end
 
-    plots_surv = [plot(title="Surviving Trajectories (Migration Rate: $formatted_migration_rate, Deme: $i)", xlabel="Time", ylabel="Total Infected Number in Deme $i", legend=false, ylims=(1,10^6)) for i in 1:2]
-    plots_not_surv = [plot(title="Non-Surviving Trajectories (Migration Rate: $formatted_migration_rate, Deme: $i)", xlabel="Time", ylabel="Total Infected Number in Deme $i", legend=false, ylims=(1,10^6)) for i in 1:2]
+    plots_surv = [plot(title="Surviving Trajectories (Migration Rate: $formatted_migration_rate, Deme: $i)", xlabel="Time", ylabel="Total Infected Number in Deme $i", legend=false, ylims=(1,3*10^6)) for i in 1:2]
+    plots_not_surv = [plot(title="Non-Surviving Trajectories (Migration Rate: $formatted_migration_rate, Deme: $i)", xlabel="Time", ylabel="Total Infected Number in Deme $i", legend=false, ylims=(1,3*10^6)) for i in 1:2]
 
     for file in files
         simulation = open(deserialize, file)
@@ -71,10 +72,10 @@ function plot_total_infected_per_deme(migration_rate, migration_rate_index)
     end
 
     for (idx, p) in enumerate(plots_surv)
-        savefig(p, "plotted_results/trajectory_surv_deme_$(idx)_idx_$(migration_rate_index)_rate_$(formatted_migration_rate).png")
+        savefig(p, "$(OUTPUT_PATH)/trajectory_surv_deme_$(idx)_idx_$(migration_rate_index)_rate_$(formatted_migration_rate).png")
     end
     for (idx, p) in enumerate(plots_not_surv)
-        savefig(p, "plotted_results/trajectory_not_surv_deme_$(idx)_idx_$(migration_rate_index)_rate_$(formatted_migration_rate).png")
+        savefig(p, "$(OUTPUT_PATH)/trajectory_not_surv_deme_$(idx)_idx_$(migration_rate_index)_rate_$(formatted_migration_rate).png")
     end
 end
 
@@ -89,14 +90,14 @@ function calculate_probability_of_survival(migration_rate, cutoff)
     println(total_files)
     
     for file in files
-        simulation = open(deserialize, file) # Changed this line
-        
-        data_slice = calculate_total_infected(simulation)[Int(round(end * 0.95)) : end]
-        
-        if mean(data_slice) > cutoff
-            survival_counts += 1
+            simulation = open(deserialize, file) # Changed this line
+            
+            data_slice = calculate_total_infected(simulation)[Int(round(end * 0.95)) : end]
+            
+            if mean(data_slice) > cutoff
+                survival_counts += 1
+            end
         end
-    end
     
     probability_of_survival = survival_counts / total_files
     standard_error = sqrt((probability_of_survival * (1 - probability_of_survival)) / total_files)
@@ -128,12 +129,12 @@ function plot_total_infected_trajectories(migration_rate, migration_rate_index)
         end
     end
 
-    if !isdir("plotted_results")
-        mkdir("plotted_results")
+    if !isdir("$(OUTPUT_PATH)")
+        mkdir("$(OUTPUT_PATH)")
     end
 
-    savefig(plot_surviving, "plotted_results/trajectory_surv_idx_$(migration_rate_index)_rate_$(formatted_migration_rate).png")
-    savefig(plot_not_surviving, "plotted_results/trajectory_not_surv_idx_$(migration_rate_index)_rate_$(formatted_migration_rate).png")
+    savefig(plot_surviving, "$(OUTPUT_PATH)/trajectory_surv_idx_$(migration_rate_index)_rate_$(formatted_migration_rate).png")
+    savefig(plot_not_surviving, "$(OUTPUT_PATH)/trajectory_not_surv_idx_$(migration_rate_index)_rate_$(formatted_migration_rate).png")
 end
 
 
@@ -167,17 +168,17 @@ function main()
          title="Probability of Survival as a Function of Migration Rate",
          legend=false)
     
-    hline!([0.4185], color=:red, linestyle=:dash)
-    hline!([probabilities[1]], color=:blue, linestyle=:dash)
+    # hline!([0.4185], color=:red, linestyle=:dash)
+    # hline!([probabilities[1]], color=:blue, linestyle=:dash)
     display(plotvar)
 
     # Check if the "plotted_results" folder exists, if not create it
-    if !isdir("plotted_results")
-        mkdir("plotted_results")
+    if !isdir("$(OUTPUT_PATH)")
+        mkdir("$(OUTPUT_PATH)")
     end
 
     # Save the plot as a PNG file in the "plotted_results" folder
-    savefig(plotvar, "plotted_results/probability_of_survival.png")
+    savefig(plotvar, "$(OUTPUT_PATH)/probability_of_survival.png")
 end
 
 main()
