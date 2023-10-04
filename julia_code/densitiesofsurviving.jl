@@ -10,7 +10,7 @@ using .CoevolutionNetworkBase
 const DIRECTORY_PATH = "C:/Users/Daniel/Desktop/simresults_oneinfected/"
 const OUTPUT_PATH = "plotted_results_oneinfected/"
 
-function analyze_and_plot(migration_rate)
+function analyze_and_plot(idx, migration_rate)
     files = glob("simulation_results_migration_$(migration_rate)_replicate_*.jld2", DIRECTORY_PATH)
     println(length(files))
 
@@ -74,14 +74,14 @@ function analyze_and_plot(migration_rate)
         mkdir("$(OUTPUT_PATH)")
     end
 
-    savefig(p, "$(OUTPUT_PATH)/densities_migration_$(migration_rate).png")
+    savefig(p, "$(OUTPUT_PATH)/densities_idx_$(idx)_migration_$(migration_rate).png")
 end
 
 function main()
     migration_rates = vcat([0], exp10.(LinRange(-6, 0.5, 9))) # Example migration rates to sweep over
-    for migration_rate in migration_rates
+    for (idx, migration_rate) in enumerate(migration_rates)
         println("Analyzing migration rate: $migration_rate")
-        analyze_and_plot(migration_rate)
+        analyze_and_plot(idx,migration_rate)
     end
 end
 
