@@ -8,8 +8,8 @@ using Statistics
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const DIRECTORY_PATH = "C:/Users/Daniel/Desktop/simresults_oneinfected/"
-const OUTPUT_PATH = "plotted_results_oneinfected"
+const DIRECTORY_PATH = "C:/Users/Daniel/Desktop/simresults_oneinfected_large_r/"
+const OUTPUT_PATH = "plotted_results_oneinfected_large_r/"
 
 function calculate_total_infected_per_deme(simulation::Simulation)
     # Get the number of populations (demes)

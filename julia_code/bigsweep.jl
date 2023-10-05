@@ -4,7 +4,7 @@ using Serialization
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "C:/Users/Daniel/Desktop/simresults_oneinfected"
+const OUTPUT_DIRECTORY = "C:/Users/Daniel/Desktop/simresults_oneinfected_largest_beta"
 
 if !isdir(OUTPUT_DIRECTORY)
     mkdir(OUTPUT_DIRECTORY)
@@ -17,10 +17,12 @@ const dx = 0.3
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
-const beta = 2.5
+const beta = 5
+# const beta = 4.0
 const alpha = 1.0
 const gamma = 0.0
 const D = 0.01
+# const D = 0.0001
 const Nh = 3 * 10^6
 const dt = 0.05
 const duration = 80.0
@@ -70,8 +72,8 @@ end
 
 function main()
     migration_rates = vcat([0.0], exp10.(LinRange(-6, 0.5, 9))) # Example migration rates to sweep over
-    start_rep = 3001
-    num_replicates = 15000
+    start_rep = 5001
+    num_replicates = 10000
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in start_rep:(start_rep + num_replicates - 1)]

@@ -7,8 +7,8 @@ using Statistics
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const DIRECTORY_PATH = "C:/Users/Daniel/Desktop/simresults_oneinfected/"
-const OUTPUT_PATH = "plotted_results_oneinfected/"
+const DIRECTORY_PATH = "C:/Users/Daniel/Desktop/simresults_oneinfected_smaller_mutation/"
+const OUTPUT_PATH = "plotted_results_oneinfected_smaller_mutation/"
 
 function analyze_and_plot(idx, migration_rate)
     files = glob("simulation_results_migration_$(migration_rate)_replicate_*.jld2", DIRECTORY_PATH)
@@ -31,6 +31,7 @@ function analyze_and_plot(idx, migration_rate)
         end_state = simulation.trajectory[end]
         
         total_viral_deme1 = sum(end_state.populations[1].viral_density .* end_state.populations[1].dx)
+        println(total_viral_deme1)
         total_viral_deme2 = sum(end_state.populations[2].viral_density .* end_state.populations[2].dx)
 
         if total_viral_deme1 > 0.0
