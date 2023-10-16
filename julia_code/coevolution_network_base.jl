@@ -1,5 +1,5 @@
 module CoevolutionNetworkBase
-export Population, Network, Simulation, run_simulation!, calculate_total_infected, single_step_evolve!, thin_simulation!
+export Population, Network, Simulation, run_simulation!, calculate_total_infected, single_step_evolve!, thin_simulation!, plot_spacetime_density
 
 using Random
 using Distributions
@@ -557,5 +557,4 @@ function Base.copy(network::Network)
     new_populations = [copy(pop) for pop in network.populations]
     return Network(new_populations, copy(network.migration_matrix))
 end
-
 end
