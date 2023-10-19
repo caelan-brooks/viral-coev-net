@@ -51,8 +51,10 @@ Analyze the data for a given beta value and return counts of each extinction typ
 function analyze_data_for_beta(beta_value)
     files = glob("simulation_results_beta_$(beta_value)_replicate_*.jld2", DATA_DIRECTORY)
     n_files = length(files)
+    println(n_files)
+    flush(stdout)
     outcomes = Dict(i => Dict("demographic" => 0, "immune" => 0, "survival" => 0, "unknown" => 0) for i in 1:n_files)
-
+    
     Threads.@threads for idx in 1:n_files
         file = files[idx]
         try
@@ -81,7 +83,6 @@ end
 results = Dict()
 for (idx, beta) in enumerate(BETA_VALUES)
     println(beta)
-    flush(stdout)
     results[idx] = analyze_data_for_beta(beta)
 end
 
