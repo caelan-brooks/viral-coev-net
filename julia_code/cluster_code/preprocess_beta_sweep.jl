@@ -4,7 +4,7 @@ using Printf
 using Statistics
 using Plots
 
-include("coevolution_network_base.jl")
+include("../coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
 const DATA_DIRECTORY = "/pool001/dswartz/viral_coev_output/betasweep_results"
@@ -71,6 +71,7 @@ end
 # Analyzing the data and saving the results
 results = Dict()
 for (idx, beta) in enumerate(BETA_VALUES)
+    println(beta)
     results[idx] = analyze_data_for_beta(beta)
 end
 
