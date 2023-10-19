@@ -50,27 +50,38 @@ Analyze the data for a given beta value and return counts of each extinction typ
 """
 function analyze_data_for_beta(beta_value)
     files = glob("simulation_results_beta_$(beta_value)_replicate_*.jld2", DATA_DIRECTORY)
-    outcomes = Dict("demographic" => 0, "immune" => 0, "survival" => 0, "unknown" => 0)
+    n_files = length(files)
+    outcomes = Dict(i => Dict("demographic" => 0, "immune" => 0, "survival" => 0, "unknown" => 0) for i in 1:n_files)
 
-    Threads.@threads for idx in 1:length(files)
+    Threads.@threads for idx in 1:n_files
         file = files[idx]
         try
             simulation = open(deserialize, file)
             extinction_type = classify_extinction_type(simulation)
-            outcomes[extinction_type] += 1
+            outcomes[idx][extinction_type] += 1
         catch e
             println("Error processing file $file: $e")
-            outcomes["unknown"] += 1
+            outcomes[idx]["unknown"] += 1
         end
     end
 
-    return outcomes
+    # Aggregate outcomes
+    aggregated_outcomes = Dict("demographic" => 0, "immune" => 0, "survival" => 0, "unknown" => 0)
+    for i in 1:n_files
+        for key in keys(aggregated_outcomes)
+            aggregated_outcomes[key] += outcomes[i][key]
+        end
+    end
+
+    return aggregated_outcomes
 end
+
 
 # Analyzing the data and saving the results
 results = Dict()
 for (idx, beta) in enumerate(BETA_VALUES)
     println(beta)
+    flush(stdout)
     results[idx] = analyze_data_for_beta(beta)
 end
 
