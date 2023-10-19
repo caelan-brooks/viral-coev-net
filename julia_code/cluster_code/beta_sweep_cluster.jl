@@ -70,10 +70,11 @@ function main(job_id)
     # Assign a specific beta value based on job_id
     beta_value = beta_values[job_id]
     
+    start_replicate = 1
     num_replicates = 8000  # Total number of replicates for the assigned beta_value
 
     # Create a list of simulation numbers for the given beta_value
-    simulation_numbers = 1:num_replicates
+    simulation_numbers = start_replicate:(start_replicate+num_replicates)
 
     @threads for simulation_number in simulation_numbers
         args = beta_value, simulation_number
