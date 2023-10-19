@@ -2,7 +2,6 @@ using Serialization
 using Glob
 using Printf
 using Statistics
-using Plots
 
 include("../coevolution_network_base.jl")
 using .CoevolutionNetworkBase
