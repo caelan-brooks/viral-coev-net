@@ -27,7 +27,7 @@ Returns:
 """
 function classify_extinction_type(simulation)
     try
-        total_infected_at_t4 = calculate_total_infected(simulation)[Int(round(4 / simulation.dt))]
+        total_infected_at_t4 = calculate_total_infected(simulation)[argmin(abs.(simulation.duration_times .- 4.0))]
         total_infected_at_end = calculate_total_infected(simulation)[end]
 
         if total_infected_at_t4 == 0
