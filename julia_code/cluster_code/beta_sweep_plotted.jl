@@ -20,7 +20,7 @@ se_immune = sqrt.((immune_extinctions .* (1 .- immune_extinctions)) ./ n_files)
 se_total = sqrt.((total_extinctions .* (1 .- total_extinctions)) ./ n_files)
 
 # Plot the extinction probabilities
-p = plot(BETA_VALUES, demographic_extinctions, ribbon=se_demographic, label="Demographic Extinction", alpha=0.5, linecolor=:blue,yscale=:log10)
+p = plot(BETA_VALUES, demographic_extinctions, ribbon=se_demographic, label="Demographic Extinction", alpha=0.5, linecolor=:blue,yscale=:log10, legend=:bottomleft)
 plot!(p, BETA_VALUES, immune_extinctions, ribbon=se_immune, label="Immune Extinction", alpha=0.5, linecolor=:red)
 plot!(p, BETA_VALUES, 1 .- total_extinctions, ribbon=se_total, label="Survival Prob", alpha=0.5, linecolor=:green)
 # plot!(p,BETA_VALUES,1.0 ./ BETA_VALUES .^ 0.2,linestyle=:dash)
