@@ -6,8 +6,10 @@ include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
 const OUTPUT_DIRECTORY = "/pool001/dswartz/migration_network_sweep_results"
-const MIGRATION_RATES = exp10.(LinRange(-6, 0.5, 2))
-const NETWORK_SIZES = 2:3
+const MIGRATION_RATES = exp10.(LinRange(-6, 0.5, 20))
+const NETWORK_SIZES = 2:10
+
+println("Number of threads: ", nthreads())
 
 const TOTAL_HOST_POPULATION = 12 * 10^6
 const L = 60.0
