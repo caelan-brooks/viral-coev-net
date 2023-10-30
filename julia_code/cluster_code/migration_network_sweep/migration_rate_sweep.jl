@@ -77,7 +77,7 @@ function main(job_id_arg)
 
     # Prepare output directory for this combination of parameters
     output_subdirectory = joinpath(OUTPUT_DIRECTORY, "network_size_$(network_size)", "migration_rate_idx_$(migration_rate_idx)")
-    isdir(output_subdirectory) || mkdir(output_subdirectory)
+    mkpath(output_subdirectory)
 
     # Run simulations for all replicates
     @threads for simulation_number in 1:NUM_REPLICATES
