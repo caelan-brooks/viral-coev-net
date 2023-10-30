@@ -6,8 +6,8 @@ include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
 const OUTPUT_DIRECTORY = "/pool001/dswartz/migration_network_sweep_results"
-const MIGRATION_RATES = exp10.(LinRange(-6, 0.5, 20))
-const NETWORK_SIZES = 2:10
+const MIGRATION_RATES = exp10.(LinRange(-6, 0.5, 10))
+const NETWORK_SIZES = 2:6
 
 println("Number of threads: ", nthreads())
 
@@ -29,6 +29,8 @@ const NUM_REPLICATES = 10000
 function run_single_simulation(args)
     # Unpack arguments
     migration_rate_idx, network_size, simulation_number = args
+    println(simulation_number)
+    flush(stdout)
     
     # Retrieve the actual migration rate using the index
     migration_rate = MIGRATION_RATES[migration_rate_idx]
