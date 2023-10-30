@@ -12,6 +12,7 @@ const NETWORK_SIZES = 2:3
 const TOTAL_HOST_POPULATION = 12 * 10^6
 const L = 60.0
 const dx = 0.3
+const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
 const beta = 2.5
@@ -38,8 +39,19 @@ function run_single_simulation(args)
     normalized_migration_rate = migration_rate / (network_size - 1)
     population_per_deme = round(Int, TOTAL_HOST_POPULATION / network_size)
 
+    
+    # Initialize viral and immune densities
+    viral_densities = [zeros(Float64, length(x)) for _ in 1:network_size]
+    immune_densities = [zeros(Float64, length(x)) for _ in 1:network_size]
+
+    # Set the value of viral_density at the closest index to 1/dx for the first population
+    index_closest_to_zero = argmin(abs.(x))
+    viral_densities[1][index_closest_to_zero] = 1/dx
+
+    # Create populations
+    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, population_per_deme, viral_densities[i], immune_densities[i]) for i in 1:network_size]
+
     # Initialize populations and network
-    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, population_per_deme) for _ in 1:network_size]
     migration_matrix = normalized_migration_rate * (ones(network_size, network_size) - I)
     network = Network(populations, migration_matrix)
     simulation = Simulation(network, DT, DURATION)
