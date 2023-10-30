@@ -24,7 +24,7 @@ const D = 0.01
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 50
-const NUM_REPLICATES = 10
+const NUM_REPLICATES = 10000
 
 function run_single_simulation(args)
     # Unpack arguments
