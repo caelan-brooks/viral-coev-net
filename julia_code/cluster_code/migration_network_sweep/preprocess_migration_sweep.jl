@@ -43,16 +43,25 @@ num_replicates = zeros(Int, length(NETWORK_SIZES), length(MIGRATION_RATES))
 # Loop over network sizes and migration rates
 for (size_idx, network_size) in enumerate(NETWORK_SIZES)
     for (rate_idx, migration_rate) in enumerate(MIGRATION_RATES)
-        # Detect the number of replicates by counting the files
-        files = glob(joinpath(OUTPUT_DIRECTORY, "network_size_$(network_size)", "migration_rate_idx_$(rate_idx)", "replicate_*.jld2"))
-        num_replicates[size_idx, rate_idx] = length(files)
-        println(num_replicates[size_idx, rate_idx])
-        flush(stdout)
-        
-        # Analyze data
-        survival_probabilities[size_idx, rate_idx], total_survivals = analyze_data(network_size, rate_idx, num_replicates[size_idx, rate_idx])
-        
-        println("Network Size: $network_size, Migration Rate Index: $rate_idx, Replicates: $(num_replicates[size_idx, rate_idx]), Total Survivals: $total_survivals, Survival Probability: $(survival_probabilities[size_idx, rate_idx])")
+        # Define the directory and pattern
+        dir = joinpath(OUTPUT_DIRECTORY, "network_size_$(network_size)", "migration_rate_idx_$(rate_idx)")
+        pattern = "replicate_*.jld2"
+
+        # Check if the directory exists
+        if isdir(dir)
+            # Detect the number of replicates by counting the files
+            files = glob(pattern, dir)
+            num_replicates[size_idx, rate_idx] = length(files)
+            println("Network Size: $network_size, Migration Rate Index: $rate_idx, Replicates: $(num_replicates[size_idx, rate_idx])")
+            flush(stdout)
+            
+            # Analyze data
+            survival_probabilities[size_idx, rate_idx], total_survivals = analyze_data(network_size, rate_idx, num_replicates[size_idx, rate_idx])
+            
+            println("Total Survivals: $total_survivals, Survival Probability: $(survival_probabilities[size_idx, rate_idx])")
+        else
+            println("Directory does not exist: $dir")
+        end
     end
 end
 
