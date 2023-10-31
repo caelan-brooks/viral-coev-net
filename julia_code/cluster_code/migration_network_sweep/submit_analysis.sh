@@ -9,5 +9,7 @@
 # Path to the Julia project/environment
 JULIA_PROJECT_PATH="/home/dswartz/viral-coev-net/julia_code/cluster_code/cluster_project"
 
+module load julia
+
 # Execute your Julia script using the specific project and auto-threading
 julia --project=$JULIA_PROJECT_PATH -t auto preprocess_migration_sweep.jl
