@@ -14,24 +14,24 @@ const LOCAL_RESULTS_DIRECTORY = "./migration_network_sweep_results"
 println("Number of threads: ", nthreads())
 
 function analyze_data(network_size, migration_rate_idx, num_replicates)
-    total_survivals = 0
-    
-    for replicate_idx in 1:num_replicates
+    # Preallocate an array to store the survival status for each replicate
+    survival_statuses = zeros(Bool, num_replicates)
+
+    @threads for replicate_idx in 1:num_replicates
         file_path = joinpath(OUTPUT_DIRECTORY, "network_size_$(network_size)", "migration_rate_idx_$(migration_rate_idx)", "replicate_$(replicate_idx).jld2")
-        
+
         if isfile(file_path)
             try
                 simulation = open(deserialize, file_path)
                 total_infected = calculate_total_infected(simulation)
-                if total_infected[end] > 0
-                    total_survivals += 1
-                end
+                survival_statuses[replicate_idx] = total_infected[end] > 0
             catch e
                 println("Error processing file $(file_path): $e")
             end
         end
     end
 
+    total_survivals = sum(survival_statuses)
     survival_probability = total_survivals / num_replicates
     return survival_probability, total_survivals
 end
