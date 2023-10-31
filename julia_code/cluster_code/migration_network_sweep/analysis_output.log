@@ -1,0 +1,146 @@
+Number of threads: 16
+Network Size: 2, Migration Rate Index: 1, Replicates: 10000
+Total Survivals: 870, Survival Probability: 0.087
+Network Size: 2, Migration Rate Index: 2, Replicates: 10000
+Total Survivals: 1002, Survival Probability: 0.1002
+Network Size: 2, Migration Rate Index: 3, Replicates: 10000
+Total Survivals: 1046, Survival Probability: 0.1046
+Network Size: 2, Migration Rate Index: 4, Replicates: 10000
+Total Survivals: 1158, Survival Probability: 0.1158
+Network Size: 2, Migration Rate Index: 5, Replicates: 10000
+Total Survivals: 1047, Survival Probability: 0.1047
+Network Size: 2, Migration Rate Index: 6, Replicates: 10000
+Total Survivals: 948, Survival Probability: 0.0948
+Network Size: 2, Migration Rate Index: 7, Replicates: 10000
+Total Survivals: 926, Survival Probability: 0.0926
+Network Size: 2, Migration Rate Index: 8, Replicates: 10000
+Total Survivals: 899, Survival Probability: 0.0899
+Network Size: 2, Migration Rate Index: 9, Replicates: 9461
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_7699.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_8947.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_1869.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_6042.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_6658.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_7911.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_4368.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_823.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_5624.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_8739.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_9/replicate_1665.jld2: EOFError()
+Total Survivals: 810, Survival Probability: 0.08561462847479125
+Network Size: 2, Migration Rate Index: 10, Replicates: 9762
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_621.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_4377.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_5628.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_1458.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_9372.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_3338.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_3964.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_5835.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_7082.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_1040.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_9578.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_3550.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_4795.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_2/migration_rate_idx_10/replicate_5417.jld2: EOFError()
+Total Survivals: 870, Survival Probability: 0.08912108174554395
+Network Size: 3, Migration Rate Index: 1, Replicates: 5562
+Total Survivals: 199, Survival Probability: 0.035778496943545485
+Network Size: 3, Migration Rate Index: 2, Replicates: 4063
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_2801.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_3845.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_2594.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_85.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_3428.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_2384.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_921.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_713.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_2175.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_3/migration_rate_idx_2/replicate_1966.jld2: EOFError()
+Total Survivals: 142, Survival Probability: 0.034949544671425053
+Network Size: 3, Migration Rate Index: 3, Replicates: 10000
+Total Survivals: 1074, Survival Probability: 0.1074
+Network Size: 3, Migration Rate Index: 4, Replicates: 10000
+Total Survivals: 1112, Survival Probability: 0.1112
+Network Size: 3, Migration Rate Index: 5, Replicates: 10000
+Total Survivals: 1095, Survival Probability: 0.1095
+Network Size: 3, Migration Rate Index: 6, Replicates: 10000
+Total Survivals: 1030, Survival Probability: 0.103
+Network Size: 3, Migration Rate Index: 7, Replicates: 10000
+Total Survivals: 926, Survival Probability: 0.0926
+Network Size: 3, Migration Rate Index: 8, Replicates: 10000
+Total Survivals: 899, Survival Probability: 0.0899
+Network Size: 3, Migration Rate Index: 9, Replicates: 10000
+Total Survivals: 904, Survival Probability: 0.0904
+Network Size: 3, Migration Rate Index: 10, Replicates: 10000
+Total Survivals: 876, Survival Probability: 0.0876
+Network Size: 4, Migration Rate Index: 1, Replicates: 10000
+Total Survivals: 518, Survival Probability: 0.0518
+Network Size: 4, Migration Rate Index: 2, Replicates: 10000
+Total Survivals: 954, Survival Probability: 0.0954
+Network Size: 4, Migration Rate Index: 3, Replicates: 10000
+Total Survivals: 1094, Survival Probability: 0.1094
+Network Size: 4, Migration Rate Index: 4, Replicates: 10000
+Total Survivals: 1107, Survival Probability: 0.1107
+Network Size: 4, Migration Rate Index: 5, Replicates: 10000
+Total Survivals: 1115, Survival Probability: 0.1115
+Network Size: 4, Migration Rate Index: 6, Replicates: 10000
+Total Survivals: 1045, Survival Probability: 0.1045
+Network Size: 4, Migration Rate Index: 7, Replicates: 10000
+Total Survivals: 991, Survival Probability: 0.0991
+Network Size: 4, Migration Rate Index: 8, Replicates: 10000
+Total Survivals: 913, Survival Probability: 0.0913
+Network Size: 4, Migration Rate Index: 9, Replicates: 10000
+Total Survivals: 891, Survival Probability: 0.0891
+Network Size: 4, Migration Rate Index: 10, Replicates: 10000
+Total Survivals: 875, Survival Probability: 0.0875
+Network Size: 5, Migration Rate Index: 1, Replicates: 8434
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_5/migration_rate_idx_1/replicate_1156.jld2: EOFError()
+Total Survivals: 283, Survival Probability: 0.03355465971069481
+Network Size: 5, Migration Rate Index: 2, Replicates: 8519
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_5/migration_rate_idx_2/replicate_3662.jld2: EOFError()
+Total Survivals: 655, Survival Probability: 0.07688695856321165
+Network Size: 5, Migration Rate Index: 3, Replicates: 8516
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_5/migration_rate_idx_3/replicate_3036.jld2: EOFError()
+Total Survivals: 754, Survival Probability: 0.08853922029121654
+Network Size: 5, Migration Rate Index: 4, Replicates: 8520
+Total Survivals: 785, Survival Probability: 0.09213615023474178
+Network Size: 5, Migration Rate Index: 5, Replicates: 8506
+Total Survivals: 816, Survival Probability: 0.09593228309428639
+Network Size: 5, Migration Rate Index: 6, Replicates: 8411
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_5/migration_rate_idx_6/replicate_4917.jld2: EOFError()
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_5/migration_rate_idx_6/replicate_2391.jld2: EOFError()
+Total Survivals: 719, Survival Probability: 0.08548329568422304
+Network Size: 5, Migration Rate Index: 7, Replicates: 8522
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_5/migration_rate_idx_7/replicate_537.jld2: EOFError()
+Total Survivals: 753, Survival Probability: 0.0883595400140812
+Network Size: 5, Migration Rate Index: 8, Replicates: 8495
+Total Survivals: 647, Survival Probability: 0.07616244849911713
+Network Size: 5, Migration Rate Index: 9, Replicates: 8456
+Total Survivals: 639, Survival Probability: 0.07556764427625355
+Network Size: 5, Migration Rate Index: 10, Replicates: 8505
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_5/migration_rate_idx_10/replicate_3030.jld2: EOFError()
+Total Survivals: 609, Survival Probability: 0.07160493827160494
+Network Size: 6, Migration Rate Index: 1, Replicates: 6783
+Total Survivals: 167, Survival Probability: 0.024620374465575703
+Network Size: 6, Migration Rate Index: 2, Replicates: 6715
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_6/migration_rate_idx_2/replicate_2922.jld2: EOFError()
+Total Survivals: 444, Survival Probability: 0.06612062546537602
+Network Size: 6, Migration Rate Index: 3, Replicates: 6220
+Total Survivals: 401, Survival Probability: 0.06446945337620578
+Network Size: 6, Migration Rate Index: 4, Replicates: 6260
+Total Survivals: 426, Survival Probability: 0.06805111821086263
+Network Size: 6, Migration Rate Index: 5, Replicates: 6228
+Total Survivals: 430, Survival Probability: 0.06904303147077713
+Network Size: 6, Migration Rate Index: 6, Replicates: 6216
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_6/migration_rate_idx_6/replicate_2263.jld2: EOFError()
+Total Survivals: 413, Survival Probability: 0.06644144144144144
+Network Size: 6, Migration Rate Index: 7, Replicates: 6137
+Total Survivals: 387, Survival Probability: 0.06306012709793059
+Network Size: 6, Migration Rate Index: 8, Replicates: 6236
+Total Survivals: 335, Survival Probability: 0.05372033354714561
+Network Size: 6, Migration Rate Index: 9, Replicates: 2982
+Total Survivals: 78, Survival Probability: 0.026156941649899398
+Network Size: 6, Migration Rate Index: 10, Replicates: 2940
+Error processing file /pool001/dswartz/migration_network_sweep_results/network_size_6/migration_rate_idx_10/replicate_688.jld2: EOFError()
+Total Survivals: 74, Survival Probability: 0.025170068027210883
