@@ -3,10 +3,16 @@ using Glob
 using Statistics
 using LaTeXStrings
 using Plots
-const DIRECTORY_PATH = "simresults_singledeme"
+const DIRECTORY_PATH = "simresults_singledeme2"
+cd("C:\\Users\\Daniel\\Documents\\GitHub\\viral-coev-net\\julia_code")
+
+if !isdir(DIRECTORY_PATH)
+    error("Directory not found: ", DIRECTORY_PATH)
+end
+
 
 function calculate_probability_of_survival(cutoff::Real)
-    files = glob("simulation_results_replicate_*.jld2", DIRECTORY_PATH)
+    files = glob("*", DIRECTORY_PATH)
     
     survival_counts = 0
     total_files = length(files)

@@ -26,6 +26,9 @@ for (idx, network_size) in enumerate(network_sizes)
     plot!(p, migration_rates, p_values, ribbon=errors, label="Network Size $network_size", marker=:circle)
 end
 
+# Add horizontal dashed line at 0.0904
+hline!(p, [0.0904], linestyle=:dash, color=:black, label="Threshold")
+
 # Display the plot
 display(p)
 
