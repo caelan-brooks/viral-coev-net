@@ -1,10 +1,10 @@
-using Distributed
+using Distributions
 using Base.Threads
 using Serialization
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "C:/Users/Daniel/Desktop/simresults_oneinfected_largest_beta"
+const OUTPUT_DIRECTORY = "C:/Users/Daniel/Desktop/simresults_random_rates"
 
 if !isdir(OUTPUT_DIRECTORY)
     mkdir(OUTPUT_DIRECTORY)
@@ -17,8 +17,7 @@ const dx = 0.3
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
-const beta = 5
-# const beta = 4.0
+const beta = 2.5
 const alpha = 1.0
 const gamma = 0.0
 const D = 0.01
@@ -53,7 +52,11 @@ function run_single_simulation(args)
     population1 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density)
     population2 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density2, immune_density)
     
-    migration_matrix = [0.0 migration_rate; migration_rate 0.0]
+    # migration_matrix = [0.0 migration_rate; migration_rate 0.0]
+    # Generate off-diagonal terms as iid exponential random variables
+    migration1to2 = rand(Exponential(migration_rate))
+    migration2to1 = rand(Exponential(migration_rate))
+    migration_matrix = [0.0 migration1to2; migration2to1 0.0]
 
     network = Network([population1, population2], migration_matrix)
     simulation = Simulation(network, dt, duration)
@@ -71,7 +74,8 @@ function run_single_simulation(args)
 end
 
 function main()
-    migration_rates = vcat([0.0], exp10.(LinRange(-6, 0.5, 9))) # Example migration rates to sweep over
+    # migration_rates = vcat([0.0], exp10.(LinRange(-6, 0.5, 9))) # Example migration rates to sweep over
+    migration_rates = exp10.(LinRange(-6, 0.5, 9)) # Example migration rates to sweep over
     start_rep = 5001
     num_replicates = 10000
 

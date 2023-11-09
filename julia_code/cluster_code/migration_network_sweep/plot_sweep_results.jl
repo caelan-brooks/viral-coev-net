@@ -17,7 +17,7 @@ function standard_error(p, n)
 end
 
 # Initialize the plot with a transparent legend
-p = plot(xscale=:log10, yscale=:lin, xlabel="Migration Rate", ylabel="Survival Probability", legend=:topright, legendalpha=0.5)
+p = plot(xscale=:log10, yscale=:lin, xlabel="Migration Rate", ylabel="Survival Probability", legend=:bottomleft, legendalpha=0.5)
 
 # Plot the survival probability vs migration rate for each network size with error bars
 for (idx, network_size) in enumerate(network_sizes)

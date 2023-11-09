@@ -9,8 +9,8 @@ using .CoevolutionNetworkBase
 
 # const DIRECTORY_PATH = "simresults_newseed/"
 
-const DIRECTORY_PATH ="C:/Users/Daniel/Desktop/simresults_oneinfected/"
-const OUTPUT_PATH = "plotted_results_oneinfected_repeat/"
+const DIRECTORY_PATH ="C:/Users/Daniel/Desktop/simresults_random_rates/"
+const OUTPUT_PATH = "plotted_results_random_rates/"
 
 function calculate_total_infected_per_deme(simulation::Simulation)
     # Get the number of populations (demes)
@@ -197,7 +197,7 @@ function main()
     end
 
     plotvar = plot(migration_rates[2:end], probabilities[2:end], yerr=errors[2:end], seriestype=:scatter, xscale=:log10,
-         xlabel="Migration Rate", ylabel="Probability of Survival",
+         xlabel="Average Migration Rate", ylabel="Probability of Survival",
          title="Probability of Survival as a Function of Migration Rate",
          legend=false)
     
