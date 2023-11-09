@@ -12,7 +12,7 @@ const NETWORK_SIZES = 2:6
 println("Number of threads: ", nthreads())
 
 const TOTAL_HOST_POPULATION = 12 * 10^6
-const L = 60.0
+const L = 40.0
 const dx = 0.3
 const x = -L/2:dx:L/2-dx
 const r = 3.0
@@ -24,7 +24,7 @@ const D = 0.01
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 50
-const NUM_REPLICATES = 10000
+const NUM_REPLICATES = 3000
 
 function run_single_simulation(args)
     # Unpack arguments
@@ -50,7 +50,7 @@ function run_single_simulation(args)
 
     # Set the value of viral_density at the closest index to 1/dx for the first population
     index_closest_to_zero = argmin(abs.(x))
-    viral_densities[1][index_closest_to_zero] = 1/dx
+    viral_densities[1][index_closest_to_zero] = 100/dx
 
     # Create populations
     populations = [Population(L, dx, r, M, beta, alpha, gamma, D, population_per_deme, viral_densities[i], immune_densities[i]) for i in 1:network_size]

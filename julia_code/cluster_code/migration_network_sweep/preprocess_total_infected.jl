@@ -15,7 +15,7 @@ println("Number of threads: ", nthreads())
 
 function calculate_and_save_total_infected(network_size, migration_rate_idx)
     # Directory to save the total infected data
-    save_directory = joinpath(LOCAL_RESULTS_DIRECTORY, "total_infected", "network_size_$(network_size)", "migration_rate_idx_$(migration_rate_idx)")
+    save_directory = joinpath(LOCAL_RESULTS_DIRECTORY, "total_infected")
     if !isdir(save_directory)
         mkpath(save_directory)
     end
@@ -28,6 +28,9 @@ function calculate_and_save_total_infected(network_size, migration_rate_idx)
     files = glob(pattern, dir)
     num_replicates = length(files)
 
+    # Initialize a collection to hold all the data
+    all_replicates_data = [Dict() for _ in 1:num_replicates]
+
     @threads for replicate_idx in 1:num_replicates
         file_path = joinpath(dir, "replicate_$(replicate_idx).jld2")
         
@@ -37,16 +40,19 @@ function calculate_and_save_total_infected(network_size, migration_rate_idx)
                 total_infected = calculate_total_infected(simulation)
                 times = simulation.duration_times  # Assuming time steps are in discrete units starting from 0
                 
-                # Save the total infected data
-                save_file_path = joinpath(save_directory, "replicate_$(replicate_idx).jld2")
-                open(save_file_path, "w") do file
-                    serialize(file, Dict("total_infected" => total_infected, "times" => times))
-                end
+                # Insert the data for this replicate into the collection
+                all_replicates_data[replicate_idx] = Dict("total_infected" => total_infected, "times" => times)
                 
             catch e
                 println("Error processing file $(file_path): $e")
             end
         end
+    end
+
+    # Save all replicates data to a single file
+    save_file_path = joinpath(save_directory, "network_size_$(network_size)_migration_rate_idx_$(migration_rate_idx).jld2")
+    open(save_file_path, "w") do file
+        serialize(file, all_replicates_data)
     end
 end
 
