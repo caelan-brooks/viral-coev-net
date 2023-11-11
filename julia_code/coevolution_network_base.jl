@@ -1,5 +1,5 @@
 module CoevolutionNetworkBase
-export Population, Network, Simulation, run_simulation!, calculate_total_infected, single_step_evolve!, thin_simulation!, plot_spacetime_density
+export Population, Network, Simulation, run_simulation!, calculate_total_infected, calculate_total_infected_per_deme, single_step_evolve!, thin_simulation!, plot_spacetime_density
 
 using Random
 using Distributions
@@ -340,6 +340,26 @@ function calculate_total_infected(simulation::Simulation)
     return total_infected
 end
 
+function calculate_total_infected_per_deme(simulation::Simulation)
+    # Get the number of populations (demes)
+    num_demes = length(simulation.trajectory[1].populations)
+    
+    # Initialize a list of vectors to hold the total number of infected individuals at each time step for each deme
+    total_infected_per_deme = [zeros(Float64, length(simulation.trajectory)) for _ in 1:num_demes]
+
+    # Iterate over each network state in the simulation's trajectory
+    for (i, network) in enumerate(simulation.trajectory)
+        # Iterate over each population in the current network state
+        for (j, population) in enumerate(network.populations)
+            # Increment the total infected count for the current time step and deme
+            # by adding the integral of the viral density (viral_density multiplied by dx)
+            total_infected_per_deme[j][i] += sum(population.viral_density .* population.dx)
+        end
+    end
+
+    # Return the list containing the total number of infected individuals at each time step for each deme
+    return total_infected_per_deme
+end
 
 """
     single_step_evolve_network(network::Network, dt)

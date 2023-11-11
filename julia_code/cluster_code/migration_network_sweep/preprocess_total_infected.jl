@@ -37,11 +37,11 @@ function calculate_and_save_total_infected(network_size, migration_rate_idx)
         if isfile(file_path)
             try
                 simulation = open(deserialize, file_path)
-                total_infected = calculate_total_infected(simulation)
+                total_infected_per_deme = calculate_total_infected_per_deme(simulation)
                 times = simulation.duration_times  # Assuming time steps are in discrete units starting from 0
                 
                 # Insert the data for this replicate into the collection
-                all_replicates_data[replicate_idx] = Dict("total_infected" => total_infected, "times" => times)
+                all_replicates_data[replicate_idx] = Dict("total_infected" => total_infected_per_deme, "times" => times)
                 
             catch e
                 println("Error processing file $(file_path): $e")
