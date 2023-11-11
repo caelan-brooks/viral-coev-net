@@ -4,7 +4,7 @@ using Serialization
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "C:/Users/Daniel/Desktop/simresults_random_rates"
+const OUTPUT_DIRECTORY = "C:/Users/Daniel/Desktop/simresults_no_cross"
 
 if !isdir(OUTPUT_DIRECTORY)
     mkdir(OUTPUT_DIRECTORY)
