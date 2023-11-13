@@ -1,5 +1,5 @@
 module CoevolutionNetworkBase
-export Population, Network, Simulation, run_simulation!, calculate_total_infected, calculate_total_infected_per_deme, single_step_evolve!, thin_simulation!, plot_spacetime_density
+export Population, Network, Simulation, run_simulation!, calculate_total_infected, calculate_total_infected_per_deme, single_step_evolve!, thin_simulation!, plot_spacetime_density, calculate_antigenic_variance_per_deme
 
 using Random
 using Distributions
@@ -349,7 +349,7 @@ function calculate_total_infected_per_deme(simulation::Simulation)
     num_time_points = length(simulation.duration_times)
     
     # Initialize a list of vectors to hold the total number of infected individuals at each time step for each deme
-    zeros(num_demes, num_time_points);
+    total_infected_per_deme = zeros(num_demes, num_time_points);
 
     # Iterate over each network state in the simulation's trajectory
     for (i, network) in enumerate(simulation.trajectory)
@@ -365,6 +365,28 @@ function calculate_total_infected_per_deme(simulation::Simulation)
     return total_infected_per_deme
 end
 
+function calculate_antigenic_variance_per_deme(simulation::Simulation)
+    xs = simulation.trajectory[1].populations[1].xs
+    num_time_points = length(simulation.duration_times)
+    num_demes = length(simulation.trajectory[1].populations)
+
+    total_infected_per_deme = calculate_total_infected_per_deme(simulation)
+    println(size(total_infected_per_deme))
+    variances_per_deme = zeros(num_demes,num_time_points)
+
+    for i = 1:num_time_points
+        for j = 1:num_demes
+            population = simulation.trajectory[i].populations[j]
+            if total_infected_per_deme[j,i] > 0
+                avg_antigenicity = sum(xs .* population.viral_density .* population.dx) ./ total_infected_per_deme[j,i]
+                variances_per_deme[j,i] = sum((xs .- avg_antigenicity).^2 .* population.viral_density) ./ total_infected_per_deme[j,i]
+            end
+        
+        end
+    end
+
+    return variances_per_deme
+end
 """
     single_step_evolve_network(network::Network, dt)
 
