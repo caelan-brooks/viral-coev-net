@@ -265,6 +265,9 @@ function copy_network_data!(dest::Network, source::Network)
     for i in 1:length(dest.populations)
         dest.populations[i].viral_density .= source.populations[i].viral_density
         dest.populations[i].immune_density .= source.populations[i].immune_density
+        dest.populations[i].cross_reactive .= source.populations[i].cross_reactive
+        dest.populations[i].susceptibility .= source.populations[i].susceptibility
+        dest.populations[i].fitness .= source.populations[i].fitness
         # Copy other fields as necessary
     end
 end
@@ -343,9 +346,10 @@ end
 function calculate_total_infected_per_deme(simulation::Simulation)
     # Get the number of populations (demes)
     num_demes = length(simulation.trajectory[1].populations)
+    num_time_points = length(simulation.duration_times)
     
     # Initialize a list of vectors to hold the total number of infected individuals at each time step for each deme
-    total_infected_per_deme = [zeros(Float64, length(simulation.trajectory)) for _ in 1:num_demes]
+    zeros(num_demes, num_time_points);
 
     # Iterate over each network state in the simulation's trajectory
     for (i, network) in enumerate(simulation.trajectory)
@@ -353,7 +357,7 @@ function calculate_total_infected_per_deme(simulation::Simulation)
         for (j, population) in enumerate(network.populations)
             # Increment the total infected count for the current time step and deme
             # by adding the integral of the viral density (viral_density multiplied by dx)
-            total_infected_per_deme[j][i] += sum(population.viral_density .* population.dx)
+            total_infected_per_deme[j,i] += sum(population.viral_density .* population.dx)
         end
     end
 

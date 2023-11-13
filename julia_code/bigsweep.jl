@@ -4,7 +4,7 @@ using Serialization
 include("coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "C:/Users/Daniel/Desktop/simresults_no_cross"
+const OUTPUT_DIRECTORY = "C:/Users/Daniel/Desktop/simresults"
 
 if !isdir(OUTPUT_DIRECTORY)
     mkdir(OUTPUT_DIRECTORY)
@@ -33,7 +33,7 @@ index_closest_to_zero = argmin(abs.(x))
 const viral_density = zeros(Float64, length(x))
 
 # Set the value of viral_density at the closest index to 1/dx
-viral_density[index_closest_to_zero] = 1/dx
+viral_density[index_closest_to_zero] = 100/dx
 
 const viral_density2 = zeros(Float64, length(x))
 const immune_density = zeros(Float64, length(x))
@@ -75,9 +75,9 @@ end
 
 function main()
     # migration_rates = vcat([0.0], exp10.(LinRange(-6, 0.5, 9))) # Example migration rates to sweep over
-    migration_rates = exp10.(LinRange(-6, 0.5, 9)) # Example migration rates to sweep over
-    start_rep = 5001
-    num_replicates = 10000
+    migration_rates = exp10.(LinRange(-7.0, -0.5, 9)) # Example migration rates to sweep over
+    start_rep = 1
+    num_replicates = 5000
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in start_rep:(start_rep + num_replicates - 1)]
