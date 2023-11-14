@@ -377,9 +377,11 @@ function calculate_antigenic_variance_per_deme(simulation::Simulation)
     for i = 1:num_time_points
         for j = 1:num_demes
             population = simulation.trajectory[i].populations[j]
-            if total_infected_per_deme[j,i] > 0
+            if total_infected_per_deme[j,i] > 1
                 avg_antigenicity = sum(xs .* population.viral_density .* population.dx) ./ total_infected_per_deme[j,i]
                 variances_per_deme[j,i] = sum((xs .- avg_antigenicity).^2 .* population.viral_density) ./ total_infected_per_deme[j,i]
+            else
+                variances_per_deme[j,i] = 0
             end
         
         end
