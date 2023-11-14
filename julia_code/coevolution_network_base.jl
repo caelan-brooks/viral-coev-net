@@ -371,7 +371,6 @@ function calculate_antigenic_variance_per_deme(simulation::Simulation)
     num_demes = length(simulation.trajectory[1].populations)
 
     total_infected_per_deme = calculate_total_infected_per_deme(simulation)
-    println(size(total_infected_per_deme))
     variances_per_deme = zeros(num_demes,num_time_points)
 
     for i = 1:num_time_points
