@@ -20,7 +20,7 @@ function analyze_data(adjacency_matrix_idx, migration_rate_idx, num_replicates; 
     survival_statuses = zeros(Bool, num_replicates)
 
     @threads for replicate_idx in 1:num_replicates
-        file_path = joinpath(OUTPUT_DIRECTORY, "adjacency_matrix_idx_$(adjacency_matrix_idx)", "migration_rate_idx_$(migration_rate_idx)", "replicate_$(replicate_idx).jld2")
+        file_path = joinpath(DATA_DIRECTORY, "adjacency_matrix_idx_$(adjacency_matrix_idx)", "migration_rate_idx_$(migration_rate_idx)", "replicate_$(replicate_idx).jld2")
 
         if isfile(file_path)
             try
@@ -54,6 +54,7 @@ for adjacency_matrix_idx in 1:length(all_adjacency_matrices)
             
             # Call the analysis function and store the results
             survival_probability, total_survivals = analyze_data(adjacency_matrix_idx, rate_idx, num_replicates)
+            println(survival_probability)
             results[(adjacency_matrix_idx, rate_idx)] = (survival_probability, total_survivals, num_replicates)
         else
             println("Directory does not exist: $dir")
