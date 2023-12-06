@@ -8,7 +8,7 @@ using .CoevolutionNetworkBase
 # New line to include the script for loading adjacency matrices
 include("./all_adjacency_matrices.jl")
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/all_four_deme_results"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/all_four_deme_with_variance"
 const MIGRATION_RATES = exp10.(LinRange(-6, -0.5, 10))
 
 println("Number of threads: ", nthreads())
@@ -26,8 +26,8 @@ const D = 0.01
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 4000
-const START_REPLICATE = 4000
+const NUM_REPLICATES = 1000
+const START_REPLICATE = 1
 
 function run_single_simulation(args)
     # Unpack arguments
@@ -72,13 +72,14 @@ function run_single_simulation(args)
 
         # Calculate total infected per deme
         total_infected_per_deme = calculate_total_infected_per_deme(simulation)
+        antigenic_variance_per_deme = calculate_antigenic_variance_per_deme(simulation)
 
         # Prepare output file path using migration rate index
         output_file = joinpath(OUTPUT_DIRECTORY, "adjacency_matrix_idx_$(adjacency_matrix_idx)", "migration_rate_idx_$(migration_rate_idx)", "replicate_$(simulation_number).jld2")
 
         # Save the calculated total infected per deme
         open(output_file, "w") do file
-            serialize(file, total_infected_per_deme)
+            serialize(file, (total_infected_per_deme, antigenic_variance_per_deme))
         end
     catch e
         println("Error in simulation with args $(args): $e")
