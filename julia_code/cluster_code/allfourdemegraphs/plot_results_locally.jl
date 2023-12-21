@@ -23,12 +23,12 @@ for (key, value) in results
 end
 
 # Plotting
-group = [1, 3, 2, 2, 2, 1, 2, 2, 1, 1, 2]
-group_colors = [:red, :green, :purple]
+group = [1, 3, 2, 2, 4, 1, 2, 4, 1, 1, 2]
+group_colors = [:purple, :pink, :blue, :green]
 p = plot(legend=:topright, xscale=:log10)
 for (adjacency_matrix_idx, (rates, probabilities, errors)) in plot_data
     sort_idx = sortperm(rates)  # To ensure the rates are in ascending order
-    plot!(p, rates[sort_idx], probabilities[sort_idx], ribbon=errors[sort_idx], label="Network $(adjacency_matrix_idx)", color=group_colors[group[adjacency_matrix_idx]])
+    plot!(p, rates[sort_idx], probabilities[sort_idx], ribbon=errors[sort_idx], label=:none, color=group_colors[group[adjacency_matrix_idx]])
 end
 
 xlabel!(p, "Migration Rate")
