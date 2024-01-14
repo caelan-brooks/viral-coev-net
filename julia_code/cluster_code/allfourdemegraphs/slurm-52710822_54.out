@@ -1,0 +1,2025 @@
+Graph 1 is connected.
+Graph 2 is connected.
+Graph 3 is connected.
+Graph 4 is connected.
+Graph 5 is connected.
+Graph 6 is connected.
+Graph 7 is connected.
+Graph 8 is connected.
+Graph 9 is connected.
+Graph 10 is connected.
+Graph 11 is connected.
+Matrix 1 normalized.
+Matrix 2 normalized.
+Matrix 3 normalized.
+Matrix 4 normalized.
+Matrix 5 normalized.
+Matrix 6 normalized.
+Matrix 7 normalized.
+Matrix 8 normalized.
+Matrix 9 normalized.
+Matrix 10 normalized.
+Matrix 11 normalized.
+Number of threads: 20
+1521
+
+902
+102
+452
+552
+52
+202
+702
+302
+352
+852
+652
+402
+502
+952
+602
+802
+752
+252
+  6.483636 seconds (862.34 k allocations: 937.932 MiB, 15.41% gc time)
+253
+ 10.236738 seconds (1.42 M allocations: 1.248 GiB, 36.13% gc time, 0.35% compilation time)
+703
+ 10.223046 seconds (1.22 M allocations: 1.168 GiB, 36.18% gc time, 0.35% compilation time)
+203
+ 10.342889 seconds (1.34 M allocations: 1.232 GiB, 35.76% gc time, 0.35% compilation time)
+903
+ 10.442202 seconds (1.49 M allocations: 1.303 GiB, 35.42% gc time, 0.34% compilation time)
+653
+ 10.571626 seconds (1.74 M allocations: 1.417 GiB, 34.98% gc time, 0.34% compilation time)
+53
+ 10.839774 seconds (2.07 M allocations: 1.578 GiB, 34.12% gc time, 0.33% compilation time)
+453
+ 11.152429 seconds (2.07 M allocations: 1.611 GiB, 33.16% gc time, 0.32% compilation time)
+803
+ 11.237729 seconds (2.23 M allocations: 1.684 GiB, 32.91% gc time, 0.32% compilation time)
+553
+ 11.334768 seconds (2.25 M allocations: 1.704 GiB, 32.63% gc time, 0.32% compilation time)
+953
+ 11.694429 seconds (2.52 M allocations: 1.851 GiB, 31.62% gc time, 0.31% compilation time)
+2
+ 11.821768 seconds (2.75 M allocations: 1.958 GiB, 31.28% gc time, 0.30% compilation time)
+ 11.735387 seconds (2.58 M allocations: 1.882 GiB, 31.51% gc time, 0.31% compilation time)
+503
+ 12.597403 seconds (2.89 M allocations: 2.095 GiB, 29.36% gc time, 0.29% compilation time)
+ 12.253597 seconds (2.63 M allocations: 1.957 GiB, 30.18% gc time, 0.29% compilation time)
+ 12.216272 seconds (2.67 M allocations: 1.968 GiB, 30.27% gc time, 0.29% compilation time)
+753
+ 12.351837 seconds (2.70 M allocations: 1.993 GiB, 29.94% gc time, 0.29% compilation time)
+ 12.449809 seconds (2.89 M allocations: 2.080 GiB, 29.71% gc time, 0.29% compilation time)
+ 12.104284 seconds (2.62 M allocations: 1.934 GiB, 30.55% gc time, 0.30% compilation time)
+ 12.185863 seconds (2.82 M allocations: 2.025 GiB, 30.35% gc time, 0.30% compilation time)
+853
+403
+353
+153
+603
+303
+103
+ 12.560474 seconds (3.61 M allocations: 2.205 GiB, 43.71% gc time)
+254
+  9.326924 seconds (3.36 M allocations: 2.047 GiB, 29.92% gc time)
+204
+  9.367314 seconds (3.18 M allocations: 1.979 GiB, 29.79% gc time)
+654
+  9.838428 seconds (3.64 M allocations: 2.213 GiB, 28.36% gc time)
+704
+  9.880195 seconds (3.44 M allocations: 2.140 GiB, 28.24% gc time)
+  9.639784 seconds (3.32 M allocations: 2.064 GiB, 28.95% gc time)
+54
+454
+  9.295864 seconds (3.13 M allocations: 1.952 GiB, 30.02% gc time)
+954
+  8.237484 seconds (2.05 M allocations: 1.402 GiB, 33.88% gc time)
+354
+ 10.660182 seconds (4.06 M allocations: 2.474 GiB, 26.18% gc time)
+904
+  8.676071 seconds (2.22 M allocations: 1.515 GiB, 32.16% gc time)
+154
+  9.013123 seconds (2.32 M allocations: 1.594 GiB, 30.96% gc time)
+504
+ 10.807348 seconds (4.06 M allocations: 2.490 GiB, 25.82% gc time)
+554
+  9.239855 seconds (2.49 M allocations: 1.688 GiB, 30.20% gc time)
+304
+  9.390662 seconds (2.66 M allocations: 1.773 GiB, 29.72% gc time)
+854
+ 11.130626 seconds (4.32 M allocations: 2.632 GiB, 25.07% gc time)
+804
+ 10.382363 seconds (3.39 M allocations: 2.173 GiB, 26.88% gc time)
+754
+ 10.733560 seconds (3.40 M allocations: 2.214 GiB, 26.00% gc time)
+604
+ 10.844497 seconds (3.46 M allocations: 2.254 GiB, 25.73% gc time)
+404
+ 11.090955 seconds (3.74 M allocations: 2.393 GiB, 25.16% gc time)
+104
+ 11.188099 seconds (3.80 M allocations: 2.430 GiB, 24.94% gc time)
+3
+  7.086306 seconds (3.50 M allocations: 2.170 GiB)
+255
+  6.502536 seconds (2.88 M allocations: 1.855 GiB)
+455
+  5.109248 seconds (1.83 M allocations: 1.282 GiB)
+  7.470584 seconds (3.62 M allocations: 2.263 GiB)
+555
+655
+  8.341916 seconds (4.23 M allocations: 2.601 GiB)
+205
+  8.435428 seconds (4.11 M allocations: 2.561 GiB)
+705
+  8.309072 seconds (3.95 M allocations: 2.482 GiB)
+55
+  7.803861 seconds (3.59 M allocations: 2.282 GiB)
+  8.260273 seconds (3.93 M allocations: 2.470 GiB)
+955
+905
+  8.185874 seconds (3.88 M allocations: 2.442 GiB)
+355
+  7.998973 seconds (3.89 M allocations: 2.425 GiB)
+155
+  5.968579 seconds (2.58 M allocations: 1.675 GiB)
+605
+  6.698351 seconds (3.02 M allocations: 1.934 GiB)
+755
+  7.662390 seconds (3.44 M allocations: 2.209 GiB)
+855
+  8.128129 seconds (4.11 M allocations: 2.530 GiB)
+  6.112176 seconds (2.75 M allocations: 1.760 GiB)
+105
+505
+  7.037743 seconds (3.45 M allocations: 2.144 GiB)
+405
+  8.581006 seconds (4.19 M allocations: 2.606 GiB)
+305
+  8.630903 seconds (4.25 M allocations: 2.638 GiB)
+805
+  6.519829 seconds (3.27 M allocations: 2.014 GiB)
+456
+  6.427216 seconds (3.18 M allocations: 1.969 GiB)
+656
+  7.022644 seconds (3.59 M allocations: 2.199 GiB)
+256
+  7.648199 seconds (3.99 M allocations: 2.426 GiB)
+4
+  7.220948 seconds (3.58 M allocations: 2.213 GiB)
+556
+  6.815676 seconds (3.30 M allocations: 2.054 GiB)
+56
+  7.725457 seconds (3.73 M allocations: 2.330 GiB)
+206
+  7.481146 seconds (3.76 M allocations: 2.314 GiB)
+706
+  7.200412 seconds (3.44 M allocations: 2.155 GiB)
+906
+  7.978857 seconds (3.70 M allocations: 2.340 GiB)
+956
+  7.296735 seconds (2.97 M allocations: 1.970 GiB)
+756
+  7.636113 seconds (3.43 M allocations: 2.195 GiB)
+  8.065312 seconds (3.76 M allocations: 2.373 GiB)
+156
+356
+  7.812693 seconds (3.67 M allocations: 2.313 GiB)
+606
+  7.678703 seconds (3.36 M allocations: 2.172 GiB)
+506
+  6.955734 seconds (2.98 M allocations: 1.944 GiB)
+406
+  7.814863 seconds (3.50 M allocations: 2.247 GiB)
+856
+  7.239865 seconds (3.37 M allocations: 2.131 GiB)
+306
+  8.088622 seconds (3.93 M allocations: 2.450 GiB)
+106
+  8.131721 seconds (3.79 M allocations: 2.392 GiB)
+806
+  7.004778 seconds (3.61 M allocations: 2.203 GiB)
+457
+  7.122260 seconds (3.58 M allocations: 2.202 GiB)
+657
+  7.210444 seconds (3.62 M allocations: 2.229 GiB)
+257
+  7.589689 seconds (3.64 M allocations: 2.273 GiB)
+5
+  7.578821 seconds (3.61 M allocations: 2.262 GiB)
+557
+  7.435570 seconds (3.54 M allocations: 2.218 GiB)
+57
+  7.326200 seconds (3.46 M allocations: 2.174 GiB)
+707
+  8.234954 seconds (3.93 M allocations: 2.457 GiB)
+207
+  6.846583 seconds (3.03 M allocations: 1.944 GiB)
+757
+  7.933170 seconds (3.83 M allocations: 2.389 GiB)
+907
+  6.786643 seconds (2.82 M allocations: 1.853 GiB)
+507
+  7.440353 seconds (3.51 M allocations: 2.205 GiB)
+357
+  7.735053 seconds (3.94 M allocations: 2.414 GiB)
+957
+  7.537309 seconds (3.65 M allocations: 2.274 GiB)
+  7.155270 seconds (3.17 M allocations: 2.035 GiB)
+607
+157
+  7.294812 seconds (3.40 M allocations: 2.147 GiB)
+407
+  7.311052 seconds (3.43 M allocations: 2.159 GiB)
+307
+  7.873199 seconds (3.84 M allocations: 2.383 GiB)
+857
+  7.715385 seconds (3.66 M allocations: 2.295 GiB)
+107
+  7.674199 seconds (3.71 M allocations: 2.313 GiB)
+807
+  7.219054 seconds (3.64 M allocations: 2.238 GiB)
+458
+ 16.341264 seconds (3.76 M allocations: 2.377 GiB, 50.10% gc time)
+658
+ 15.325974 seconds (3.41 M allocations: 2.127 GiB, 53.42% gc time)
+6
+ 16.316370 seconds (3.83 M allocations: 2.406 GiB, 50.18% gc time)
+258
+ 16.367053 seconds (3.78 M allocations: 2.389 GiB, 50.02% gc time)
+558
+ 14.952482 seconds (3.22 M allocations: 2.011 GiB, 54.75% gc time)
+208
+ 14.237605 seconds (2.33 M allocations: 1.573 GiB, 57.50% gc time)
+158
+ 14.950407 seconds (3.11 M allocations: 1.968 GiB, 54.76% gc time)
+508
+ 16.247768 seconds (3.98 M allocations: 2.461 GiB, 50.39% gc time)
+708
+ 15.113869 seconds (3.15 M allocations: 1.999 GiB, 54.17% gc time)
+ 16.771810 seconds (4.32 M allocations: 2.656 GiB, 48.81% gc time)
+358
+58
+ 15.209321 seconds (3.30 M allocations: 2.072 GiB, 53.83% gc time)
+958
+ 15.458865 seconds (3.33 M allocations: 2.111 GiB, 52.96% gc time)
+608
+ 16.602001 seconds (4.31 M allocations: 2.633 GiB, 49.31% gc time)
+908
+ 15.135919 seconds (3.03 M allocations: 1.959 GiB, 54.09% gc time)
+108
+ 15.952641 seconds (3.41 M allocations: 2.199 GiB, 51.32% gc time)
+858
+ 15.128154 seconds (3.20 M allocations: 2.031 GiB, 54.12% gc time)
+808
+ 18.112070 seconds (5.16 M allocations: 3.142 GiB, 45.20% gc time)
+758
+ 17.114126 seconds (4.17 M allocations: 2.631 GiB, 47.84% gc time)  4.593672 seconds (1.52 M allocations: 1.096 GiB)
+
+  6.225586 seconds (2.70 M allocations: 1.752 GiB)  4.954470 seconds (2.59 M allocations: 1.580 GiB)
+
+  7.172967 seconds (3.24 M allocations: 2.075 GiB)
+  5.276193 seconds (1.98 M allocations: 1.354 GiB)
+  5.985222 seconds (2.39 M allocations: 1.598 GiB)
+ 16.641978 seconds (3.91 M allocations: 2.475 GiB, 49.19% gc time)
+259
+408359459
+
+
+7509
+308
+209
+
+  8.325216 seconds (4.13 M allocations: 2.556 GiB)
+659
+  5.960977 seconds (3.04 M allocations: 1.860 GiB)
+59
+  5.527103 seconds (2.78 M allocations: 1.706 GiB)
+609
+  7.834893 seconds (4.41 M allocations: 2.619 GiB)
+559
+  6.590234 seconds (3.37 M allocations: 2.059 GiB)
+959
+  7.294774 seconds (3.94 M allocations: 2.366 GiB)
+709
+  7.829982 seconds (4.37 M allocations: 2.603 GiB)
+159
+  6.270365 seconds (3.41 M allocations: 2.041 GiB)
+909
+  6.598721 seconds (3.54 M allocations: 2.130 GiB)
+109
+  6.670213 seconds (3.42 M allocations: 2.085 GiB)
+809
+  7.444327 seconds (3.81 M allocations: 2.324 GiB)
+859
+  4.576529 seconds (2.12 M allocations: 1.344 GiB)
+210
+  6.049061 seconds (2.81 M allocations: 1.777 GiB)
+260
+  6.940282 seconds (2.58 M allocations: 1.775 GiB)
+  6.968899 seconds (2.26 M allocations: 1.646 GiB)
+  6.795133 seconds (2.61 M allocations: 1.772 GiB)
+  6.983536 seconds (2.65 M allocations: 1.807 GiB)
+  7.302690 seconds (3.00 M allocations: 1.984 GiB)
+610
+360  5.997965 seconds (2.19 M allocations: 1.517 GiB)
+510
+
+8
+  5.286269 seconds (1.88 M allocations: 1.314 GiB)
+460
+60
+560
+  7.766959 seconds (2.88 M allocations: 1.988 GiB)
+660
+  7.971599 seconds (3.35 M allocations: 2.200 GiB)
+309
+  8.320747 seconds (4.31 M allocations: 2.627 GiB)
+759
+  8.773103 seconds (4.38 M allocations: 2.706 GiB)
+409
+  7.206496 seconds (3.25 M allocations: 2.078 GiB)
+910
+  7.050762 seconds (3.22 M allocations: 2.052 GiB)
+110
+  8.290129 seconds (3.94 M allocations: 2.476 GiB)
+960
+  8.247534 seconds (3.86 M allocations: 2.440 GiB)
+710
+  8.236867 seconds (3.87 M allocations: 2.443 GiB)
+160
+  6.474257 seconds (3.41 M allocations: 2.070 GiB)
+860
+  6.245899 seconds (3.37 M allocations: 2.033 GiB)
+211
+  7.982465 seconds (4.04 M allocations: 2.486 GiB)
+810
+  6.079803 seconds (2.40 M allocations: 1.616 GiB)
+  6.088671 seconds (2.41 M allocations: 1.621 GiB)
+561
+61
+  6.033775 seconds (2.40 M allocations: 1.611 GiB)
+760
+  6.045514 seconds (2.27 M allocations: 1.560 GiB)
+911
+  6.037960 seconds (2.27 M allocations: 1.559 GiB)
+111
+  6.046386 seconds (2.18 M allocations: 1.520 GiB)
+961
+  8.083162 seconds (3.44 M allocations: 2.250 GiB)
+  6.045463 seconds (2.12 M allocations: 1.498 GiB)
+9
+711
+  6.218300 seconds (2.29 M allocations: 1.586 GiB)
+861
+  8.761536 seconds (3.87 M allocations: 2.499 GiB)
+361
+  8.780871 seconds (3.90 M allocations: 2.515 GiB)
+511
+  8.810955 seconds (3.99 M allocations: 2.553 GiB)
+261
+  8.819353 seconds (3.99 M allocations: 2.557 GiB)
+461
+  8.802238 seconds (4.02 M allocations: 2.567 GiB)
+661
+  8.804995 seconds (4.29 M allocations: 2.675 GiB)
+310
+  9.181125 seconds (4.82 M allocations: 2.933 GiB)
+611
+  7.761035 seconds (3.74 M allocations: 2.339 GiB)
+161
+  9.463693 seconds (4.80 M allocations: 2.954 GiB)
+410
+  8.459388 seconds (3.71 M allocations: 2.398 GiB)
+811
+  8.979883 seconds (4.00 M allocations: 2.572 GiB)
+212
+ 16.514075 seconds (1.45 M allocations: 1.053 GiB, 72.68% gc time)
+462
+ 17.451956 seconds (2.54 M allocations: 1.601 GiB, 68.78% gc time)
+962
+ 19.686744 seconds (3.71 M allocations: 2.312 GiB, 60.97% gc time)
+ 17.003526 seconds (1.65 M allocations: 1.188 GiB, 70.59% gc time)
+262
+761
+ 16.351412 seconds (1.51 M allocations: 1.064 GiB, 73.41% gc time)
+162
+ 20.556940 seconds (4.38 M allocations: 2.676 GiB, 58.39% gc time)
+562
+ 19.093777 seconds (3.54 M allocations: 2.179 GiB, 62.86% gc time)
+ 19.496399 seconds (3.95 M allocations: 2.390 GiB, 61.56% gc time)
+112
+10
+ 21.558126 seconds (4.94 M allocations: 3.013 GiB, 55.68% gc time)
+62
+ 21.156771 seconds (4.74 M allocations: 2.888 GiB, 56.73% gc time)
+912
+ 20.659105 seconds (4.27 M allocations: 2.643 GiB, 58.10% gc time)
+712
+ 19.579965 seconds (3.07 M allocations: 2.040 GiB, 61.30% gc time)
+612
+ 20.716844 seconds (3.95 M allocations: 2.518 GiB, 57.94% gc time)
+512
+ 19.146970 seconds (3.03 M allocations: 1.982 GiB, 62.69% gc time)
+411
+ 20.799130 seconds (3.84 M allocations: 2.482 GiB, 57.71% gc time)
+311
+ 21.109750 seconds (4.33 M allocations: 2.715 GiB, 56.86% gc time)
+362
+ 21.074882 seconds (4.18 M allocations: 2.651 GiB, 56.95% gc time)
+662
+ 21.400528 seconds (4.77 M allocations: 2.926 GiB, 56.09% gc time)
+862
+  6.025042 seconds (3.14 M allocations: 1.917 GiB)
+463
+  6.129862 seconds (3.22 M allocations: 1.962 GiB)
+963
+  6.039773 seconds (3.13 M allocations: 1.914 GiB)
+263
+  8.697595 seconds (4.15 M allocations: 2.610 GiB)
+213
+  9.103016 seconds (4.44 M allocations: 2.767 GiB)
+812
+  7.197807 seconds (3.55 M allocations: 2.206 GiB)
+762
+  7.746298 seconds (3.61 M allocations: 2.289 GiB)  7.922991 seconds (3.23 M allocations: 2.150 GiB)
+
+  6.400017 seconds (3.00 M allocations: 1.898 GiB)
+  6.791594 seconds (2.92 M allocations: 1.906 GiB)
+  6.945736 seconds (3.35 M allocations: 2.100 GiB)
+11
+113
+163
+63
+563
+  6.957149 seconds (3.54 M allocations: 2.176 GiB)
+913
+  6.172523 seconds (3.01 M allocations: 1.873 GiB)
+412
+  6.525046 seconds (2.74 M allocations: 1.795 GiB)
+863
+  4.882351 seconds (2.31 M allocations: 1.452 GiB)
+964
+  7.337645 seconds (3.67 M allocations: 2.264 GiB)
+513
+  7.482131 seconds (3.49 M allocations: 2.205 GiB)
+312
+  8.694446 seconds (4.45 M allocations: 2.728 GiB)
+713
+  8.595500 seconds (4.41 M allocations: 2.702 GiB)
+613
+  6.064009 seconds (3.19 M allocations: 1.937 GiB)
+464
+  6.113441 seconds (2.94 M allocations: 1.837 GiB)
+813
+  9.579854 seconds (4.31 M allocations: 2.759 GiB)
+363
+  7.384718 seconds (3.54 M allocations: 2.215 GiB)
+  7.914940 seconds (3.75 M allocations: 2.358 GiB)
+214
+ 10.432177 seconds (4.61 M allocations: 2.971 GiB)
+264
+663
+  6.043838 seconds (2.82 M allocations: 1.784 GiB)
+  6.061775 seconds (2.84 M allocations: 1.794 GiB)
+  6.072757 seconds (2.84 M allocations: 1.794 GiB)
+763
+564
+114
+  6.029791 seconds (2.93 M allocations: 1.829 GiB)
+413
+  6.031118 seconds (2.78 M allocations: 1.765 GiB)
+965
+  8.080385 seconds (3.77 M allocations: 2.382 GiB)
+  6.044775 seconds (2.66 M allocations: 1.716 GiB)
+12
+313
+  6.035027 seconds (2.67 M allocations: 1.721 GiB)
+614
+  6.127206 seconds (2.71 M allocations: 1.747 GiB)
+714
+  6.093507 seconds (2.71 M allocations: 1.746 GiB)
+465
+  8.996735 seconds (4.80 M allocations: 2.901 GiB)
+164
+  9.106857 seconds (4.70 M allocations: 2.873 GiB)
+64
+  6.034029 seconds (3.03 M allocations: 1.869 GiB)
+814
+  9.556066 seconds (4.64 M allocations: 2.898 GiB)
+864
+  9.175411 seconds (4.37 M allocations: 2.747 GiB)
+514
+  6.291260 seconds (3.03 M allocations: 1.899 GiB)
+215
+ 11.668252 seconds (5.56 M allocations: 3.494 GiB)
+914
+  6.010079 seconds (2.73 M allocations: 1.745 GiB)
+115
+ 29.461161 seconds (2.74 M allocations: 1.755 GiB, 74.68% gc time)
+414
+ 28.341396 seconds (2.01 M allocations: 1.335 GiB, 77.63% gc time)
+715
+ 28.322118 seconds (1.98 M allocations: 1.323 GiB, 77.68% gc time)
+466
+ 29.450978 seconds (2.80 M allocations: 1.778 GiB, 74.70% gc time)
+314
+ 29.468927 seconds (2.83 M allocations: 1.789 GiB, 74.66% gc time)
+13
+ 32.476552 seconds (4.07 M allocations: 2.611 GiB, 67.74% gc time)
+764
+ 32.508019 seconds (4.09 M allocations: 2.621 GiB, 67.68% gc time)
+ 31.153150 seconds (3.62 M allocations: 2.291 GiB, 70.62% gc time)
+565
+966
+ 34.577831 seconds (5.40 M allocations: 3.374 GiB, 63.63% gc time)
+364
+ 34.132909 seconds (5.26 M allocations: 3.272 GiB, 64.46% gc time)
+ 34.282656 seconds (5.33 M allocations: 3.316 GiB, 64.17% gc time)
+664
+265
+ 31.476952 seconds (4.05 M allocations: 2.498 GiB, 69.89% gc time)
+615
+ 30.093794 seconds (3.30 M allocations: 2.045 GiB, 73.11% gc time)
+815
+ 31.684077 seconds (3.90 M allocations: 2.454 GiB, 69.44% gc time)
+165
+ 31.902143 seconds (3.98 M allocations: 2.511 GiB, 68.96% gc time)
+65
+ 30.836636 seconds (3.41 M allocations: 2.167 GiB, 71.35% gc time)  5.315249 seconds (2.31 M allocations: 1.494 GiB)
+
+  6.043603 seconds (2.66 M allocations: 1.717 GiB)
+ 30.024823 seconds (3.15 M allocations: 1.978 GiB, 73.28% gc time)
+ 30.645392 seconds (3.39 M allocations: 2.141 GiB, 71.79% gc time)
+415
+216
+515
+865
+  5.069660 seconds (2.25 M allocations: 1.445 GiB)
+716
+467
+  5.899335 seconds (3.06 M allocations: 1.868 GiB)
+315
+  6.633291 seconds (3.29 M allocations: 2.037 GiB)
+14
+  8.731223 seconds (4.30 M allocations: 2.664 GiB)
+915
+  9.251400 seconds (4.68 M allocations: 2.874 GiB)
+116
+  6.405214 seconds (3.19 M allocations: 1.970 GiB)
+765
+  6.373709 seconds (3.13 M allocations: 1.944 GiB)
+566
+  5.437880 seconds (2.71 M allocations: 1.671 GiB)
+816
+  8.095090 seconds (3.51 M allocations: 2.276 GiB)
+665
+  7.669916 seconds (3.18 M allocations: 2.095 GiB)
+166
+  6.047196 seconds (2.22 M allocations: 1.533 GiB)
+  6.031749 seconds (2.17 M allocations: 1.511 GiB)
+416
+217
+  9.817652 seconds (4.56 M allocations: 2.884 GiB)
+365
+  6.564590 seconds (2.78 M allocations: 1.816 GiB)
+516
+ 10.420769 seconds (4.94 M allocations: 3.103 GiB)
+967
+  6.710391 seconds (2.83 M allocations: 1.850 GiB)
+717
+  9.442273 seconds (4.65 M allocations: 2.883 GiB)
+616
+ 10.187302 seconds (4.95 M allocations: 3.080 GiB)
+266
+  4.871492 seconds (2.25 M allocations: 1.425 GiB)
+766
+  6.863835 seconds (3.32 M allocations: 2.072 GiB)
+316
+  8.363173 seconds (3.83 M allocations: 2.433 GiB)
+468
+  9.045029 seconds (4.06 M allocations: 2.598 GiB)
+  7.264191 seconds (3.52 M allocations: 2.196 GiB)
+866
+15
+  9.451012 seconds (4.39 M allocations: 2.777 GiB)
+66
+  6.582381 seconds (3.15 M allocations: 1.974 GiB)
+817
+  7.523173 seconds (3.84 M allocations: 2.355 GiB)
+916
+  7.877342 seconds (3.75 M allocations: 2.352 GiB)
+567
+  5.688486 seconds (2.88 M allocations: 1.771 GiB)
+218
+  9.734914 seconds (4.37 M allocations: 2.801 GiB)
+117
+  3.665439 seconds (1.37 M allocations: 962.469 MiB)
+867
+  6.929263 seconds (3.34 M allocations: 2.089 GiB)
+366
+  7.444651 seconds (3.72 M allocations: 2.297 GiB)
+167
+  6.064704 seconds (2.67 M allocations: 1.724 GiB)
+767
+  5.718990 seconds (2.48 M allocations: 1.612 GiB)
+469
+  7.738738 seconds (3.78 M allocations: 2.356 GiB)
+517
+  7.704543 seconds (3.68 M allocations: 2.313 GiB)
+968
+  7.725039 seconds (3.72 M allocations: 2.329 GiB)
+718
+  9.775694 seconds (5.25 M allocations: 3.168 GiB)
+666
+  7.802093 seconds (3.74 M allocations: 2.347 GiB)
+  7.491785 seconds (3.43 M allocations: 2.184 GiB)
+  9.449490 seconds (4.01 M allocations: 2.626 GiB)
+  4.860215 seconds (1.95 M allocations: 1.305 GiB)
+617
+219
+  6.039985 seconds (2.27 M allocations: 1.557 GiB)
+  9.542316 seconds (4.83 M allocations: 2.972 GiB)
+317
+267
+568
+417
+  7.885300 seconds (3.89 M allocations: 2.413 GiB)
+67
+  8.269710 seconds (4.08 M allocations: 2.533 GiB)
+16
+ 16.015091 seconds (3.98 M allocations: 2.481 GiB, 48.91% gc time)
+818
+ 16.586726 seconds (4.16 M allocations: 2.613 GiB, 47.22% gc time)
+917
+ 13.911750 seconds (3.34 M allocations: 2.003 GiB, 56.30% gc time)
+868
+ 13.899029 seconds (3.21 M allocations: 1.945 GiB, 56.36% gc time)
+168
+ 13.896202 seconds (3.21 M allocations: 1.944 GiB, 56.37% gc time)
+768
+ 13.564198 seconds (3.07 M allocations: 1.854 GiB, 57.75% gc time)
+470
+ 15.797376 seconds (4.30 M allocations: 2.590 GiB, 49.58% gc time)
+118
+ 14.209647 seconds (3.21 M allocations: 1.979 GiB, 55.12% gc time)
+518
+ 15.792968 seconds (4.30 M allocations: 2.588 GiB, 49.60% gc time)
+367
+ 16.354979 seconds (3.76 M allocations: 2.425 GiB, 47.89% gc time)
+969
+ 16.369616 seconds (3.76 M allocations: 2.425 GiB, 47.85% gc time)
+719
+  6.059766 seconds (2.40 M allocations: 1.609 GiB)
+17
+ 14.444041 seconds (2.96 M allocations: 1.894 GiB, 54.23% gc time)
+618
+ 14.678765 seconds (3.24 M allocations: 2.033 GiB, 53.36% gc time)
+569
+  6.222117 seconds (2.68 M allocations: 1.743 GiB)
+819
+ 15.287003 seconds (3.41 M allocations: 2.170 GiB, 51.24% gc time)
+220
+ 15.420267 seconds (3.52 M allocations: 2.227 GiB, 50.80% gc time)
+667
+ 15.738298 seconds (3.75 M allocations: 2.354 GiB, 49.77% gc time)
+418
+ 16.228934 seconds (3.97 M allocations: 2.493 GiB, 48.26% gc time)
+318
+  5.574106 seconds (2.47 M allocations: 1.590 GiB)
+471
+  5.514795 seconds (2.58 M allocations: 1.626 GiB)
+119
+ 17.041986 seconds (4.49 M allocations: 2.794 GiB, 45.96% gc time)
+268
+  8.153962 seconds (3.79 M allocations: 2.395 GiB)
+869
+ 10.124332 seconds (4.63 M allocations: 2.946 GiB)
+68
+  8.597783 seconds (3.99 M allocations: 2.523 GiB)
+169
+  5.619068 seconds (1.88 M allocations: 1.349 GiB)  6.047673 seconds (2.40 M allocations: 1.610 GiB)
+
+  5.676174 seconds (2.34 M allocations: 1.546 GiB)  9.603730 seconds (4.41 M allocations: 2.801 GiB)
+
+  6.295565 seconds (2.16 M allocations: 1.536 GiB)
+  9.711040 seconds (3.95 M allocations: 2.621 GiB)
+  6.826249 seconds (3.05 M allocations: 1.954 GiB)
+18
+  5.211976 seconds (1.60 M allocations: 1.194 GiB)221
+  5.808841 seconds (1.82 M allocations: 1.346 GiB)
+
+769
+  7.441097 seconds (2.92 M allocations: 1.966 GiB)
+368
+970
+  8.176441 seconds (3.39 M allocations: 2.234 GiB)
+918
+820
+619
+668
+419
+519
+  5.568417 seconds (2.99 M allocations: 1.797 GiB)
+  5.591852 seconds (3.00 M allocations: 1.807 GiB)
+472
+319
+  4.975764 seconds (2.90 M allocations: 1.698 GiB)
+269
+  7.350338 seconds (4.34 M allocations: 2.537 GiB)
+570
+  6.333434 seconds (3.50 M allocations: 2.087 GiB)
+120
+ 10.400987 seconds (5.60 M allocations: 3.368 GiB)
+720
+  7.442451 seconds (3.67 M allocations: 2.272 GiB)
+870
+  7.022917 seconds (3.52 M allocations: 2.164 GiB)
+69
+  6.041367 seconds (2.38 M allocations: 1.595 GiB)
+  6.056887 seconds (2.36 M allocations: 1.590 GiB)
+19
+  6.191283 seconds (2.03 M allocations: 1.470 GiB)  7.983697 seconds (2.69 M allocations: 1.923 GiB)
+
+  6.171119 seconds (2.02 M allocations: 1.467 GiB)
+  7.895443 seconds (2.27 M allocations: 1.741 GiB)
+  5.699055 seconds (1.40 M allocations: 1.165 GiB)
+  5.995587 seconds (1.31 M allocations: 1.155 GiB)
+  7.794437 seconds (2.31 M allocations: 1.751 GiB)
+  5.869394 seconds (1.70 M allocations: 1.302 GiB)
+  5.877096 seconds (1.70 M allocations: 1.304 GiB)
+  5.834375 seconds (1.45 M allocations: 1.197 GiB)
+  8.621977 seconds (2.34 M allocations: 1.810 GiB)
+  7.912490 seconds (2.28 M allocations: 1.746 GiB)
+  6.051815 seconds (2.27 M allocations: 1.553 GiB)
+  5.350422 seconds (1.04 M allocations: 975.889 MiB)
+  7.570301 seconds (2.25 M allocations: 1.702 GiB)222
+821
+121571
+
+
+669
+  8.676252 seconds (2.37 M allocations: 1.823 GiB)
+  4.612854 seconds (642.65 k allocations: 713.117 MiB)
+320
+170
+770
+270
+520
+473
+  4.089639 seconds (605.80 k allocations: 674.369 MiB)
+620
+420
+721
+971
+919
+369
+70
+871
+  4.267694 seconds (713.34 k allocations: 747.612 MiB)
+771
+ 19.529259 seconds (1.72 M allocations: 1.368 GiB, 66.84% gc time)
+20
+ 19.548445 seconds (1.77 M allocations: 1.391 GiB, 66.78% gc time)
+521
+ 19.724103 seconds (1.61 M allocations: 1.344 GiB, 66.18% gc time)
+321
+ 19.679160 seconds (1.41 M allocations: 1.262 GiB, 66.33% gc time)
+171
+ 20.126846 seconds (2.28 M allocations: 1.660 GiB, 64.86% gc time)
+621
+ 20.398668 seconds (2.51 M allocations: 1.785 GiB, 63.99% gc time)
+822
+ 20.657770 seconds (2.14 M allocations: 1.661 GiB, 63.19% gc time)
+872
+ 20.718480 seconds (2.17 M allocations: 1.683 GiB, 63.01% gc time)
+ 20.739079 seconds (2.19 M allocations: 1.692 GiB, 62.94% gc time)
+ 20.874009 seconds (2.76 M allocations: 1.939 GiB, 62.54% gc time)
+122
+223
+670
+ 21.207813 seconds (2.74 M allocations: 1.966 GiB, 61.55% gc time)
+920
+ 21.326297 seconds (2.80 M allocations: 2.006 GiB, 61.21% gc time)
+271
+ 21.523150 seconds (3.40 M allocations: 2.268 GiB, 60.65% gc time)
+ 21.418858 seconds (2.91 M allocations: 2.062 GiB, 60.95% gc time)
+572
+972
+ 21.857439 seconds (3.82 M allocations: 2.478 GiB, 59.72% gc time)
+71
+ 22.156118 seconds (4.11 M allocations: 2.625 GiB, 58.92% gc time)
+474
+ 22.137707 seconds (3.68 M allocations: 2.451 GiB, 58.97% gc time)
+722
+ 22.162652 seconds (3.65 M allocations: 2.444 GiB, 58.90% gc time)
+ 22.148303 seconds (3.64 M allocations: 2.436 GiB, 58.94% gc time)
+421
+370
+ 20.588637 seconds (3.70 M allocations: 2.304 GiB, 63.40% gc time)
+772
+  6.034375 seconds (3.34 M allocations: 2.001 GiB)
+522
+  6.040710 seconds (3.22 M allocations: 1.950 GiB)
+322
+  6.683224 seconds (3.72 M allocations: 2.222 GiB)
+21
+  6.056164 seconds (2.92 M allocations: 1.824 GiB)
+873
+  6.043383 seconds (2.78 M allocations: 1.768 GiB)
+123
+  6.034197 seconds (2.41 M allocations: 1.611 GiB)
+573
+  6.034055 seconds (2.41 M allocations: 1.612 GiB)
+973
+  6.039075 seconds (2.31 M allocations: 1.567 GiB)
+475
+  8.180917 seconds (4.28 M allocations: 2.604 GiB)
+622
+  8.996846 seconds (4.73 M allocations: 2.871 GiB)
+172
+  9.084744 seconds (4.60 M allocations: 2.829 GiB)
+823
+  9.072485 seconds (4.23 M allocations: 2.674 GiB)
+224
+  9.072686 seconds (4.22 M allocations: 2.669 GiB)
+671
+  8.868930 seconds (4.00 M allocations: 2.558 GiB)
+272
+  9.095014 seconds (4.16 M allocations: 2.646 GiB)
+921
+  9.064104 seconds (4.04 M allocations: 2.595 GiB)
+72
+  9.071041 seconds (3.71 M allocations: 2.458 GiB)
+723
+  9.064183 seconds (3.67 M allocations: 2.445 GiB)
+  9.085970 seconds (3.68 M allocations: 2.452 GiB)
+422
+371
+  6.063867 seconds (3.34 M allocations: 1.999 GiB)
+523
+  6.039459 seconds (3.34 M allocations: 1.995 GiB)
+323
+  6.038470 seconds (3.34 M allocations: 1.995 GiB)
+22
+  6.058174 seconds (3.30 M allocations: 1.982 GiB)
+874
+  6.061686 seconds (3.32 M allocations: 1.991 GiB)
+124
+  6.033913 seconds (3.20 M allocations: 1.942 GiB)
+974
+  6.416934 seconds (3.42 M allocations: 2.069 GiB)
+574
+  6.032140 seconds (3.27 M allocations: 1.971 GiB)
+476
+  9.084721 seconds (4.87 M allocations: 2.940 GiB)
+773
+  9.043672 seconds (3.93 M allocations: 2.554 GiB)
+623
+  6.652897 seconds (2.76 M allocations: 1.822 GiB)
+73
+  6.035035 seconds (2.15 M allocations: 1.508 GiB)
+524
+  9.044357 seconds (4.09 M allocations: 2.618 GiB)
+173
+  6.045881 seconds (2.34 M allocations: 1.588 GiB)
+324
+  6.058429 seconds (2.40 M allocations: 1.614 GiB)
+23
+  9.097093 seconds (4.48 M allocations: 2.784 GiB)
+824
+  6.049927 seconds (2.50 M allocations: 1.652 GiB)
+875
+  9.076398 seconds (4.40 M allocations: 2.749 GiB)
+225
+  9.049804 seconds (4.42 M allocations: 2.756 GiB)
+672
+  6.050423 seconds (2.55 M allocations: 1.674 GiB)
+125
+  9.067611 seconds (4.67 M allocations: 2.856 GiB)
+273
+  9.087666 seconds (4.68 M allocations: 2.864 GiB)
+922
+  6.039930 seconds (2.99 M allocations: 1.855 GiB)
+975
+  6.049807 seconds (2.86 M allocations: 1.801 GiB)
+477
+  9.052901 seconds (4.57 M allocations: 2.812 GiB)
+724
+  9.076529 seconds (4.61 M allocations: 2.830 GiB)
+423
+  9.100793 seconds (4.66 M allocations: 2.855 GiB)
+372
+  9.068653 seconds (3.99 M allocations: 2.571 GiB)
+575
+  9.069083 seconds (3.80 M allocations: 2.495 GiB)
+774
+  6.063026 seconds (3.21 M allocations: 1.940 GiB)
+74
+  6.047837 seconds (3.18 M allocations: 1.927 GiB)
+525
+ 36.455478 seconds (3.07 M allocations: 1.881 GiB, 83.31% gc time)
+325
+ 36.771895 seconds (3.24 M allocations: 1.986 GiB, 82.59% gc time)
+24
+ 35.546416 seconds (2.05 M allocations: 1.372 GiB, 85.44% gc time)
+976
+ 35.482088 seconds (1.72 M allocations: 1.228 GiB, 85.60% gc time)
+424
+ 38.976900 seconds (4.15 M allocations: 2.587 GiB, 77.92% gc time)
+174
+ 37.987263 seconds (3.46 M allocations: 2.198 GiB, 79.95% gc time)
+ 39.550895 seconds (4.76 M allocations: 2.899 GiB, 76.79% gc time)
+876
+624
+ 36.894985 seconds (2.72 M allocations: 1.784 GiB, 82.32% gc time)
+478
+ 38.119850 seconds (3.57 M allocations: 2.259 GiB, 79.67% gc time)
+126
+ 37.542465 seconds (2.83 M allocations: 1.898 GiB, 80.90% gc time)
+373
+ 39.739143 seconds (4.77 M allocations: 2.920 GiB, 76.43% gc time)
+825
+ 39.490110 seconds (4.30 M allocations: 2.701 GiB, 76.91% gc time)
+673
+ 39.664249 seconds (4.42 M allocations: 2.770 GiB, 76.57% gc time)
+226
+  3.040909 seconds (1.67 M allocations: 1.002 GiB)
+425
+ 39.721151 seconds (4.40 M allocations: 2.766 GiB, 76.46% gc time)
+923
+ 39.516285 seconds (3.99 M allocations: 2.578 GiB, 76.86% gc time)
+725
+ 36.735621 seconds (3.38 M allocations: 2.043 GiB, 82.68% gc time)
+775
+  6.043130 seconds (3.05 M allocations: 1.876 GiB)
+326
+ 41.371627 seconds (5.35 M allocations: 3.329 GiB, 73.41% gc time)
+274
+  6.036368 seconds (3.07 M allocations: 1.885 GiB)
+977
+  6.988678 seconds (3.56 M allocations: 2.186 GiB)
+75
+  3.031119 seconds (1.40 M allocations: 911.853 MiB)
+426
+  6.061546 seconds (3.08 M allocations: 1.892 GiB)
+175
+  8.803266 seconds (4.34 M allocations: 2.694 GiB)
+526
+  6.048806 seconds (2.80 M allocations: 1.778 GiB)
+374
+  9.093111 seconds (4.33 M allocations: 2.719 GiB)
+25
+  6.216888 seconds (2.93 M allocations: 1.846 GiB)
+826
+  6.293329 seconds (2.84 M allocations: 1.817 GiB)
+227
+  3.021748 seconds (1.20 M allocations: 825.624 MiB)
+427
+ 42.310826 seconds (5.97 M allocations: 3.685 GiB, 71.78% gc time)
+576
+  9.623674 seconds (4.56 M allocations: 2.866 GiB)
+625
+  9.544915 seconds (4.38 M allocations: 2.785 GiB)
+127
+  9.725779 seconds (4.47 M allocations: 2.844 GiB)
+479
+  7.700804 seconds (3.51 M allocations: 2.238 GiB)
+924
+  6.045054 seconds (2.74 M allocations: 1.749 GiB)
+978
+  8.870307 seconds (4.23 M allocations: 2.657 GiB)
+674
+ 10.596542 seconds (5.34 M allocations: 3.289 GiB)
+877
+  7.390811 seconds (3.67 M allocations: 2.268 GiB)
+327
+  7.795970 seconds (3.99 M allocations: 2.443 GiB)
+776
+  8.380245 seconds (4.32 M allocations: 2.642 GiB)
+726
+  6.038063 seconds (3.20 M allocations: 1.938 GiB)
+176
+  7.863866 seconds (3.88 M allocations: 2.406 GiB)
+76
+  8.603126 seconds (4.35 M allocations: 2.676 GiB)
+275
+  7.677177 seconds (3.72 M allocations: 2.322 GiB)
+527
+ 15.079933 seconds (3.05 M allocations: 1.944 GiB, 55.60% gc time)
+428
+ 16.168104 seconds (3.74 M allocations: 2.341 GiB, 51.86% gc time)
+375
+ 13.634329 seconds (2.09 M allocations: 1.399 GiB, 61.49% gc time)
+675
+ 13.174426 seconds (1.67 M allocations: 1.179 GiB, 63.64% gc time)
+727
+ 17.565406 seconds (4.35 M allocations: 2.734 GiB, 47.73% gc time)
+26
+ 12.651276 seconds (1.50 M allocations: 1.055 GiB, 66.27% gc time)
+77
+ 17.495805 seconds (4.43 M allocations: 2.763 GiB, 47.92% gc time)
+827
+ 14.892788 seconds (2.96 M allocations: 1.889 GiB, 56.30% gc time)
+979
+ 15.534154 seconds (3.60 M allocations: 2.218 GiB, 53.97% gc time)
+128
+ 15.349214 seconds (3.21 M allocations: 2.039 GiB, 54.62% gc time)
+878
+ 16.736141 seconds (4.29 M allocations: 2.625 GiB, 50.10% gc time)
+626
+ 18.683160 seconds (5.06 M allocations: 3.144 GiB, 44.88% gc time)
+228
+ 16.078874 seconds (3.59 M allocations: 2.273 GiB, 52.14% gc time)
+328
+ 16.994622 seconds (4.34 M allocations: 2.673 GiB, 49.33% gc time)
+925
+ 14.878821 seconds (3.00 M allocations: 1.904 GiB, 56.35% gc time)
+276
+ 18.687414 seconds (5.35 M allocations: 3.263 GiB, 44.87% gc time)
+577
+ 16.055077 seconds (3.72 M allocations: 2.321 GiB, 52.22% gc time)
+177
+ 17.459402 seconds (4.29 M allocations: 2.700 GiB, 48.02% gc time)
+777
+ 18.662084 seconds (5.24 M allocations: 3.216 GiB, 44.93% gc time)
+480
+ 14.892449 seconds (3.42 M allocations: 2.077 GiB, 56.30% gc time)
+528
+  6.044910 seconds (3.21 M allocations: 1.945 GiB)
+676
+  6.026317 seconds (3.20 M allocations: 1.942 GiB)
+728
+  6.022637 seconds (3.04 M allocations: 1.875 GiB)
+78
+  6.018119 seconds (2.89 M allocations: 1.811 GiB)
+980
+  9.073643 seconds (4.41 M allocations: 2.752 GiB)
+429
+  6.031067 seconds (2.76 M allocations: 1.760 GiB)
+627
+  9.448775 seconds (4.67 M allocations: 2.896 GiB)
+376
+  6.028793 seconds (2.63 M allocations: 1.704 GiB)
+926
+  6.218780 seconds (2.62 M allocations: 1.720 GiB)
+277
+  9.149813 seconds (4.56 M allocations: 2.822 GiB)
+27
+  8.820797 seconds (4.13 M allocations: 2.610 GiB)
+828
+  7.393807 seconds (3.50 M allocations: 2.202 GiB)
+229
+  8.187657 seconds (3.93 M allocations: 2.463 GiB)
+879
+  9.121003 seconds (4.62 M allocations: 2.842 GiB)
+129
+  8.197045 seconds (3.98 M allocations: 2.484 GiB)
+329
+  6.919951 seconds (3.07 M allocations: 1.979 GiB)
+529
+  8.872612 seconds (4.04 M allocations: 2.582 GiB)
+578
+  7.720921 seconds (3.47 M allocations: 2.226 GiB)
+  6.229713 seconds (3.04 M allocations: 1.897 GiB)
+778
+677
+  8.711950 seconds (4.29 M allocations: 2.665 GiB)
+178
+  5.770672 seconds (3.12 M allocations: 1.884 GiB)
+79
+  6.709377 seconds (3.58 M allocations: 2.167 GiB)
+729
+  9.678169 seconds (4.46 M allocations: 2.837 GiB)
+481
+  5.651959 seconds (2.37 M allocations: 1.560 GiB)
+28
+  8.752233 seconds (4.02 M allocations: 2.562 GiB)
+981
+  7.238851 seconds (3.39 M allocations: 2.147 GiB)
+927
+  8.051128 seconds (3.83 M allocations: 2.412 GiB)
+  8.169669 seconds (3.92 M allocations: 2.461 GiB)
+628
+430
+  6.462346 seconds (2.78 M allocations: 1.814 GiB)
+230
+  8.041184 seconds (3.92 M allocations: 2.451 GiB)
+278
+  7.753224 seconds (3.56 M allocations: 2.269 GiB)
+829
+  6.238331 seconds (2.95 M allocations: 1.862 GiB)
+  7.324133 seconds (3.40 M allocations: 2.160 GiB)
+530
+130
+  9.050390 seconds (4.65 M allocations: 2.855 GiB)
+377
+  6.038914 seconds (2.94 M allocations: 1.839 GiB)
+678
+  9.031123 seconds (4.34 M allocations: 2.723 GiB)
+880
+  7.038729 seconds (3.18 M allocations: 2.040 GiB)
+179
+  7.122157 seconds (3.17 M allocations: 2.045 GiB)
+80
+  9.514429 seconds (4.55 M allocations: 2.856 GiB)
+330
+  8.492418 seconds (3.94 M allocations: 2.503 GiB)
+779
+  7.566382 seconds (3.45 M allocations: 2.202 GiB)
+730
+  8.828394 seconds (4.39 M allocations: 2.721 GiB)
+579
+  5.815024 seconds (3.31 M allocations: 1.965 GiB)
+29
+  5.254585 seconds (2.85 M allocations: 1.714 GiB)
+928
+ 16.303598 seconds (3.48 M allocations: 2.061 GiB, 62.79% gc time)
+982
+ 16.292447 seconds (3.18 M allocations: 1.934 GiB, 62.84% gc time)
+431
+ 17.122888 seconds (3.37 M allocations: 2.097 GiB, 59.79% gc time)
+629
+ 16.285159 seconds (3.04 M allocations: 1.872 GiB, 62.87% gc time)
+830
+ 16.316187 seconds (2.88 M allocations: 1.812 GiB, 62.75% gc time)
+131
+ 14.522228 seconds (2.15 M allocations: 1.324 GiB, 70.50% gc time)
+180
+ 18.487767 seconds (3.40 M allocations: 2.250 GiB, 55.38% gc time)
+378
+ 21.590459 seconds (5.49 M allocations: 3.431 GiB, 47.42% gc time)
+482
+ 19.736164 seconds (4.36 M allocations: 2.771 GiB, 51.87% gc time)
+ 18.864570 seconds (3.60 M allocations: 2.369 GiB, 54.27% gc time)
+279
+ 21.255987 seconds (4.77 M allocations: 3.098 GiB, 48.16% gc time) 18.657892 seconds (3.16 M allocations: 2.167 GiB, 54.87% gc time) 20.798576 seconds (4.12 M allocations: 2.782 GiB, 49.22% gc time)
+  6.271663 seconds (1.89 M allocations: 1.424 GiB)
+ 16.317450 seconds (2.13 M allocations: 1.504 GiB, 62.74% gc time)
+
+
+531
+983
+231
+81
+30
+ 17.577126 seconds (2.56 M allocations: 1.806 GiB, 58.24% gc time)
+ 16.558251 seconds (2.45 M allocations: 1.660 GiB, 61.83% gc time)
+  5.697767 seconds (1.94 M allocations: 1.387 GiB)
+679
+780
+731
+929
+  4.973843 seconds (2.63 M allocations: 1.591 GiB)
+831
+  5.399007 seconds (2.86 M allocations: 1.730 GiB)
+630
+ 18.448852 seconds (4.19 M allocations: 2.566 GiB, 55.49% gc time)
+580
+ 20.934919 seconds (5.51 M allocations: 3.366 GiB, 48.90% gc time)
+881
+  7.212443 seconds (3.68 M allocations: 2.253 GiB)
+432
+ 19.616115 seconds (5.09 M allocations: 3.056 GiB, 52.19% gc time)
+331
+  6.383646 seconds (3.52 M allocations: 2.102 GiB)
+132
+  6.608507 seconds (3.55 M allocations: 2.137 GiB)
+181
+  5.362409 seconds (3.35 M allocations: 1.929 GiB)
+379
+  6.035049 seconds (2.57 M allocations: 1.679 GiB)
+532
+  6.024652 seconds (2.45 M allocations: 1.629 GiB)
+  6.052752 seconds (2.51 M allocations: 1.656 GiB)
+  6.040056 seconds (2.47 M allocations: 1.638 GiB)
+984
+31
+232
+  6.054610 seconds (2.46 M allocations: 1.639 GiB)
+832
+  6.026197 seconds (2.40 M allocations: 1.609 GiB)
+581
+  9.365385 seconds (4.78 M allocations: 2.929 GiB)
+483
+  6.046782 seconds (2.00 M allocations: 1.447 GiB)
+182
+  9.079555 seconds (3.83 M allocations: 2.514 GiB)
+82
+  9.049741 seconds (3.69 M allocations: 2.453 GiB)
+  9.068535 seconds (3.70 M allocations: 2.462 GiB)
+  9.061605 seconds (3.69 M allocations: 2.458 GiB)
+  9.082539 seconds (3.71 M allocations: 2.468 GiB)
+  9.083386 seconds (3.72 M allocations: 2.471 GiB)
+781
+280
+680
+732
+930
+  6.049951 seconds (2.81 M allocations: 1.782 GiB)
+380
+  9.038856 seconds (4.24 M allocations: 2.679 GiB)
+631
+  8.970491 seconds (4.10 M allocations: 2.614 GiB)
+882
+  9.094318 seconds (4.16 M allocations: 2.654 GiB)
+433
+  9.304324 seconds (4.24 M allocations: 2.706 GiB)
+332
+  3.416833 seconds (1.86 M allocations: 1.119 GiB)  6.483824 seconds (2.91 M allocations: 1.868 GiB)
+
+  9.243922 seconds (4.10 M allocations: 2.642 GiB)
+  6.279755 seconds (2.71 M allocations: 1.762 GiB)
+  6.652483 seconds (2.90 M allocations: 1.879 GiB)
+  6.656849 seconds (2.90 M allocations: 1.881 GiB)
+183
+133
+533
+985
+833
+32
+  7.090566 seconds (3.54 M allocations: 2.189 GiB)
+233
+  6.438300 seconds (3.67 M allocations: 2.172 GiB)
+582
+  5.846624 seconds (2.65 M allocations: 1.689 GiB)
+681
+  6.217805 seconds (2.82 M allocations: 1.798 GiB)
+733
+  6.388600 seconds (2.97 M allocations: 1.878 GiB)
+782
+  8.331887 seconds (4.36 M allocations: 2.650 GiB)
+484
+  7.117772 seconds (3.37 M allocations: 2.117 GiB)
+931
+  6.959556 seconds (3.21 M allocations: 2.035 GiB)
+632
+  6.493413 seconds (3.00 M allocations: 1.905 GiB)
+434
+  8.404320 seconds (4.12 M allocations: 2.559 GiB)
+83
+  8.586698 seconds (4.12 M allocations: 2.578 GiB)
+281
+  8.490077 seconds (4.00 M allocations: 2.518 GiB)
+381
+  8.336500 seconds (3.92 M allocations: 2.471 GiB)
+883
+  5.821329 seconds (2.50 M allocations: 1.630 GiB)
+986
+ 16.521562 seconds (2.66 M allocations: 1.717 GiB, 63.39% gc time)
+234
+ 18.020363 seconds (3.15 M allocations: 2.073 GiB, 58.12% gc time)
+333
+ 18.160844 seconds (3.22 M allocations: 2.116 GiB, 57.67% gc time)
+33
+ 17.964558 seconds (3.06 M allocations: 2.030 GiB, 58.30% gc time)
+583
+ 18.962995 seconds (3.65 M allocations: 2.374 GiB, 55.23% gc time)
+534
+ 16.702057 seconds (2.91 M allocations: 1.837 GiB, 62.70% gc time)
+734
+ 19.414062 seconds (3.99 M allocations: 2.563 GiB, 53.95% gc time)
+ 19.409409 seconds (3.95 M allocations: 2.545 GiB, 53.96% gc time)
+134
+834
+ 19.758476 seconds (4.28 M allocations: 2.717 GiB, 53.00% gc time)
+184
+ 16.529934 seconds (3.00 M allocations: 1.856 GiB, 63.36% gc time)
+932
+ 16.504154 seconds (3.07 M allocations: 1.883 GiB, 63.46% gc time)
+633
+ 16.602018 seconds (3.08 M allocations: 1.899 GiB, 63.08% gc time)
+435
+ 18.776621 seconds (4.28 M allocations: 2.619 GiB, 55.78% gc time)
+682
+ 18.754264 seconds (4.22 M allocations: 2.590 GiB, 55.84% gc time)
+783
+  6.037747 seconds (2.67 M allocations: 1.721 GiB)
+235
+ 19.926191 seconds (4.53 M allocations: 2.837 GiB, 52.56% gc time)
+485
+  6.034964 seconds (2.78 M allocations: 1.768 GiB)
+334
+ 19.572555 seconds (4.06 M allocations: 2.609 GiB, 53.51% gc time)
+84
+  6.034755 seconds (2.76 M allocations: 1.758 GiB)
+34
+ 19.516085 seconds (4.14 M allocations: 2.635 GiB, 53.66% gc time)
+282
+  6.031214 seconds (2.82 M allocations: 1.784 GiB)
+584
+ 19.529939 seconds (4.45 M allocations: 2.766 GiB, 53.63% gc time)
+382
+  6.013990 seconds (3.06 M allocations: 1.881 GiB)
+735
+  9.065515 seconds (4.46 M allocations: 2.772 GiB)
+884
+  9.044870 seconds (4.52 M allocations: 2.794 GiB)
+987
+  6.017778 seconds (2.93 M allocations: 1.827 GiB)
+933
+  6.039206 seconds (2.93 M allocations: 1.830 GiB)
+634
+  6.029949 seconds (2.88 M allocations: 1.807 GiB)
+436
+  9.053416 seconds (4.41 M allocations: 2.749 GiB)
+535
+  9.045914 seconds (4.21 M allocations: 2.666 GiB)
+135
+  9.061414 seconds (4.21 M allocations: 2.668 GiB)
+835
+  6.028264 seconds (3.06 M allocations: 1.881 GiB)
+236
+  9.062837 seconds (4.29 M allocations: 2.701 GiB)
+185
+  9.052317 seconds (4.07 M allocations: 2.608 GiB)
+683
+  6.030445 seconds (3.09 M allocations: 1.893 GiB)
+335
+  6.030837 seconds (2.90 M allocations: 1.819 GiB)
+35
+  6.043115 seconds (2.88 M allocations: 1.813 GiB)
+585
+  9.061731 seconds (4.31 M allocations: 2.709 GiB)
+784
+  6.484477 seconds (2.97 M allocations: 1.891 GiB)
+736
+  6.377426 seconds (2.81 M allocations: 1.815 GiB)
+885
+  9.038724 seconds (4.59 M allocations: 2.822 GiB)
+486
+  6.492219 seconds (2.87 M allocations: 1.854 GiB)
+635
+  6.830855 seconds (3.12 M allocations: 1.991 GiB)
+934
+  9.108608 seconds (4.56 M allocations: 2.817 GiB)
+85
+  9.047383 seconds (4.21 M allocations: 2.669 GiB)
+383
+  9.033742 seconds (4.33 M allocations: 2.716 GiB)
+283
+  7.248634 seconds (3.40 M allocations: 2.150 GiB)
+437
+  9.064845 seconds (4.34 M allocations: 2.725 GiB)
+988
+  6.403969 seconds (3.41 M allocations: 2.067 GiB)
+536
+  6.430763 seconds (3.40 M allocations: 2.066 GiB)
+836
+  5.029583 seconds (2.76 M allocations: 1.658 GiB)
+336
+  7.116622 seconds (3.78 M allocations: 2.291 GiB)
+136
+  6.040524 seconds (2.81 M allocations: 1.780 GiB)
+785
+  6.488351 seconds (3.15 M allocations: 1.966 GiB)
+36
+  8.134984 seconds (4.04 M allocations: 2.504 GiB)
+237
+  9.792194 seconds (4.45 M allocations: 2.845 GiB)
+  8.696552 seconds (4.12 M allocations: 2.594 GiB)
+684
+186
+  8.021702 seconds (3.52 M allocations: 2.278 GiB)
+886
+  8.024557 seconds (3.52 M allocations: 2.276 GiB)
+  7.763379 seconds (3.36 M allocations: 2.186 GiB)
+737
+487
+  7.302014 seconds (3.40 M allocations: 2.151 GiB)
+935
+  9.916155 seconds (4.59 M allocations: 2.914 GiB)
+  6.271452 seconds (2.84 M allocations: 1.815 GiB)
+284
+586
+  7.996533 seconds (3.99 M allocations: 2.467 GiB)
+636
+  6.254621 seconds (2.93 M allocations: 1.851 GiB)
+537
+  6.897075 seconds (3.45 M allocations: 2.131 GiB)
+438
+  6.041840 seconds (2.98 M allocations: 1.848 GiB)
+837
+  6.031941 seconds (3.06 M allocations: 1.880 GiB)
+337
+ 12.484506 seconds (3.06 M allocations: 1.880 GiB, 51.70% gc time)
+137
+ 12.505024 seconds (3.07 M allocations: 1.882 GiB, 51.61% gc time)
+786
+ 15.518893 seconds (4.61 M allocations: 2.830 GiB, 41.59% gc time)
+384
+ 15.675405 seconds (4.66 M allocations: 2.867 GiB, 41.17% gc time)
+86
+ 12.506560 seconds (3.00 M allocations: 1.859 GiB, 51.60% gc time)
+685
+ 15.529204 seconds (3.84 M allocations: 2.513 GiB, 41.56% gc time)
+ 12.509463 seconds (2.73 M allocations: 1.748 GiB, 51.59% gc time)
+37
+488
+ 17.871850 seconds (4.99 M allocations: 3.229 GiB, 36.11% gc time)
+989
+ 15.527343 seconds (3.91 M allocations: 2.545 GiB, 41.56% gc time)
+238
+ 12.529275 seconds (2.94 M allocations: 1.833 GiB, 51.51% gc time)
+936
+ 12.556558 seconds (2.94 M allocations: 1.836 GiB, 51.40% gc time)
+285
+ 12.283171 seconds (2.76 M allocations: 1.734 GiB, 52.54% gc time)
+538
+ 12.502903 seconds (2.53 M allocations: 1.662 GiB, 51.62% gc time)
+ 12.523385 seconds (2.58 M allocations: 1.687 GiB, 51.54% gc time)
+439
+838
+  5.767704 seconds (2.44 M allocations: 1.602 GiB)
+138
+ 14.255518 seconds (4.16 M allocations: 2.516 GiB, 45.27% gc time)
+887
+  6.636753 seconds (3.15 M allocations: 1.980 GiB)
+338
+  5.771879 seconds (2.88 M allocations: 1.781 GiB)
+787
+ 16.367958 seconds (5.36 M allocations: 3.229 GiB, 39.43% gc time)
+187
+ 15.869225 seconds (5.06 M allocations: 3.051 GiB, 40.67% gc time)
+738
+ 14.988001 seconds (4.26 M allocations: 2.632 GiB, 43.06% gc time)
+637
+ 16.567220 seconds (5.03 M allocations: 3.113 GiB, 38.96% gc time)
+587
+  6.038657 seconds (3.20 M allocations: 1.942 GiB)
+686
+  8.510579 seconds (3.97 M allocations: 2.514 GiB)
+385
+  8.694068 seconds (4.01 M allocations: 2.551 GiB)
+87
+  6.426523 seconds (2.93 M allocations: 1.872 GiB)
+937
+  6.330636 seconds (2.85 M allocations: 1.829 GiB)
+286
+  6.042775 seconds (2.44 M allocations: 1.629 GiB)
+139
+  7.886017 seconds (3.75 M allocations: 2.359 GiB)
+990
+  7.189349 seconds (3.15 M allocations: 2.038 GiB)
+440
+  6.333153 seconds (2.45 M allocations: 1.662 GiB)
+188
+  7.796726 seconds (3.29 M allocations: 2.162 GiB)
+539
+  9.320633 seconds (4.35 M allocations: 2.754 GiB)
+  7.988766 seconds (3.54 M allocations: 2.285 GiB)
+839
+239
+  9.748915 seconds (4.97 M allocations: 3.054 GiB)
+489
+  6.368886 seconds (2.77 M allocations: 1.802 GiB)
+739
+  8.071539 seconds (3.75 M allocations: 2.381 GiB)
+  9.885863 seconds (5.07 M allocations: 3.111 GiB)
+888
+38
+  8.032761 seconds (4.00 M allocations: 2.478 GiB)
+339
+  8.202190 seconds (4.03 M allocations: 2.507 GiB)
+788
+  7.474295 seconds (3.63 M allocations: 2.269 GiB)
+638
+  6.050029 seconds (3.20 M allocations: 1.943 GiB)
+687
+  6.856982 seconds (3.74 M allocations: 2.249 GiB)
+588
+  7.019211 seconds (3.63 M allocations: 2.220 GiB)
+386
+  7.082438 seconds (3.50 M allocations: 2.174 GiB)
+88
+  5.934550 seconds (3.28 M allocations: 1.962 GiB)
+938
+  5.108156 seconds (2.80 M allocations: 1.680 GiB)
+189
+  4.032255 seconds (1.29 M allocations: 969.825 MiB)
+639
+  7.607407 seconds (3.85 M allocations: 2.374 GiB)
+140
+  5.407201 seconds (1.95 M allocations: 1.362 GiB)
+789
+  7.727714 seconds (3.85 M allocations: 2.384 GiB)
+441
+  9.344184 seconds (4.58 M allocations: 2.853 GiB)
+287
+  7.074495 seconds (2.89 M allocations: 1.922 GiB)
+889
+  7.020073 seconds (2.86 M allocations: 1.904 GiB)
+39
+  7.717711 seconds (3.83 M allocations: 2.371 GiB)
+840
+  8.143223 seconds (3.72 M allocations: 2.373 GiB)
+490
+  8.974098 seconds (4.44 M allocations: 2.754 GiB)
+540
+  9.044112 seconds (4.00 M allocations: 2.582 GiB)
+740
+  9.440280 seconds (4.51 M allocations: 2.830 GiB)
+240
+  6.039247 seconds (2.83 M allocations: 1.787 GiB)
+387
+  6.030640 seconds (2.80 M allocations: 1.775 GiB)
+939
+ 12.048337 seconds (6.14 M allocations: 3.775 GiB)
+991
+  6.025901 seconds (2.89 M allocations: 1.810 GiB)
+190
+  8.952047 seconds (3.98 M allocations: 2.561 GiB)
+589
+  6.021628 seconds (3.06 M allocations: 1.882 GiB)
+640
+  6.026126 seconds (3.07 M allocations: 1.884 GiB)
+141
+ 11.236614 seconds (5.23 M allocations: 3.312 GiB)
+340
+ 21.436138 seconds (5.00 M allocations: 3.179 GiB, 49.30% gc time)
+688
+ 16.393380 seconds (3.17 M allocations: 1.902 GiB, 64.46% gc time)
+442
+ 15.961927 seconds (2.84 M allocations: 1.724 GiB, 66.20% gc time)
+40
+ 20.135403 seconds (4.81 M allocations: 2.965 GiB, 52.48% gc time)
+89
+ 17.282057 seconds (3.73 M allocations: 2.225 GiB, 61.14% gc time)
+790
+ 14.871820 seconds (2.26 M allocations: 1.373 GiB, 71.05% gc time)
+388
+ 15.307835 seconds (2.58 M allocations: 1.547 GiB, 69.03% gc time)
+241
+ 14.329929 seconds (1.91 M allocations: 1.174 GiB, 73.74% gc time)
+590
+ 18.607645 seconds (4.10 M allocations: 2.513 GiB, 56.79% gc time)
+890
+ 18.920074 seconds (4.20 M allocations: 2.587 GiB, 55.85% gc time)
+288
+ 16.994084 seconds (3.12 M allocations: 1.945 GiB, 62.18% gc time)
+940
+ 19.722689 seconds (4.35 M allocations: 2.733 GiB, 53.58% gc time)
+491
+  6.022193 seconds (2.40 M allocations: 1.609 GiB)
+689
+ 18.146560 seconds (3.33 M allocations: 2.151 GiB, 58.23% gc time)
+191
+ 18.526972 seconds (3.66 M allocations: 2.327 GiB, 57.04% gc time)
+992
+  6.015976 seconds (2.62 M allocations: 1.702 GiB)
+443
+ 21.717287 seconds (5.39 M allocations: 3.369 GiB, 48.66% gc time)
+841
+  6.031500 seconds (2.72 M allocations: 1.745 GiB)
+41
+ 21.365811 seconds (5.41 M allocations: 3.340 GiB, 49.46% gc time)
+541
+ 20.938218 seconds (5.19 M allocations: 3.206 GiB, 50.47% gc time)
+741
+  6.504800 seconds (3.04 M allocations: 1.923 GiB)
+791
+  6.026589 seconds (2.87 M allocations: 1.805 GiB)
+389
+  6.041344 seconds (2.92 M allocations: 1.826 GiB)
+242
+  7.342311 seconds (3.54 M allocations: 2.217 GiB)
+90
+  9.853661 seconds (4.76 M allocations: 2.976 GiB)
+142
+  6.997379 seconds (3.28 M allocations: 2.075 GiB)
+591
+  9.910213 seconds (4.79 M allocations: 2.994 GiB)
+341
+  6.029163 seconds (3.04 M allocations: 1.877 GiB)
+289
+  6.275658 seconds (3.24 M allocations: 1.981 GiB)
+941
+  5.121900 seconds (2.36 M allocations: 1.500 GiB)
+444
+ 22.335164 seconds (5.82 M allocations: 3.608 GiB, 47.31% gc time)
+641
+  9.439903 seconds (4.40 M allocations: 2.784 GiB)
+891
+  7.237653 seconds (3.59 M allocations: 2.223 GiB)
+690
+  6.107879 seconds (2.77 M allocations: 1.769 GiB)
+542
+  8.177478 seconds (4.14 M allocations: 2.548 GiB)
+492
+  7.708935 seconds (3.99 M allocations: 2.435 GiB)
+  7.397344 seconds (3.75 M allocations: 2.309 GiB)
+192
+993
+  6.078475 seconds (2.81 M allocations: 1.781 GiB)
+243
+  7.537629 seconds (3.57 M allocations: 2.245 GiB)
+  7.053928 seconds (3.21 M allocations: 2.047 GiB)
+742
+390
+  8.394774 seconds (4.15 M allocations: 2.577 GiB)
+842
+  8.292869 seconds (3.85 M allocations: 2.442 GiB)
+792
+  7.744592 seconds (3.60 M allocations: 2.279 GiB)
+91
+  6.916578 seconds (3.11 M allocations: 1.994 GiB)
+342
+ 10.185081 seconds (5.04 M allocations: 3.127 GiB)
+42
+  7.637644 seconds (3.65 M allocations: 2.287 GiB)
+143
+  7.452983 seconds (3.44 M allocations: 2.188 GiB)
+592
+  6.024904 seconds (3.14 M allocations: 1.915 GiB)
+445
+  8.296734 seconds (3.92 M allocations: 2.472 GiB)
+290
+  6.060961 seconds (2.89 M allocations: 1.815 GiB)
+543
+  6.282613 seconds (3.11 M allocations: 1.929 GiB)
+691
+  6.092945 seconds (2.90 M allocations: 1.824 GiB)
+493
+  6.329962 seconds (2.98 M allocations: 1.880 GiB)
+994
+  7.939557 seconds (4.03 M allocations: 2.478 GiB)
+892
+  9.102216 seconds (4.48 M allocations: 2.781 GiB)
+642
+  9.192625 seconds (4.54 M allocations: 2.815 GiB)
+942
+  6.347771 seconds (1.62 M allocations: 1.049 GiB, 41.13% gc time)
+446
+ 11.029298 seconds (3.98 M allocations: 2.504 GiB, 23.67% gc time)
+193
+  9.966772 seconds (3.40 M allocations: 2.159 GiB, 26.20% gc time)
+843
+ 11.207206 seconds (4.13 M allocations: 2.584 GiB, 23.30% gc time)
+244
+ 10.755128 seconds (3.88 M allocations: 2.435 GiB, 24.28% gc time)
+743
+  9.485444 seconds (2.98 M allocations: 1.935 GiB, 27.53% gc time)
+43
+ 10.283278 seconds (3.57 M allocations: 2.260 GiB, 25.39% gc time)
+92
+ 11.800238 seconds (4.34 M allocations: 2.731 GiB, 22.13% gc time)
+ 10.327229 seconds (3.65 M allocations: 2.297 GiB, 25.28% gc time)
+343
+391
+ 10.584682 seconds (3.74 M allocations: 2.360 GiB, 24.67% gc time)
+144
+ 11.707847 seconds (4.59 M allocations: 2.824 GiB, 22.30% gc time)
+793
+  8.669316 seconds (2.95 M allocations: 1.837 GiB, 30.12% gc time)
+494
+ 11.711397 seconds (4.20 M allocations: 2.667 GiB, 22.30% gc time)
+593
+  9.231415 seconds (3.16 M allocations: 1.980 GiB, 28.28% gc time)
+995
+ 10.280892 seconds (3.45 M allocations: 2.210 GiB, 25.40% gc time)  4.924092 seconds (1.96 M allocations: 1.315 GiB)
+
+  9.690193 seconds (2.87 M allocations: 1.911 GiB, 26.95% gc time) 12.143295 seconds (4.14 M allocations: 2.683 GiB, 21.50% gc time)
+
+245
+ 11.228976 seconds (3.63 M allocations: 2.382 GiB, 23.25% gc time)
+544
+291
+  5.446663 seconds (2.44 M allocations: 1.567 GiB)
+692
+  8.865354 seconds (2.97 M allocations: 1.866 GiB, 29.45% gc time)
+447
+643
+893
+ 10.479807 seconds (3.23 M allocations: 2.142 GiB, 24.92% gc time)
+943
+  7.042863 seconds (3.76 M allocations: 2.271 GiB)
+194
+  6.316283 seconds (3.32 M allocations: 2.017 GiB)
+744
+  7.477431 seconds (3.96 M allocations: 2.398 GiB)
+844
+  5.937954 seconds (3.00 M allocations: 1.848 GiB)
+344
+  6.595219 seconds (3.61 M allocations: 2.168 GiB)
+  6.277109 seconds (3.22 M allocations: 1.973 GiB)
+44
+392
+  6.089996 seconds (3.21 M allocations: 1.950 GiB)
+794
+  7.867819 seconds (4.01 M allocations: 2.462 GiB)
+93
+  6.726968 seconds (3.44 M allocations: 2.110 GiB)
+495
+  6.347411 seconds (3.36 M allocations: 2.037 GiB)
+594
+  8.803798 seconds (4.27 M allocations: 2.663 GiB)
+145
+  5.153277 seconds (2.30 M allocations: 1.476 GiB)
+292
+  6.053258 seconds (2.64 M allocations: 1.709 GiB)
+944
+  6.042597 seconds (2.40 M allocations: 1.610 GiB)
+745
+  6.159830 seconds (2.21 M allocations: 1.540 GiB)
+345
+  6.338742 seconds (2.18 M allocations: 1.545 GiB)
+  7.912779 seconds (3.25 M allocations: 2.152 GiB)
+  7.884229 seconds (3.22 M allocations: 2.134 GiB)
+45
+996
+644
+  6.449040 seconds (2.36 M allocations: 1.635 GiB)
+393
+  5.638465 seconds (2.33 M allocations: 1.539 GiB)
+94
+  8.859224 seconds (4.03 M allocations: 2.571 GiB)
+448
+  8.614029 seconds (3.83 M allocations: 2.462 GiB)
+195
+  9.133512 seconds (4.57 M allocations: 2.819 GiB)
+246
+  9.157317 seconds (4.39 M allocations: 2.748 GiB)
+894
+  9.323805 seconds (4.62 M allocations: 2.863 GiB)
+693
+  9.382814 seconds (4.71 M allocations: 2.905 GiB)
+545
+  9.124741 seconds (4.43 M allocations: 2.760 GiB)
+845
+  7.436717 seconds (3.52 M allocations: 2.213 GiB)
+496
+  7.457004 seconds (3.52 M allocations: 2.215 GiB)
+595
+  6.518609 seconds (3.40 M allocations: 2.071 GiB)
+146
+  9.144905 seconds (4.43 M allocations: 2.765 GiB)
+795
+  6.828911 seconds (3.59 M allocations: 2.181 GiB)
+293
+  6.022376 seconds (2.81 M allocations: 1.780 GiB)
+645
+  6.044787 seconds (2.83 M allocations: 1.790 GiB)
+997
+  6.048957 seconds (2.80 M allocations: 1.779 GiB)
+95
+  6.028550 seconds (2.73 M allocations: 1.743 GiB)
+  8.889786 seconds (4.31 M allocations: 2.691 GiB)
+449
+945
+  6.044391 seconds (2.69 M allocations: 1.733 GiB)
+196
+  6.130767 seconds (2.81 M allocations: 1.788 GiB)
+895
+  9.113827 seconds (3.96 M allocations: 2.571 GiB)
+  5.330222 seconds (1.86 M allocations: 1.317 GiB)  8.464344 seconds (3.85 M allocations: 2.458 GiB)
+
+  6.449956 seconds (2.46 M allocations: 1.682 GiB)
+  7.586657 seconds (2.78 M allocations: 1.930 GiB)
+  8.967819 seconds (4.59 M allocations: 2.816 GiB)
+  5.077934 seconds (2.11 M allocations: 1.393 GiB)
+  8.736968 seconds (4.42 M allocations: 2.724 GiB)
+  8.265985 seconds (3.15 M allocations: 2.150 GiB)
+846
+46
+497
+247
+746
+346
+147
+394
+694
+  8.591855 seconds (4.26 M allocations: 2.639 GiB)
+546
+  6.727635 seconds (3.44 M allocations: 2.108 GiB)
+796
+  7.922527 seconds (4.03 M allocations: 2.472 GiB)
+596
+ 18.560240 seconds (3.71 M allocations: 2.309 GiB, 58.98% gc time)
+294
+ 14.009320 seconds (1.32 M allocations: 878.967 MiB, 78.14% gc time)
+896
+ 17.071050 seconds (3.05 M allocations: 1.882 GiB, 64.12% gc time)
+ 16.980420 seconds (2.93 M allocations: 1.824 GiB, 64.46% gc time)
+450
+197
+ 18.291132 seconds (3.88 M allocations: 2.350 GiB, 59.84% gc time)
+998
+ 17.424413 seconds (3.36 M allocations: 2.044 GiB, 62.82% gc time)
+946
+ 18.993237 seconds (4.31 M allocations: 2.600 GiB, 57.63% gc time)
+646
+ 18.931857 seconds (4.30 M allocations: 2.589 GiB, 57.82% gc time)
+96
+ 17.002761 seconds (2.82 M allocations: 1.781 GiB, 64.38% gc time)
+47
+ 17.130098 seconds (2.60 M allocations: 1.704 GiB, 63.90% gc time)
+347
+ 18.338510 seconds (2.93 M allocations: 1.965 GiB, 59.69% gc time)
+ 18.349650 seconds (2.94 M allocations: 1.972 GiB, 59.65% gc time)
+248
+498
+  6.033375 seconds (2.39 M allocations: 1.606 GiB)
+295
+  6.712388 seconds (2.76 M allocations: 1.827 GiB)
+597
+ 19.500642 seconds (3.46 M allocations: 2.305 GiB, 56.13% gc time)
+695
+ 19.824590 seconds (3.80 M allocations: 2.475 GiB, 55.22% gc time)
+747
+ 20.092587 seconds (3.96 M allocations: 2.569 GiB, 54.48% gc time)
+148
+ 20.295782 seconds (4.15 M allocations: 2.669 GiB, 53.93% gc time)
+395
+ 20.471610 seconds (4.25 M allocations: 2.730 GiB, 53.47% gc time)
+847
+  6.489845 seconds (3.17 M allocations: 1.973 GiB)
+897
+ 20.076028 seconds (4.13 M allocations: 2.638 GiB, 54.52% gc time)
+547
+  6.055781 seconds (2.94 M allocations: 1.831 GiB)
+947
+ 20.233770 seconds (4.43 M allocations: 2.778 GiB, 54.10% gc time)
+797
+  8.263463 seconds (3.79 M allocations: 2.410 GiB)
+451
+  6.717673 seconds (3.04 M allocations: 1.943 GiB)
+48
+  9.230658 seconds (4.02 M allocations: 2.606 GiB)
+  7.874956 seconds (3.48 M allocations: 2.245 GiB)
+  8.547302 seconds (3.72 M allocations: 2.413 GiB)
+999
+647
+97
+  9.722110 seconds (4.59 M allocations: 2.891 GiB)
+198
+  7.247948 seconds (3.59 M allocations: 2.226 GiB)
+348
+  3.863753 seconds (1.73 M allocations: 1.113 GiB)
+848
+  6.915789 seconds (3.60 M allocations: 2.196 GiB)
+249
+  6.303412 seconds (3.28 M allocations: 2.000 GiB)
+  6.686974 seconds (3.57 M allocations: 2.161 GiB)
+696
+296
+  6.010827 seconds (2.73 M allocations: 1.744 GiB)
+898
+  8.261204 seconds (4.28 M allocations: 2.614 GiB)
+499
+  6.324885 seconds (2.98 M allocations: 1.880 GiB)
+548
+  8.216921 seconds (4.07 M allocations: 2.524 GiB)
+748
+  8.465554 seconds (4.04 M allocations: 2.534 GiB)
+  9.071611 seconds (4.47 M allocations: 2.777 GiB)
+149
+  6.056716 seconds (2.81 M allocations: 1.781 GiB)
+598
+  9.081499 seconds (4.18 M allocations: 2.656 GiB)
+396
+  8.657039 seconds (3.81 M allocations: 2.461 GiB)
+948
+  6.392268 seconds (3.26 M allocations: 1.999 GiB)
+49
+  9.412000 seconds (4.12 M allocations: 2.667 GiB)
+798
+  6.057740 seconds (2.54 M allocations: 1.672 GiB)
+849
+  6.163960 seconds (2.69 M allocations: 1.741 GiB)
+250
+  7.573428 seconds (3.49 M allocations: 2.216 GiB)
+1000
+  7.302127 seconds (3.23 M allocations: 2.084 GiB)
+349
+  7.908563 seconds (3.85 M allocations: 2.399 GiB)
+648
+  6.187467 seconds (2.90 M allocations: 1.831 GiB)
+697
+  5.195042 seconds (2.53 M allocations: 1.576 GiB)
+549
+  8.370483 seconds (4.35 M allocations: 2.651 GiB)
+98
+  8.274200 seconds (4.24 M allocations: 2.597 GiB)
+199
+  7.766360 seconds (3.74 M allocations: 2.340 GiB)
+297
+  7.389546 seconds (3.54 M allocations: 2.221 GiB)
+500
+  8.069811 seconds (3.85 M allocations: 2.415 GiB)
+899
+  6.023827 seconds (2.28 M allocations: 1.563 GiB)
+  7.709484 seconds (3.06 M allocations: 2.056 GiB)
+  6.024884 seconds (2.89 M allocations: 1.814 GiB)
+  6.790323 seconds (2.65 M allocations: 1.793 GiB)
+  4.700412 seconds (1.66 M allocations: 1.168 GiB)
+799
+599
+50
+397
+  7.070426 seconds (3.36 M allocations: 2.114 GiB)
+749
+350
+  5.686077 seconds (2.79 M allocations: 1.736 GiB)
+251
+  6.001896 seconds (3.04 M allocations: 1.869 GiB)
+1001
+  5.603632 seconds (2.59 M allocations: 1.644 GiB)
+550
+  6.046655 seconds (2.94 M allocations: 1.835 GiB)
+649
+  8.910921 seconds (4.64 M allocations: 2.830 GiB)
+150
+  6.264861 seconds (3.17 M allocations: 1.948 GiB)
+698
+  5.961536 seconds (2.90 M allocations: 1.806 GiB)
+99
+  8.031140 seconds (4.43 M allocations: 2.652 GiB)
+850
+  6.549357 seconds (3.28 M allocations: 2.024 GiB)
+200
+  9.794944 seconds (5.39 M allocations: 3.229 GiB)
+949
+  7.182981 seconds (3.51 M allocations: 2.185 GiB)
+298
+ 18.855846 seconds (2.19 M allocations: 1.408 GiB, 73.91% gc time)
+900
+ 18.478622 seconds (2.00 M allocations: 1.289 GiB, 75.42% gc time)
+ 18.510751 seconds (1.70 M allocations: 1.168 GiB, 75.29% gc time)
+650
+ 19.609050 seconds (2.51 M allocations: 1.617 GiB, 71.07% gc time)
+600
+ 20.059655 seconds (2.78 M allocations: 1.772 GiB, 69.48% gc time)
+750
+ 23.493334 seconds (4.41 M allocations: 2.797 GiB, 59.32% gc time)
+501
+ 20.974589 seconds (3.20 M allocations: 2.038 GiB, 66.45% gc time)
+351
+ 21.328279 seconds (3.56 M allocations: 2.224 GiB, 65.35% gc time)
+800
+ 20.063602 seconds (2.34 M allocations: 1.593 GiB, 69.46% gc time)
+699
+ 21.520388 seconds (3.70 M allocations: 2.303 GiB, 64.76% gc time)
+398
+ 22.406034 seconds (4.15 M allocations: 2.577 GiB, 62.20% gc time)
+51
+ 22.616676 seconds (4.00 M allocations: 2.539 GiB, 61.62% gc time)
+ 21.598187 seconds (3.06 M allocations: 2.047 GiB, 64.53% gc time)
+100
+ 22.061181 seconds (3.60 M allocations: 2.317 GiB, 63.17% gc time)
+551
+ 21.166846 seconds (2.98 M allocations: 1.969 GiB, 65.84% gc time)
+201
+  5.799235 seconds (2.63 M allocations: 1.681 GiB)
+299
+ 22.730237 seconds (3.62 M allocations: 2.397 GiB, 61.32% gc time)
+851
+ 23.216788 seconds (3.94 M allocations: 2.580 GiB, 60.03% gc time)
+151
+  3.017014 seconds (1.36 M allocations: 893.432 MiB)
+700
+ 22.617977 seconds (3.74 M allocations: 2.432 GiB, 61.62% gc time)
+950
+  6.634029 seconds (3.29 M allocations: 2.040 GiB)
+901
+  3.014082 seconds (1.40 M allocations: 909.561 MiB)
+  6.564773 seconds (3.15 M allocations: 1.975 GiB)
+601
+  7.025657 seconds (3.42 M allocations: 2.131 GiB)
+651
+  7.216029 seconds (3.38 M allocations: 2.138 GiB)
+751
+  6.048288 seconds (2.77 M allocations: 1.764 GiB)
+801
+  7.052785 seconds (3.49 M allocations: 2.167 GiB)
+  5.197063 seconds (2.54 M allocations: 1.585 GiB)
+  6.694291 seconds (2.91 M allocations: 1.889 GiB)
+399
+  5.733172 seconds (2.55 M allocations: 1.642 GiB)
+101
+  5.412856 seconds (2.31 M allocations: 1.509 GiB)
+300
+  5.797106 seconds (2.55 M allocations: 1.651 GiB)
+  8.782603 seconds (4.03 M allocations: 2.566 GiB)
+  5.257368 seconds (2.01 M allocations: 1.373 GiB)
+701
+  5.507037 seconds (2.08 M allocations: 1.427 GiB)
+  4.476078 seconds (1.05 M allocations: 885.668 MiB)
+  5.483404 seconds (2.14 M allocations: 1.449 GiB)
+  3.192490 seconds (580.80 k allocations: 553.682 MiB)
+  4.023420 seconds (1.42 M allocations: 1.003 GiB)
+  5.417299 seconds (1.77 M allocations: 1.290 GiB)
+  5.959268 seconds (1.99 M allocations: 1.435 GiB)
+  4.845521 seconds (1.40 M allocations: 1.064 GiB)
+  4.348188 seconds (1.05 M allocations: 882.706 MiB)
+951
+  3.961829 seconds (1.07 M allocations: 816.869 MiB)
+400
+  3.787392 seconds (851.57 k allocations: 669.081 MiB)
+301
+  2.843568 seconds (511.43 k allocations: 369.759 MiB)
+  2.931830 seconds (497.62 k allocations: 368.162 MiB)
+  3.031038 seconds (357.61 k allocations: 305.168 MiB)
+401
+  2.981963 seconds (329.04 k allocations: 273.344 MiB)
+  4.480857 seconds (67.87 k allocations: 75.530 MiB, 36.34% gc time)
