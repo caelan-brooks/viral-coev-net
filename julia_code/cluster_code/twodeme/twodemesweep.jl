@@ -102,3 +102,7 @@ function main(job_id_arg)
         run_single_simulation(args)
     end
 end
+
+# Get job_id from command line arguments or environment variable
+job_id_arg = get(ARGS, 1, get(ENV, "SLURM_ARRAY_TASK_ID", "1"))
+main(job_id_arg)
