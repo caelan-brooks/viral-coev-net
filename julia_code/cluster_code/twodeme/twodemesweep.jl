@@ -41,7 +41,7 @@ function run_single_simulation(args)
 
     # Retrieve the adjacency matrix for the given index
     adjacency_matrix = [0.0 1.0; 1.0 0.0]
-    networ_size = 2
+    network_size = 2
 
     # Initialize viral and immune densities
     viral_densities = [zeros(Float64, length(x)) for _ in 1:network_size]
