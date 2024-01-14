@@ -5,8 +5,8 @@ using LinearAlgebra
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme"
-const MIGRATION_RATES = exp10.(LinRange(-6, -0.5, 10))
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_final"
+const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
 
 println("Number of threads: ", nthreads())
 
@@ -52,7 +52,11 @@ function run_single_simulation(args)
     viral_densities[1][index_closest_to_zero] = 100/dx
 
     # Create populations
-    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]) for i in 1:network_size]
+    if migration_rate_idx == length(MIGRATION_RATES)
+        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, 2 * HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]) for i in 1:network_size]
+    else
+        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]) for i in 1:network_size]
+    end
 
     # Initialize populations and network with the new migration matrix
     migration_matrix = migration_rate * adjacency_matrix
