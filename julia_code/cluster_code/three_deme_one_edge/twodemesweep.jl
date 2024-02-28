@@ -2,13 +2,11 @@ using Base.Threads
 using Serialization
 using Random
 using LinearAlgebra
-using CSV
-using DataFrames
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_largeNh"
-const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
+const OUTPUT_DIRECTORY = "/pool001/dswartz/three_deme_one_edge"
+const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10))]
 
 println("Number of threads: ", nthreads())
 
@@ -26,7 +24,7 @@ const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
 const NUM_REPLICATES = 10000
-const START_REPLICATE = 1
+const START_REPLICATE = 10001
 
 function run_single_simulation(args)
     # Unpack arguments
@@ -42,8 +40,8 @@ function run_single_simulation(args)
     Random.seed!(seed)
 
     # Retrieve the adjacency matrix for the given index
-    adjacency_matrix = [0.0 1.0; 1.0 0.0]
-    network_size = 2
+    migration_matrix = [0.0 1e-4 migration_rate; 1e-4 0.0 1e-4; migration_rate 1e-4 0.0]
+    network_size = 3
 
     # Initialize viral and immune densities
     viral_densities = [zeros(Float64, length(x)) for _ in 1:network_size]
@@ -53,15 +51,10 @@ function run_single_simulation(args)
     index_closest_to_zero = argmin(abs.(x))
     viral_densities[1][index_closest_to_zero] = 100/dx
 
-    # Create populations
-    if migration_rate_idx == length(MIGRATION_RATES)
-        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, 2 * HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]) for i in 1:network_size]
-    else
-        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]) for i in 1:network_size]
-    end
+
+    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]) for i in 1:network_size]
 
     # Initialize populations and network with the new migration matrix
-    migration_matrix = migration_rate * adjacency_matrix
     network = Network(populations, migration_matrix)
     simulation = Simulation(network, DT, DURATION)
 
@@ -86,41 +79,6 @@ function run_single_simulation(args)
     end
 
 end
-
-# Function to save parameters and migration rates to CSV
-function save_parameters_and_migration_rates_to_csv(output_directory, migration_rates)
-    # Create a DataFrame for the main parameters
-    parameters = DataFrame(
-        HOST_POPULATION_PER_DEME = [HOST_POPULATION_PER_DEME],
-        L = [L],
-        dx = [dx],
-        r = [r],
-        M = [M],
-        beta = [beta],
-        alpha = [alpha],
-        gamma = [gamma],
-        D = [D],
-        DURATION = [DURATION],
-        DT = [DT],
-        THIN_BY = [THIN_BY],
-        NUM_REPLICATES = [NUM_REPLICATES],
-        START_REPLICATE = [START_REPLICATE]
-    )
-    
-    # Save the main parameters DataFrame to a CSV file
-    parameters_path = joinpath(output_directory, "simulation_parameters.csv")
-    CSV.write(parameters_path, parameters)
-    
-    # Create a DataFrame for migration rates
-    migration_rates_df = DataFrame(MIGRATION_RATES = migration_rates)
-    
-    # Save the migration rates DataFrame to a CSV file
-    migration_rates_path = joinpath(output_directory, "migration_rates.csv")
-    CSV.write(migration_rates_path, migration_rates_df)
-end
-
-save_parameters_and_migration_rates_to_csv(OUTPUT_DIRECTORY, MIGRATION_RATES)
-
 
 function main(job_id_arg)
     job_id = parse(Int, job_id_arg)
