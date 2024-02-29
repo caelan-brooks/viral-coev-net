@@ -40,6 +40,7 @@ struct Population
     alpha::Float64
     gamma::Float64
     D::Float64
+    sigma::Float64
     Nh::Int
     viral_density::Vector{Float64}
     immune_density::Vector{Float64}
@@ -71,7 +72,7 @@ Examples:
     pop = Population(1.0, 0.1, 0.5, 10, 0.3, 0.2, 0.1, 0.05, 100, [0.0 for i in 1:10], [0.0 for i in 1:10])
 
 """
-function Population(L::Float64, dx::Float64, r::Float64, M::Int64, beta::Float64, alpha::Float64, gamma::Float64, D::Float64, Nh::Int64, viral_density::Vector{Float64}, immune_density::Vector{Float64}; stochastic::Bool=true, time_stamp::Float64=0.0)
+function Population(L::Float64, dx::Float64, r::Float64, M::Int64, beta::Float64, alpha::Float64, gamma::Float64, D::Float64, Nh::Int64, viral_density::Vector{Float64}, immune_density::Vector{Float64}; stochastic::Bool=true, time_stamp::Float64=0.0, sigma=sqrt(20))
     xs = collect(-L/2:dx:L/2-dx)  # Creating a vector of spatial discretization points
     num_antigen_points = length(xs)  # Calculating the number of points in the antigen grid
     temporary_data = zeros(num_antigen_points)
@@ -82,7 +83,7 @@ function Population(L::Float64, dx::Float64, r::Float64, M::Int64, beta::Float64
     @assert length(viral_density) == num_antigen_points "Viral density vector size mismatch"
     @assert length(immune_density) == num_antigen_points "Immune density vector size mismatch"
     
-    return Population(L, dx, r, M, beta, alpha, gamma, D, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points, temporary_data,cross_reactive,susceptibility,fitness)
+    return Population(L, dx, r, M, beta, alpha, gamma, D, sigma, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points, temporary_data,cross_reactive,susceptibility,fitness)
 end
 
 
@@ -474,7 +475,7 @@ function single_step_evolve!(population::Population, dt::Float64)
             end
         end
         
-        apply_stochasticity!(population)
+        apply_stochasticity!(population, dt)
     end
 
 end
@@ -505,9 +506,9 @@ function compute_fitness!(population::Population)
     population.fitness .= population.beta .* population.susceptibility .- population.alpha .- population.gamma
 end
 
-function apply_stochasticity!(population::Population)
+function apply_stochasticity!(population::Population, dt::Float64)
     for i in eachindex(population.viral_density)
-        population.viral_density[i] = rand(Poisson(population.dx * population.viral_density[i])) / population.dx
+        population.viral_density[i] = rand(Poisson(population.dx * population.viral_density[i] / (dt * population.sigma^2))) * population.sigma^2 * dt / population.dx
     end
 end
 

@@ -90,42 +90,42 @@ function process_trajectories(migration_rate_idx, num_replicates)
 end
 
 
-# # Initialize survival_probabilities as an array with NaN
-# survival_probabilities = fill(NaN, length(MIGRATION_RATES))
+# Initialize survival_probabilities as an array with NaN
+survival_probabilities = fill(NaN, length(MIGRATION_RATES))
 
-# # Loop over each migration rate
-# for (idx, migration_rate) in enumerate(MIGRATION_RATES)
-#     output_subdirectory = joinpath(OUTPUT_DIRECTORY, "migration_rate_idx_$idx")
-#     replicate_files = glob("*.jld2", output_subdirectory)
-#     num_replicates = length(replicate_files)
-#     num_survived = 0
-#     println(num_replicates)
-#     flush(stdout)
+# Loop over each migration rate
+for (idx, migration_rate) in enumerate(MIGRATION_RATES)
+    output_subdirectory = joinpath(OUTPUT_DIRECTORY, "migration_rate_idx_$idx")
+    replicate_files = glob("*.jld2", output_subdirectory)
+    num_replicates = length(replicate_files)
+    num_survived = 0
+    println(num_replicates)
+    flush(stdout)
 
-#     # Process each replicate
-#     for file in replicate_files
-#         total_infected_per_deme, _ = read_data(file)
+    # Process each replicate
+    for file in replicate_files
+        total_infected_per_deme, _ = read_data(file)
         
-#         # Check if the pathogen survived
-#         survived = sum(total_infected_per_deme[:, end]) > 0
-#         num_survived += survived ? 1 : 0
-#     end
+        # Check if the pathogen survived
+        survived = sum(total_infected_per_deme[:, end]) > 0
+        num_survived += survived ? 1 : 0
+    end
 
-#     # Update survival probability for this migration rate in the array
-#     survival_probabilities[idx] = num_survived / num_replicates
-# end
+    # Update survival probability for this migration rate in the array
+    survival_probabilities[idx] = num_survived / num_replicates
+end
 
-# # Process and save trajectories for migration rate index 1
-# process_trajectories(1, 200)
+# Process and save trajectories for migration rate index 1
+process_trajectories(1, 200)
 
-# # Convert to DataFrame for CSV
-# df = DataFrame(
-#     MigrationRate = MIGRATION_RATES,
-#     SurvivalProbability = survival_probabilities
-# )
+# Convert to DataFrame for CSV
+df = DataFrame(
+    MigrationRate = MIGRATION_RATES,
+    SurvivalProbability = survival_probabilities
+)
 
-# # Save to CSV
-# CSV.write(joinpath(CSV_OUTPUT_DIRECTORY, "analysis_results.csv"), df)
+# Save to CSV
+CSV.write(joinpath(CSV_OUTPUT_DIRECTORY, "analysis_results.csv"), df)
 
 # Process and save histograms for each migration rate, except the first and last
 for idx in 2:length(MIGRATION_RATES)-1
