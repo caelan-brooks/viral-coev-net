@@ -7,12 +7,13 @@ using DataFrames
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_largeNh"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_final"
 const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
 
 println("Number of threads: ", nthreads())
 
 const HOST_POPULATION_PER_DEME = 2 * 10^6
+const N0 = 100
 const L = 40.0
 const dx = 0.3
 const x = -L/2:dx:L/2-dx
@@ -51,7 +52,7 @@ function run_single_simulation(args)
 
     # Set the value of viral_density at the closest index to 1/dx for the first population
     index_closest_to_zero = argmin(abs.(x))
-    viral_densities[1][index_closest_to_zero] = 100/dx
+    viral_densities[1][index_closest_to_zero] = N0/dx
 
     # Create populations
     if migration_rate_idx == length(MIGRATION_RATES)
