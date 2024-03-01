@@ -27,8 +27,9 @@ const THIN_BY = 20
 const NUM_REPLICATES = 500
 const START_REPLICATE = 1
 
-# load the migration matrix and population sizes vector
-migration_matrix, population_sizes = deserialize("cleaned_adjacency_matrix")
+df = CSV.read("cleaned_adjacency_matrix.csv", DataFrame)
+new_adjacency_matrix = Matrix(df[:, 1:end-1])  # Assuming the last column is the population sizes vector
+population_sizes = df[:,:population_sizes]
 
 function run_single_simulation(args)
     # Unpack arguments
