@@ -1,0 +1,60 @@
+/1.8.5(5):ERROR:150: Module '/1.8.5' conflicts with the currently loaded module(s) 'julia/1.8.5'
+/1.8.5(5):ERROR:102: Tcl command execution failed: conflict	 julia 
+
+Number of threads: 16
+1458
+14961553
+
+1401
+1591
+1420
+1515
+1648
+157214391610
+
+
+1629
+16841666
+1534
+1477
+
+771.761641 seconds (52.50 M allocations: 137.667 GiB, 26.67% gc time)
+1535
+785.851182 seconds (52.84 M allocations: 138.324 GiB, 27.67% gc time, 0.00% compilation time)
+1402
+862.336766 seconds (56.36 M allocations: 143.444 GiB, 32.64% gc time, 0.00% compilation time)
+1459
+869.532758 seconds (57.01 M allocations: 144.915 GiB, 32.37% gc time, 0.00% compilation time)
+1592
+896.424060 seconds (66.27 M allocations: 154.365 GiB, 31.39% gc time, 0.00% compilation time)
+1685
+874.915005 seconds (57.59 M allocations: 146.062 GiB, 32.17% gc time, 0.00% compilation time)
+1611
+897.533748 seconds (61.03 M allocations: 151.482 GiB, 31.36% gc time, 0.00% compilation time)
+898.704983 seconds (61.21 M allocations: 151.764 GiB, 31.32% gc time, 0.00% compilation time)
+1573
+1554
+914.303986 seconds (64.03 M allocations: 155.819 GiB, 30.78% gc time, 0.00% compilation time)
+1630
+1025.767124 seconds (71.45 M allocations: 167.724 GiB, 34.91% gc time, 0.00% compilation time)
+1440
+1037.935995 seconds (72.58 M allocations: 170.397 GiB, 34.50% gc time, 0.00% compilation time)
+1038.474998 seconds (72.63 M allocations: 170.519 GiB, 34.48% gc time, 0.00% compilation time)
+1478
+1497
+1078.003557 seconds (77.35 M allocations: 179.265 GiB, 33.22% gc time, 0.00% compilation time)
+1078.410404 seconds (77.39 M allocations: 179.352 GiB, 33.21% gc time, 0.00% compilation time)
+1667
+1649
+1084.057872 seconds (78.24 M allocations: 180.700 GiB, 33.03% gc time, 0.00% compilation time)
+1516
+1140.645090 seconds (79.71 M allocations: 182.250 GiB, 36.21% gc time, 0.00% compilation time)
+1421
+829.135577 seconds (64.12 M allocations: 144.343 GiB, 33.72% gc time)
+1686
+1264.585562 seconds (64.04 M allocations: 146.570 GiB, 53.38% gc time)
+1612
+1417.979795 seconds (66.94 M allocations: 152.642 GiB, 47.61% gc time)
+1593
+1561.467030 seconds (78.21 M allocations: 170.182 GiB, 46.73% gc time)
+1536

@@ -1,0 +1,77 @@
+/1.8.5(5):ERROR:150: Module '/1.8.5' conflicts with the currently loaded module(s) 'julia/1.8.5'
+/1.8.5(5):ERROR:102: Tcl command execution failed: conflict	 julia 
+
+Number of threads: 16
+1629
+157214201648
+
+1591
+1610
+1401
+1666
+1496
+1477
+1515
+1553
+1458
+
+1684
+1439
+1534
+
+signal (7): Bus error
+in expression starting at /home/dswartz/viral-coev-net/julia_code/cluster_code/real_network/real_network_sweep.jl:134
+gc_try_setmark at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gc.c:1764 [inlined]
+gc_mark_scan_array8 at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gc.c:1912 [inlined]
+gc_mark_loop at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gc.c:2279
+_jl_gc_collect at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gc.c:3117
+ijl_gc_collect at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gc.c:3346
+maybe_collect at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gc.c:903 [inlined]
+jl_gc_big_alloc_inner at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gc.c:968 [inlined]
+jl_gc_big_alloc_noinline at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gc.c:1007 [inlined]
+jl_gc_alloc_ at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/julia_internal.h:373 [inlined]
+jl_gc_alloc at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gc.c:3391
+_new_array_ at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/array.c:134 [inlined]
+_new_array at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/array.c:198 [inlined]
+ijl_alloc_array_1d at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/array.c:436
+Array at ./boot.jl:459 [inlined]
+Array at ./boot.jl:468 [inlined]
+Array at ./boot.jl:476 [inlined]
+similar at ./abstractarray.jl:841 [inlined]
+similar at ./abstractarray.jl:840 [inlined]
+similar at ./broadcast.jl:212 [inlined]
+similar at ./broadcast.jl:211 [inlined]
+copy at ./broadcast.jl:885 [inlined]
+materialize at ./broadcast.jl:860 [inlined]
+calculate_migration_effect! at /home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl:558
+single_step_evolve_network! at /home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl:423
+run_simulation! at /home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl:254 [inlined]
+macro expansion at ./timing.jl:262 [inlined]
+run_single_simulation at /home/dswartz/viral-coev-net/julia_code/cluster_code/real_network/real_network_sweep.jl:64
+macro expansion at /home/dswartz/viral-coev-net/julia_code/cluster_code/real_network/real_network_sweep.jl:128 [inlined]
+#17#threadsfor_fun#9 at ./threadingconstructs.jl:84
+#17#threadsfor_fun at ./threadingconstructs.jl:51 [inlined]
+#1 at ./threadingconstructs.jl:30
+unknown function (ip: 0x2aab0fce657f)
+_jl_invoke at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gf.c:2377 [inlined]
+ijl_apply_generic at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gf.c:2559
+jl_apply at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/julia.h:1843 [inlined]
+start_task at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/task.c:931
+Allocations: 53078099 (Pool: 41592541; Big: 11485558); GC: 26
+fatal: error thrown and no exception handler available.
+UndefRefError()
+getindex at ./array.jl:924 [inlined]
+calculate_migration_effect! at /home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl:558
+single_step_evolve_network! at /home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl:423
+run_simulation! at /home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl:254 [inlined]
+macro expansion at ./timing.jl:262 [inlined]
+run_single_simulation at /home/dswartz/viral-coev-net/julia_code/cluster_code/real_network/real_network_sweep.jl:64
+macro expansion at /home/dswartz/viral-coev-net/julia_code/cluster_code/real_network/real_network_sweep.jl:128 [inlined]
+#17#threadsfor_fun#9 at ./threadingconstructs.jl:84
+#17#threadsfor_fun at ./threadingconstructs.jl:51 [inlined]
+#1 at ./threadingconstructs.jl:30
+unknown function (ip: 0x2aab0fce657f)
+_jl_invoke at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gf.c:2377 [inlined]
+ijl_apply_generic at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/gf.c:2559
+jl_apply at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/julia.h:1843 [inlined]
+start_task at /cache/build/default-amdci4-2/julialang/julia-release-1-dot-8/src/task.c:931

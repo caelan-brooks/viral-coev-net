@@ -1,0 +1,84 @@
+/1.8.5(5):ERROR:150: Module '/1.8.5' conflicts with the currently loaded module(s) 'julia/1.8.5'
+/1.8.5(5):ERROR:102: Tcl command execution failed: conflict	 julia 
+
+Number of threads: 16
+1610
+1534
+1684
+14011477
+1458
+1666
+159114391496
+
+
+
+1515
+1420
+1553
+1629
+1572
+1648
+7967.453690 seconds (54.34 M allocations: 142.523 GiB, 90.46% gc time)
+1402
+8041.340763 seconds (58.10 M allocations: 150.160 GiB, 90.19% gc time, 0.03% compilation time)
+8041.995567 seconds (58.16 M allocations: 150.292 GiB, 90.18% gc time, 0.03% compilation time)
+1421
+1459
+8046.890554 seconds (58.66 M allocations: 151.351 GiB, 90.12% gc time, 0.03% compilation time)
+1440
+8048.414137 seconds (58.83 M allocations: 151.673 GiB, 90.11% gc time, 0.03% compilation time)
+1554
+8055.166683 seconds (59.76 M allocations: 153.264 GiB, 90.03% gc time, 0.03% compilation time)
+1573
+8087.145513 seconds (69.46 M allocations: 163.205 GiB, 89.67% gc time, 0.03% compilation time)
+1685
+8062.671240 seconds (61.10 M allocations: 155.222 GiB, 89.95% gc time, 0.03% compilation time)
+8063.165434 seconds (61.22 M allocations: 155.381 GiB, 89.94% gc time, 0.03% compilation time)
+1516
+1630
+8064.862675 seconds (61.57 M allocations: 155.856 GiB, 89.92% gc time, 0.03% compilation time)
+1535
+8067.013130 seconds (62.11 M allocations: 156.514 GiB, 89.90% gc time, 0.03% compilation time)
+8067.957819 seconds (62.38 M allocations: 156.832 GiB, 89.89% gc time, 0.03% compilation time)
+1497
+8068.664599 seconds (62.57 M allocations: 157.048 GiB, 89.88% gc time, 0.03% compilation time)
+1611
+1478
+8070.206667 seconds (63.01 M allocations: 157.550 GiB, 89.86% gc time, 0.03% compilation time)
+1667
+8460.233566 seconds (66.77 M allocations: 161.587 GiB, 85.72% gc time, 0.03% compilation time)
+8513.725266 seconds (67.20 M allocations: 162.046 GiB, 85.18% gc time, 0.03% compilation time)
+1649
+1592
+3989.273493 seconds (75.26 M allocations: 164.611 GiB, 69.29% gc time)
+1403
+731.375003 seconds (60.80 M allocations: 148.892 GiB, 16.99% gc time)
+1441
+813.860333 seconds (66.72 M allocations: 156.622 GiB, 23.51% gc time)
+1686
+839.912912 seconds (64.54 M allocations: 155.533 GiB, 25.41% gc time)
+1555
+878.447400 seconds (71.06 M allocations: 163.230 GiB, 27.35% gc time)
+1422
+905.183143 seconds (65.41 M allocations: 157.841 GiB, 29.82% gc time)
+1498
+918.559009 seconds (72.27 M allocations: 165.469 GiB, 29.85% gc time)
+1460
+916.845262 seconds (66.93 M allocations: 159.864 GiB, 30.32% gc time)
+1479
+940.107258 seconds (69.94 M allocations: 163.276 GiB, 31.65% gc time)
+1517
+942.735484 seconds (72.12 M allocations: 165.719 GiB, 31.56% gc time)
+1631
+939.452108 seconds (69.98 M allocations: 163.280 GiB, 31.67% gc time)
+1612
+972.633510 seconds (72.87 M allocations: 166.563 GiB, 33.58% gc time)
+1536
+975.931751 seconds (74.53 M allocations: 168.638 GiB, 33.47% gc time)
+1668
+1004.148879 seconds (76.21 M allocations: 171.159 GiB, 34.69% gc time)
+1593
+1011.564838 seconds (77.85 M allocations: 173.901 GiB, 34.43% gc time)
+1650
+1055.027101 seconds (80.96 M allocations: 179.561 GiB, 35.56% gc time)
+1574

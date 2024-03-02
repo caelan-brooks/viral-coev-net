@@ -1,0 +1,51 @@
+/1.8.5(5):ERROR:150: Module '/1.8.5' conflicts with the currently loaded module(s) 'julia/1.8.5'
+/1.8.5(5):ERROR:102: Tcl command execution failed: conflict	 julia 
+
+Number of threads: 16
+1515
+1458
+1534
+1629
+1572
+1401
+166615911420
+
+
+1610
+1496
+1648
+1553
+1684
+1477
+1439
+8029.424016 seconds (53.13 M allocations: 139.295 GiB, 88.77% gc time)
+1535
+8073.843782 seconds (55.42 M allocations: 143.169 GiB, 88.69% gc time, 0.02% compilation time)
+1649
+8177.102068 seconds (60.31 M allocations: 153.762 GiB, 88.27% gc time, 0.02% compilation time)
+1573
+8179.925642 seconds (60.54 M allocations: 154.329 GiB, 88.24% gc time, 0.02% compilation time)
+1497
+8182.695277 seconds (60.82 M allocations: 154.903 GiB, 88.21% gc time, 0.02% compilation time)
+8182.777613 seconds (60.82 M allocations: 154.930 GiB, 88.21% gc time, 0.02% compilation time)
+8210.046534 seconds (70.34 M allocations: 164.513 GiB, 87.91% gc time, 0.02% compilation time)
+1554
+1516
+1667
+8194.316422 seconds (61.60 M allocations: 156.190 GiB, 88.08% gc time, 0.02% compilation time)
+1611
+8229.323538 seconds (62.34 M allocations: 157.361 GiB, 87.71% gc time, 0.02% compilation time)
+8229.174738 seconds (62.32 M allocations: 157.341 GiB, 87.71% gc time, 0.02% compilation time)
+8235.351080 seconds (62.45 M allocations: 157.523 GiB, 87.64% gc time, 0.02% compilation time)
+8258.411796 seconds (62.73 M allocations: 157.946 GiB, 87.40% gc time, 0.02% compilation time)
+8260.152492 seconds (62.75 M allocations: 157.967 GiB, 87.38% gc time, 0.02% compilation time)
+8279.814663 seconds (62.92 M allocations: 158.207 GiB, 87.17% gc time, 0.02% compilation time)
+1592
+1459
+8325.461093 seconds (63.39 M allocations: 158.815 GiB, 86.70% gc time, 0.02% compilation time)
+1440
+8374.533175 seconds (64.02 M allocations: 159.546 GiB, 86.19% gc time, 0.02% compilation time)
+1421
+1685
+1402
+1478

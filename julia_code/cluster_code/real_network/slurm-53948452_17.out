@@ -1,0 +1,24 @@
+/1.8.5(5):ERROR:150: Module '/1.8.5' conflicts with the currently loaded module(s) 'julia/1.8.5'
+/1.8.5(5):ERROR:102: Tcl command execution failed: conflict	 julia 
+
+Number of threads: 20
+1401
+16271417
+1552
+1507
+1597
+
+14621492
+1537
+14771432
+1522
+
+
+1612
+1642
+1657
+1582
+1687
+1672
+1567
+1447
