@@ -463,8 +463,8 @@ function single_step_evolve!(population::Population, dt::Float64)
     compute_fitness!(population)
 
     # Updating the immune density using the Euler method
-    total_infected_individuals = sum(population.viral_density) * population.dx
-    population.immune_density .+= dt / population.M / population.Nh .* (population.viral_density .- total_infected_individuals .* population.immune_density)
+    # total_infected_individuals = sum(population.viral_density) * population.dx
+    population.immune_density .+= dt / population.M / population.Nh .* (population.viral_density .- (sum(population.viral_density) * population.dx) .* population.immune_density)
     population.viral_density .+= population.fitness .* population.viral_density .* dt
 
     # Applying stochastic variations to the viral densities if the `stochastic` parameter is True
@@ -553,9 +553,9 @@ function calculate_migration_effect!(network::Network, dt::Float64)
 
         for j in 1:length(populations)
             if i != j
-                migration_rate_in = migration_matrix[i, j]
-                migration_rate_out = migration_matrix[j, i]
-                populations[i].temporary_data .+= migration_rate_in .* populations[j].viral_density - migration_rate_out .* populations[i].viral_density
+                # migration_rate_in = migration_matrix[i, j]
+                # migration_rate_out = migration_matrix[j, i]
+                populations[i].temporary_data .+= migration_matrix[i, j] .* populations[j].viral_density .- migration_matrix[j,i] .* populations[i].viral_density
             end
         end
     end

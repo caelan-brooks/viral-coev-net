@@ -12,7 +12,7 @@ const OUTPUT_DIRECTORY = "/pool001/dswartz/real_network"
 println("Number of threads: ", nthreads())
 
 const N0 = 100
-const L = 100.0  # Consider if this needs to be longer
+const L = 50.0  # Consider if this needs to be longer
 const dx = 0.3
 const x = -L/2:dx:L/2-dx
 const r = 3.0
@@ -20,8 +20,8 @@ const M = 15
 const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
-const D = 0.001 # make this smaller? 
-const DURATION = 160.0
+const D = 0.007 # make this smaller? 
+const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
 const NUM_REPLICATES = 300
@@ -30,6 +30,9 @@ const START_REPLICATE = 1
 df = CSV.read("cleaned_adjacency_matrix.csv", DataFrame)
 migration_matrix = Matrix(df[:, 1:end-1])  # Assuming the last column is the population sizes vector
 population_sizes = df[:,:population_sizes]
+
+println(migration_matrix)
+println(population_sizes)
 
 function run_single_simulation(args)
     # Unpack arguments
