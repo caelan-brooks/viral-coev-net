@@ -175,6 +175,7 @@ mutable struct Simulation
     trajectory::Vector{Network}  # A vector to store the network state at each time step
     duration_times::Vector{Float64}  # The time points at which the network state is recorded
     simulation_complete::Bool  # A flag to indicate if the simulation is complete
+    thin_by::Int64 # Number which knows how much time resultion is requested
 end
 
 
@@ -201,18 +202,18 @@ Examples:
     sim = Simulation(init_network, 0.1, 10.0)
 
 """
-function Simulation(initial_network::Network, dt::Float64, duration::Float64)
+function Simulation(initial_network::Network, dt::Float64, duration::Float64; thin_by=1)
     # Create a range representing the time points at which the network state will be recorded
     duration_times = collect(0:dt:duration)
     num_time_steps = length(duration_times)
 
     # Initialize the trajectory with the initial network state
-    trajectory = [deepcopy(initial_network) for i in 1:num_time_steps]
+    trajectory = [deepcopy(initial_network) for i in 1:thin_by:num_time_steps]
 
     # Create and return a new Simulation instance with the initial network, 
     # time step, duration, trajectory, and duration times
     # The simulation_complete flag is initially set to false
-    Simulation(initial_network, dt, duration, trajectory, duration_times, false)
+    Simulation(initial_network, dt, duration, trajectory, duration_times, false, thin_by)
 end
 
 
@@ -249,15 +250,23 @@ function run_simulation!(sim::Simulation)
         error("Simulation has already been run and cannot be run again.")
     end
     
+    current_update = 1
+
     # Iteratively evolve the network at each time step in the duration_times (skipping the initial time)
     for i in 2:length(sim.duration_times)
         single_step_evolve_network!(sim.initial_network, sim.dt)
         
-        copy_network_data!(sim.trajectory[i],sim.initial_network)
+        if mod(i-1,sim.thin_by)==0
+            current_update += 1
+            copy_network_data!(sim.trajectory[current_update],sim.initial_network)
+        end
     end
 
     # Mark the simulation as completed
     sim.simulation_complete = true
+
+    # Make the time vector line up with the saved configurations
+    sim.duration_times = sim.duration_times[1:sim.thin_by:end]
 end
 
 function copy_network_data!(dest::Network, source::Network)
