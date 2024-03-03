@@ -20,12 +20,12 @@ const M = 15
 const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
-const D = 0.007 # make this smaller? 
+const D = 0.001 # make this smaller? 
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
 const NUM_REPLICATES = 1000
-const START_REPLICATE = 1101
+const START_REPLICATE = 1
 
 df = CSV.read("cleaned_adjacency_matrix.csv", DataFrame)
 migration_matrix = Matrix(df[:, 1:end-1])  # Assuming the last column is the population sizes vector
@@ -60,12 +60,11 @@ function run_single_simulation(args)
 
     # Initialize populations and network with the new migration matrix
     network = Network(populations, migration_matrix)
-    simulation = Simulation(network, DT, DURATION)
+    simulation = Simulation(network, DT, DURATION; thin_by=THIN_BY)
 
    # Run the simulation
     try
         @time run_simulation!(simulation)
-        thin_simulation!(simulation, THIN_BY)
 
         # Calculate total infected per deme
         total_infected_per_deme = calculate_total_infected_per_deme(simulation)
