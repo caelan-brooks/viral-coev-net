@@ -24,8 +24,8 @@ const D = 0.007 # make this smaller?
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 300
-const START_REPLICATE = 1
+const NUM_REPLICATES = 1000
+const START_REPLICATE = 1101
 
 df = CSV.read("cleaned_adjacency_matrix.csv", DataFrame)
 migration_matrix = Matrix(df[:, 1:end-1])  # Assuming the last column is the population sizes vector
