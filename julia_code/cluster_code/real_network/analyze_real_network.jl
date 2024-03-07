@@ -22,7 +22,24 @@ end
 # Initialize survival_probabilities as an array with NaN
 survival_probabilities = fill(NaN, length(OUTBREAK_DEMES))
 
-# Loop over each migration rate
+# Define the function to process each replicate
+function process_replicate(file_path)
+    try
+        total_infected_per_deme, _ = read_data(file_path)
+        total_infected = vec(sum(total_infected_per_deme, dims=1))
+
+        survived = total_infected[end] > 0
+        survived_flag = survived ? 1 : 0
+        extinction_time = !survived ? findfirst(total_infected .== 0) : NaN
+        
+        return (survived_flag, extinction_time)
+    catch e
+        println("error reading file: error is $e")
+        return (0, NaN) # Assuming survival flag as 0 and extinction time as NaN in case of error
+    end
+end
+
+# Loop over each outbreak deme
 for (idx, outbreak_deme) in enumerate(OUTBREAK_DEMES)
     output_subdirectory = joinpath(OUTPUT_DIRECTORY, "outbreak_deme_idx_$idx")
     replicate_files = glob("*.jld2", output_subdirectory)
@@ -31,30 +48,15 @@ for (idx, outbreak_deme) in enumerate(OUTBREAK_DEMES)
     println(num_replicates)
     flush(stdout)
     
-    survived_results = zeros(Int, num_replicates)
-    extinction_times = fill(NaN, num_replicates)
-    maximum_infected_deme_1 = fill(NaN, num_replicates)
-    maximum_infected_deme_2 = fill(NaN, num_replicates)
-    # Process each replicate
-    @threads for file_idx = 1:num_replicates
-        try
-            total_infected_per_deme, _ = read_data(replicate_files[file_idx])
-            
-            total_infected = vec(sum(total_infected_per_deme, dims=1))
-
-            maximum_infected_deme_1[file_idx] = maximum(total_infected_per_deme[1,:])
-            maximum_infected_deme_2[file_idx] = maximum(total_infected_per_deme[2,:])
-
-            # Check if the pathogen survived
-            survived = total_infected[end] > 0
-            survived_results[file_idx] = survived ? 1 : 0
-            if !survived
-                extinction_times[file_idx] = findfirst(total_infected .== 0)
-            end
-        catch e
-            println("error reading file: error is $e")
-        end
+    results = Array{Any}(undef, num_replicates)
+    
+    # Parallel processing of each replicate
+    @threads for file_idx in 1:num_replicates
+        results[file_idx] = process_replicate(replicate_files[file_idx])
     end
+
+    survived_results = [result[1] for result in results]
+    extinction_times = [result[2] for result in results]
     
     valid_extinction_times = extinction_times[.!isnan.(extinction_times)]
     
@@ -63,8 +65,6 @@ for (idx, outbreak_deme) in enumerate(OUTBREAK_DEMES)
     println("number of times greater than 60: ", count(valid_extinction_times .> 60))
     println("number times greater than 70: ", count(valid_extinction_times .> 70))
     println("number times greater than 80: ", count(valid_extinction_times .> 80))
-    println("Peak infected in deme 1: ", mean(maximum_infected_deme_1), " +- ", std(maximum_infected_deme_1))
-    println("Peak infected in deme 2: ", mean(maximum_infected_deme_2), " +- ", std(maximum_infected_deme_2))
     
     # Update survival probability for this migration rate in the array
     survival_probabilities[idx] = sum(survived_results) / num_replicates
