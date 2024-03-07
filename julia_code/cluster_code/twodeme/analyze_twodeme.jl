@@ -93,6 +93,26 @@ function process_trajectories(migration_rate_idx, num_replicates)
     CSV.write(joinpath(CSV_OUTPUT_DIRECTORY, "trajectories_migration_rate_idx_$migration_rate_idx.csv"), traj_df)
 end
 
+# Function to process each replicate
+function process_replicate(file_path)
+    try
+        total_infected_per_deme, _ = read_data(file_path)
+        total_infected = vec(sum(total_infected_per_deme, dims=1))
+
+        maximum_infected_deme_1 = maximum(total_infected_per_deme[1,:])
+        maximum_infected_deme_2 = maximum(total_infected_per_deme[2,:])
+
+        survived = total_infected[end] > 0
+        survived_flag = survived ? 1 : 0
+        extinction_time = !survived ? findfirst(total_infected .== 0) : NaN
+        
+        return (survived_flag, extinction_time, maximum_infected_deme_1, maximum_infected_deme_2)
+    catch e
+        println("error reading file: error is $e")
+        return (0, NaN, NaN, NaN) # Assuming default values in case of error
+    end
+end
+
 function analyze_migration_rates(MIGRATION_RATES, OUTPUT_DIRECTORY)
     survival_probabilities = fill(NaN, length(MIGRATION_RATES))
 
@@ -132,7 +152,6 @@ function analyze_migration_rates(MIGRATION_RATES, OUTPUT_DIRECTORY)
     return survival_probabilities
 end
 
-# Function call example
 survival_probabilities = analyze_migration_rates(MIGRATION_RATES, OUTPUT_DIRECTORY)
 
 # Process and save trajectories for migration rate index 1
