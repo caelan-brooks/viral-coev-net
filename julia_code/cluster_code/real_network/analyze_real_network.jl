@@ -31,14 +31,18 @@ for (idx, outbreak_deme) in enumerate(OUTBREAK_DEMES)
     
     survived_results = zeros(Int, num_replicates)
     extinction_times = fill(NaN, num_replicates)
-    
+    maximum_infected_deme_1 = fill(NaN, num_replicates)
+    maximum_infected_deme_2 = fill(NaN, num_replicates)
     # Process each replicate
     @threads for file_idx = 1:num_replicates
         try
             total_infected_per_deme, _ = read_data(replicate_files[file_idx])
             
             total_infected = vec(sum(total_infected_per_deme, dims=1))
-            
+
+            maximum_infected_deme_1[file_idx] = maximum(total_infected_per_deme[1,:])
+            maximum_infected_deme_2[file_idx] = maximum(total_infected_per_deme[2,:])
+
             # Check if the pathogen survived
             survived = total_infected[end] > 0
             survived_results[file_idx] = survived ? 1 : 0
@@ -57,6 +61,8 @@ for (idx, outbreak_deme) in enumerate(OUTBREAK_DEMES)
     println("number of times greater than 60: ", count(valid_extinction_times .> 60))
     println("number times greater than 70: ", count(valid_extinction_times .> 70))
     println("number times greater than 80: ", count(valid_extinction_times .> 80))
+    println("Peak infected in deme 1: ", mean(maximum_infected_deme_1), " +- ", std(maximum_infected_deme_1))
+    println("Peak infected in deme 2: ", mean(maximum_infected_deme_2), " +- ", std(maximum_infected_deme_2))
     
     # Update survival probability for this migration rate in the array
     survival_probabilities[idx] = sum(survived_results) / num_replicates
