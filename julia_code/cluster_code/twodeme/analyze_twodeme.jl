@@ -2,6 +2,8 @@ using Serialization
 using CSV
 using DataFrames
 using Glob
+using Base.Threads
+using Statistics
 
 const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_final"
 const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_final/csv_outputs"  # Directory for CSV outputs
@@ -9,6 +11,8 @@ const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
 
 # Create CSV output directory if it doesn't exist
 isdir(CSV_OUTPUT_DIRECTORY) || mkdir(CSV_OUTPUT_DIRECTORY)
+
+println("Number of threads: ", nthreads())
 
 # Define read_data as a global function
 function read_data(file)
@@ -102,17 +106,44 @@ for (idx, migration_rate) in enumerate(MIGRATION_RATES)
     println(num_replicates)
     flush(stdout)
 
+    survived_results = zeros(Int, num_replicates)
+    extinction_times = fill(NaN, num_replicates)
+    maximum_infected_deme_1 = fill(NaN, num_replicates)
+    maximum_infected_deme_2 = fill(NaN, num_replicates)
     # Process each replicate
-    for file in replicate_files
-        total_infected_per_deme, _ = read_data(file)
-        
-        # Check if the pathogen survived
-        survived = sum(total_infected_per_deme[:, end]) > 0
-        num_survived += survived ? 1 : 0
-    end
+    @threads for file_idx = 1:num_replicates
+        try
+            total_infected_per_deme, _ = read_data(replicate_files[file_idx])
+            
+            total_infected = vec(sum(total_infected_per_deme, dims=1))
 
+            maximum_infected_deme_1[file_idx] = maximum(total_infected_per_deme[1,:])
+            maximum_infected_deme_2[file_idx] = maximum(total_infected_per_deme[2,:])
+
+            # Check if the pathogen survived
+            survived = total_infected[end] > 0
+            survived_results[file_idx] = survived ? 1 : 0
+            if !survived
+                extinction_times[file_idx] = findfirst(total_infected .== 0)
+            end
+        catch e
+            println("error reading file: error is $e")
+        end
+    end
+    
+    valid_extinction_times = extinction_times[.!isnan.(extinction_times)]
+    
+    println("Maximum Extinction Time: ", maximum(valid_extinction_times))
+    println("Average Extinction Time: ", mean(valid_extinction_times))
+    println("number of times greater than 60: ", count(valid_extinction_times .> 60))
+    println("number times greater than 70: ", count(valid_extinction_times .> 70))
+    println("number times greater than 80: ", count(valid_extinction_times .> 80))
+    println("Peak infected in deme 1: ", mean(maximum_infected_deme_1), " +- ", std(maximum_infected_deme_1))
+    println("Peak infected in deme 2: ", mean(maximum_infected_deme_2), " +- ", std(maximum_infected_deme_2))
+    
     # Update survival probability for this migration rate in the array
-    survival_probabilities[idx] = num_survived / num_replicates
+    survival_probabilities[idx] = sum(survived_results) / num_replicates
+
 end
 
 # Process and save trajectories for migration rate index 1

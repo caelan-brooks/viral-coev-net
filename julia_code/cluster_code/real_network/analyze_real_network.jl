@@ -9,6 +9,8 @@ const OUTPUT_DIRECTORY = "/pool001/dswartz/real_network"
 const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/real_network/csv_outputs"  # Directory for CSV outputs
 const OUTBREAK_DEMES = collect(1:20)
 
+println("Number of threads: ", nthreads())
+
 # Create CSV output directory if it doesn't exist
 isdir(CSV_OUTPUT_DIRECTORY) || mkdir(CSV_OUTPUT_DIRECTORY)
 
