@@ -35,7 +35,7 @@ function process_and_save_histograms(migration_rate_idx::Int64; cutoff = 100)
         
         # Find indices of maximal infection for each deme because dt = 1/20 and thin by = 20 index corrresponds to "real" time!
         max_infected_idx_deme1 = argmax(total_infected_per_deme[1, :])
-        min_infected_idx_deme1 = argmin(total_infected_per_deme[1, :])
+        min_infected_idx_deme1 = argmin(total_infected_per_deme[1, 6:end])
         
         max_infected_idx_deme2 = argmax(total_infected_per_deme[2, :])
         
