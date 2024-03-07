@@ -19,7 +19,7 @@ function read_data(file)
     open(deserialize, file)
 end
 
-function process_and_save_histograms(migration_rate_idx; cutoff = 100)
+function process_and_save_histograms(migration_rate_idx::Int64; cutoff = 100)
     output_subdirectory = joinpath(OUTPUT_DIRECTORY, "migration_rate_idx_$migration_rate_idx")
     replicate_files = glob("*.jld2", output_subdirectory)
 
@@ -27,6 +27,8 @@ function process_and_save_histograms(migration_rate_idx; cutoff = 100)
     antigenic_variance_deme2 = []
     peak_time_difference = []
     variance_difference = []
+
+    number_late_trajectories = 0
 
     for file in replicate_files
         total_infected_per_deme, antigenic_variance_per_deme = read_data(file)
@@ -36,6 +38,7 @@ function process_and_save_histograms(migration_rate_idx; cutoff = 100)
         min_infected_idx_deme1 = argmin(total_infected_per_deme[1, :])
         
         max_infected_idx_deme2 = argmax(total_infected_per_deme[2, :])
+        
         
         
         # Check if maximal infection is greater than cutoff before recording the antigenic variance
@@ -53,8 +56,7 @@ function process_and_save_histograms(migration_rate_idx; cutoff = 100)
         
         if !isnothing(first_cross_idx_deme2)
             if first_cross_idx_deme2 > min_infected_idx_deme1
-                println("LATE")
-                flush(stdout)
+                number_late_trajectories += 1
             end
      
             if total_infected_per_deme[2, max_infected_idx_deme2] > cutoff && first_cross_idx_deme2 <= min_infected_idx_deme1
@@ -64,6 +66,8 @@ function process_and_save_histograms(migration_rate_idx; cutoff = 100)
             end
         end
     end
+    
+    println("Number of late trajectories: ", number_late_trajectories)
 
     # Save the antigenic variance data
     CSV.write(joinpath(CSV_OUTPUT_DIRECTORY, "antigenic_variance_deme1_migration_rate_idx_$migration_rate_idx.csv"), DataFrame(AntigenicVariance=antigenic_variance_deme1))
@@ -72,7 +76,7 @@ function process_and_save_histograms(migration_rate_idx; cutoff = 100)
     CSV.write(joinpath(CSV_OUTPUT_DIRECTORY, "variance_difference_migration_rate_idx_$migration_rate_idx.csv"), DataFrame(VarianceDifference=variance_difference))
 end
 
-function process_trajectories(migration_rate_idx, num_replicates)
+function process_trajectories(migration_rate_idx::Int64, num_replicates::Int64)
     output_subdirectory = joinpath(OUTPUT_DIRECTORY, "migration_rate_idx_$migration_rate_idx")
     replicate_files = glob("*.jld2", output_subdirectory)
     
@@ -94,7 +98,7 @@ function process_trajectories(migration_rate_idx, num_replicates)
 end
 
 # Function to process each replicate
-function process_replicate(file_path)
+function process_replicate(file_path::String)
     try
         total_infected_per_deme, _ = read_data(file_path)
         total_infected = vec(sum(total_infected_per_deme, dims=1))
@@ -113,7 +117,7 @@ function process_replicate(file_path)
     end
 end
 
-function analyze_migration_rates(MIGRATION_RATES, OUTPUT_DIRECTORY)
+function analyze_migration_rates(MIGRATION_RATES, OUTPUT_DIRECTORY::String)
     survival_probabilities = fill(NaN, length(MIGRATION_RATES))
 
     # Your existing process_replicate function remains unchanged
@@ -127,8 +131,10 @@ function analyze_migration_rates(MIGRATION_RATES, OUTPUT_DIRECTORY)
 
         results = Array{Any}(undef, num_replicates)
 
-        @threads for file_idx in 1:num_replicates
-            results[file_idx] = process_replicate(replicate_files[file_idx])
+        @time begin
+            @threads for file_idx in 1:num_replicates
+                results[file_idx] = process_replicate(replicate_files[file_idx])
+            end
         end
 
         survived_results = [result[1] for result in results]
