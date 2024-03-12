@@ -3,27 +3,37 @@ using Glob
 using Statistics
 using LaTeXStrings
 using Plots
-const DIRECTORY_PATH = "simresults_singledeme"
+const DIRECTORY_PATH = "simresults_singledeme2"
+cd("C:\\Users\\Daniel\\Documents\\GitHub\\viral-coev-net\\julia_code")
+
+if !isdir(DIRECTORY_PATH)
+    error("Directory not found: ", DIRECTORY_PATH)
+end
+
 
 function calculate_probability_of_survival(cutoff::Real)
-    files = glob("simulation_results_replicate_*.jld2", DIRECTORY_PATH)
+    files = glob("*", DIRECTORY_PATH)
     
     survival_counts = 0
     total_files = length(files)
     println("Total files: ", total_files)
 
-    plotvar = plot(label="Total Infected", 
-                    xlabel="Time", 
-                    ylabel="Number of Infected Individuals", 
-                    title="Infection Over Time",
-                    guidefont=font(16, "Computer Modern"), 
-                    tickfont=font(14, "Computer Modern"), 
-                    legendfont=font(14, "Computer Modern"), 
-                    titlefont=font(16, "Computer Modern"))
-    
+    plot(;  xlabel="Time", 
+            ylabel="Number of Infected Individuals", 
+            title="Infection Over Time",
+            yscale=:log10,
+            guidefont=font(16, "Computer Modern"), 
+            tickfont=font(14, "Computer Modern"), 
+            legendfont=font(14, "Computer Modern"), 
+            titlefont=font(16, "Computer Modern")
+        )
+
     for file in files
         result_dict = open(deserialize, file)
-        plot!(result_dict["times"], result_dict["total_infected_number"],legend=false)
+        xdata = result_dict["times"]
+        ydata = result_dict["total_infected_number"]
+        reg = ydata .> 0.0
+        plot!(xdata[reg], ydata[reg], legend=false)
 
         data_slice = result_dict["total_infected_number"][Int(round(end * 0.95)) : end]
         
@@ -31,18 +41,19 @@ function calculate_probability_of_survival(cutoff::Real)
             survival_counts += 1
         end
     end
+
     
     probability_of_survival = survival_counts / total_files
     standard_error = sqrt((probability_of_survival * (1 - probability_of_survival)) / total_files)
     
-    return probability_of_survival, standard_error, plotvar
+    return probability_of_survival, standard_error
 end
 
 # Usage:
 # Adjust the cutoff value as per your requirement
-cutoff = 10^2  # Adjust this value
+cutoff = 0  # Adjust this value
 
-prob_of_survival, std_error, plotvar = calculate_probability_of_survival(cutoff)
+prob_of_survival, std_error = calculate_probability_of_survival(cutoff)
 println("Probability of Survival: ", prob_of_survival)
 println("Standard Error: ", std_error)
-display(plotvar)
+display(current())
