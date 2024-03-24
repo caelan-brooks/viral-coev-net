@@ -111,6 +111,7 @@ function save_parameters_and_migration_rates_to_csv(output_directory, migration_
     
     # Save the main parameters DataFrame to a CSV file
     parameters_path = joinpath(output_directory, "simulation_parameters.csv")
+    mkpath(output_directory)
     CSV.write(parameters_path, parameters)
     
     # Create a DataFrame for migration rates
