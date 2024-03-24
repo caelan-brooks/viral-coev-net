@@ -5,8 +5,8 @@ using Glob
 using Base.Threads
 using Statistics
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_final"
-const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_final/csv_outputs"  # Directory for CSV outputs
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_sigmaone_final"
+const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_sigmaone_final/csv_outputs"  # Directory for CSV outputs
 const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
 
 # Create CSV output directory if it doesn't exist
