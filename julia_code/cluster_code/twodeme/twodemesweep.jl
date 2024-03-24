@@ -7,7 +7,7 @@ using DataFrames
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_final"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme__sigmaone_final"
 const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
 
 println("Number of threads: ", nthreads())
@@ -22,7 +22,8 @@ const M = 15
 const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
-const D = 0.01
+const D = 0.004
+const sigma = 1 # noise amplitude set to one
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
@@ -56,9 +57,9 @@ function run_single_simulation(args)
 
     # Create populations
     if migration_rate_idx == length(MIGRATION_RATES)
-        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, 2 * HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]) for i in 1:network_size]
+        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, 2 * HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]; sigma=sigma) for i in 1:network_size]
     else
-        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]) for i in 1:network_size]
+        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]; sigma=sigma) for i in 1:network_size]
     end
 
     # Initialize populations and network with the new migration matrix
