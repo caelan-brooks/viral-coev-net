@@ -12,7 +12,7 @@ const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
 
 println("Number of threads: ", nthreads())
 
-const HOST_POPULATION_PER_DEME = 2 * 10^6
+const HOST_POPULATION_PER_DEME = 2 * 10^5
 const N0 = 100
 const L = 40.0
 const dx = 0.3
@@ -22,7 +22,7 @@ const M = 15
 const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
-const D = 0.004
+const D = 0.01
 const sigma = 1 # noise amplitude set to one
 const DURATION = 80.0
 const DT = 0.05
