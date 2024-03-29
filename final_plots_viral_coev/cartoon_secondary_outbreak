@@ -1,0 +1,48 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import rcParams
+from scipy.stats import poisson
+
+rcParams['font.family'] = 'serif'
+rcParams['font.serif'] = ['Times New Roman']
+rcParams['font.size'] = 20  # Default font size
+rcParams['axes.labelsize'] = 20
+rcParams['axes.titlesize'] = 20
+rcParams['xtick.labelsize'] = 20
+rcParams['ytick.labelsize'] = 20
+rcParams['legend.fontsize'] = 18
+# Sample data for Poisson distribution
+mu = 70  # Mean of distribution
+shift = 2  # Shift to the right
+x = np.arange(0, 200, 1)  # Discrete interval
+
+# Poisson PMF
+pmf = poisson.pmf(x, mu)
+pmf_shifted = poisson.pmf(x, mu)
+
+# Creating the plot
+fig, ax = plt.subplots(figsize=(12,8))
+
+# Plotting the original and shifted Poisson densities
+ax.plot(x + 30, pmf_shifted, label='Deme 2', color='#e41a1c', linewidth=2)
+ax.plot(x, pmf, label='Deme 1', color='#377eb8', linewidth=2)
+
+
+# Removing axes ticks and numbers
+ax.set_xticks([])
+ax.set_yticks([])
+
+# Labeling axes
+ax.set_xlabel('Time')
+ax.set_ylabel('Infected number')
+
+# Adding a legend
+ax.legend()
+
+ax.set_xlim(0,200)
+
+# Ensuring the style is clean and the plot is well thought out
+plt.tight_layout()
+
+plt.savefig('cartoon_secondary_outbreak.pdf', format='pdf', dpi=300)
+plt.show()
