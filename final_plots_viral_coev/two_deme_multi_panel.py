@@ -45,20 +45,28 @@ middle_df_new = df_new.iloc[1:10]  # Adjust as per your new data structure
 # Set the global font to Times New Roman
 rcParams['font.family'] = 'serif'
 rcParams['font.serif'] = ['Times New Roman']
-rcParams['font.size'] = 20  # Default font size
-rcParams['axes.labelsize'] = 20
-rcParams['axes.titlesize'] = 15
-rcParams['xtick.labelsize'] = 15
-rcParams['ytick.labelsize'] = 15
-rcParams['legend.fontsize'] = 20
+rcParams['font.size'] = 35  # Default font size
+rcParams['axes.labelsize'] = 35
+rcParams['axes.titlesize'] = 35
+rcParams['xtick.labelsize'] = 35
+rcParams['ytick.labelsize'] = 35
+rcParams['legend.fontsize'] = 35
+written_text_fontsize = 35
 
 # Begin multi-panel figure setup
 # fig, axs = plt.subplots(3, 2, figsize=(24, 16))  # Adjust overall figure size as needed
 fig, axs = plt.subplots(3, 2, figsize=(24, 24))  # Adjust the figure size to balance the subplot shapes
+labels = ['(a)', '(b)', '(c)', '(d)', '(e)', '(f)']
+
+for ax, label in zip(axs.flat, labels):
+    # Position: x=0, y=1 in axis coordinates (top left corner), transform=ax.transAxes
+    # uses the axes coordinate system (0,0 is bottom left of the plot and 1,1 is top right)
+    ax.text(0.02, 0.98, label, transform=ax.transAxes, fontweight='bold', va='top')
+
 plt.subplots_adjust(wspace=0.3, hspace=0.3)  # Adjust spacing as needed
 
 # Panel (f) plotting adjusted to fit into the subplot grid
-ax = axs[2, 1]  # This selects the last panel position in a 3x2 grid
+ax = axs[0, 1]  # This selects the last panel position in a 3x2 grid
 
 # Plotting code adjusted for the subplot
 ax.errorbar(middle_df['MigrationRate'], middle_df['SurvivalProbability'], yerr=middle_df['StandardError'], fmt='-o', capsize=5, color='saddlebrown', label='Two-way Migration (1 \u2194 2)')
@@ -76,8 +84,9 @@ ax.set_xscale('log')
 ax.legend()
 ax.set_xlim(1e-8, 1)
 ax.set_ylim(bottom=0)
-ax.set_xlabel('Migration Rate')
+ax.set_xlabel(r'Migration Rate (Units: $\gamma$)')
 ax.set_ylabel('Survival Probability')
+ax.tick_params(axis='x', pad=15)
 # ax.set_title('Survival Probability as a Function of Migration Rate')
 
 
@@ -96,19 +105,28 @@ end_time = max([len(traj) for traj in trajectories_df['parent'].apply(ast.litera
 
 # Assuming the commented out lines are to be included, uncomment these as needed
 # ax.axvspan(start_time, end_time, color='green', alpha=0.3)
-ax.text(x=start_time + (end_time - start_time) / 2, y=1e6, s="Survival", rotation='horizontal', ha='center', va='center', color='green', fontsize=20)
+ax.text(x=start_time + (end_time - start_time) / 2.3, y=1e6, s="Survival", rotation='horizontal', ha='center', va='center', color='green', fontsize=written_text_fontsize)
 
 # ax.axhspan(0, 2, color='red', alpha=0.3)
-ax.text(x=end_time * 0.67, y=1, s="Extinction", ha='center', va='center', color='red', fontsize=20)
+ax.text(x=end_time * 0.74, y=5, s="Extinction", ha='center', va='center', color='red', fontsize=written_text_fontsize)
 
 ax.set_yscale('log')
-ax.set_xlabel('Time')
+ax.set_xlabel(r'Time (Units: $\gamma^{-1}$)')
 ax.set_ylabel('Total Infected Number')
 ax.set_xlim(0, 80)
-# ax.set_title('Total Infected Number vs Time for 200 Trajectories')
+ax.set_ylim(bottom=1)
+x_pos = np.max(ax.get_xlim()) * 0.95  # Adjust based on your axis limits
+y_pos = np.min(ax.get_ylim()) * 3  # Pick a position within the visible range on a log scale
+
+# # Plotting the dot
+# ax.plot(x_pos, y_pos, 'o', color='blue', markersize=50, alpha=0.2, markeredgecolor='black')
+
+# # Adding text in the middle of the dot
+# ax.text(x_pos, y_pos, '1', color='black', verticalalignment='center', horizontalalignment='center')
+
 
 # Panel (b) setup and plotting within the multi-panel figure
-ax = axs[0, 1]  # Accessing the subplot for panel (b)
+ax = axs[1, 0]  # Accessing the subplot for panel (b)
 
 # Function for standard error calculation
 def standard_error_of_proportion(p, n):
@@ -121,8 +139,8 @@ data_b = pd.read_csv(csv_file_b)
 # Filter and binning setup
 xmin, xmax = 0.1, 0.3  # Adjust this range as needed
 data_b = data_b[(data_b['AntigenicVariance'] >= xmin) & (data_b['AntigenicVariance'] <= xmax)]
-num_bins = 15  # Number of bins
-hist, bin_edges = np.histogram(data_b['AntigenicVariance'], bins=num_bins, range=(xmin, xmax), density=False)
+num_bins = 30  # Number of bins
+hist, bin_edges = np.histogram(data_b['AntigenicVariance'], bins=num_bins, range=(xmin, xmax), density=True)
 
 # Calculate survival proportions and standard errors
 survival_counts = []
@@ -146,17 +164,37 @@ non_survival_proportions = np.array(non_survival_counts) / total_counts
 
 # Plotting for panel (b)
 widths = np.diff(bin_edges)
-ax.bar(bin_edges[:-1], hist, width=widths, color='#87CEEB', edgecolor='gray', align='edge')
+ax.bar(bin_edges[:-1], hist, width=widths, color='#87CEEB', edgecolor='none', align='edge')
 ax.set_xlabel(r'Antigenic Diversity at Outbreak Max, $V(T_1)$')
-ax.set_ylabel('Counts')
+ax.set_ylabel('Probability Density')
 ax.set_xlim(xmin, xmax)
+ax.tick_params(axis='x', pad=15)
+# ax.tick_params(axis='y', pad=10)
 # ax.set_title('Histogram of Antigenic Diversity & Probability of Survival')
+
+# Define your color
+curve_color = '#C71585'
 
 # Second y-axis for probability of survival
 ax2 = ax.twinx()
-ax2.errorbar(bin_edges[:-1] + widths / 2, survival_proportions, yerr=standard_errors, color='#C71585', marker='o', linestyle='-', label='Probability of Survival', capsize=5)
-ax2.set_ylabel('Probability of Survival')
-ax2.legend(loc='upper right')
+ax2.errorbar(bin_edges[:-1] + widths / 2, survival_proportions, yerr=standard_errors, color=curve_color, marker='o', linestyle='-', capsize=5)
+ax2.set_ylabel('Probability of Survival', color=curve_color)  # Set y-axis label color
+
+# Set the color of the tick labels
+ax2.tick_params(axis='y', colors=curve_color)
+
+# Optionally, set the color of the spine (the axis line)
+ax2.spines['right'].set_color(curve_color)
+
+# Mask to ignore NaN values for calculations
+valid_mask = ~np.isnan(survival_proportions)
+
+# Calculate the upper limit for y-axis considering only valid (non-NaN) survival_proportions
+upper_ylim = np.max(survival_proportions[valid_mask] + np.array(standard_errors)[valid_mask])
+
+# Set a bit higher ylim to ensure everything fits nicely
+ax2.set_ylim(0, upper_ylim * 1.1)
+
 
 from scipy.stats import poisson
 
@@ -166,7 +204,7 @@ x = np.arange(0, 200, 1)  # Discrete interval
 pmf = poisson.pmf(x, mu)  # Poisson PMF for original and shifted data
 
 # Accessing the subplot for panel (c)
-ax = axs[1, 0]  # Position for panel (c) within the 3x2 grid
+ax = axs[2, 1]  # Position for panel (c) within the 3x2 grid
 
 # Plotting the original and shifted Poisson densities directly on the chosen subplot
 ax.plot(x + 30, pmf, label='Deme 2', color='#e41a1c', linewidth=2)  # Shifted plot for Deme 2
@@ -177,8 +215,8 @@ ax.set_xticks([])
 ax.set_yticks([])
 
 # Labeling axes
-ax.set_xlabel('Time')
-ax.set_ylabel('Infected number')
+ax.set_xlabel(r'Time (Units: $\gamma^{-1}$)')
+ax.set_ylabel('Total Infected Number')
 
 # Adding a legend
 ax.legend()
@@ -219,7 +257,7 @@ ax.set_ylim(0, label_y_position + 0.01)
 
 
 # Panel (e) setup for averages plotting, adapted for the subplot
-ax = axs[2, 0]  # Accessing the subplot for panel (d)
+ax = axs[1, 1]  # Accessing the subplot for panel (d)
 
 cmap = plt.get_cmap('viridis')
 colors = cmap(np.linspace(0, 1, len(migration_rates)))
@@ -257,7 +295,7 @@ ax.set_ylabel('Average Variance Difference')
 ax.grid(True, which="both", linestyle='--', linewidth=0.5)
 
 # Panel (d) setup for average peak time difference plotting
-ax = axs[1, 1]  # Accessing the subplot for panel (d), adjusted based on your correction
+ax = axs[2, 0]  # Accessing the subplot for panel (d), adjusted based on your correction
 
 num_migration_rates = len(migration_rates)
 average_peak_time_differences = []
@@ -272,10 +310,13 @@ for migration_rate_idx in range(2, num_migration_rates + 2):
 # Plotting directly within the subplot
 ax.plot(migration_rates, average_peak_time_differences, marker='o', linestyle='-', color='blue')
 
-ax.set_xlabel('Migration Rate')
-ax.set_ylabel(r'Average Peak Time Difference, $\Delta$')
+ax.set_xlabel(r'Migration Rate (Units: $\gamma^{-1}$)')
+ax.set_ylabel(r'Average Peak Time Difference, $\Delta$ (Units: $\gamma^{-1}$)')
+ax.set_ylim(bottom=0)
 # ax.set_title('Average Peak Time Difference vs. Migration Rate')
 ax.set_xscale('log')
+ax.tick_params(axis='x', pad=15)
+
 # ax.set_yscale('log')
 # ax.grid(True, which="both", linestyle='--', linewidth=0.5)
 
@@ -313,9 +354,11 @@ ax.plot(migration_rates, avg_deltas, linestyle='--', color='red', label='Theoret
 
 
 # Show the entire multi-panel figure
-plt.tight_layout(pad=3.0, h_pad=3.0, w_pad=2.0)  # Adjust padding and spacing as needed
+# plt.tight_layout(pad=3.0, h_pad=3.0, w_pad=2.0)  # Adjust padding and spacing as needed
+fig.set_constrained_layout(True)
+
 plt.savefig('twodeme_multipanel_coded.pdf', format='pdf', dpi=300)
 plt.savefig('twodeme_multipanel_coded.png', format='png')
 plt.savefig('twodeme_multipanel_coded.svg', format='svg', dpi=300)
 
-plt.show()
+# plt.show()
