@@ -50,7 +50,7 @@ rcParams['axes.labelsize'] = 35
 rcParams['axes.titlesize'] = 35
 rcParams['xtick.labelsize'] = 35
 rcParams['ytick.labelsize'] = 35
-rcParams['legend.fontsize'] = 35
+rcParams['legend.fontsize'] = 25
 written_text_fontsize = 35
 
 # Begin multi-panel figure setup
@@ -206,55 +206,66 @@ pmf = poisson.pmf(x, mu)  # Poisson PMF for original and shifted data
 # Accessing the subplot for panel (c)
 ax = axs[2, 1]  # Position for panel (c) within the 3x2 grid
 
-# Plotting the original and shifted Poisson densities directly on the chosen subplot
-ax.plot(x + 30, pmf, label='Deme 2', color='#e41a1c', linewidth=2)  # Shifted plot for Deme 2
-ax.plot(x, pmf, label='Deme 1', color='#377eb8', linewidth=2)  # Original plot for Deme 1
+df = pd.read_csv("single_trajectory.csv")
 
-# Removing axes ticks and numbers for a clean style
-ax.set_xticks([])
-ax.set_yticks([])
+# Plot total infected for each deme
+ax.plot(df['times'], df['total_infected_1'], label='Deme 1', color='blue', linewidth=2)
+ax.plot(df['times'], df['total_infected_2'], label='Deme 2', color='green', linewidth=2)
+
+# Create a second y-axis for antigenic variance
+ax2 = ax.twinx()
+ax2.plot(df['times'], df['antigenic_variance_1'], label='Antigenic Variance Deme 1', color='blue', linestyle='-.', linewidth=2)
+ax2.plot(df['times'], df['antigenic_variance_2'], label='Antigenic Variance Deme 2', color='green', linestyle='-.', linewidth=2)
+
+max_idx_deme1 = df['total_infected_1'].idxmax()
+max_idx_deme2 = df['total_infected_2'].idxmax()
+
+time_max_infected_deme1 = df.loc[max_idx_deme1, 'times']
+time_max_infected_deme2 = df.loc[max_idx_deme2, 'times']
+
+# Vertical dashed lines
+ax.axvline(time_max_infected_deme1, color='blue', linestyle='--', linewidth=2)
+ax.axvline(time_max_infected_deme2, color='green', linestyle='--', linewidth=2)
+
+# Annotate the first line
+# ax.annotate('Max Infected Deme 1', xy=(time_max_infected_deme1, ax.get_ylim()[1]), xytext=(time_max_infected_deme1, ax.get_ylim()[1]*1.05),
+#              arrowprops=dict(facecolor='blue', shrink=0.05), horizontalalignment='right')
+
+# Draw a two-headed arrow between the lines
+ax.annotate('', xy=(time_max_infected_deme1, ax.get_ylim()[1]*0.95), xytext=(time_max_infected_deme2, ax.get_ylim()[1]*0.95),
+            arrowprops=dict(arrowstyle="<->", color='black'))
+
+# Label the arrow as \Delta
+mid_point = (time_max_infected_deme1 + time_max_infected_deme2) / 2
+ax.text(mid_point, ax.get_ylim()[1]*0.86, r'$\Delta$', horizontalalignment='center', color='black')
+ax.text(time_max_infected_deme1 - 0.9, ax.get_ylim()[1]*0.9, r'$T_1$', color='black', horizontalalignment='center')
+
+ax2.plot(df.loc[max_idx_deme1, 'times'], df.loc[max_idx_deme1, 'antigenic_variance_1'], 'o', color='blue', markersize=15)
+ax2.plot(df.loc[max_idx_deme2, 'times'], df.loc[max_idx_deme2, 'antigenic_variance_2'], 'o', color='green', markersize=15)
+
+# Find the antigenic variances at the times of maximum infection
+antigenic_variance_at_max1 = df.loc[max_idx_deme1, 'antigenic_variance_1']
+antigenic_variance_at_max2 = df.loc[max_idx_deme2, 'antigenic_variance_2']
+
+# Draw horizontal dashed lines from each dot to just before the secondary y-axis
+# Note: ax2.get_xlim()[1] might need to be adjusted if it does not exactly match the secondary y-axis's end
+ax2.plot([time_max_infected_deme1, ax2.get_xlim()[1]], [antigenic_variance_at_max1, antigenic_variance_at_max1], 'blue', linestyle='--', linewidth=2, dashes=(5, 5))
+ax2.plot([time_max_infected_deme2, ax2.get_xlim()[1]], [antigenic_variance_at_max2, antigenic_variance_at_max2], 'green', linestyle='--', linewidth=2, dashes=(5, 5))
+
+# Labeling
+# ax.set_xlabel('Time')
+ax.set_ylabel('Total Infected Number')
+ax2.set_ylabel('Antigenic Diversity')
+ax.set_ylim(bottom=0)
+ax2.set_ylim(0, 1)
+
+# Add legends
+ax.legend(loc='center left')
 
 # Labeling axes
 ax.set_xlabel(r'Time (Units: $\gamma^{-1}$)')
 ax.set_ylabel('Total Infected Number')
-
-# Adding a legend
-ax.legend()
-
-# Setting x limits
-ax.set_xlim(0, 200)
-
-# Position of the maxima
-max_pos_deme1 = mu  # For Deme 1, no additional shift applied here
-max_pos_deme2 = mu + 30  # For Deme 2, considering the +30 shift
-
-# Y-positions of the maxima, directly from the PMF values
-max_val_deme1 = poisson.pmf(mu, mu)
-max_val_deme2 = poisson.pmf(mu, mu)  # The PMF value at the mean is the same, no shift in mu for Deme 2
-
-# Drawing a two-way arrow between the maxima
-ax.annotate('', xy=(max_pos_deme1, max_val_deme1), xytext=(max_pos_deme2, max_val_deme2),
-            arrowprops=dict(arrowstyle="<->", lw=2))
-
-# Adding a label above the center of the arrow
-delta_x = (max_pos_deme1 + max_pos_deme2) / 2
-delta_y = max(max_val_deme1, max_val_deme2) + 0.005  # Slightly above the max for visibility
-ax.text(delta_x, delta_y, r'$\Delta$', ha='center', va='center')
-
-# Ensure the y-limit is adjusted if the label or arrow goes beyond the current limits
-ax.set_ylim(0, max(max_val_deme1, max_val_deme2) + 0.01)
-
-# Drawing a vertical line at mu for Deme 1's maximum
-ax.axvline(x=mu, color='#377eb8', linestyle='--', linewidth=2)
-
-# Labeling the line with T_1
-# Adjust the y-position as needed to place the label appropriately
-label_y_position = max_val_deme1 + 0.005  # Slightly above the max for visibility
-ax.text(mu-7, label_y_position, r'$T_1$', ha='center', va='bottom')
-
-# Ensure the y-limit is adjusted if the label goes beyond the current limits
-ax.set_ylim(0, label_y_position + 0.01)
-
+ax.set_xlim(0,22)
 
 # Panel (e) setup for averages plotting, adapted for the subplot
 ax = axs[1, 1]  # Accessing the subplot for panel (d)
