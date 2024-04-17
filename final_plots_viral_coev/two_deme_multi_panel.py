@@ -41,21 +41,26 @@ n_new = 10000  # Assuming the same number of replicates for the new data
 df_new['StandardError'] = np.sqrt(df_new['SurvivalProbability'] * (1 - df_new['SurvivalProbability']) / n_new)
 middle_df_new = df_new.iloc[1:10]  # Adjust as per your new data structure
 
+## TODO 
+# 1. figsize = 6.5, 2.5 per row tall (this is in inches)
+# 2. axis labels = 12
+# 3. legends, insets = 10
+# 4. subplot labels should be unbolded (a), (b), 
 
 # Set the global font to Times New Roman
 rcParams['font.family'] = 'serif'
 rcParams['font.serif'] = ['Times New Roman']
-rcParams['font.size'] = 35  # Default font size
-rcParams['axes.labelsize'] = 35
-rcParams['axes.titlesize'] = 35
-rcParams['xtick.labelsize'] = 35
-rcParams['ytick.labelsize'] = 35
-rcParams['legend.fontsize'] = 25
-written_text_fontsize = 35
+rcParams['font.size'] = 12  # Default font size
+rcParams['axes.labelsize'] = 12
+rcParams['axes.titlesize'] = 12
+rcParams['xtick.labelsize'] = 12
+rcParams['ytick.labelsize'] = 12
+rcParams['legend.fontsize'] = 10
+written_text_fontsize = 12
 
 # Begin multi-panel figure setup
 # fig, axs = plt.subplots(3, 2, figsize=(24, 16))  # Adjust overall figure size as needed
-fig, axs = plt.subplots(3, 2, figsize=(24, 24))  # Adjust the figure size to balance the subplot shapes
+fig, axs = plt.subplots(3, 2, figsize=(6.5, 7.5))  # Adjust the figure size to balance the subplot shapes
 labels = ['(a)', '(b)', '(c)', '(d)', '(e)', '(f)']
 
 for ax, label in zip(axs.flat, labels):
