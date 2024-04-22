@@ -35,13 +35,13 @@ df['StandardError'] = np.sqrt(df['SurvivalProbability'] * (1 - df['SurvivalProba
 # Extracting the first, last, and middle elements
 first = df.iloc[0]
 last = df.iloc[-1]
-middle_df = df.iloc[1:10]
+middle_df = df.iloc[1:11]
 
 # New data
 df_new = pd.read_csv("analysis_results_noback.csv")
 n_new = 10000  # Assuming the same number of replicates for the new data
 df_new['StandardError'] = np.sqrt(df_new['SurvivalProbability'] * (1 - df_new['SurvivalProbability']) / n_new)
-middle_df_new = df_new.iloc[1:10]  # Adjust as per your new data structure
+middle_df_new = df_new.iloc[1:11]  # Adjust as per your new data structure
 
 ## TODO 
 # 1. figsize = 6.5, 2.5 per row tall (this is in inches)
@@ -261,7 +261,7 @@ bin_centers = bin_edges[:-1] + widths / 2
 
 # Perform linear regression
 slope, intercept, r_value, p_value, std_err = linregress(bin_centers[valid_mask], survival_proportions[valid_mask])
-print(intercept)
+print(slope, intercept)
 # Calculate R^2 and Pearson correlation
 r_squared = r_value**2
 pearson_corr = r_value
@@ -424,6 +424,20 @@ ax.fill_between([migration_rate_min, migration_rate_max], first['SurvivalProbabi
 ax.axhline(y=last['SurvivalProbability'], color='darkorange', linestyle='--')
 ax.fill_between([migration_rate_min, migration_rate_max], last['SurvivalProbability'] - last['StandardError'], last['SurvivalProbability'] + last['StandardError'], color=color_last, alpha=0.3)
 
+def load_and_compute_averages(num_migration_rates):
+    avg_variances = []
+    for idx in range(2, num_migration_rates + 2):
+        deme2_data = pd.read_csv(f"antigenic_variance_deme2_migration_rate_idx_{idx}.csv")['AntigenicVariance'].values
+        avg_variance = np.mean(deme2_data) * len(deme2_data) / 10001 + (-intercept/slope) * (1 - len(deme2_data)/10001) # adjust for the fact that at low migration not all trajectories result in secondary outbreaks
+        avg_variances.append(avg_variance)
+    return np.array(avg_variances)
+
+# Calculate p2 and the modified survival probability
+def compute_probabilities(avg_variances, p1, slope, intercept):
+    p2_values = slope * avg_variances + intercept
+    final_probabilities = 1 - (1 - p1) * (1 - p2_values)
+    return final_probabilities
+
 p1 = first['SurvivalProbability']
 
 avg_x_data = []
@@ -433,23 +447,29 @@ final_probabilities = []
 
 colors = plt.cm.viridis(np.linspace(0, 1, len(migration_rates)))  # Generate colors
 
-for idx, migration_rate in enumerate(migration_rates):
-    # Load data
-    peak_time_path = f"peak_time_difference_migration_rate_idx_{idx + 2}.csv"
-    peak_time_data = pd.read_csv(peak_time_path)['PeakTimeDifference'].values
+# Load data and compute averages
+avg_variances = load_and_compute_averages(len(migration_rates))
+print(avg_variances)
+# Compute the probabilities
+final_probabilities = compute_probabilities(avg_variances, p1, slope, intercept)
 
-    variance_diff_path = f"variance_difference_migration_rate_idx_{idx + 2}.csv"
-    variance_diff_data = pd.read_csv(variance_diff_path)['VarianceDifference'].values
+# for idx, migration_rate in enumerate(migration_rates):
+#     # Load data
+#     peak_time_path = f"peak_time_difference_migration_rate_idx_{idx + 2}.csv"
+#     peak_time_data = pd.read_csv(peak_time_path)['PeakTimeDifference'].values
 
-    avg_y_data.append(np.mean(variance_diff_data))
+#     variance_diff_path = f"variance_difference_migration_rate_idx_{idx + 2}.csv"
+#     variance_diff_data = pd.read_csv(variance_diff_path)['VarianceDifference'].values
 
-    # Calculate p2
-    p2 = p1 + slope * np.mean(variance_diff_data)
-    p2_values.append(p2)
+#     avg_y_data.append(np.mean(variance_diff_data))
 
-    # Calculate final probability
-    final_prob = 1 - (1 - p1) * (1 - p2)
-    final_probabilities.append(final_prob)
+#     # Calculate p2
+#     p2 = p1 + slope * np.mean(variance_diff_data)
+#     p2_values.append(p2)
+
+#     # Calculate final probability
+#     final_prob = 1 - (1 - p1) * (1 - p2)
+#     final_probabilities.append(final_prob)
 
 
 print(p2_values, p1)
@@ -462,9 +482,8 @@ ax.set_ylim(bottom=0)
 ax.set_xlabel(r'migration rate (units: $\gamma$)')
 ax.set_ylabel('survival probability')
 
-plt.show()
-
 #######################
 plt.tight_layout()
 plt.savefig('twodeme_trajectories_and_probs_with_theory.pdf', format='pdf', dpi=300)
+plt.show()
 print('Done')
