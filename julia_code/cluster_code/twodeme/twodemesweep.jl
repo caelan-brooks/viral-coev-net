@@ -7,7 +7,7 @@ using DataFrames
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme__sigmaone_final"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_small_dx_final"
 const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
 
 println("Number of threads: ", nthreads())
@@ -15,7 +15,7 @@ println("Number of threads: ", nthreads())
 const HOST_POPULATION_PER_DEME = 2 * 10^5
 const N0 = 100
 const L = 40.0
-const dx = 0.3
+const dx = 0.05
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
@@ -23,11 +23,11 @@ const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
 const D = 0.01
-const sigma = 1 # noise amplitude set to one
+const sigma = sqrt(20) 
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 10000
+const NUM_REPLICATES = 5000
 const START_REPLICATE = 1
 
 function run_single_simulation(args)
@@ -51,7 +51,7 @@ function run_single_simulation(args)
     viral_densities = [zeros(Float64, length(x)) for _ in 1:network_size]
     immune_densities = [zeros(Float64, length(x)) for _ in 1:network_size]
 
-    # Set the value of viral_density at the closest index to 1/dx for the first population
+    # Set the value of viral_density at the closest index to N0/dx for the first population
     index_closest_to_zero = argmin(abs.(x))
     viral_densities[1][index_closest_to_zero] = N0/dx
 
@@ -141,7 +141,7 @@ function main(job_id_arg)
     mkpath(output_subdirectory)
 
     # Run simulations for all replicates
-    @threads for simulation_number in START_REPLICATE:(START_REPLICATE+NUM_REPLICATES)
+    @threads for simulation_number in START_REPLICATE:(START_REPLICATE+NUM_REPLICATES-1)
         args = (migration_rate_idx, simulation_number)
         run_single_simulation(args)
     end
