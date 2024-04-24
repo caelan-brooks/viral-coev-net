@@ -27,8 +27,8 @@ const sigma = sqrt(20)
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 3000
-const START_REPLICATE = 3001
+const NUM_REPLICATES = 4000
+const START_REPLICATE = 6001
 
 function run_single_simulation(args)
     # Unpack arguments
