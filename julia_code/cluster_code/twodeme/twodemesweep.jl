@@ -17,7 +17,7 @@ const N0 = 100
 const L = 40.0
 const dx = 0.05
 const x = -L/2:dx:L/2-dx
-const r = 3.0
+const r = 2.5
 const M = 15
 const beta = 2.5
 const alpha = 0.0
@@ -28,7 +28,7 @@ const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
 const NUM_REPLICATES = 3000
-const START_REPLICATE = 3001
+const START_REPLICATE = 1
 
 function run_single_simulation(args)
     # Unpack arguments
