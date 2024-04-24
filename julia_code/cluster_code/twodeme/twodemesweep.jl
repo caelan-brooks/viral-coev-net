@@ -12,7 +12,7 @@ const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
 
 println("Number of threads: ", nthreads())
 
-const HOST_POPULATION_PER_DEME = 2 * 10^5
+const HOST_POPULATION_PER_DEME = 2 * 10^6
 const N0 = 100
 const L = 40.0
 const dx = 0.05
@@ -52,8 +52,10 @@ function run_single_simulation(args)
     immune_densities = [zeros(Float64, length(x)) for _ in 1:network_size]
 
     # Set the value of viral_density at the closest index to N0/dx for the first population
-    index_closest_to_zero = argmin(abs.(x))
-    viral_densities[1][index_closest_to_zero] = N0/dx
+    # index_closest_to_zero = argmin(abs.(x))
+    # viral_densities[1][index_closest_to_zero] = N0/dx
+    initial_antigenic_variance = 0.3;
+    viral_densitiees[1] .= 1/sqrt(2 * pi * initial_antigenic_variance) .* exp.(-x.^2/2/initial_antigenic_variance)
 
     # Create populations
     if migration_rate_idx == length(MIGRATION_RATES)
