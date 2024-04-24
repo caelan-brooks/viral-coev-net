@@ -102,6 +102,7 @@ function save_parameters_and_migration_rates_to_csv(output_directory, migration_
         alpha = [alpha],
         gamma = [gamma],
         D = [D],
+        sigma = [sigma],
         DURATION = [DURATION],
         DT = [DT],
         THIN_BY = [THIN_BY],
