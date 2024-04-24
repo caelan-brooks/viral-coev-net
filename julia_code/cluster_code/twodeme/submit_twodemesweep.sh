@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -N 1                # Number of nodes
-#SBATCH -n 8               # Number of cores
+#SBATCH -n 12               # Number of cores
 #SBATCH -p sched_mit_hill   # Partition name
 #SBATCH --mem-per-cpu=800  # Memory per CPU (adjust this based on your requirements)
 #SBATCH --array=1-12        # Create a job array for 10 jobs
