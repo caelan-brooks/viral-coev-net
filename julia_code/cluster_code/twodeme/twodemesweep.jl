@@ -55,7 +55,7 @@ function run_single_simulation(args)
     # index_closest_to_zero = argmin(abs.(x))
     # viral_densities[1][index_closest_to_zero] = N0/dx
     initial_antigenic_variance = 0.1;
-    viral_densities[1] .= 1/sqrt(2 * pi * initial_antigenic_variance) .* exp.(-x.^2/2/initial_antigenic_variance)
+    viral_densities[1] .= N0/sqrt(2 * pi * initial_antigenic_variance) .* exp.(-x.^2/2/initial_antigenic_variance)
 
     # Create populations
     if migration_rate_idx == length(MIGRATION_RATES)
