@@ -54,7 +54,7 @@ function run_single_simulation(args)
     # Set the value of viral_density at the closest index to N0/dx for the first population
     # index_closest_to_zero = argmin(abs.(x))
     # viral_densities[1][index_closest_to_zero] = N0/dx
-    initial_antigenic_variance = 0.3;
+    initial_antigenic_variance = 0.1;
     viral_densitiees[1] .= 1/sqrt(2 * pi * initial_antigenic_variance) .* exp.(-x.^2/2/initial_antigenic_variance)
 
     # Create populations
