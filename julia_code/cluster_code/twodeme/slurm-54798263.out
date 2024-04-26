@@ -1,0 +1,129 @@
+Number of threads: 16
+10000
+ 24.897393 seconds (1.77 M allocations: 140.494 MiB, 0.63% gc time, 5.24% compilation time)
+Maximum Extinction Time: 67
+Average Extinction Time: 29.421352893235532
+number of times greater than 60: 3
+number times greater than 70: 0
+number times greater than 80: 0
+Peak infected in deme 1: 1.3434551187000002e6 +- 29288.811947505525
+Peak infected in deme 2: 0.0 +- 0.0
+10000
+ 10.536582 seconds (589.38 k allocations: 80.316 MiB)
+Maximum Extinction Time: 77
+Average Extinction Time: 30.090835030549897
+number of times greater than 60: 6
+number times greater than 70: 2
+number times greater than 80: 0
+Peak infected in deme 1: 1.3436018309820013e6 +- 28631.098805238296
+Peak infected in deme 2: 95247.09446205587 +- 345991.9673636554
+10000
+  3.353429 seconds (589.00 k allocations: 80.300 MiB)
+Maximum Extinction Time: 74
+Average Extinction Time: 33.02015631427396
+number of times greater than 60: 18
+number times greater than 70: 2
+number times greater than 80: 0
+Peak infected in deme 1: 1.3443855539434524e6 +- 28769.65324986012
+Peak infected in deme 2: 462206.22424116003 +- 642450.7001895407
+10000
+ 17.824900 seconds (587.59 k allocations: 80.241 MiB)
+Maximum Extinction Time: 79
+Average Extinction Time: 38.45620399018457
+number of times greater than 60: 36
+number times greater than 70: 7
+number times greater than 80: 0
+Peak infected in deme 1: 1.3439048390434817e6 +- 28852.027218553885
+Peak infected in deme 2: 1.2129049321221288e6 +- 437747.676572028
+10000
+ 37.115358 seconds (586.45 k allocations: 80.193 MiB)
+Maximum Extinction Time: 80
+Average Extinction Time: 38.230218994167494
+number of times greater than 60: 41
+number times greater than 70: 9
+number times greater than 80: 0
+Peak infected in deme 1: 1.3440794470468464e6 +- 28604.80068073804
+Peak infected in deme 2: 1.3902133282931903e6 +- 53155.72282495309
+10000
+  9.092302 seconds (586.36 k allocations: 80.189 MiB, 8.76% gc time)
+Maximum Extinction Time: 80
+Average Extinction Time: 36.86861555432984
+number of times greater than 60: 37
+number times greater than 70: 7
+number times greater than 80: 0
+Peak infected in deme 1: 1.343917707169032e6 +- 29079.36622180405
+Peak infected in deme 2: 1.3927787160362017e6 +- 44067.25738059543
+10000
+ 20.623001 seconds (587.05 k allocations: 80.218 MiB)
+Maximum Extinction Time: 72
+Average Extinction Time: 35.438670564035945
+number of times greater than 60: 24
+number times greater than 70: 3
+number times greater than 80: 0
+Peak infected in deme 1: 1.343581583146684e6 +- 28701.452403336025
+Peak infected in deme 2: 1.3842045588872642e6 +- 37357.804212699135
+10000
+ 10.556985 seconds (587.56 k allocations: 80.239 MiB)
+Maximum Extinction Time: 73
+Average Extinction Time: 33.9263135412217
+number of times greater than 60: 18
+number times greater than 70: 1
+number times greater than 80: 0
+Peak infected in deme 1: 1.3406749558886604e6 +- 28114.69777241218
+Peak infected in deme 2: 1.3824211774390358e6 +- 33484.49125008247
+10000
+  8.465384 seconds (588.09 k allocations: 80.262 MiB)
+Maximum Extinction Time: 81
+Average Extinction Time: 32.7475523739341
+number of times greater than 60: 20
+number times greater than 70: 3
+number times greater than 80: 1
+Peak infected in deme 1: 1.3263852266540157e6 +- 26574.7649844927
+Peak infected in deme 2: 1.3807324306702842e6 +- 33890.337367843116
+10000
+  7.600982 seconds (588.36 k allocations: 80.410 MiB)
+Maximum Extinction Time: 77
+Average Extinction Time: 31.965708311552536
+number of times greater than 60: 17
+number times greater than 70: 4
+number times greater than 80: 0
+Peak infected in deme 1: 1.302762635827754e6 +- 24188.588009378473
+Peak infected in deme 2: 1.3886786021368224e6 +- 36417.34014682243
+10000
+  9.322713 seconds (588.39 k allocations: 80.412 MiB, 7.39% gc time)
+Maximum Extinction Time: 70
+Average Extinction Time: 31.70221433047838
+number of times greater than 60: 5
+number times greater than 70: 0
+number times greater than 80: 0
+Peak infected in deme 1: 1.3361770237138309e6 +- 28376.666635889316
+Peak infected in deme 2: 1.3458999293146816e6 +- 29531.338095855303
+10000
+  7.393933 seconds (588.53 k allocations: 80.417 MiB)
+Maximum Extinction Time: 77
+Average Extinction Time: 31.789966694421317
+number of times greater than 60: 7
+number times greater than 70: 3
+number times greater than 80: 0
+Peak infected in deme 1: 2.6808767721e6 +- 57236.311079095285
+Peak infected in deme 2: 0.0 +- 0.0
+2
+Number of late trajectories: 4
+3
+Number of late trajectories: 25
+4
+Number of late trajectories: 14
+5
+Number of late trajectories: 0
+6
+Number of late trajectories: 0
+7
+Number of late trajectories: 0
+8
+Number of late trajectories: 0
+9
+Number of late trajectories: 0
+10
+Number of late trajectories: 0
+11
+Number of late trajectories: 0

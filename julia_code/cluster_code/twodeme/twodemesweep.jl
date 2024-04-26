@@ -17,7 +17,7 @@ const N0 = 100
 const L = 40.0
 const dx = 0.05
 const x = -L/2:dx:L/2-dx
-const r = 2.5
+const r = 3.0
 const M = 15
 const beta = 2.5
 const alpha = 0.0
@@ -27,8 +27,8 @@ const sigma = sqrt(20)
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 4000
-const START_REPLICATE = 6001
+const NUM_REPLICATES = 2000
+const START_REPLICATE = 8001 
 
 function run_single_simulation(args)
     # Unpack arguments
@@ -52,10 +52,10 @@ function run_single_simulation(args)
     immune_densities = [zeros(Float64, length(x)) for _ in 1:network_size]
 
     # Set the value of viral_density at the closest index to N0/dx for the first population
-    # index_closest_to_zero = argmin(abs.(x))
-    # viral_densities[1][index_closest_to_zero] = N0/dx
-    initial_antigenic_variance = 0.1;
-    viral_densities[1] .= N0/sqrt(2 * pi * initial_antigenic_variance) .* exp.(-x.^2/2/initial_antigenic_variance)
+    index_closest_to_zero = argmin(abs.(x))
+    viral_densities[1][index_closest_to_zero] = N0/dx
+    # initial_antigenic_variance = 0.1;
+    # viral_densities[1] .= N0/sqrt(2 * pi * initial_antigenic_variance) .* exp.(-x.^2/2/initial_antigenic_variance)
 
     # Create populations
     if migration_rate_idx == length(MIGRATION_RATES)
@@ -67,12 +67,12 @@ function run_single_simulation(args)
     # Initialize populations and network with the new migration matrix
     migration_matrix = migration_rate * adjacency_matrix
     network = Network(populations, migration_matrix)
-    simulation = Simulation(network, DT, DURATION)
+    simulation = Simulation(network, DT, DURATION; thin_by=THIN_BY)
 
    # Run the simulation
     try
-        @time run_simulation!(simulation)
-        thin_simulation!(simulation, THIN_BY)
+        @time run_simulation!(simulation);
+        # thin_simulation!(simulation, THIN_BY)
 
         # Calculate total infected per deme
         total_infected_per_deme = calculate_total_infected_per_deme(simulation)
