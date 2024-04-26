@@ -515,6 +515,7 @@ function compute_fitness!(population::Population)
     population.fitness .= population.beta .* population.susceptibility .- population.alpha .- population.gamma
 end
 
+# check if this should have dx in it, it seems like the answer is no
 function apply_stochasticity!(population::Population, dt::Float64)
     for i in eachindex(population.viral_density)
         population.viral_density[i] = rand(Poisson(population.viral_density[i] / (dt * population.sigma^2))) * population.sigma^2 * dt
