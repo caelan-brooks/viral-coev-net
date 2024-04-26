@@ -197,7 +197,7 @@ csv_file_b = "special_case_antigenic_variance_deme1_migration_rate_idx_1.csv"  #
 data_b = pd.read_csv(csv_file_b)
 
 # Filter and binning setup
-xmin, xmax = 0.1, 0.3  # Adjust this range as needed
+xmin, xmax = 0.1, 0.25  # Adjust this range as needed
 data_b = data_b[(data_b['AntigenicVariance'] >= xmin) & (data_b['AntigenicVariance'] <= xmax)]
 num_bins = 30  # Number of bins
 hist, bin_edges = np.histogram(data_b['AntigenicVariance'], bins=num_bins, range=(xmin, xmax), density=True)
@@ -428,7 +428,7 @@ def load_and_compute_averages(num_migration_rates):
     avg_variances = []
     for idx in range(2, num_migration_rates + 2):
         deme2_data = pd.read_csv(f"antigenic_variance_deme2_migration_rate_idx_{idx}.csv")['AntigenicVariance'].values
-        avg_variance = np.mean(deme2_data) * len(deme2_data) / 10001 + (-intercept/slope) * (1 - len(deme2_data)/10001) # adjust for the fact that at low migration not all trajectories result in secondary outbreaks
+        avg_variance = np.mean(deme2_data) * len(deme2_data) / 10000 + (-intercept/slope) * (1 - len(deme2_data)/10000) # adjust for the fact that at low migration not all trajectories result in secondary outbreaks
         avg_variances.append(avg_variance)
     return np.array(avg_variances)
 
