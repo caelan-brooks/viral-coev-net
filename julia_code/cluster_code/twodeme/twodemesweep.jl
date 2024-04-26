@@ -7,7 +7,7 @@ using DataFrames
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_convergent_small_dx"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_convergent_small_dx_delta_intial"
 const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
 
 println("Number of threads: ", nthreads())
@@ -27,8 +27,8 @@ const sigma = sqrt(20/0.3)
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 6000
-const START_REPLICATE = 4001 
+const NUM_REPLICATES = 5000
+const START_REPLICATE = 1 
 
 function run_single_simulation(args)
     # Unpack arguments
@@ -53,9 +53,9 @@ function run_single_simulation(args)
 
     # Set the value of viral_density at the closest index to N0/dx for the first population
     index_closest_to_zero = argmin(abs.(x))
-    # viral_densities[1][index_closest_to_zero] = N0/dx
-    initial_antigenic_variance = 0.1;
-    viral_densities[1] .= N0/sqrt(2 * pi * initial_antigenic_variance) .* exp.(-x.^2/2/initial_antigenic_variance)
+    viral_densities[1][index_closest_to_zero] = N0/dx
+    # initial_antigenic_variance = 0.1;
+    # viral_densities[1] .= N0/sqrt(2 * pi * initial_antigenic_variance) .* exp.(-x.^2/2/initial_antigenic_variance)
 
     # Create populations
     if migration_rate_idx == length(MIGRATION_RATES)
