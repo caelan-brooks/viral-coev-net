@@ -197,7 +197,7 @@ csv_file_b = "special_case_antigenic_variance_deme1_migration_rate_idx_1.csv"  #
 data_b = pd.read_csv(csv_file_b)
 
 # Filter and binning setup
-xmin, xmax = 0.15, 0.4  # Adjust this range as needed
+xmin, xmax = 0.1, 0.4  # Adjust this range as needed
 
 data_b = data_b[(data_b['AntigenicVariance'] >= xmin) & (data_b['AntigenicVariance'] <= xmax)]
 num_bins = 30  # Number of bins
