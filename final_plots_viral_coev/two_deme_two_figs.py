@@ -197,7 +197,7 @@ csv_file_b = "special_case_antigenic_variance_deme1_migration_rate_idx_1.csv"  #
 data_b = pd.read_csv(csv_file_b)
 
 # Filter and binning setup
-xmin, xmax = 0.15, 0.4  # Adjust this range as needed
+xmin, xmax = 0.15, 0.2  # Adjust this range as needed
 
 data_b = data_b[(data_b['AntigenicVariance'] >= xmin) & (data_b['AntigenicVariance'] <= xmax)]
 num_bins = 30  # Number of bins
@@ -250,6 +250,7 @@ ax2.spines['right'].set_color(curve_color)
 
 # Mask to ignore NaN values for calculations
 valid_mask = ~np.isnan(survival_proportions)
+valid_mask = total_counts > 100
 
 # Calculate the upper limit for y-axis considering only valid (non-NaN) survival_proportions
 upper_ylim = np.max(survival_proportions[valid_mask] + np.array(standard_errors)[valid_mask])
