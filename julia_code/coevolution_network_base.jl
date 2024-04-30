@@ -266,7 +266,7 @@ function run_simulation!(sim::Simulation)
     sim.simulation_complete = true
 
     # Make the time vector line up with the saved configurations
-    sim.duration_times = sim.duration_times[1:sim.thin_by:end]
+    sim.duration_times = sim.duration_times[1:sim.thin_by:end];
 end
 
 function copy_network_data!(dest::Network, source::Network)
@@ -517,8 +517,10 @@ end
 
 # check if this should have dx in it, it seems like the answer is no
 function apply_stochasticity!(population::Population, dt::Float64)
+    scaling_factor = 2 / (dt * population.sigma^2)
     for i in eachindex(population.viral_density)
-        population.viral_density[i] = rand(Poisson(population.viral_density[i] / (dt * population.sigma^2))) * population.sigma^2 * dt
+        population.viral_density[i] = rand(Poisson(population.viral_density[i] * scaling_factor))
+        population.viral_density[i] = (population.viral_density[i] == 0) ? 0 : rand(Gamma(population.viral_density[i])) / scaling_factor 
     end
 end
 
