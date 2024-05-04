@@ -7,8 +7,8 @@ using DataFrames
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_convergent_small_dx_delta_intial"
-const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_method_delta_initial"
+const MIGRATION_RATES = [0; exp10.(LinRange(-9, 0.0, 12)); 0]
 
 println("Number of threads: ", nthreads())
 
@@ -23,12 +23,12 @@ const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
 const D = 0.01
-const sigma = sqrt(20/0.3) 
+const sigma = 5 
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
 const NUM_REPLICATES = 5000
-const START_REPLICATE = 5001 
+const START_REPLICATE = 1 
 
 function run_single_simulation(args)
     # Unpack arguments
