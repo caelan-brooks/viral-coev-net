@@ -52,6 +52,7 @@ struct Population
     cross_reactive::Vector{Float64}
     susceptibility::Vector{Float64}
     fitness::Vector{Float64}
+    cross_reactive_kernel::Matrix{Float64}
 end
 
 """
@@ -83,7 +84,16 @@ function Population(L::Float64, dx::Float64, r::Float64, M::Int64, beta::Float64
     @assert length(viral_density) == num_antigen_points "Viral density vector size mismatch"
     @assert length(immune_density) == num_antigen_points "Immune density vector size mismatch"
     
-    return Population(L, dx, r, M, beta, alpha, gamma, D, sigma, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points, temporary_data,cross_reactive,susceptibility,fitness)
+    cross_reactive_kernel = Matrix{Float64}(undef, length(xs), length(xs))
+
+    for i in eachindex(xs)
+        for j in eachindex(xs)
+            diff = min(abs(i - j), num_antigen_points - abs(i - j)) * dx
+            cross_reactive_kernel[j,i] = exp(-diff/r) * dx
+        end
+    end 
+
+    return Population(L, dx, r, M, beta, alpha, gamma, D, sigma, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points, temporary_data,cross_reactive,susceptibility,fitness,cross_reactive_kernel)
 end
 
 
@@ -534,15 +544,16 @@ function cross_reactive_convolution!(population::Population)
     population (Population): The population object containing the necessary parameters and fields.
     """
     
-    population.cross_reactive .= 0.0  # Reset the array to zero without creating a new array
-    for i in 1:population.num_antigen_points  # Loop through each antigenic point (1-indexed in Julia)
-        for j in 1:population.num_antigen_points  # For each antigenic point, loop through all other antigenic points
-            # Calculate the minimum distance between the current pair of antigenic points, considering the periodic boundary conditions
-            diff = min(abs(i - j), population.num_antigen_points - abs(i - j)) * population.dx  
-            # Increment the cross-reactive value for the i-th point based on the contribution from the j-th point
-            population.cross_reactive[i] += population.immune_density[j] * exp(-diff/population.r) * population.dx
-        end
-    end
+    population.cross_reactive .= population.cross_reactive_kernel * population.immune_density
+    # population.cross_reactive .= 0.0  # Reset the array to zero without creating a new array
+    # for i in 1:population.num_antigen_points  # Loop through each antigenic point (1-indexed in Julia)
+    #     for j in 1:population.num_antigen_points  # For each antigenic point, loop through all other antigenic points
+    #         # Calculate the minimum distance between the current pair of antigenic points, considering the periodic boundary conditions
+    #         diff = min(abs(i - j), population.num_antigen_points - abs(i - j)) * population.dx  
+    #         # Increment the cross-reactive value for the i-th point based on the contribution from the j-th point
+    #         population.cross_reactive[i] += population.immune_density[j] * exp(-diff/population.r) * population.dx
+    #     end
+    # end
 end
 
 
