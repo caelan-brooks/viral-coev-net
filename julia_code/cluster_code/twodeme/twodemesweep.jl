@@ -8,7 +8,7 @@ include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
 const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_method_delta_initial"
-const MIGRATION_RATES = [0; exp10.(LinRange(-9, 0.0, 12)); 0]
+const MIGRATION_RATES = [0; exp10.(LinRange(-9.0, 0.0, 12)); 0]
 
 println("Number of threads: ", nthreads())
 

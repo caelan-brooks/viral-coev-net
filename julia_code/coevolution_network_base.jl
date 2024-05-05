@@ -52,7 +52,6 @@ struct Population
     cross_reactive::Vector{Float64}
     susceptibility::Vector{Float64}
     fitness::Vector{Float64}
-    cross_reactive_kernel::Matrix{Float64}
 end
 
 """
@@ -83,17 +82,8 @@ function Population(L::Float64, dx::Float64, r::Float64, M::Int64, beta::Float64
 
     @assert length(viral_density) == num_antigen_points "Viral density vector size mismatch"
     @assert length(immune_density) == num_antigen_points "Immune density vector size mismatch"
-    
-    cross_reactive_kernel = Matrix{Float64}(undef, length(xs), length(xs))
 
-    for i in eachindex(xs)
-        for j in eachindex(xs)
-            diff = min(abs(i - j), num_antigen_points - abs(i - j)) * dx
-            cross_reactive_kernel[j,i] = exp(-diff/r) * dx
-        end
-    end 
-
-    return Population(L, dx, r, M, beta, alpha, gamma, D, sigma, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points, temporary_data,cross_reactive,susceptibility,fitness,cross_reactive_kernel)
+    return Population(L, dx, r, M, beta, alpha, gamma, D, sigma, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points, temporary_data,cross_reactive,susceptibility,fitness)
 end
 
 
@@ -186,6 +176,7 @@ mutable struct Simulation
     duration_times::Vector{Float64}  # The time points at which the network state is recorded
     simulation_complete::Bool  # A flag to indicate if the simulation is complete
     thin_by::Int64 # Number which knows how much time resultion is requested
+    cross_reactive_kernel::Matrix{Float64}
 end
 
 
@@ -220,10 +211,23 @@ function Simulation(initial_network::Network, dt::Float64, duration::Float64; th
     # Initialize the trajectory with the initial network state
     trajectory = [deepcopy(initial_network) for i in 1:thin_by:num_time_steps]
 
+    # Fill out the cross_reactive_kernel
+    dx = initial_network.populations[1].dx
+    r = initial_network.populations[1].r
+    num_antigen_points = initial_network.populations[1].num_antigen_points
+    cross_reactive_kernel = Matrix{Float64}(undef,  num_antigen_points, num_antigen_points)
+
+    for i = 1:num_antigen_points
+        for j = 1:num_antigen_points
+            diff = min(abs(i - j), num_antigen_points - abs(i - j)) * dx
+            cross_reactive_kernel[j,i] = exp(-diff/r) * dx
+        end
+    end 
+
     # Create and return a new Simulation instance with the initial network, 
     # time step, duration, trajectory, and duration times
     # The simulation_complete flag is initially set to false
-    Simulation(initial_network, dt, duration, trajectory, duration_times, false, thin_by)
+    return Simulation(initial_network, dt, duration, trajectory, duration_times, false, thin_by, cross_reactive_kernel)
 end
 
 
@@ -264,7 +268,7 @@ function run_simulation!(sim::Simulation)
 
     # Iteratively evolve the network at each time step in the duration_times (skipping the initial time)
     for i in 2:length(sim.duration_times)
-        single_step_evolve_network!(sim.initial_network, sim.dt)
+        single_step_evolve_network!(sim.initial_network, sim.dt, sim.cross_reactive_kernel)
         
         if mod(i-1,sim.thin_by)==0
             current_update += 1
@@ -433,10 +437,10 @@ Examples:
     new_network = single_step_evolve_network(init_network, 0.1)
 
 """
-function single_step_evolve_network!(network::Network, dt::Float64)
+function single_step_evolve_network!(network::Network, dt::Float64, cross_reactive_kernel::Matrix{Float64})
     # Evolving each population independently using the single_step_evolve function
     for pop in network.populations
-        single_step_evolve!(pop,dt)
+        single_step_evolve!(pop,dt,cross_reactive_kernel)
     end
 
     calculate_migration_effect!(network,dt)
@@ -468,12 +472,12 @@ Example:
     # Evolving the population by a single time step
     new_pop = single_step_evolve(init_pop, 0.1)
 """
-function single_step_evolve!(population::Population, dt::Float64)
+function single_step_evolve!(population::Population, dt::Float64, cross_reactive_kernel::Matrix{Float64})
     # Computing the change in viral density due to mutation (diffusion)
     compute_mutation_effect!(population, dt)
 
     # Computing the cross-reactive field using the convolution method 
-    cross_reactive_convolution!(population)
+    cross_reactive_convolution!(population, cross_reactive_kernel)
 
     # Computing the susceptibility at each antigenic point based on the cross-reactive field
     compute_susceptibility!(population)
@@ -536,7 +540,7 @@ end
 
 
 
-function cross_reactive_convolution!(population::Population)
+function cross_reactive_convolution!(population::Population, cross_reactive_kernel::Matrix{Float64})
     """
     Modifies the cross-reactive field c(x,t) in place.
 
@@ -544,7 +548,7 @@ function cross_reactive_convolution!(population::Population)
     population (Population): The population object containing the necessary parameters and fields.
     """
     
-    population.cross_reactive .= population.cross_reactive_kernel * population.immune_density
+    population.cross_reactive .= cross_reactive_kernel * population.immune_density
     # population.cross_reactive .= 0.0  # Reset the array to zero without creating a new array
     # for i in 1:population.num_antigen_points  # Loop through each antigenic point (1-indexed in Julia)
     #     for j in 1:population.num_antigen_points  # For each antigenic point, loop through all other antigenic points
