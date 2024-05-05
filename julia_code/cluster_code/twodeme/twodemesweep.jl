@@ -8,7 +8,7 @@ include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
 const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_method_delta_initial"
-const MIGRATION_RATES = [0; exp10.(LinRange(-9.0, 0.0, 12)); 0]
+const MIGRATION_RATES = [0; exp10.(LinRange(-10.0, 2.0, 12)); 0]
 
 println("Number of threads: ", nthreads())
 
@@ -27,8 +27,8 @@ const sigma = 5
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 5000
-const START_REPLICATE = 5001 
+const NUM_REPLICATES = 10000
+const START_REPLICATE = 1 
 
 function run_single_simulation(args)
     # Unpack arguments
