@@ -5,9 +5,9 @@ using Glob
 using Base.Threads
 using Statistics
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_convergent_small_dx"
-const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_convergent_small_dx/csv_outputs"  # Directory for CSV outputs
-const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_method_delta_initial"
+const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_method_delta_initial/csv_outputs"  # Directory for CSV outputs
+const MIGRATION_RATES = [0; exp10.(LinRange(-9, 0.0, 12)); 0]
 
 # Create CSV output directory if it doesn't exist
 isdir(CSV_OUTPUT_DIRECTORY) || mkdir(CSV_OUTPUT_DIRECTORY)
