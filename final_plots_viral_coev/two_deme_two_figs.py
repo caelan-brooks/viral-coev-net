@@ -14,6 +14,8 @@ from scipy.stats import norm
 from scipy.stats import linregress
 
 migration_rates = 10**(np.linspace(-7, -0.5, 10))
+
+migration_rates = 10**(np.linspace(-10, 1.0, 12))
 N0 = 100
 D = 1/100
 
@@ -26,7 +28,7 @@ color_last = 'darkorange'
 
 # Define extended migration rate range for shading
 migration_rate_min = 1e-12
-migration_rate_max = 10
+migration_rate_max = 30
 
 # Calculate the standard error for a binomial distribution
 n = 10000  # number of replicates
@@ -35,13 +37,13 @@ df['StandardError'] = np.sqrt(df['SurvivalProbability'] * (1 - df['SurvivalProba
 # Extracting the first, last, and middle elements
 first = df.iloc[0]
 last = df.iloc[-1]
-middle_df = df.iloc[1:11]
+middle_df = df.iloc[1:-1]
 
 # New data
 df_new = pd.read_csv("analysis_results_noback.csv")
 n_new = 10000  # Assuming the same number of replicates for the new data
 df_new['StandardError'] = np.sqrt(df_new['SurvivalProbability'] * (1 - df_new['SurvivalProbability']) / n_new)
-middle_df_new = df_new.iloc[1:11]  # Adjust as per your new data structure
+middle_df_new = df_new.iloc[1:-1]  # Adjust as per your new data structure
 
 ## TODO 
 # 1. figsize = 6.5, 2.5 per row tall (this is in inches)
@@ -112,7 +114,7 @@ ax.fill_between([migration_rate_min, migration_rate_max], last['SurvivalProbabil
 
 ax.set_xscale('log')
 ax.legend(frameon=False, loc=(0.1, 0.01))
-ax.set_xlim(1e-8, 1)
+ax.set_xlim(migration_rate_min, migration_rate_max)
 ax.set_ylim(bottom=0)
 ax.set_xlabel(r'migration rate (units: $\gamma$)')
 ax.set_ylabel('survival probability')
@@ -198,10 +200,10 @@ data_b = pd.read_csv(csv_file_b)
 
 # Filter and binning setup
 xmin, xmax = 0.1, 0.4  # Adjust this range as needed
-xmin, xmax = 0.15, 0.2  # Adjust this range as needed
+xmin, xmax = 0.16, 0.19  # Adjust this range as needed
 
 data_b = data_b[(data_b['AntigenicVariance'] >= xmin) & (data_b['AntigenicVariance'] <= xmax)]
-num_bins = 30  # Number of bins
+num_bins = 10  # Number of bins
 hist, bin_edges = np.histogram(data_b['AntigenicVariance'], bins=num_bins, range=(xmin, xmax), density=True)
 
 # Calculate survival proportions and standard errors
