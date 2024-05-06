@@ -45,6 +45,8 @@ n_new = 10000  # Assuming the same number of replicates for the new data
 df_new['StandardError'] = np.sqrt(df_new['SurvivalProbability'] * (1 - df_new['SurvivalProbability']) / n_new)
 middle_df_new = df_new.iloc[1:-1]  # Adjust as per your new data structure
 
+# print("number of data points:", len(middle_df))
+
 ## TODO 
 # 1. figsize = 6.5, 2.5 per row tall (this is in inches)
 # 2. axis labels = 12
@@ -124,7 +126,7 @@ ax.set_ylabel('survival probability')
 #######################
 plt.tight_layout()
 plt.savefig('twodeme_trajectories_and_probs.pdf', format='pdf', dpi=300)
-print('Done')
+# print('Done')
 
 ########################
 
@@ -199,9 +201,8 @@ csv_file_b = "special_case_antigenic_variance_deme1_migration_rate_idx_1.csv"  #
 data_b = pd.read_csv(csv_file_b)
 
 # Filter and binning setup
-xmin, xmax = 0.1, 0.4  # Adjust this range as needed
-xmin, xmax = 0.16, 0.19  # Adjust this range as needed
-
+xmin, xmax = 0.15, 0.25  # Adjust this range as needed
+xmin, xmax = 0.16, 0.19
 data_b = data_b[(data_b['AntigenicVariance'] >= xmin) & (data_b['AntigenicVariance'] <= xmax)]
 num_bins = 10  # Number of bins
 hist, bin_edges = np.histogram(data_b['AntigenicVariance'], bins=num_bins, range=(xmin, xmax), density=True)
@@ -223,6 +224,7 @@ for i in range(len(bin_edges)-1):
 
 # Normalize the counts to get proportions
 total_counts = np.array(survival_counts) + np.array(non_survival_counts)
+print(total_counts)
 survival_proportions = np.array(survival_counts) / total_counts
 non_survival_proportions = np.array(non_survival_counts) / total_counts
 
@@ -266,7 +268,7 @@ bin_centers = bin_edges[:-1] + widths / 2
 
 # Perform linear regression
 slope, intercept, r_value, p_value, std_err = linregress(bin_centers[valid_mask], survival_proportions[valid_mask])
-print(slope, intercept)
+# print(slope, intercept)
 # Calculate R^2 and Pearson correlation
 r_squared = r_value**2
 pearson_corr = r_value
@@ -376,7 +378,7 @@ ax.set_xlim(0,22)
 #######################
 plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.0) 
 plt.savefig('twodeme_antigenic_diversity.pdf', format='pdf', dpi=300)
-print('Done again')
+# print('Done again')
 #######################
 
 ## First figure will have the trajectories and the survival probabilities 
@@ -454,7 +456,7 @@ colors = plt.cm.viridis(np.linspace(0, 1, len(migration_rates)))  # Generate col
 
 # Load data and compute averages
 avg_variances = load_and_compute_averages(len(migration_rates))
-print(avg_variances)
+# print(avg_variances)
 # Compute the probabilities
 final_probabilities = compute_probabilities(avg_variances, p1, slope, intercept)
 
@@ -477,12 +479,12 @@ final_probabilities = compute_probabilities(avg_variances, p1, slope, intercept)
 #     final_probabilities.append(final_prob)
 
 
-print(p2_values, p1)
+# print(p2_values, p1)
 ax.plot(migration_rates, final_probabilities, 'o-', label='test' )
 
 ax.set_xscale('log')
 ax.legend(frameon=False, loc=(0.1, 0.01))
-ax.set_xlim(1e-8, 1)
+ax.set_xlim(migration_rate_min, migration_rate_max)
 ax.set_ylim(bottom=0)
 ax.set_xlabel(r'migration rate (units: $\gamma$)')
 ax.set_ylabel('survival probability')
