@@ -7,7 +7,7 @@ using DataFrames
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_SEMIPOISSON_method_delta_initial"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_method_final"
 const MIGRATION_RATES = [0; exp10.(LinRange(-10.0, 1.0, 12)); 0]
 
 println("Number of threads: ", nthreads())
@@ -23,10 +23,10 @@ const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
 const D = 0.01
-const sigma = sqrt(40.0/0.3) # this is about 11, 
+const sigma = 4.0 # this is about 11, 
 const DURATION = 80.0
 const DT = 0.05
-const THIN_BY = 20
+const THIN_BY = 10
 const NUM_REPLICATES = 10000
 const START_REPLICATE = 1 
 
@@ -83,7 +83,7 @@ function run_single_simulation(args)
 
         # Save the calculated total infected per deme
         open(output_file, "w") do file
-            serialize(file, (total_infected_per_deme, antigenic_variance_per_deme, ))
+            serialize(file, (total_infected_per_deme, antigenic_variance_per_deme, simulation.duration_times))
         end
     catch e
         println("Error in simulation with args $(args): $e")

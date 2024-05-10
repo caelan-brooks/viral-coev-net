@@ -268,6 +268,7 @@ bin_centers = bin_edges[:-1] + widths / 2
 
 # Perform linear regression
 slope, intercept, r_value, p_value, std_err = linregress(bin_centers[valid_mask], survival_proportions[valid_mask])
+slope, intercept = 0.25/0.175, 0
 # print(slope, intercept)
 # Calculate R^2 and Pearson correlation
 r_squared = r_value**2
@@ -294,6 +295,7 @@ for idx, migration_rate in enumerate(migration_rates):
 
     avg_x_data.append(np.mean(2 * D * peak_time_data))
     avg_y_data.append(np.mean(variance_diff_data))
+    # print(np.mean(variance_diff_data))
 
     migration_rate_label = f"{migration_rate:.1e}"
     ax.scatter(avg_x_data[-1], avg_y_data[-1], color=colors[idx], edgecolor='black', s=100, label=migration_rate_label)

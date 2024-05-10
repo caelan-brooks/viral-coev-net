@@ -5,8 +5,8 @@ using Glob
 using Base.Threads
 using Statistics
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_SEMIPOISSON_method_delta_initial"
-const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_SEMIPOISSON_method_delta_initial/csv_outputs"  # Directory for CSV outputs
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_method_final"
+const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_method_final/csv_outputs"  # Directory for CSV outputs
 const MIGRATION_RATES = [0; exp10.(LinRange(-10.0, 1.0, 12)); 0]
 
 # Create CSV output directory if it doesn't exist
@@ -31,7 +31,7 @@ function process_and_save_histograms(migration_rate_idx::Int64; cutoff = 100)
     number_late_trajectories = 0
 
     for file in replicate_files
-        total_infected_per_deme, antigenic_variance_per_deme = read_data(file)
+        total_infected_per_deme, antigenic_variance_per_deme, duration_times = read_data(file)
         
         # Find indices of maximal infection for each deme because dt = 1/20 and thin by = 20 index corrresponds to "real" time!
         max_infected_idx_deme1 = argmax(total_infected_per_deme[1, :])
@@ -61,7 +61,7 @@ function process_and_save_histograms(migration_rate_idx::Int64; cutoff = 100)
      
             if total_infected_per_deme[2, max_infected_idx_deme2] > cutoff && first_cross_idx_deme2 <= min_infected_idx_deme1
                 push!(antigenic_variance_deme2, antigenic_variance_per_deme[2, max_infected_idx_deme2])
-                push!(peak_time_difference, max_infected_idx_deme2 - max_infected_idx_deme1)
+                push!(peak_time_difference, duration_times[max_infected_idx_deme2] - duration[max_infected_idx_deme1])
                 push!(variance_difference, antigenic_variance_per_deme[2, max_infected_idx_deme2] - antigenic_variance_per_deme[1, max_infected_idx_deme1])
             end
         end
