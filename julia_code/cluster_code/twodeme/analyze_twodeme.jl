@@ -34,7 +34,8 @@ function process_and_save_histograms(migration_rate_idx::Int64; cutoff = 100)
         total_infected_per_deme, antigenic_variance_per_deme, duration_times = read_data(file)
         
         # Find indices of maximal infection for each deme because dt = 1/20 and thin by = 20 index corrresponds to "real" time!
-        max_infected_idx_deme1 = argmax(total_infected_per_deme[1, :])
+        time_region = duration_times .< duration_times[end]/4
+        max_infected_idx_deme1 = argmax(total_infected_per_deme[1, time_region])
         min_infected_idx_deme1 = argmin(total_infected_per_deme[1, 6:end])
         
         max_infected_idx_deme2 = argmax(total_infected_per_deme[2, :])
