@@ -62,7 +62,7 @@ function process_and_save_histograms(migration_rate_idx::Int64; cutoff = 100)
      
             if total_infected_per_deme[2, max_infected_idx_deme2] > cutoff && first_cross_idx_deme2 <= min_infected_idx_deme1
                 push!(antigenic_variance_deme2, antigenic_variance_per_deme[2, max_infected_idx_deme2])
-                push!(peak_time_difference, duration_times[max_infected_idx_deme2] - duration[max_infected_idx_deme1])
+                push!(peak_time_difference, duration_times[max_infected_idx_deme2] - duration_times[max_infected_idx_deme1])
                 push!(variance_difference, antigenic_variance_per_deme[2, max_infected_idx_deme2] - antigenic_variance_per_deme[1, max_infected_idx_deme1])
             end
         end
@@ -101,7 +101,7 @@ end
 # Function to process each replicate
 function process_replicate(file_path::String)
     try
-        total_infected_per_deme, _ = read_data(file_path)
+        total_infected_per_deme, _, duration_times = read_data(file_path)
         total_infected = vec(sum(total_infected_per_deme, dims=1))
 
         maximum_infected_deme_1 = maximum(total_infected_per_deme[1,:])
@@ -109,7 +109,7 @@ function process_replicate(file_path::String)
 
         survived = total_infected[end] > 0
         survived_flag = survived ? 1 : 0
-        extinction_time = !survived ? findfirst(total_infected .== 0) : NaN
+        extinction_time = !survived ? duration_times[findfirst(total_infected .== 0)] : NaN
         
         return (survived_flag, extinction_time, maximum_infected_deme_1, maximum_infected_deme_2)
     catch e
