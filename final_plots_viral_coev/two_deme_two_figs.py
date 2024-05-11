@@ -80,6 +80,8 @@ trajectories_df = pd.read_csv("trajectories_migration_rate_idx_1.csv")
 for index, row in trajectories_df.iterrows():
     trajectory = ast.literal_eval(row['parent'])  # Convert string representation of list to actual list
     ax.plot(trajectory, linewidth=1.5)
+    # print(len(trajectory))
+
 
 start_time = 65
 end_time = max([len(traj) for traj in trajectories_df['parent'].apply(ast.literal_eval)])
@@ -94,7 +96,7 @@ ax.text(x=end_time * 0.73, y=3, s="extinction", ha='center', va='center', color=
 ax.set_yscale('log')
 ax.set_xlabel(r'time (units: $\gamma^{-1}$)')
 ax.set_ylabel('total infected number')
-ax.set_xlim(0, 80)
+# ax.set_xlim(0, 80)
 ax.set_ylim(bottom=1)
 x_pos = np.max(ax.get_xlim()) * 0.95  # Adjust based on your axis limits
 y_pos = np.min(ax.get_ylim()) * 3  # Pick a position within the visible range on a log scale
@@ -202,7 +204,7 @@ data_b = pd.read_csv(csv_file_b)
 
 # Filter and binning setup
 xmin, xmax = 0.15, 0.25  # Adjust this range as needed
-xmin, xmax = 0.16, 0.19
+xmin, xmax = 0.12, 0.16
 data_b = data_b[(data_b['AntigenicVariance'] >= xmin) & (data_b['AntigenicVariance'] <= xmax)]
 num_bins = 10  # Number of bins
 hist, bin_edges = np.histogram(data_b['AntigenicVariance'], bins=num_bins, range=(xmin, xmax), density=True)
@@ -268,7 +270,7 @@ bin_centers = bin_edges[:-1] + widths / 2
 
 # Perform linear regression
 slope, intercept, r_value, p_value, std_err = linregress(bin_centers[valid_mask], survival_proportions[valid_mask])
-slope, intercept = 0.25/0.175, 0
+# slope, intercept = 0.25/0.175, 0
 # print(slope, intercept)
 # Calculate R^2 and Pearson correlation
 r_squared = r_value**2
