@@ -531,7 +531,7 @@ end
 
 # check if this should have dx in it, it seems like the answer is no
 function apply_stochasticity!(population::Population, dt::Float64)
-    scaling_factor = 2 / (dt * population.sigma^2)
+    scaling_factor = 2 * population.dx / (dt * population.sigma^2)
     # scaling_factor =  population.dx / (dt * population.sigma^2)
     for i in eachindex(population.viral_density)
         population.viral_density[i] = rand(Poisson(population.viral_density[i] * scaling_factor)) 
