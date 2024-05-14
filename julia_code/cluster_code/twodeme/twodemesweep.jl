@@ -22,13 +22,14 @@ const M = 15
 const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
-const D = 0.008
-const sigma = 3.0 # this is about 11, 
+const D = 0.01
+const sigma = 1.0 # this is about 11, 
 const DURATION = 100.0
 const DT = 0.05
 const THIN_BY = 10
 const NUM_REPLICATES = 10000
 const START_REPLICATE = 1 
+const noise_method = :PL_with_dx
 
 function run_single_simulation(args)
     # Unpack arguments
@@ -59,9 +60,9 @@ function run_single_simulation(args)
 
     # Create populations
     if migration_rate_idx == length(MIGRATION_RATES)
-        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, 2 * HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]; sigma=sigma) for i in 1:network_size]
+        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, 2 * HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]; sigma=sigma, noise_method=noise_method) for i in 1:network_size]
     else
-        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]; sigma=sigma) for i in 1:network_size]
+        populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]; sigma=sigma, noise_method=noise_method) for i in 1:network_size]
     end
 
     # Initialize populations and network with the new migration matrix
@@ -109,7 +110,8 @@ function save_parameters_and_migration_rates_to_csv(output_directory, migration_
         DT = [DT],
         THIN_BY = [THIN_BY],
         NUM_REPLICATES = [NUM_REPLICATES],
-        START_REPLICATE = [START_REPLICATE]
+        START_REPLICATE = [START_REPLICATE],
+        noise_method = [noise_method]
     )
     
     # Save the main parameters DataFrame to a CSV file
