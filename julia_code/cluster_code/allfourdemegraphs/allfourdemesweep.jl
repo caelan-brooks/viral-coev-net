@@ -2,6 +2,8 @@ using Base.Threads
 using Serialization
 using Random
 using LinearAlgebra
+using DataFrames
+using CSV
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
