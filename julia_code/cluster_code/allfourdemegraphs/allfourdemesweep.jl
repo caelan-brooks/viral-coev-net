@@ -30,7 +30,7 @@ const noise_method = :PL_with_dx
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 1000
+const NUM_REPLICATES = 10000
 const START_REPLICATE = 1
 
 function run_single_simulation(args)
