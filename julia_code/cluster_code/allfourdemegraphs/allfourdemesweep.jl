@@ -30,8 +30,8 @@ const noise_method = :PL_with_dx
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 10000
-const START_REPLICATE = 1
+const NUM_REPLICATES = 9000
+const START_REPLICATE = 1001
 
 function run_single_simulation(args)
     # Unpack arguments
@@ -147,7 +147,7 @@ function main(job_id_arg)
     mkpath(output_subdirectory)
 
     # Run simulations for all replicates
-    @threads for simulation_number in START_REPLICATE:(START_REPLICATE+NUM_REPLICATES)
+    @threads for simulation_number in START_REPLICATE:(START_REPLICATE+NUM_REPLICATES-1)
         args = (migration_rate_idx, adjacency_matrix_idx, simulation_number)
         run_single_simulation(args)
     end
