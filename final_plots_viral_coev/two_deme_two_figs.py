@@ -203,10 +203,10 @@ csv_file_b = "special_case_antigenic_variance_deme1_migration_rate_idx_1.csv"  #
 data_b = pd.read_csv(csv_file_b)
 
 # Filter and binning setup
-xmin, xmax = 0.15, 0.25  # Adjust this range as needed
-xmin, xmax = 0.12, 0.16
+xmin, xmax = 0.14, 0.21  # Adjust this range as needed
+# xmin, xmax = 0.12, 0.16
 data_b = data_b[(data_b['AntigenicVariance'] >= xmin) & (data_b['AntigenicVariance'] <= xmax)]
-num_bins = 10  # Number of bins
+num_bins = 20  # Number of bins
 hist, bin_edges = np.histogram(data_b['AntigenicVariance'], bins=num_bins, range=(xmin, xmax), density=True)
 
 # Calculate survival proportions and standard errors
