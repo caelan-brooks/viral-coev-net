@@ -94,7 +94,7 @@ end
 function save_parameters_and_migration_rates_to_csv(output_directory, migration_rates)
     # Create a DataFrame for the main parameters
     parameters = DataFrame(
-        HOST_POPULATION_PER_DEME = [HOST_POPULATION_PER_DEME],
+        TOTAL_HOST_POPULATION = [TOTAL_HOST_POPULATION],
         L = [L],
         dx = [dx],
         r = [r],
