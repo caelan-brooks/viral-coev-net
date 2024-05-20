@@ -270,7 +270,7 @@ bin_centers = bin_edges[:-1] + widths / 2
 
 # Perform linear regression
 slope, intercept, r_value, p_value, std_err = linregress(bin_centers[valid_mask], survival_proportions[valid_mask])
-# slope, intercept = 0.25/0.175, 0
+slope, intercept = 2.34, -0.318
 # print(slope, intercept)
 # Calculate R^2 and Pearson correlation
 r_squared = r_value**2
