@@ -101,7 +101,6 @@ ax.set_ylim(bottom=1)
 x_pos = np.max(ax.get_xlim()) * 0.95  # Adjust based on your axis limits
 y_pos = np.min(ax.get_ylim()) * 3  # Pick a position within the visible range on a log scale
 
-
 ax = axs[1]  # This selects the last panel position in a 3x2 grid
 
 # Plotting code adjusted for the subplot
@@ -378,7 +377,7 @@ ax.legend(loc='center left', frameon=False)
 # Labeling axes
 ax.set_xlabel(r'time (units: $\gamma^{-1}$)')
 ax.set_ylabel('total infected number')
-ax.set_xlim(0,22)
+ax.set_xlim(0,20)
 #######################
 plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.0) 
 plt.savefig('twodeme_antigenic_diversity.pdf', format='pdf', dpi=300)
