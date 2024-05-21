@@ -259,17 +259,32 @@ ax.fill_between([migration_rate_min, migration_rate_max], first['SurvivalProbabi
 ax.axhline(y=last['SurvivalProbability'], color='darkorange', linestyle='--')
 ax.fill_between([migration_rate_min, migration_rate_max], last['SurvivalProbability'] - last['StandardError'], last['SurvivalProbability'] + last['StandardError'], color=color_last, alpha=0.3)
 
+# def load_and_compute_averages(num_migration_rates):
+#     avg_variances = []
+#     for idx in range(2, num_migration_rates + 2):
+#         deme2_data = pd.read_csv(f"../antigenic_variance_deme2_migration_rate_idx_{idx}.csv")['AntigenicVariance'].values
+#         avg_variance = np.mean(deme2_data) * len(deme2_data) / 10000 + (-intercept/slope) * (1 - len(deme2_data)/10000) # adjust for the fact that at low migration not all trajectories result in secondary outbreaks
+#         avg_variances.append(avg_variance)
+#     return np.array(avg_variances)
+
 def load_and_compute_averages(num_migration_rates):
-    avg_variances = []
+    avg_variance_differences = []
+    probability_of_spreading = []
     for idx in range(2, num_migration_rates + 2):
-        deme2_data = pd.read_csv(f"../antigenic_variance_deme2_migration_rate_idx_{idx}.csv")['AntigenicVariance'].values
-        avg_variance = np.mean(deme2_data) * len(deme2_data) / 10000 + (-intercept/slope) * (1 - len(deme2_data)/10000) # adjust for the fact that at low migration not all trajectories result in secondary outbreaks
-        avg_variances.append(avg_variance)
-    return np.array(avg_variances)
+        deme2_data = pd.read_csv(f"../variance_difference_migration_rate_idx_{idx}.csv")['VarianceDifference'].values
+        avg_variance_difference = np.mean(deme2_data)
+        avg_variance_differences.append(avg_variance_difference)
+        probability_of_spreading.append(len(deme2_data)/10000)
+
+    return np.array(avg_variance_differences), np.array(probability_of_spreading)
 
 # Calculate p2 and the modified survival probability
-def compute_probabilities(avg_variances, p1, slope, intercept):
-    p2_values = slope * avg_variances + intercept
+# def compute_probabilities(avg_variances, p1, slope, intercept):
+#     p2_values = slope * avg_variances + intercept
+#     final_probabilities = 1 - (1 - p1) * (1 - p2_values)
+#     return final_probabilities
+def compute_probabilities(avg_variance_differences, probability_of_spreading, p1, slope):
+    p2_values = probability_of_spreading * (p1 + slope * avg_variance_differences)
     final_probabilities = 1 - (1 - p1) * (1 - p2_values)
     return final_probabilities
 
@@ -283,8 +298,10 @@ final_probabilities = []
 colors = plt.cm.viridis(np.linspace(0, 1, len(migration_rates)))  # Generate colors
 
 # Load data and compute averages
-avg_variances = load_and_compute_averages(len(migration_rates))
-final_probabilities = compute_probabilities(avg_variances, p1, slope, intercept)
+# avg_variances = load_and_compute_averages(len(migration_rates))
+# final_probabilities = compute_probabilities(avg_variances, p1, slope, intercept)
+avg_variance_differences, probability_of_spreading = load_and_compute_averages(len(migration_rates))
+final_probabilities = compute_probabilities(avg_variance_differences, probability_of_spreading, p1, slope)
 
 ax.plot(migration_rates, final_probabilities, 'k--', label='Theory' )
 
