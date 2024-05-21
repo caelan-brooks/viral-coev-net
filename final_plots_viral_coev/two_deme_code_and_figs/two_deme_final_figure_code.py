@@ -183,7 +183,7 @@ ax.annotate('', xy=(mean - fwhm1/2, height1), xytext=(mean + fwhm1/2, height1),
 
 
 # Text annotations for FWHM
-ax.text(mean, height1 * 0.95, r'$\sqrt{V}$', ha='center', va='top', color='black')
+ax.text(mean, height1 * 0.95, r'$\sqrt{V(t)}$', ha='center', va='top', color='black')
 
 # Annotation for the total number of infected hosts
 # ax.annotate(r'area = $N(t)$', xy=(0, 0.5), xycoords='data',
