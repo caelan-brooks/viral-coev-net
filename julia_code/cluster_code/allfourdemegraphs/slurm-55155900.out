@@ -1,0 +1,244 @@
+Graph 1 is connected.
+Graph 2 is connected.
+Graph 3 is connected.
+Graph 4 is connected.
+Graph 5 is connected.
+Graph 6 is connected.
+Graph 7 is connected.
+Graph 8 is connected.
+Graph 9 is connected.
+Graph 10 is connected.
+Graph 11 is connected.
+Matrix 1 normalized.
+Matrix 2 normalized.
+Matrix 3 normalized.
+Matrix 4 normalized.
+Matrix 5 normalized.
+Matrix 6 normalized.
+Matrix 7 normalized.
+Matrix 8 normalized.
+Matrix 9 normalized.
+Matrix 10 normalized.
+Matrix 11 normalized.
+Number of threads: 16
+Adjacency Matrix: 1, Migration Rate Index: 1, Replicates: 10000
+0.0505
+Adjacency Matrix: 1, Migration Rate Index: 2, Replicates: 10000
+0.0611
+Adjacency Matrix: 1, Migration Rate Index: 3, Replicates: 10000
+0.1833
+Adjacency Matrix: 1, Migration Rate Index: 4, Replicates: 10000
+0.4631
+Adjacency Matrix: 1, Migration Rate Index: 5, Replicates: 10000
+0.5378
+Adjacency Matrix: 1, Migration Rate Index: 6, Replicates: 10000
+0.5004
+Adjacency Matrix: 1, Migration Rate Index: 7, Replicates: 10000
+0.4171
+Adjacency Matrix: 1, Migration Rate Index: 8, Replicates: 10000
+0.3198
+Adjacency Matrix: 1, Migration Rate Index: 9, Replicates: 10000
+0.2584
+Adjacency Matrix: 1, Migration Rate Index: 10, Replicates: 10000
+0.2412
+Adjacency Matrix: 2, Migration Rate Index: 1, Replicates: 10000
+0.0537
+Adjacency Matrix: 2, Migration Rate Index: 2, Replicates: 10000
+0.063
+Adjacency Matrix: 2, Migration Rate Index: 3, Replicates: 10000
+0.1669
+Adjacency Matrix: 2, Migration Rate Index: 4, Replicates: 10000
+0.6009
+Adjacency Matrix: 2, Migration Rate Index: 5, Replicates: 10000
+0.7638
+Adjacency Matrix: 2, Migration Rate Index: 6, Replicates: 10000
+0.7723
+Adjacency Matrix: 2, Migration Rate Index: 7, Replicates: 10000
+0.6631
+Adjacency Matrix: 2, Migration Rate Index: 8, Replicates: 10000
+0.4773
+Adjacency Matrix: 2, Migration Rate Index: 9, Replicates: 10000
+0.2986
+Adjacency Matrix: 2, Migration Rate Index: 10, Replicates: 10000
+0.2457
+Adjacency Matrix: 3, Migration Rate Index: 1, Replicates: 10000
+0.0448
+Adjacency Matrix: 3, Migration Rate Index: 2, Replicates: 10000
+0.0633
+Adjacency Matrix: 3, Migration Rate Index: 3, Replicates: 10000
+0.1559
+Adjacency Matrix: 3, Migration Rate Index: 4, Replicates: 10000
+0.508
+Adjacency Matrix: 3, Migration Rate Index: 5, Replicates: 10000
+0.6414
+Adjacency Matrix: 3, Migration Rate Index: 6, Replicates: 10000
+0.6151
+Adjacency Matrix: 3, Migration Rate Index: 7, Replicates: 10000
+0.5002
+Adjacency Matrix: 3, Migration Rate Index: 8, Replicates: 10000
+0.3857
+Adjacency Matrix: 3, Migration Rate Index: 9, Replicates: 10000
+0.2801
+Adjacency Matrix: 3, Migration Rate Index: 10, Replicates: 10000
+0.2441
+Adjacency Matrix: 4, Migration Rate Index: 1, Replicates: 10000
+0.049
+Adjacency Matrix: 4, Migration Rate Index: 2, Replicates: 10000
+0.0601
+Adjacency Matrix: 4, Migration Rate Index: 3, Replicates: 10000
+0.1827
+Adjacency Matrix: 4, Migration Rate Index: 4, Replicates: 10000
+0.5816
+Adjacency Matrix: 4, Migration Rate Index: 5, Replicates: 10000
+0.6654
+Adjacency Matrix: 4, Migration Rate Index: 6, Replicates: 10000
+0.6137
+Adjacency Matrix: 4, Migration Rate Index: 7, Replicates: 10000
+0.4968
+Adjacency Matrix: 4, Migration Rate Index: 8, Replicates: 10000
+0.3512
+Adjacency Matrix: 4, Migration Rate Index: 9, Replicates: 10000
+0.2526
+Adjacency Matrix: 4, Migration Rate Index: 10, Replicates: 10000
+0.2435
+Adjacency Matrix: 5, Migration Rate Index: 1, Replicates: 10000
+0.0538
+Adjacency Matrix: 5, Migration Rate Index: 2, Replicates: 10000
+0.0644
+Adjacency Matrix: 5, Migration Rate Index: 3, Replicates: 10000
+0.1771
+Adjacency Matrix: 5, Migration Rate Index: 4, Replicates: 10000
+0.5592
+Adjacency Matrix: 5, Migration Rate Index: 5, Replicates: 10000
+0.7049
+Adjacency Matrix: 5, Migration Rate Index: 6, Replicates: 10000
+0.6884
+Adjacency Matrix: 5, Migration Rate Index: 7, Replicates: 10000
+0.5751
+Adjacency Matrix: 5, Migration Rate Index: 8, Replicates: 10000
+0.4137
+Adjacency Matrix: 5, Migration Rate Index: 9, Replicates: 10000
+0.2681
+Adjacency Matrix: 5, Migration Rate Index: 10, Replicates: 10000
+0.2475
+Adjacency Matrix: 6, Migration Rate Index: 1, Replicates: 10000
+0.0506
+Adjacency Matrix: 6, Migration Rate Index: 2, Replicates: 10000
+0.0644
+Adjacency Matrix: 6, Migration Rate Index: 3, Replicates: 10000
+0.1553
+Adjacency Matrix: 6, Migration Rate Index: 4, Replicates: 10000
+0.4449
+Adjacency Matrix: 6, Migration Rate Index: 5, Replicates: 10000
+0.532
+Adjacency Matrix: 6, Migration Rate Index: 6, Replicates: 10000
+0.5025
+Adjacency Matrix: 6, Migration Rate Index: 7, Replicates: 10000
+0.4249
+Adjacency Matrix: 6, Migration Rate Index: 8, Replicates: 10000
+0.3324
+Adjacency Matrix: 6, Migration Rate Index: 9, Replicates: 10000
+0.263
+Adjacency Matrix: 6, Migration Rate Index: 10, Replicates: 10000
+0.2499
+Adjacency Matrix: 7, Migration Rate Index: 1, Replicates: 10000
+0.0456
+Adjacency Matrix: 7, Migration Rate Index: 2, Replicates: 10000
+0.0604
+Adjacency Matrix: 7, Migration Rate Index: 3, Replicates: 10000
+0.1694
+Adjacency Matrix: 7, Migration Rate Index: 4, Replicates: 10000
+0.5061
+Adjacency Matrix: 7, Migration Rate Index: 5, Replicates: 10000
+0.6453
+Adjacency Matrix: 7, Migration Rate Index: 6, Replicates: 10000
+0.6196
+Adjacency Matrix: 7, Migration Rate Index: 7, Replicates: 10000
+0.5209
+Adjacency Matrix: 7, Migration Rate Index: 8, Replicates: 10000
+0.3954
+Adjacency Matrix: 7, Migration Rate Index: 9, Replicates: 10000
+0.2907
+Adjacency Matrix: 7, Migration Rate Index: 10, Replicates: 10000
+0.2502
+Adjacency Matrix: 8, Migration Rate Index: 1, Replicates: 10000
+0.046
+Adjacency Matrix: 8, Migration Rate Index: 2, Replicates: 10000
+0.0608
+Adjacency Matrix: 8, Migration Rate Index: 3, Replicates: 10000
+0.1639
+Adjacency Matrix: 8, Migration Rate Index: 4, Replicates: 10000
+0.5386
+Adjacency Matrix: 8, Migration Rate Index: 5, Replicates: 10000
+0.7126
+Adjacency Matrix: 8, Migration Rate Index: 6, Replicates: 10000
+0.6885
+Adjacency Matrix: 8, Migration Rate Index: 7, Replicates: 10000
+0.5822
+Adjacency Matrix: 8, Migration Rate Index: 8, Replicates: 10000
+0.4274
+Adjacency Matrix: 8, Migration Rate Index: 9, Replicates: 10000
+0.2862
+Adjacency Matrix: 8, Migration Rate Index: 10, Replicates: 10000
+0.2525
+Adjacency Matrix: 9, Migration Rate Index: 1, Replicates: 10000
+0.0516
+Adjacency Matrix: 9, Migration Rate Index: 2, Replicates: 10000
+0.0619
+Adjacency Matrix: 9, Migration Rate Index: 3, Replicates: 10000
+0.1375
+Adjacency Matrix: 9, Migration Rate Index: 4, Replicates: 10000
+0.4206
+Adjacency Matrix: 9, Migration Rate Index: 5, Replicates: 10000
+0.5443
+Adjacency Matrix: 9, Migration Rate Index: 6, Replicates: 10000
+0.5001
+Adjacency Matrix: 9, Migration Rate Index: 7, Replicates: 10000
+0.4289
+Adjacency Matrix: 9, Migration Rate Index: 8, Replicates: 10000
+0.3371
+Adjacency Matrix: 9, Migration Rate Index: 9, Replicates: 10000
+0.2797
+Adjacency Matrix: 9, Migration Rate Index: 10, Replicates: 10000
+0.248
+Adjacency Matrix: 10, Migration Rate Index: 1, Replicates: 10000
+0.0464
+Adjacency Matrix: 10, Migration Rate Index: 2, Replicates: 10000
+0.0574
+Adjacency Matrix: 10, Migration Rate Index: 3, Replicates: 10000
+0.173
+Adjacency Matrix: 10, Migration Rate Index: 4, Replicates: 10000
+0.4457
+Adjacency Matrix: 10, Migration Rate Index: 5, Replicates: 10000
+0.534
+Adjacency Matrix: 10, Migration Rate Index: 6, Replicates: 10000
+0.5029
+Adjacency Matrix: 10, Migration Rate Index: 7, Replicates: 10000
+0.4082
+Adjacency Matrix: 10, Migration Rate Index: 8, Replicates: 10000
+0.324
+Adjacency Matrix: 10, Migration Rate Index: 9, Replicates: 10000
+0.2557
+Adjacency Matrix: 10, Migration Rate Index: 10, Replicates: 10000
+0.2418
+Adjacency Matrix: 11, Migration Rate Index: 1, Replicates: 10000
+0.0503
+Adjacency Matrix: 11, Migration Rate Index: 2, Replicates: 10000
+0.0605
+Adjacency Matrix: 11, Migration Rate Index: 3, Replicates: 10000
+0.1836
+Adjacency Matrix: 11, Migration Rate Index: 4, Replicates: 10000
+0.5657
+Adjacency Matrix: 11, Migration Rate Index: 5, Replicates: 10000
+0.6568
+Adjacency Matrix: 11, Migration Rate Index: 6, Replicates: 10000
+0.6211
+Adjacency Matrix: 11, Migration Rate Index: 7, Replicates: 10000
+0.4933
+Adjacency Matrix: 11, Migration Rate Index: 8, Replicates: 10000
+0.3627
+Adjacency Matrix: 11, Migration Rate Index: 9, Replicates: 10000
+0.2623
+Adjacency Matrix: 11, Migration Rate Index: 10, Replicates: 10000
+0.2429
+Analysis results saved to ./plotting_data/analysis_results.jld2
