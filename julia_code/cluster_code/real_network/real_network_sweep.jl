@@ -12,8 +12,8 @@ const OUTPUT_DIRECTORY = "/pool001/dswartz/real_network_PL_with_dx"
 println("Number of threads: ", nthreads())
 
 const N0 = 100
-const L = 50.0  # Consider if this needs to be longer
-const dx = 0.1
+const L = 35.0  # Consider if this needs to be longer
+const dx = 0.15
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
