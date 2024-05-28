@@ -3,7 +3,7 @@
 #SBATCH -n 6               # Number of cores
 #SBATCH -p sched_mit_hill   # Partition name
 #SBATCH -t 0-11:58          # time taken is 4 hrs
-#SBATCH --mem-per-cpu=300  # Memory per CPU (adjust this based on your requirements)
+#SBATCH --mem-per-cpu=1000  # Memory per CPU (adjust this based on your requirements)
 #SBATCH --array=1-20        # Create a job array for 10 jobs
 
 # Path to the Julia project/environment

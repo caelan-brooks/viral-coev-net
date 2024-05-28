@@ -13,7 +13,7 @@ println("Number of threads: ", nthreads())
 
 const N0 = 100
 const L = 35.0  # Consider if this needs to be longer
-const dx = 0.15
+const dx = 0.1
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
@@ -23,8 +23,8 @@ const gamma = 1.0
 const D = 0.0042 # make this smaller? 
 const sigma = 2.0
 const DURATION = 80.0
-const DT = 0.05
-const THIN_BY = 20
+const DT = 0.05 
+const THIN_BY = 200
 const NUM_REPLICATES = 4000
 const START_REPLICATE = 1
 
