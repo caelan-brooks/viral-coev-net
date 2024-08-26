@@ -40,7 +40,7 @@ function run_single_simulation(args)
     
     # Retrieve the actual migration rate using the index
     migration_rate = MIGRATION_RATES[migration_rate_idx]
-    host_population_per_deme = Int64(HOST_POPULATION_SIZES[host_per_deme_idx])
+    host_population_per_deme = round(HOST_POPULATION_SIZES[host_per_deme_idx])
 
     # Generate unique seed and set random seed
     seed = hash((host_per_deme_idx, migration_rate_idx, simulation_number))
