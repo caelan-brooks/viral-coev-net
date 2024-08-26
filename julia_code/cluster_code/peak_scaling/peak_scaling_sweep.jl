@@ -128,7 +128,7 @@ function save_parameters_and_migration_rates_to_csv(output_directory, migration_
     CSV.write(population_sizes_path, population_sizes_df)
 end
 
-save_parameters_and_migration_rates_to_csv(OUTPUT_DIRECTORY, MIGRATION_RATES)
+save_parameters_and_migration_rates_to_csv(OUTPUT_DIRECTORY, MIGRATION_RATES, HOST_POPULATION_SIZES)
 
 function main(job_id_arg)
     job_id = parse(Int, job_id_arg)
