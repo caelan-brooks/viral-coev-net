@@ -10,7 +10,7 @@ const OUTPUT_DIRECTORY = "/pool001/dswartz/peak_scaling"
 df = CSV.read(joinpath(OUTPUT_DIRECTORY,"migration_rates.csv"), DataFrame)
 const MIGRATION_RATES = df.MIGRATION_RATES
 
-df = CSV.read(joinpath(OUTPUT_DIRECTORY, "host_population_sizes"), DataFrame)
+df = CSV.read(joinpath(OUTPUT_DIRECTORY, "host_population_sizes.csv"), DataFrame)
 const HOST_POPULATION_SIZES = df.HOST_POPULATION_SIZES
 
 println("Number of threads: ", nthreads())
