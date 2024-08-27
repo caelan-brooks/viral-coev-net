@@ -26,7 +26,7 @@ function calculate_survival_probability(migration_rate_idx, host_per_deme_idx)
     num_replicates = length(files)
     survival_results = zeros(Bool, num_replicates)
     
-    println((mutation_rate_idx, migration_rate_idx, num_replicates))
+    println((host_per_deme_idx, migration_rate_idx, num_replicates))
     flush(stdout)
 
     @threads for i in 1:num_replicates
