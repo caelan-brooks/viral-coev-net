@@ -3,6 +3,7 @@ export Population, Network, Simulation, run_simulation!, calculate_total_infecte
 
 using Random
 using Distributions
+using LinearAlgebra
 
 """
     Population
@@ -552,6 +553,26 @@ end
 
 
 
+# function cross_reactive_convolution!(population::Population, cross_reactive_kernel::Matrix{Float64})
+#     """
+#     Modifies the cross-reactive field c(x,t) in place.
+
+#     Parameters:
+#     population (Population): The population object containing the necessary parameters and fields.
+#     """
+    
+#     population.cross_reactive .= cross_reactive_kernel * population.immune_density
+#     # population.cross_reactive .= 0.0  # Reset the array to zero without creating a new array
+#     # for i in 1:population.num_antigen_points  # Loop through each antigenic point (1-indexed in Julia)
+#     #     for j in 1:population.num_antigen_points  # For each antigenic point, loop through all other antigenic points
+#     #         # Calculate the minimum distance between the current pair of antigenic points, considering the periodic boundary conditions
+#     #         diff = min(abs(i - j), population.num_antigen_points - abs(i - j)) * population.dx  
+#     #         # Increment the cross-reactive value for the i-th point based on the contribution from the j-th point
+#     #         population.cross_reactive[i] += population.immune_density[j] * exp(-diff/population.r) * population.dx
+#     #     end
+#     # end
+# end
+
 function cross_reactive_convolution!(population::Population, cross_reactive_kernel::Matrix{Float64})
     """
     Modifies the cross-reactive field c(x,t) in place.
@@ -559,19 +580,33 @@ function cross_reactive_convolution!(population::Population, cross_reactive_kern
     Parameters:
     population (Population): The population object containing the necessary parameters and fields.
     """
-    
-    population.cross_reactive .= cross_reactive_kernel * population.immune_density
-    # population.cross_reactive .= 0.0  # Reset the array to zero without creating a new array
-    # for i in 1:population.num_antigen_points  # Loop through each antigenic point (1-indexed in Julia)
-    #     for j in 1:population.num_antigen_points  # For each antigenic point, loop through all other antigenic points
-    #         # Calculate the minimum distance between the current pair of antigenic points, considering the periodic boundary conditions
-    #         diff = min(abs(i - j), population.num_antigen_points - abs(i - j)) * population.dx  
-    #         # Increment the cross-reactive value for the i-th point based on the contribution from the j-th point
-    #         population.cross_reactive[i] += population.immune_density[j] * exp(-diff/population.r) * population.dx
-    #     end
-    # end
+
+    # Perform the matrix-vector multiplication manually and store the result in temporary_data
+    for i in 1:population.num_antigen_points
+        population.temporary_data[i] = 0.0
+        for j in 1:population.num_antigen_points
+            population.temporary_data[i] += cross_reactive_kernel[i, j] * population.immune_density[j]
+            # population.temporary_data[i] += I[i,j] * population.immune_density[j]
+        end
+    end
+
+    # Copy the result from temporary_data to population.cross_reactive
+    population.cross_reactive .= population.temporary_data
 end
 
+# function cross_reactive_convolution!(population::Population, cross_reactive_kernel::Matrix{Float64})
+#     """
+#     Modifies the cross-reactive field c(x,t) in place using BLAS.gemv!.
+
+#     Parameters:
+#     population (Population): The population object containing the necessary parameters and fields.
+#     """
+    
+#     # BLAS.gemv! performs the operation: y = α*A*x + β*y
+#     # Here, α is 1.0 (default), β is 0.0 (default), A is cross_reactive_kernel,
+#     # x is population.immune_density, and y is population.cross_reactive.
+#     BLAS.gemv!('N', 1.0, cross_reactive_kernel, population.immune_density, 0.0, population.cross_reactive)
+# end
 
 
 # Function to validate the dimensions of the migration matrix
