@@ -202,6 +202,7 @@ ax.set_ylim(bottom=0)
 plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.1) 
 plt.subplots_adjust(right=0.96)
 plt.savefig('single_deme.pdf', format='pdf', dpi=300)
+plt.savefig('single_deme.svg', format='svg', dpi=300)
 ###############################################################
 
 migration_rates = 10**(np.linspace(-10, 1.0, 12))
@@ -426,3 +427,4 @@ plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.05)
 # plt.tight_layout()
 plt.subplots_adjust(right=0.99)
 plt.savefig('two_deme.pdf', format='pdf', dpi=300)
+plt.savefig('two_deme.svg', format='svg', dpi=300)
