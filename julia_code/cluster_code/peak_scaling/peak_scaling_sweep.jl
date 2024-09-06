@@ -11,6 +11,7 @@ using .CoevolutionNetworkBase
 const OUTPUT_DIRECTORY = "/pool001/dswartz/peak_scaling"
 const MIGRATION_RATES = exp10.(LinRange(-6.0, -2, 40))
 const HOST_POPULATION_SIZES = exp10.(4:0.5:6.5)
+const DIFFUSION_CONSTANTS = LinRange(0.018, 0.01, length(HOST_POPULATION_SIZES))
 
 println("Number of threads: ", nthreads())
 
@@ -23,7 +24,7 @@ const M = 15
 const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
-const D = 0.01
+# const D = 0.01
 const sigma = 2.0 
 const DURATION = 100.0
 const DT = 0.05
@@ -41,6 +42,7 @@ function run_single_simulation(args)
     # Retrieve the actual migration rate using the index
     migration_rate = MIGRATION_RATES[migration_rate_idx]
     host_population_per_deme = round(Int, HOST_POPULATION_SIZES[host_per_deme_idx])
+    D = DIFFUSION_CONSTANTS[host_per_deme_idx]
 
     # Generate unique seed and set random seed
     seed = hash((host_per_deme_idx, migration_rate_idx, simulation_number))
@@ -91,7 +93,7 @@ function run_single_simulation(args)
 end
 
 # Function to save parameters and migration rates to CSV
-function save_parameters_and_migration_rates_to_csv(output_directory, migration_rates, host_population_sizes)
+function save_parameters_and_migration_rates_to_csv(output_directory, migration_rates, host_population_sizes, diffusion_constants)
     # Create a DataFrame for the main parameters
     parameters = DataFrame(
         L = [L],
@@ -101,7 +103,7 @@ function save_parameters_and_migration_rates_to_csv(output_directory, migration_
         beta = [beta],
         alpha = [alpha],
         gamma = [gamma],
-        D = [D],
+        # D = [D],
         sigma = [sigma],
         DURATION = [DURATION],
         DT = [DT],
@@ -126,9 +128,13 @@ function save_parameters_and_migration_rates_to_csv(output_directory, migration_
     population_sizes_df = DataFrame(HOST_POPULATION_SIZES = host_population_sizes)
     population_sizes_path = joinpath(output_directory, "host_population_sizes.csv")
     CSV.write(population_sizes_path, population_sizes_df)
+
+    diffusion_constants_df = DataFrame(DIFFUSION_CONSTANTS = diffusion_constants)
+    diffusion_constants_path = joinpath(output_directory, "diffusion_constants.csv")
+    CSV.write(diffusion_constants_path, diffusion_constants_df)
 end
 
-save_parameters_and_migration_rates_to_csv(OUTPUT_DIRECTORY, MIGRATION_RATES, HOST_POPULATION_SIZES)
+save_parameters_and_migration_rates_to_csv(OUTPUT_DIRECTORY, MIGRATION_RATES, HOST_POPULATION_SIZES, DIFFUSION_CONSTANTS)
 
 function main(job_id_arg)
     job_id = parse(Int, job_id_arg)
