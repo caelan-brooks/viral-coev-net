@@ -10,7 +10,7 @@ using .CoevolutionNetworkBase
 
 const OUTPUT_DIRECTORY = "/pool001/dswartz/peak_scaling"
 const MIGRATION_RATES = exp10.(LinRange(-6.0, -2, 40))
-const HOST_POPULATION_SIZES = exp10.(4:0.5:6.5)
+const HOST_POPULATION_SIZES = exp10.(LinRange(3.0,7.0,7))
 const DIFFUSION_CONSTANTS = LinRange(0.018, 0.01, length(HOST_POPULATION_SIZES))
 
 println("Number of threads: ", nthreads())
