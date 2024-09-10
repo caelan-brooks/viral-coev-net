@@ -56,6 +56,9 @@ for host_idx = 1:length(HOST_POPULATION_SIZES)
     for migration_idx = 1:length(MIGRATION_RATES)
         prob = calculate_survival_probability(migration_idx, host_idx)
         push!(df, (migration_idx, host_idx, prob))
+
+        println(prob)
+        flush(stdout)
     end
 end
 
