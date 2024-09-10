@@ -24,19 +24,31 @@ function calculate_survival_probability(migration_rate_idx, host_per_deme_idx)
     output_subdirectory = joinpath(OUTPUT_DIRECTORY, "host_per_deme_idx_$(host_per_deme_idx)", "migration_rate_idx_$(migration_rate_idx)")
     files = glob("*.jld2", output_subdirectory)
     num_replicates = length(files)
-    survival_results = zeros(Bool, num_replicates)
+    survival_results = fill(NaN, num_replicates)
     
     println((host_per_deme_idx, migration_rate_idx, num_replicates))
     flush(stdout)
 
     @threads for i in 1:num_replicates
-        total_infected_per_deme, _ = open(deserialize, files[i])
-        # total_infected_per_deme = data[1] # Assuming this is the correct structure
-        survival_results[i] = sum(total_infected_per_deme[:, end]) > 0
+        try
+            total_infected_per_deme, _ = open(deserialize, files[i])
+            survival_results[i] = sum(total_infected_per_deme[:, end]) > 0 ? 1.0 : 0.0
+        catch e
+            println("Error reading file $(files[i]): ", e)
+            survival_results[i] = NaN  # Mark failed reads as NaN
+        end
     end
 
-    return count(survival_results) / num_replicates
+    # Filter out NaN values and calculate survival probability from valid results
+    valid_results = filter(!isnan, survival_results)
+    
+    if length(valid_results) == 0
+        return NaN  # If all results are NaN, return NaN
+    else
+        return mean(valid_results)  # Calculate survival probability from valid samples
+    end
 end
+
 
 df = DataFrame(MigrationRateIdx = Int[], HostPerDemeIdx = Int[], SurvivalProbability = Float64[])
 
