@@ -87,18 +87,23 @@ slope, intercept = np.linalg.lstsq(A, probability, rcond=None)[0]
 # Define linear fit function
 linear_fit = lambda x: slope * x + intercept
 
+CROSS_REACTIVE_R = 3.0
+
 # Scatter plot with error bars
-ax.errorbar(variance, probability, yerr=error, fmt='o', label="Survival Probability", color='blue', ecolor='lightgray', elinewidth=1, capsize=1)
+ax.errorbar(variance / CROSS_REACTIVE_R**2, probability, yerr=error, fmt='o', label=None, color='blue', ecolor='lightgray', elinewidth=1, capsize=1)
 print(error)
 
 # Plot linear fit
-x_vals = np.linspace(min(variance), max(variance), 100)
-ax.plot(x_vals, linear_fit(x_vals), 'r--', label=f"Linear Fit\ny = {slope:.3f}x + {intercept:.3f}")
+x_vals = np.linspace(min(variance/CROSS_REACTIVE_R**2), max(variance/CROSS_REACTIVE_R**2), 100)
+# ax.plot(x_vals, linear_fit(x_vals), 'r--', label=f"Linear Fit\ny = {slope:.3f}x + {intercept:.3f}")
+formatted_slope = f"{slope * CROSS_REACTIVE_R**2:.2f}"  # Format the slope with 2 decimal places
+ax.plot(x_vals, linear_fit(x_vals * CROSS_REACTIVE_R**2), 'r--', label=rf"slope = {formatted_slope}")
 
 # Customize plot
-ax.set_xlabel(r"antigenic diversity at outbreak peak, $V(T)$")
+ax.set_xlabel(r"diversity at outbreak peak, $V(T) / r_0^2$")
 ax.set_ylabel("escape probability", labelpad=1)
 ax.set_ylim(0, 0.5)
+ax.legend(frameon=False)
 
 # Function to create a Gaussian plot
 def plot_gaussian(ax, mean, variance, color):
@@ -118,13 +123,13 @@ def plot_gaussian(ax, mean, variance, color):
     return max(y)
 
 # Adding inset for low variance Gaussian
-low_variance = variance[0] / 3
+low_variance = variance[0] / 3 
 mean = 0
 inset_ax_low = ax.inset_axes([0.15, 0.6, 0.3, 0.3])  # Adjust position and size as needed
 low_ymax = plot_gaussian(inset_ax_low, mean, low_variance, 'black')
 
 # Adding inset for high variance Gaussian
-high_variance = variance[-1] * 2
+high_variance = variance[-1] * 2 
 inset_ax_high = ax.inset_axes([0.67, 0.15, 0.3, 0.3])  # Adjust position and size as needed
 high_ymax = plot_gaussian(inset_ax_high, mean, high_variance, 'black')
 
@@ -136,15 +141,15 @@ inset_ax_high.set_ylim(0, common_ylim)
 # Adding arrows pointing to data points
 high_var_idx = np.argmax(variance)
 low_var_idx = np.argmin(variance)
-ax.annotate('', xy=(variance[high_var_idx], probability[high_var_idx]), xytext=(0.85, 0.25), textcoords='axes fraction',
+ax.annotate('', xy=(variance[high_var_idx]/CROSS_REACTIVE_R**2, probability[high_var_idx]), xytext=(0.85, 0.25), textcoords='axes fraction',
             arrowprops=dict(facecolor='black', shrink=0.1, width=0.5, headwidth=5, headlength=5))
-ax.annotate('', xy=(variance[low_var_idx], probability[low_var_idx]), xytext=(0.25, 0.75), textcoords='axes fraction',
+ax.annotate('', xy=(variance[low_var_idx]/CROSS_REACTIVE_R**2, probability[low_var_idx]), xytext=(0.25, 0.75), textcoords='axes fraction',
             arrowprops=dict(facecolor='black', shrink=0.1, width=0.5, headwidth=5, headlength=5))
 
 # Customize main plot
-ax.set_xticks(np.linspace(min(variance), max(variance), num=6))  # Generate xticks
-ax.xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'{x:.2f}'))  # Format xticks with 1 decimal place
+ax.set_xticks(np.linspace(min(variance/CROSS_REACTIVE_R**2), max(variance/CROSS_REACTIVE_R**2), num=4))  # Generate xticks
 
+ax.xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'{x:.3f}'))  # Format xticks with 1 decimal place
 ax = axs[1]
 
 # Parameters for the Gaussians
@@ -310,7 +315,7 @@ ax.set_xscale('log')
 ax.legend(frameon=False, loc=(0.05, 0.7))
 ax.set_xlim(migration_rate_min, migration_rate_max)
 ax.set_ylim(bottom=0, top=0.7)
-ax.set_xlabel(r'migration rate, $k$ (units: $\gamma$)')
+ax.set_xlabel(r'migration rate, $k / \gamma$')
 ax.set_ylabel('escape probability')
 
 ax = axs[1]
