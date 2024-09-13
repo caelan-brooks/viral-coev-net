@@ -8,19 +8,20 @@
 # Path to the Julia project/environment
 JULIA_PROJECT_PATH="/home/dswartz/viral-coev-net/julia_code/cluster_code/cluster_project"
 
-source /etc/profile.d/modules.sh   # Adjust this if the file location is different on your system
+# source /etc/profile.d/modules.sh   # Adjust this if the file location is different on your system
 
-# printenv
+# # printenv
 
-# echo $PATH
+# # echo $PATH
 
-type module
+# type module
 
-# which module
+# # which module
 
-module avail
+# module avail
 
-module load julia
+# module load julia
+# module add /home/software/modulefiles/julia/
 
 # Execute your Julia script using the specific project and all available cores
-julia --project=$JULIA_PROJECT_PATH -e 'println("hello")'
+/software/julia/1.9.1/bin/julia --project=$JULIA_PROJECT_PATH -e 'println("hello")'
