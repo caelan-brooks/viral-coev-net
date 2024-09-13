@@ -12,7 +12,7 @@ source /etc/profile.d/modules.sh   # Adjust this if the file location is differe
 module avail
 
 # module load julia
-module add /software/modulefiles/julia/
+module add /home/software/modulefiles/julia/
 
 # Execute your Julia script using the specific project and all available cores
 julia --project=$JULIA_PROJECT_PATH -e 'println("hello")'
