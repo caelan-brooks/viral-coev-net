@@ -8,7 +8,7 @@
 # Path to the Julia project/environment
 JULIA_PROJECT_PATH="/home/dswartz/viral-coev-net/julia_code/cluster_code/cluster_project"
 
-module add /home/software/modulefiles/julia/
-
+# module add /home/software/modulefiles/julia/
+module add julia
 # Execute your Julia script using the specific project and all available cores
 julia --project=$JULIA_PROJECT_PATH -t auto peak_scaling_sweep.jl
