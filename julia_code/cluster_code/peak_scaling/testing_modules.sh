@@ -10,13 +10,13 @@ JULIA_PROJECT_PATH="/home/dswartz/viral-coev-net/julia_code/cluster_code/cluster
 
 source /etc/profile.d/modules.sh   # Adjust this if the file location is different on your system
 
-printenv
+# printenv
 
-echo $PATH
+# echo $PATH
 
 type module
 
-which module
+# which module
 
 module load julia
 
