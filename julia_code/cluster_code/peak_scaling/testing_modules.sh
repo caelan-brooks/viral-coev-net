@@ -18,6 +18,8 @@ type module
 
 # which module
 
+module avail
+
 module load julia
 
 # Execute your Julia script using the specific project and all available cores
