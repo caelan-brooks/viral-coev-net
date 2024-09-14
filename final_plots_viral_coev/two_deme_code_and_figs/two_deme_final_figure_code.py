@@ -336,6 +336,8 @@ time_max_infected_deme2 = df.loc[max_idx_deme2, 'times']
 ax.axvline(time_max_infected_deme1, color='blue', linestyle='--', linewidth=2)
 ax.axvline(time_max_infected_deme2, color='green', linestyle='--', linewidth=2)
 
+print("t1 = ", time_max_infected_deme1)
+
 # Draw a two-headed arrow between the lines
 ax.annotate('', xy=(time_max_infected_deme1, ax.get_ylim()[1]*2), xytext=(time_max_infected_deme2, ax.get_ylim()[1]*2),
             arrowprops=dict(arrowstyle="<->", color='black'))
@@ -413,10 +415,52 @@ for idx, migration_rate in enumerate(migration_rates):
     migration_rate_label = f"{migration_rate:.1e}"
     ax.scatter(avg_x_data[-1], avg_y_data[-1], color=colors[idx], edgecolor='black', s=100, label=migration_rate_label)
 
+print(len(avg_x_data))
 # Plot theoretical curve (adjust as needed based on your theory or model)
 xs = np.linspace(0, max(avg_x_data), 200) / 2 / D
-ys = 2 * D * xs * (1 - np.exp(-20/2/N0 * (10 - xs)))
-# ax.plot(2 * D * xs, ys)
+# ysold = 2 * D * xs * (1 - np.exp(-2 * (time_of_max_infection - xs) - 2/2.5))
+# ys = 2 * D * xs - (xs-1/1.5 * np.log(100)) * np.exp(-2 * (time_of_max_infection - (xs-1/1.5 * np.log(100))))
+# ax.plot(2 * D * (xs), ys)
+# ax.plot(2 * D * (xs), ysold)
+
+#############################################################################
+ax.set_ylim(bottom=0, top=0.25)
+# Parameters
+N0 = 100
+sig = 2
+beta = 2.5
+gamma = 1.0
+F = beta - gamma
+D = 0.01
+T1 = 10
+
+# Define the function cdf_delta
+def cdf_delta(t, k):
+    return np.exp(-2 * N0 * k / sig**2 * (np.exp(F * t) - 1))
+
+# Time and ks values
+ts = np.linspace(0, 15, int(1e4))
+ks = np.logspace(-10, 0.5, 30)
+# ks = np.asarray(middle_df['MigrationRate'])
+print(len(ks))
+# Initialize avg_deltas array
+avg_deltas = np.full_like(ks, np.nan)
+
+# Calculate avg_deltas
+for ii in range(len(ks)):
+    avg_delta = np.trapz(cdf_delta(ts, ks[ii]), ts)
+    avg_deltas[ii] = avg_delta
+
+# Initialize var_diffs array
+var_diffs = np.full_like(ks, np.nan)
+
+# Calculate var_diffs
+for ii in range(len(ks)):
+    term = - ks[ii] * (T1 - avg_deltas[ii]) * N0 * np.exp(F * avg_deltas[ii]) - sig**2 / 2 / beta
+    var_diffs[ii] = 2 * D * avg_deltas[ii] * (1 - np.exp(term))
+
+ax.plot(2 * D * avg_deltas, var_diffs)
+# ax.scatter(2 * D * avg_deltas, var_diffs, color='red', marker='x', s=100)
 
 # Plot y = x line
 max_limit = max(max(avg_x_data), max(avg_y_data))
