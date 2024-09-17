@@ -413,16 +413,15 @@ for idx, migration_rate in enumerate(migration_rates):
     # print(np.mean(variance_diff_data))
 
     migration_rate_label = f"{migration_rate:.1e}"
-    ax.scatter(avg_x_data[-1], avg_y_data[-1], color=colors[idx], edgecolor='black', s=100, label=migration_rate_label)
+    ax.scatter(avg_x_data[-1], avg_y_data[-1], color=colors[idx], edgecolor='black', s=100, label=None)
 
-print(len(avg_x_data))
+print(np.asarray(avg_x_data)/2/D)
 # Plot theoretical curve (adjust as needed based on your theory or model)
 xs = np.linspace(0, max(avg_x_data), 200) / 2 / D
-# ysold = 2 * D * xs * (1 - np.exp(-2 * (time_of_max_infection - xs) - 2/2.5))
+ysold = 2 * D * xs * (1 - np.exp(-2 * (time_of_max_infection - xs) - 2/2.5))
 # ys = 2 * D * xs - (xs-1/1.5 * np.log(100)) * np.exp(-2 * (time_of_max_infection - (xs-1/1.5 * np.log(100))))
 # ax.plot(2 * D * (xs), ys)
-# ax.plot(2 * D * (xs), ysold)
-
+ax.plot(2 * D * (xs), ysold, label="analytic expression eq 41")
 #############################################################################
 ax.set_ylim(bottom=0, top=0.25)
 # Parameters
@@ -459,7 +458,7 @@ for ii in range(len(ks)):
     term = - ks[ii] * (T1 - avg_deltas[ii]) * N0 * np.exp(F * avg_deltas[ii]) - sig**2 / 2 / beta
     var_diffs[ii] = 2 * D * avg_deltas[ii] * (1 - np.exp(term))
 
-ax.plot(2 * D * avg_deltas, var_diffs)
+ax.plot(2 * D * avg_deltas, var_diffs, label="numerically evaluate averages")
 # ax.scatter(2 * D * avg_deltas, var_diffs, color='red', marker='x', s=100)
 
 # Plot y = x line
@@ -471,7 +470,7 @@ ax.set_ylabel(r'$\langle V_2(T_2)  - V_1(T_1) \rangle$')
 # ax.set_title('Averages of 2D * Peak Time Difference vs. Variance Difference')
 # ax.legend(title="Migration Rate")
 ax.grid(True, which="both", linestyle='--', linewidth=0.5)
-
+ax.legend()
 plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.05) 
 # plt.tight_layout()
 plt.subplots_adjust(right=0.99)
