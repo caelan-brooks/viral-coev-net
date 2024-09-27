@@ -139,7 +139,7 @@ function main(job_id_arg)
 
     # Run simulations for all replicates
     @threads for simulation_number in START_REPLICATE:(START_REPLICATE+NUM_REPLICATES-1)
-        args = (host_per_deme_idx, migration_rate_idx, simulation_number)
+        args = (host_per_deme_idx, simulation_number)
         run_single_simulation(args)
         GC.gc() # Careful, this might not be the right place to clear memory
     end
