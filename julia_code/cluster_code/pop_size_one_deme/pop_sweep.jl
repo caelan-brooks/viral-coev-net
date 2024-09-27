@@ -89,7 +89,7 @@ function run_single_simulation(args)
 end
 
 # Function to save parameters and migration rates to CSV
-function save_parameters_and_migration_rates_to_csv(output_directory, migration_rates, host_population_sizes, diffusion_constants)
+function save_parameters_and_migration_rates_to_csv(output_directory, host_population_sizes)
     # Create a DataFrame for the main parameters
     parameters = DataFrame(
         L = [L],
