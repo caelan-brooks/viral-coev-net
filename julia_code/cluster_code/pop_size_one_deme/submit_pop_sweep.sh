@@ -14,4 +14,4 @@ export PATH="~/julia-1.9.0/bin:$PATH"
 which julia
 
 # Execute your Julia script using the specific project and all available cores
-julia --project=$JULIA_PROJECT_PATH -t auto peak_scaling_sweep.jl
+julia --project=$JULIA_PROJECT_PATH -t auto pop_sweep.jl
