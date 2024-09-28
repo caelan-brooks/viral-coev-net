@@ -47,9 +47,7 @@ function analyze_all_results(HOST_POPULATION_SIZES, OUTPUT_DIRECTORY::String)
         output_subdirectory = joinpath(OUTPUT_DIRECTORY, "host_per_deme_idx_$idx")
         replicate_files = glob("*.jld2", output_subdirectory)
         num_replicates = length(replicate_files)
-        println(num_replicates)
-        flush(stdout)
-
+        
         results = Array{Any}(undef, num_replicates)
 
         @time begin
@@ -63,7 +61,10 @@ function analyze_all_results(HOST_POPULATION_SIZES, OUTPUT_DIRECTORY::String)
         maximum_infected_deme_1 = [result[3] for result in results]
 
         valid_extinction_times = extinction_times[.!isnan.(extinction_times)]
+        survival_probabilities[idx] = sum(survived_results) / num_replicates
 
+        println("Analyzing ", idx)
+        println(num_replicates)
         println("Maximum Extinction Time: ", maximum(valid_extinction_times))
         println("Average Extinction Time: ", mean(valid_extinction_times))
         println("number of times greater than 60: ", count(valid_extinction_times .> 60))
@@ -71,8 +72,8 @@ function analyze_all_results(HOST_POPULATION_SIZES, OUTPUT_DIRECTORY::String)
         println("number times greater than 80: ", count(valid_extinction_times .> 80))
         println("number times greater than 110: ", count(valid_extinction_times .> 110))
         println("Peak infected in deme 1: ", mean(maximum_infected_deme_1), " +- ", std(maximum_infected_deme_1))
-
-        survival_probabilities[idx] = sum(survived_results) / num_replicates
+        println("Survival Probability = ", survival_probabilities[idx])
+        flush(stdout)
     end
 
     return survival_probabilities
