@@ -61,7 +61,6 @@ function analyze_all_results(HOST_POPULATION_SIZES, OUTPUT_DIRECTORY::String)
         survived_results = [result[1] for result in results]
         extinction_times = [result[2] for result in results]
         maximum_infected_deme_1 = [result[3] for result in results]
-        maximum_infected_deme_2 = [result[4] for result in results]
 
         valid_extinction_times = extinction_times[.!isnan.(extinction_times)]
 
@@ -70,8 +69,8 @@ function analyze_all_results(HOST_POPULATION_SIZES, OUTPUT_DIRECTORY::String)
         println("number of times greater than 60: ", count(valid_extinction_times .> 60))
         println("number times greater than 70: ", count(valid_extinction_times .> 70))
         println("number times greater than 80: ", count(valid_extinction_times .> 80))
+        println("number times greater than 110: ", count(valid_extinction_times .> 110))
         println("Peak infected in deme 1: ", mean(maximum_infected_deme_1), " +- ", std(maximum_infected_deme_1))
-        println("Peak infected in deme 2: ", mean(maximum_infected_deme_2), " +- ", std(maximum_infected_deme_2))
 
         survival_probabilities[idx] = sum(survived_results) / num_replicates
     end
