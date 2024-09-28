@@ -31,7 +31,7 @@ function process_replicate(file_path::String)
         survived_flag = survived ? 1 : 0
         extinction_time = !survived ? duration_times[findfirst(total_infected .== 0)] : NaN
         
-        return (survived_flag, extinction_time, maximum_infected_deme_1, maximum_infected_deme_2)
+        return (survived_flag, extinction_time, maximum_infected_deme_1)
     catch e
         println("error reading file: error is $e")
         return (0, NaN, NaN, NaN) # Assuming default values in case of error
