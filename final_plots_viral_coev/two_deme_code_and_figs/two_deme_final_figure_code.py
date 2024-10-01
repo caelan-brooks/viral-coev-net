@@ -19,7 +19,7 @@ rcParams['legend.fontsize'] = 9
 written_text_fontsize = 12
 
 # First figure will have the trajectories and the survival probabilities
-fig, axs = plt.subplots(2, 2, figsize=(8.5, 8.5))  # Adjust the figure size to balance the subplot shapes
+fig, axs = plt.subplots(2, 2, figsize=(8.5, 5.5))  # Adjust the figure size to balance the subplot shapes
 labels = ['(a)', '(b)', '(c)', '(d)']
 
 for ax, label in zip(axs.flat, labels):
