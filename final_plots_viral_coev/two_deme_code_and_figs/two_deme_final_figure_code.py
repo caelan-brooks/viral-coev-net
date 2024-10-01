@@ -19,14 +19,14 @@ rcParams['legend.fontsize'] = 9
 written_text_fontsize = 12
 
 # First figure will have the trajectories and the survival probabilities
-fig, axs = plt.subplots(1, 3, figsize=(8.5, 3.0))  # Adjust the figure size to balance the subplot shapes
-labels = ['(a)', '(b)', '(c)']
+fig, axs = plt.subplots(2, 2, figsize=(8.5, 8.5))  # Adjust the figure size to balance the subplot shapes
+labels = ['(a)', '(b)', '(c)', '(d)']
 
 for ax, label in zip(axs.flat, labels):
-    ax.text(-0.01, 1.05, label, transform=ax.transAxes, va='bottom')
+    ax.text(-0.01, 1.0, label, transform=ax.transAxes, va='bottom')
 
 # Adjusting code for panel (a)
-ax = axs[0]
+ax = axs.flatten()[0]
 trajectories_df = pd.read_csv("../trajectories_migration_rate_idx_1.csv")
 
 # Initialize variables to store the maximum infected number and the corresponding time for the final trajectory
@@ -70,7 +70,7 @@ ax.set_ylim(bottom=1)
 
 
 # Adjusting code for panel (b)
-ax = axs[2]  # This selects the last panel position in a 3x2 grid
+ax = axs.flatten()[2]  # This selects the last panel position in a 3x2 grid
 
 # Load data from CSV
 data = pd.read_csv("../variances_and_probabilities.csv")
@@ -150,7 +150,7 @@ ax.annotate('', xy=(variance[low_var_idx]/CROSS_REACTIVE_R**2, probability[low_v
 ax.set_xticks(np.linspace(min(variance/CROSS_REACTIVE_R**2), max(variance/CROSS_REACTIVE_R**2), num=4))  # Generate xticks
 
 ax.xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'{x:.3f}'))  # Format xticks with 1 decimal place
-ax = axs[1]
+ax = axs.flatten()[1]
 
 # Parameters for the Gaussians
 mean = 0
@@ -203,6 +203,14 @@ ax.set_ylabel(r'infected number density $n(x,t)$')
 ax.set_yticks([])
 ax.set_xticks([])
 ax.set_ylim(bottom=0)
+
+ax = axs.flatten()[3]
+data = pd.read_csv("../pop_size_scaling.csv")
+ax.scatter(data.HostPopulationSize, data.SurvivalProbability)
+ax.set_xscale("log")
+ax.set_xlabel(r"number of hosts, $N_h$")
+ax.set_ylabel("escape probability")
+ax.grid()
 
 plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.1) 
 plt.subplots_adjust(right=0.96)
