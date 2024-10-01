@@ -206,7 +206,7 @@ ax.set_ylim(bottom=0)
 
 ax = axs.flatten()[3]
 data = pd.read_csv("../pop_size_scaling.csv")
-ax.scatter(data.HostPopulationSize, data.SurvivalProbability)
+ax.scatter(data.HostPopulationSize, data.SurvivalProbability, label=None, color='blue')
 ax.set_xscale("log")
 ax.set_xlabel(r"number of hosts, $N_h$")
 ax.set_ylabel("escape probability")
