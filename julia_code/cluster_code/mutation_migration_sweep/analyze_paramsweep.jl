@@ -4,7 +4,7 @@ using DataFrames
 using Glob
 using Base.Threads
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/viral_coev_mutation_migration_sweep"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/viral_coev_mutation_migration_sweep_2"
 const MIGRATION_RATES = exp10.(LinRange(-7, -0.5, 10))
 const MUTATION_RATES = LinRange(0.001,0.02,10)
 
