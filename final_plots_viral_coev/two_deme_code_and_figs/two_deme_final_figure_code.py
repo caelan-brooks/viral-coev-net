@@ -18,6 +18,8 @@ rcParams['ytick.labelsize'] = 12
 rcParams['legend.fontsize'] = 9
 written_text_fontsize = 12
 
+rcParams['figure.dpi'] = 100  # or set it to any constant value
+
 # First figure will have the trajectories and the survival probabilities
 fig, axs = plt.subplots(2, 2, figsize=(8.5, 5.5))  # Adjust the figure size to balance the subplot shapes
 labels = ['(a)', '(b)', '(c)', '(d)']
@@ -249,7 +251,7 @@ df_new['StandardError'] = np.sqrt(df_new['SurvivalProbability'] * (1 - df_new['S
 middle_df_new = df_new.iloc[1:-3]  # Adjust as per your new data structure
 
 
-fig, axs = plt.subplots(1, 3, figsize=(10.5, 3.0))  # Adjust the figure size to balance the subplot shapes
+fig, axs = plt.subplots(1, 3, figsize=(8.5, 3.0))  # Adjust the figure size to balance the subplot shapes
 labels = ['(a)', '(b)', '(c)']
 
 for ax, label in zip(axs.flat, labels):
