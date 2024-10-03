@@ -510,7 +510,7 @@ csv_file = "../survival_probabilities.csv"  # Adjust the file name/path if neces
 data = pd.read_csv(csv_file)
 mutation_rates = np.linspace(0.001, 0.02, 10)
 migration_rates = np.power(10.0, np.linspace(-7, -0.5, 10))
-color_norm = LogNorm(vmin=min(migration_rates), vmax=max(migration_rates))
+# color_norm = LogNorm(vmin=min(migration_rates), vmax=max(migration_rates))
 
 for migration_rate_idx in range(1, len(migration_rates) + 1):
     subset = data[data["MigrationRateIdx"] == migration_rate_idx]
