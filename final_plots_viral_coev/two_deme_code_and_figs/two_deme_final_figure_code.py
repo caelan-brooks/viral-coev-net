@@ -402,6 +402,8 @@ inset_ax.text(0.05, 0.5, r'density, $n$', transform=inset_ax.transAxes, ha='cent
 inset_ax.legend(loc='best', fontsize=8, frameon=False, handlelength=1)
 
 ax = axs[2]
+r0=3
+
 from matplotlib.colors import LogNorm
 cmap = plt.get_cmap('inferno')
 cmap = plt.get_cmap('inferno')
@@ -426,12 +428,12 @@ for idx, migration_rate in enumerate(migration_rates):
     # print(np.mean(variance_diff_data))
 
     migration_rate_label = f"{migration_rate:.1e}"
-    ax.scatter(avg_x_data[-1], avg_y_data[-1], color=colors[idx], edgecolor='black', s=100, label=None)
+    ax.scatter(avg_x_data[-1] / r0**2, avg_y_data[-1] / r0**2, color=colors[idx], edgecolor='black', s=100, label=None)
 
 print(np.asarray(avg_x_data)/2/D)
 # Plot theoretical curve (adjust as needed based on your theory or model)
-xs = np.linspace(0, max(avg_x_data), 200) / 2 / D
-ysold = 2 * D * xs * (1 - np.exp(-2 * (time_of_max_infection - xs) - 2/2.5))
+# xs = np.linspace(0, max(avg_x_data), 200) / 2 / D
+# ysold = 2 * D * xs * (1 - np.exp(-2 * (time_of_max_infection - xs) - 2/2.5))
 # ys = 2 * D * xs - (xs-1/1.5 * np.log(100)) * np.exp(-2 * (time_of_max_infection - (xs-1/1.5 * np.log(100))))
 # ax.plot(2 * D * (xs), ys)
 # ax.plot(2 * D * (xs), ysold, label="analytic expression eq 41")
@@ -444,7 +446,7 @@ sm.set_array([])  # Empty array for the ScalarMappable
 cbar = plt.colorbar(sm, ax=ax)
 cbar.set_label(r'migration rate, $k/\gamma$')
 #############################################################################
-ax.set_ylim(bottom=0, top=0.25)
+ax.set_ylim(bottom=0, top=0.25 / r0**2)
 # Parameters
 N0 = 100
 sig = 2
@@ -479,15 +481,15 @@ for ii in range(len(ks)):
     term = - ks[ii] * (T1 - avg_deltas[ii]) * N0 * np.exp(F * avg_deltas[ii]) - sig**2 / 2 / beta
     var_diffs[ii] = 2 * D * avg_deltas[ii] * (1 - np.exp(term))
 
-ax.plot(2 * D * avg_deltas, var_diffs, label="numerically evaluate averages")
+ax.plot(2 * D * avg_deltas / r0**2, var_diffs / r0**2, label="numerically evaluate averages")
 # ax.scatter(2 * D * avg_deltas, var_diffs, color='red', marker='x', s=100)
 
 # Plot y = x line
 max_limit = max(max(avg_x_data), max(avg_y_data))
-ax.plot([0, max_limit], [0, max_limit], 'k--', label='y = x')  # Black dashed line
+ax.plot([0, max_limit / r0**2], [0, max_limit / r0**2], 'k--', label='y = x')  # Black dashed line
 
-ax.set_xlabel(r'$\langle 2 D \Delta T \rangle$')
-ax.set_ylabel(r'$\langle V_2(T_2)  - V_1(T_1) \rangle$')
+ax.set_xlabel(r'$\langle 2 D \Delta T \rangle / r_0^2$')
+ax.set_ylabel(r'$\langle V_2(T_2)  - V_1(T_1) \rangle / r_0^2$')
 # ax.set_title('Averages of 2D * Peak Time Difference vs. Variance Difference')
 # ax.legend(title="Migration Rate")
 ax.grid(True, which="both", linestyle='--', linewidth=0.5)
