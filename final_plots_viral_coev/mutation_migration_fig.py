@@ -8,12 +8,12 @@ import matplotlib.ticker as ticker
 # Set the global font to Times New Roman
 rcParams['font.family'] = 'serif'
 rcParams['font.serif'] = ['Times New Roman']
-rcParams['font.size'] = 14  # Default font size
-rcParams['axes.labelsize'] = 16
-rcParams['axes.titlesize'] = 18
-rcParams['xtick.labelsize'] = 14
-rcParams['ytick.labelsize'] = 14
-rcParams['legend.fontsize'] = 16
+rcParams['font.size'] = 12  # Default font size
+rcParams['axes.labelsize'] = 12
+rcParams['axes.titlesize'] = 12
+rcParams['xtick.labelsize'] = 12
+rcParams['ytick.labelsize'] = 12
+rcParams['legend.fontsize'] = 12
 
 # Load the data
 csv_file = "survival_probabilities.csv"  # Adjust the file name/path if necessary
@@ -73,15 +73,15 @@ plt.figure(figsize=(12, 8))
 for migration_rate_idx in range(1, len(migration_rates) + 1):
     subset = data[data["MigrationRateIdx"] == migration_rate_idx]
     errors = subset["SurvivalProbability"].apply(lambda p: standard_error(p))
-    plt.errorbar(mutation_rates, subset["SurvivalProbability"], yerr=errors, label=f'Migration Rate {migration_rates[migration_rate_idx - 1]:.1e}', fmt='-o', markersize=4, capsize=5, elinewidth=1, errorevery=1)
+    plt.errorbar(mutation_rates, subset["SurvivalProbability"], yerr=errors, label=f'{migration_rates[migration_rate_idx - 1]:.1e}', fmt='-o', markersize=4, capsize=5, elinewidth=1, errorevery=1)
 
 
 
-plt.xlabel("Mutation Rate")
-plt.ylabel("Survival Probability")
-plt.title("Survival Probability vs Mutation Rate for Different Migration Rates")
+plt.xlabel(r"mutation rate, $D$")
+plt.ylabel("escpape probability")
+# plt.title("Survival Probability vs Mutation Rate for Different Migration Rates")
 plt.xscale("linear")
-plt.legend(title="Migration Rates", loc='upper left')
+plt.legend(title=r"migration rates, $k/\gamma$", loc='upper left')
 plt.grid(True)
 # Using StrMethodFormatter for x-axis labels
 plt.gca().xaxis.set_major_formatter(ticker.StrMethodFormatter("{x:.1e}"))

@@ -251,8 +251,8 @@ df_new['StandardError'] = np.sqrt(df_new['SurvivalProbability'] * (1 - df_new['S
 middle_df_new = df_new.iloc[1:-3]  # Adjust as per your new data structure
 
 
-fig, axs = plt.subplots(1, 3, figsize=(8.5, 3.0))  # Adjust the figure size to balance the subplot shapes
-labels = ['(a)', '(b)', '(c)']
+fig, axs = plt.subplots(2, 2, figsize=(8.5, 5.5))  # Adjust the figure size to balance the subplot shapes
+labels = ['(a)', '(b)', '(c)', '(d)']
 
 for ax, label in zip(axs.flat, labels):
     # Position: x=0, y=1 in axis coordinates (top left corner), transform=ax.transAxes
@@ -260,7 +260,7 @@ for ax, label in zip(axs.flat, labels):
     ax.text(-0.02, 1.05, label, transform=ax.transAxes, va='bottom')
 
 
-ax = axs[0]
+ax = axs.flatten()[0]
 
 # Plotting code adjusted for the subplot
 # ax.errorbar(middle_df['MigrationRate'], middle_df['SurvivalProbability'], yerr=middle_df['StandardError'], fmt='o', capsize=5, color='saddlebrown', label='Two-way Migration (1 \u2194 2)')
@@ -328,7 +328,7 @@ ax.set_ylim(bottom=0, top=0.7)
 ax.set_xlabel(r'migration rate, $k / \gamma$')
 ax.set_ylabel('escape probability')
 
-ax = axs[1]
+ax = axs.flatten()[1]
 
 df = pd.read_csv("../single_trajectory.csv")
 
@@ -403,7 +403,7 @@ inset_ax.text(0.05, 0.5, r'density, $n$', transform=inset_ax.transAxes, ha='cent
 # Add a legend
 inset_ax.legend(loc='best', fontsize=8, frameon=False, handlelength=1)
 
-ax = axs[2]
+ax = axs.flatten()[2]
 r0=3
 
 from matplotlib.colors import LogNorm
@@ -446,7 +446,9 @@ print(np.asarray(avg_x_data)/2/D)
 sm = plt.cm.ScalarMappable(cmap=cmap, norm=color_norm)  # Use the renamed `color_norm`
 sm.set_array([])  # Empty array for the ScalarMappable
 cbar = plt.colorbar(sm, ax=ax)
-cbar.set_label(r'migration rate, $k/\gamma$')
+cbar.set_label(r'$k/\gamma$', labelpad=0, rotation=0)
+cbar.ax.xaxis.set_label_position('top')  # Move label to the top
+
 #############################################################################
 ax.set_ylim(bottom=0, top=0.25 / r0**2)
 # Parameters
@@ -496,6 +498,37 @@ ax.set_ylabel(r'$\langle V_2(T_2)  - V_1(T_1) \rangle / r_0^2$')
 # ax.legend(title="Migration Rate")
 ax.grid(True, which="both", linestyle='--', linewidth=0.5)
 # ax.legend()
+
+ax = axs.flatten()[3]
+
+# Function to calculate standard error
+def standard_error(p, n=10000):
+    return np.sqrt(p * (1 - p) / n)
+
+# Load the data
+csv_file = "../survival_probabilities.csv"  # Adjust the file name/path if necessary
+data = pd.read_csv(csv_file)
+mutation_rates = np.linspace(0.001, 0.02, 10)
+migration_rates = np.power(10.0, np.linspace(-7, -0.5, 10))
+color_norm = LogNorm(vmin=min(migration_rates), vmax=max(migration_rates))
+
+for migration_rate_idx in range(1, len(migration_rates) + 1):
+    subset = data[data["MigrationRateIdx"] == migration_rate_idx]
+    errors = subset["SurvivalProbability"].apply(lambda p: standard_error(p))
+    ax.plot(mutation_rates, subset["SurvivalProbability"], '-o', color=cmap(color_norm(migration_rates))[migration_rate_idx-1], label=f'{migration_rates[migration_rate_idx - 1]:.1e}', markersize=4)
+
+
+
+ax.set_xlabel(r"mutation rate, $D$")
+ax.set_ylabel("escpape probability")
+# ax.set_xlim(5e-3, 1.5e-2)
+# plt.title("Survival Probability vs Mutation Rate for Different Migration Rates")
+ax.set_xscale("linear")
+# ax.legend(title=r"migration rates, $k/\gamma$", loc='upper left')
+ax.grid(True)
+# Using StrMethodFormatter for x-axis labels
+ax.xaxis.set_major_formatter(ticker.StrMethodFormatter("{x:.1e}"))
+
 plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.05) 
 # plt.tight_layout()
 # plt.subplots_adjust(right=0.99)
