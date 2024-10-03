@@ -265,8 +265,8 @@ ax = axs.flatten()[0]
 # Plotting code adjusted for the subplot
 # ax.errorbar(middle_df['MigrationRate'], middle_df['SurvivalProbability'], yerr=middle_df['StandardError'], fmt='o', capsize=5, color='saddlebrown', label='Two-way Migration (1 \u2194 2)')
 # ax.errorbar(middle_df_new['MigrationRate'], middle_df_new['SurvivalProbability'], yerr=middle_df_new['StandardError'], fmt='v', capsize=5, color='darkgreen', label='One-way Migration (1 \u2192 2)')
-ax.scatter(middle_df['MigrationRate'], middle_df['SurvivalProbability'], color='saddlebrown', label='Two-way Migration (1 \u2194 2)', marker='o')
-ax.scatter(middle_df_new['MigrationRate'], middle_df_new['SurvivalProbability'], color='darkgreen', label='One-way Migration (1 \u2192 2)', marker='v')
+ax.scatter(middle_df['MigrationRate'], middle_df['SurvivalProbability'], color='saddlebrown', label='two-way migration (1 \u2194 2)', marker='o')
+ax.scatter(middle_df_new['MigrationRate'], middle_df_new['SurvivalProbability'], color='darkgreen', label='one-way migration (1 \u2192 2)', marker='v')
 
 ax.axhline(y=first['SurvivalProbability'], color='royalblue', linestyle='--')
 
@@ -319,7 +319,7 @@ colors = plt.cm.viridis(np.linspace(0, 1, len(migration_rates)))  # Generate col
 avg_variance_differences, probability_of_spreading = load_and_compute_averages(len(migration_rates))
 final_probabilities = compute_probabilities(avg_variance_differences, probability_of_spreading, p1, slope)
 
-ax.plot(migration_rates, final_probabilities, 'k--', label='Theory' )
+ax.plot(migration_rates, final_probabilities, 'k--', label='theory' )
 
 ax.set_xscale('log')
 ax.legend(frameon=False, loc=(0.05, 0.7))
