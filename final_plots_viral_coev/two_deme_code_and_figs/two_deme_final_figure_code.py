@@ -249,7 +249,7 @@ df_new['StandardError'] = np.sqrt(df_new['SurvivalProbability'] * (1 - df_new['S
 middle_df_new = df_new.iloc[1:-3]  # Adjust as per your new data structure
 
 
-fig, axs = plt.subplots(1, 3, figsize=(8.5, 3.0))  # Adjust the figure size to balance the subplot shapes
+fig, axs = plt.subplots(1, 3, figsize=(10.5, 3.0))  # Adjust the figure size to balance the subplot shapes
 labels = ['(a)', '(b)', '(c)']
 
 for ax, label in zip(axs.flat, labels):
@@ -402,8 +402,13 @@ inset_ax.text(0.05, 0.5, r'density, $n$', transform=inset_ax.transAxes, ha='cent
 inset_ax.legend(loc='best', fontsize=8, frameon=False, handlelength=1)
 
 ax = axs[2]
+from matplotlib.colors import LogNorm
 cmap = plt.get_cmap('inferno')
-colors = cmap(np.linspace(0, 1, len(migration_rates)))
+cmap = plt.get_cmap('inferno')
+color_norm = LogNorm(vmin=min(migration_rates), vmax=max(migration_rates))  # Renamed to avoid conflict
+colors = cmap(color_norm(migration_rates))  # Get colors based on log scale
+
+# colors = cmap(np.linspace(0, 1, len(migration_rates)))
 
 avg_x_data = []
 avg_y_data = []
@@ -429,7 +434,15 @@ xs = np.linspace(0, max(avg_x_data), 200) / 2 / D
 ysold = 2 * D * xs * (1 - np.exp(-2 * (time_of_max_infection - xs) - 2/2.5))
 # ys = 2 * D * xs - (xs-1/1.5 * np.log(100)) * np.exp(-2 * (time_of_max_infection - (xs-1/1.5 * np.log(100))))
 # ax.plot(2 * D * (xs), ys)
-ax.plot(2 * D * (xs), ysold, label="analytic expression eq 41")
+# ax.plot(2 * D * (xs), ysold, label="analytic expression eq 41")
+
+
+
+# Create the colorbar
+sm = plt.cm.ScalarMappable(cmap=cmap, norm=color_norm)  # Use the renamed `color_norm`
+sm.set_array([])  # Empty array for the ScalarMappable
+cbar = plt.colorbar(sm, ax=ax)
+cbar.set_label(r'migration rate, $k/\gamma$')
 #############################################################################
 ax.set_ylim(bottom=0, top=0.25)
 # Parameters
@@ -478,9 +491,9 @@ ax.set_ylabel(r'$\langle V_2(T_2)  - V_1(T_1) \rangle$')
 # ax.set_title('Averages of 2D * Peak Time Difference vs. Variance Difference')
 # ax.legend(title="Migration Rate")
 ax.grid(True, which="both", linestyle='--', linewidth=0.5)
-ax.legend()
+# ax.legend()
 plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.05) 
 # plt.tight_layout()
-plt.subplots_adjust(right=0.99)
+# plt.subplots_adjust(right=0.99)
 plt.savefig('two_deme.pdf', format='pdf', dpi=300)
 plt.savefig('two_deme.svg', format='svg', dpi=300)
