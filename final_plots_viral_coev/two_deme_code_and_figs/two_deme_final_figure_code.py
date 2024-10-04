@@ -485,9 +485,51 @@ for ii in range(len(ks)):
     term = - ks[ii] * (T1 - avg_deltas[ii]) * N0 * np.exp(F * avg_deltas[ii]) - sig**2 / 2 / beta
     var_diffs[ii] = 2 * D * avg_deltas[ii] * (1 - np.exp(term))
 
-ax.plot(2 * D * avg_deltas / r0**2, var_diffs / r0**2, label="numerically evaluate averages")
+# ax.plot(2 * D * avg_deltas / r0**2, var_diffs / r0**2, label="numerically evaluate averages")
 # ax.scatter(2 * D * avg_deltas, var_diffs, color='red', marker='x', s=100)
 
+#####################################
+# Parameters
+N0 = 100
+sig = 2
+beta = 2.5
+gamma = 1.0
+F = beta - gamma
+D = 0.01
+T1 = 10
+
+# Define the function cdf_delta and its derivative (PDF)
+def cdf_delta(t, k):
+    return np.exp(-2 * N0 * k / sig**2 * (np.exp(F * t) - 1))
+
+# Calculate the PDF by differentiating the CDF with respect to t
+def pdf_delta(t, k):
+    cdf_derivative = (2 * N0 * k / sig**2) * F * np.exp(F * t) * np.exp(-2 * N0 * k / sig**2 * (np.exp(F * t) - 1))
+    return cdf_derivative
+
+# Function to calculate var_diff at a specific time t and migration rate k
+def var_diff(t, k):
+    avg_delta = np.trapz(cdf_delta(ts, k), ts)  # Calculate the average delta for this k
+    term = -k * (T1 - avg_delta) * N0 * np.exp(F * avg_delta) - sig**2 / 2 / beta
+    return 2 * D * avg_delta * (1 - np.exp(term))
+
+# Time and ks values
+ts = np.linspace(0, 15, int(1e4))
+ks = np.logspace(-10, 0.5, 30)
+
+# Initialize avg_var_diffs array
+avg_var_diffs = np.full_like(ks, np.nan)
+
+# Calculate avg_var_diffs by integrating var_diff against the PDF of delta
+for ii in range(len(ks)):
+    # Integrate var_diff(t, k) * pdf_delta(t, k) over time
+    avg_var_diff = np.trapz(var_diff(ts, ks[ii]) * pdf_delta(ts, ks[ii]), ts)
+    avg_var_diffs[ii] = avg_var_diff
+
+# Plot the results
+# ax.plot(2 * D * avg_deltas / r0**2, avg_var_diffs / r0**2, label="numerically evaluate averages with PDF")
+
+######################################
 # Plot y = x line
 max_limit = max(max(avg_x_data), max(avg_y_data))
 ax.plot([0, max_limit / r0**2], [0, max_limit / r0**2], 'k--', label='y = x')  # Black dashed line
@@ -497,7 +539,7 @@ ax.set_ylabel(r'$\langle V_2(T_2)  - V_1(T_1) \rangle / r_0^2$')
 # ax.set_title('Averages of 2D * Peak Time Difference vs. Variance Difference')
 # ax.legend(title="Migration Rate")
 ax.grid(True, which="both", linestyle='--', linewidth=0.5)
-# ax.legend()
+ax.legend()
 
 ax = axs.flatten()[3]
 
