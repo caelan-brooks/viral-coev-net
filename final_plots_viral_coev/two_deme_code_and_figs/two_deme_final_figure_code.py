@@ -529,6 +529,44 @@ ax.grid(True)
 # Using StrMethodFormatter for x-axis labels
 ax.xaxis.set_major_formatter(ticker.StrMethodFormatter("{x:.1e}"))
 
+# Create inset plot using ax.inset_axes
+ax_inset = ax.inset_axes([0.12, 0.4, 0.32, 0.55])  # Position and size of inset [x0, y0, width, height]
+ax_inset.patch.set_alpha(0.5)  # Set background transparent
+
+# Find the migration rate with the highest survival probability, skipping cases with any survival probability of 0 or 1
+best_migration_rates = []
+for idx, mutation_rate in enumerate(mutation_rates):
+    subset = data[data["MutationRateIdx"] == idx + 1]  # Filter rows with the correct MutationRateIdx
+    
+    # Check if any survival probabilities are 0 or 1, if so, skip this mutation rate
+    if (subset["SurvivalProbability"] <= 1e-3).any() or (subset["SurvivalProbability"] == 1).any():
+        best_migration_rates.append(np.nan)  # Skip this mutation rate
+        continue
+
+    # Otherwise, find the max survival probability
+    if not subset.empty:
+        best_idx = subset["SurvivalProbability"].idxmax()  # Find index of max survival probability
+        best_migration_idx = data.loc[best_idx, "MigrationRateIdx"]  # Get the MigrationRateIdx
+        best_migration = migration_rates[best_migration_idx - 1]  # Look up the actual migration rate (adjust for 0-based index)
+        best_migration_rates.append(best_migration)
+    else:
+        best_migration_rates.append(np.nan)  # Handle cases where no valid survival probabilities exist
+
+# Plot in the inset
+ax_inset.plot(mutation_rates, best_migration_rates, '-o', color='black', markersize=4)
+ax_inset.set_xlabel(r"$D$", fontsize=10)
+ax_inset.set_ylabel(r"optimal $k/\gamma$", fontsize=10, labelpad=2)  # Adjust the labelpad to reduce space
+ax_inset.set_xscale("linear")
+ax_inset.set_yscale("log")
+ax_inset.grid(True)
+
+# Set y-axis limits to reduce padding
+ax_inset.set_ylim(1.2e-6, 8e-5)
+
+# Adjust tick parameters to make ticks face inward
+ax_inset.tick_params(axis='both', which='major', labelsize=6, direction='in')
+
+
 plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.05) 
 # plt.tight_layout()
 # plt.subplots_adjust(right=0.99)
