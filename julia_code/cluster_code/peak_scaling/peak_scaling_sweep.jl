@@ -77,14 +77,14 @@ function run_single_simulation(args)
 
         # Calculate total infected per deme
         total_infected_per_deme = calculate_total_infected_per_deme(simulation)
-        antigenic_variance_per_deme = calculate_antigenic_variance_per_deme(simulation)
 
         # Prepare output file path using migration rate index
         output_file = joinpath(OUTPUT_DIRECTORY, "host_per_deme_idx_$(host_per_deme_idx)", "migration_rate_idx_$(migration_rate_idx)", "replicate_$(simulation_number).jld2")
 
         # Save the calculated total infected per deme
         open(output_file, "w") do file
-            serialize(file, (total_infected_per_deme, antigenic_variance_per_deme, simulation.duration_times))
+            result = sum(total_infected_per_deme[:, end]) > 0 ? 1.0 : 0.0
+            serialize(file, result)
         end
     catch e
         println("Error in simulation with args $(args): $e")

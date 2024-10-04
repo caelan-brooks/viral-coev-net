@@ -31,8 +31,8 @@ function calculate_survival_probability(migration_rate_idx, host_per_deme_idx)
 
     @threads for i in 1:num_replicates
         try
-            total_infected_per_deme, _ = open(deserialize, files[i])
-            survival_results[i] = sum(total_infected_per_deme[:, end]) > 0 ? 1.0 : 0.0
+            result = open(deserialize, files[i])
+            survival_results[i] = result
         catch e
             println("Error reading file $(files[i]): ", e)
             survival_results[i] = NaN  # Mark failed reads as NaN
