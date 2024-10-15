@@ -53,7 +53,7 @@ def ridgeline(data, overlap=0.0, migration_rates=None, n_bins=500, yscale=50, hi
 
 
 # Parameters
-num_migration_rates = 10  # Adjust based on your data
+num_migration_rates = 11  # Adjust based on your data
 csv_output_directory = "path/to/your/csv"  # Update with actual path
 
 # Load data and prepare for plotting
@@ -67,7 +67,7 @@ for migration_rate_idx in range(2, num_migration_rates+2):
 
 # Create ridgeline plot
 plt.figure(figsize=(12, 8))
-migration_rates = 10**(np.linspace(-7, -0.5, 10))
+migration_rates = 10**(np.linspace(-7, -0.5, num_migration_rates))
 ridgeline(data, overlap=0.0, migration_rates=migration_rates, yscale=10, hist_scale=0.01)
 
 plt.xlabel('Antigenic Diversity at Outbreak Peak')
