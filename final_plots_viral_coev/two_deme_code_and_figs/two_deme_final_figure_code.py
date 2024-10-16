@@ -22,6 +22,7 @@ rcParams['figure.dpi'] = 100  # or set it to any constant value
 
 # First figure will have the trajectories and the survival probabilities
 fig, axs = plt.subplots(2, 2, figsize=(6.5, 5.5))  # Adjust the figure size to balance the subplot shapes
+# fig, axs = plt.subplots(2, 2, figsize=(6.5, 2.2*2))
 labels = ['(a)', '(b)', '(c)', '(d)']
 
 for ax, label in zip(axs.flat, labels):
@@ -252,6 +253,7 @@ middle_df_new = df_new.iloc[1:-3]  # Adjust as per your new data structure
 
 
 fig, axs = plt.subplots(2, 2, figsize=(6.5, 5.5))  # Adjust the figure size to balance the subplot shapes
+# fig, axs = plt.subplots(2, 2, figsize=(6.5, 2.6*2))
 labels = ['(a)', '(b)', '(c)', '(d)']
 
 for ax, label in zip(axs.flat, labels):
@@ -539,7 +541,7 @@ ax.set_ylabel(r'$\langle V_2(T_2)  - V_1(T_1) \rangle / r_0^2$')
 # ax.set_title('Averages of 2D * Peak Time Difference vs. Variance Difference')
 # ax.legend(title="Migration Rate")
 ax.grid(True, which="both", linestyle='--', linewidth=0.5)
-ax.legend()
+# ax.legend()
 
 ax = axs.flatten()[3]
 
