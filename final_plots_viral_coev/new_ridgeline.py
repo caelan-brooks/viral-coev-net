@@ -8,12 +8,12 @@ from scipy.integrate import quad
 # Set the global font to Times New Roman
 rcParams['font.family'] = 'serif'
 rcParams['font.serif'] = ['Times New Roman']
-rcParams['font.size'] = 20  # Default font size
-rcParams['axes.labelsize'] = 20
-rcParams['axes.titlesize'] = 20
-rcParams['xtick.labelsize'] = 20
-rcParams['ytick.labelsize'] = 20
-rcParams['legend.fontsize'] = 18
+rcParams['font.size'] = 12  # Default font size
+rcParams['axes.labelsize'] = 12
+rcParams['axes.titlesize'] = 12
+rcParams['xtick.labelsize'] = 12
+rcParams['ytick.labelsize'] = 12
+rcParams['legend.fontsize'] = 10
 
 def ridgeline(data, overlap=0.0, migration_rates=None, n_bins=500, yscale=50, hist_scale=0.002, density=False):
     if overlap > 1 or overlap < 0:
@@ -66,7 +66,7 @@ for migration_rate_idx in range(2, num_migration_rates+2):
     labels.append(f'Migration Rate {migration_rate_idx}')
 
 # Create ridgeline plot
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(6.5/2, 2.75))
 migration_rates = 10**(np.linspace(-10, 1.0, num_migration_rates))
 ridgeline(data, overlap=0.0, migration_rates=migration_rates, yscale=60, hist_scale=0.03)
 # ridgeline(data, overlap=0.0, migration_rates=migration_rates, yscale=50, hist_scale=1.0)
@@ -79,6 +79,7 @@ plt.ylabel(r'migration rate, $k/\gamma$')  # If you have a ylabel
 green_patch = mpatches.Patch(color='darkgreen', label='deme 1', alpha=0.3)
 purple_patch = mpatches.Patch(color='purple', label='deme 2', alpha=0.3)
 plt.legend(handles=[green_patch, purple_patch],loc='upper right')
+plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.05) 
 
 plt.savefig('ridgeline_variance.pdf', format='pdf', dpi=300)
 plt.savefig('ridgeline_variance.png', format='png')

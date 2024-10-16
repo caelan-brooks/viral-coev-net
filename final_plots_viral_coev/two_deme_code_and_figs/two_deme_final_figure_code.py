@@ -21,7 +21,7 @@ written_text_fontsize = 12
 rcParams['figure.dpi'] = 100  # or set it to any constant value
 
 # First figure will have the trajectories and the survival probabilities
-fig, axs = plt.subplots(2, 2, figsize=(8.5, 5.5))  # Adjust the figure size to balance the subplot shapes
+fig, axs = plt.subplots(2, 2, figsize=(6.5, 5.5))  # Adjust the figure size to balance the subplot shapes
 labels = ['(a)', '(b)', '(c)', '(d)']
 
 for ax, label in zip(axs.flat, labels):
@@ -251,7 +251,7 @@ df_new['StandardError'] = np.sqrt(df_new['SurvivalProbability'] * (1 - df_new['S
 middle_df_new = df_new.iloc[1:-3]  # Adjust as per your new data structure
 
 
-fig, axs = plt.subplots(2, 2, figsize=(8.5, 5.5))  # Adjust the figure size to balance the subplot shapes
+fig, axs = plt.subplots(2, 2, figsize=(6.5, 5.5))  # Adjust the figure size to balance the subplot shapes
 labels = ['(a)', '(b)', '(c)', '(d)']
 
 for ax, label in zip(axs.flat, labels):
@@ -572,7 +572,7 @@ ax.grid(True)
 ax.xaxis.set_major_formatter(ticker.StrMethodFormatter("{x:.1e}"))
 
 # Create inset plot using ax.inset_axes
-ax_inset = ax.inset_axes([0.12, 0.4, 0.32, 0.55])  # Position and size of inset [x0, y0, width, height]
+ax_inset = ax.inset_axes([0.14, 0.4, 0.27, 0.5])  # Position and size of inset [x0, y0, width, height]
 ax_inset.patch.set_alpha(0.5)  # Set background transparent
 
 # Find the migration rate with the highest survival probability, skipping cases with any survival probability of 0 or 1
@@ -596,8 +596,8 @@ for idx, mutation_rate in enumerate(mutation_rates):
 
 # Plot in the inset
 ax_inset.plot(mutation_rates, best_migration_rates, '-o', color='black', markersize=4)
-ax_inset.set_xlabel(r"$D$", fontsize=10)
-ax_inset.set_ylabel(r"optimal $k/\gamma$", fontsize=10, labelpad=2)  # Adjust the labelpad to reduce space
+ax_inset.set_xlabel(r"$D$", fontsize=9)
+ax_inset.set_ylabel(r"optimal $k/\gamma$", fontsize=9, labelpad=0.1)  # Adjust the labelpad to reduce space
 ax_inset.set_xscale("linear")
 ax_inset.set_yscale("log")
 ax_inset.grid(True)
