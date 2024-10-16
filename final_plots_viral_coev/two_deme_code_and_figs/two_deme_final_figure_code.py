@@ -572,7 +572,7 @@ ax.grid(True)
 ax.xaxis.set_major_formatter(ticker.StrMethodFormatter("{x:.1e}"))
 
 # Create inset plot using ax.inset_axes
-ax_inset = ax.inset_axes([0.14, 0.4, 0.27, 0.5])  # Position and size of inset [x0, y0, width, height]
+ax_inset = ax.inset_axes([0.155, 0.4, 0.27, 0.5])  # Position and size of inset [x0, y0, width, height]
 ax_inset.patch.set_alpha(0.5)  # Set background transparent
 
 # Find the migration rate with the highest survival probability, skipping cases with any survival probability of 0 or 1
@@ -597,7 +597,7 @@ for idx, mutation_rate in enumerate(mutation_rates):
 # Plot in the inset
 ax_inset.plot(mutation_rates, best_migration_rates, '-o', color='black', markersize=4)
 ax_inset.set_xlabel(r"$D$", fontsize=9)
-ax_inset.set_ylabel(r"optimal $k/\gamma$", fontsize=9, labelpad=0.1)  # Adjust the labelpad to reduce space
+ax_inset.set_ylabel(r"optimal $k/\gamma$", fontsize=9, labelpad=0.0)  # Adjust the labelpad to reduce space
 ax_inset.set_xscale("linear")
 ax_inset.set_yscale("log")
 ax_inset.grid(True)
