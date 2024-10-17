@@ -76,7 +76,7 @@ end
 
 function main()
     # migration_rates = vcat([0.0], exp10.(LinRange(-6, 0.5, 9))) # Example migration rates to sweep over
-    migration_rates = exp10.(LinRange(-7.0, -0.5, 9)) # Example migration rates to sweep over
+    migration_rates = exp10.(LinRange(-10.0, -0.5, 9)) # Example migration rates to sweep over
     start_rep = 1
     num_replicates = 3000
 
