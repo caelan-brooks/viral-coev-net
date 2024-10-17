@@ -30,19 +30,19 @@ prob_deme2_first = df_deme2['ProbabilityDeme2First'].values
 prob_both_same_time = df_both['ProbabilityBothSameTime'].values
 
 # Create the stacked plot
-plt.figure(figsize=(6.5, 5.5))
-plt.fill_between(migration_rates, 0, prob_both_same_time, color='green', alpha=0.5, label='Both at Same Time')
-plt.fill_between(migration_rates, prob_both_same_time, prob_both_same_time + prob_deme2_first, color='red', alpha=0.5, label='Deme 2 First')
-plt.fill_between(migration_rates, prob_both_same_time + prob_deme2_first, prob_both_same_time + prob_deme2_first + prob_deme1_first, color='blue', alpha=0.5, label='Deme 1 First')
+plt.figure(figsize=(6.5/2, 2.75))
+plt.fill_between(migration_rates, 0, prob_both_same_time, color='green', alpha=0.5, label='both at same time')
+plt.fill_between(migration_rates, prob_both_same_time, prob_both_same_time + prob_deme2_first, color='red', alpha=0.5, label='deme 2 first')
+plt.fill_between(migration_rates, prob_both_same_time + prob_deme2_first, prob_both_same_time + prob_deme2_first + prob_deme1_first, color='blue', alpha=0.5, label='deme 1 first')
 
 # Set the x-axis to log scale
 plt.xscale('log')
 
 # Add labels and title
 plt.xlabel(r'migration rate, $k/\gamma$')
-plt.ylabel('probability to introduce escape variant')
+plt.ylabel('prob. of first escape strain')
 # plt.title('Probability of Outbreak Occurrence by Migration Rate')
-plt.legend(loc='upper right')
+plt.legend(loc='upper left', framealpha=0.4)
 plt.xlim(migration_rates[0], migration_rates[-1])
 plt.ylim(0,1)
 
