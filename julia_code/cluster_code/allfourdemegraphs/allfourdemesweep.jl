@@ -2,20 +2,22 @@ using Base.Threads
 using Serialization
 using Random
 using LinearAlgebra
+using DataFrames
+using CSV
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
 # New line to include the script for loading adjacency matrices
 include("./all_adjacency_matrices.jl")
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/all_four_deme_with_variance"
-const MIGRATION_RATES = exp10.(LinRange(-6, -0.5, 10))
+const OUTPUT_DIRECTORY = "/pool001/dswartz/all_four_deme_PL_with_dx"
+const MIGRATION_RATES = exp10.(LinRange(-8, 0.0, 10))
 
 println("Number of threads: ", nthreads())
 
 const TOTAL_HOST_POPULATION = 4 * 10^6
 const L = 40.0
-const dx = 0.3
+const dx = 0.1
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
@@ -23,11 +25,13 @@ const beta = 2.5
 const alpha = 1.0
 const gamma = 0.0
 const D = 0.01
+const sigma = 2.0
+const noise_method = :PL_with_dx
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
-const NUM_REPLICATES = 1000
-const START_REPLICATE = 1
+const NUM_REPLICATES = 9000
+const START_REPLICATE = 1001
 
 function run_single_simulation(args)
     # Unpack arguments
@@ -58,34 +62,72 @@ function run_single_simulation(args)
     viral_densities[1][index_closest_to_zero] = 100/dx
 
     # Create populations
-    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, population_per_deme, viral_densities[i], immune_densities[i]) for i in 1:network_size]
+    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, population_per_deme, viral_densities[i], immune_densities[i]; sigma = sigma, noise_method=noise_method) for i in 1:network_size]
 
     # Initialize populations and network with the new migration matrix
     migration_matrix = migration_rate * adjacency_matrix
     network = Network(populations, migration_matrix)
-    simulation = Simulation(network, DT, DURATION)
+    simulation = Simulation(network, DT, DURATION; thin_by=THIN_BY)
 
    # Run the simulation
     try
         @time run_simulation!(simulation)
-        thin_simulation!(simulation, THIN_BY)
+        # thin_simulation!(simulation, THIN_BY)
 
         # Calculate total infected per deme
         total_infected_per_deme = calculate_total_infected_per_deme(simulation)
-        antigenic_variance_per_deme = calculate_antigenic_variance_per_deme(simulation)
+        # antigenic_variance_per_deme = calculate_antigenic_variance_per_deme(simulation)
 
         # Prepare output file path using migration rate index
         output_file = joinpath(OUTPUT_DIRECTORY, "adjacency_matrix_idx_$(adjacency_matrix_idx)", "migration_rate_idx_$(migration_rate_idx)", "replicate_$(simulation_number).jld2")
 
         # Save the calculated total infected per deme
         open(output_file, "w") do file
-            serialize(file, (total_infected_per_deme, antigenic_variance_per_deme))
+            # serialize(file, (total_infected_per_deme, antigenic_variance_per_deme))
+            serialize(file, total_infected_per_deme)
         end
     catch e
         println("Error in simulation with args $(args): $e")
     end
 
 end
+
+# Function to save parameters and migration rates to CSV
+function save_parameters_and_migration_rates_to_csv(output_directory, migration_rates)
+    # Create a DataFrame for the main parameters
+    parameters = DataFrame(
+        TOTAL_HOST_POPULATION = [TOTAL_HOST_POPULATION],
+        L = [L],
+        dx = [dx],
+        r = [r],
+        M = [M],
+        beta = [beta],
+        alpha = [alpha],
+        gamma = [gamma],
+        D = [D],
+        sigma = [sigma],
+        DURATION = [DURATION],
+        DT = [DT],
+        THIN_BY = [THIN_BY],
+        NUM_REPLICATES = [NUM_REPLICATES],
+        START_REPLICATE = [START_REPLICATE],
+        noise_method = [noise_method]
+    )
+    
+    # Save the main parameters DataFrame to a CSV file
+    parameters_path = joinpath(output_directory, "simulation_parameters.csv")
+    mkpath(output_directory)
+    CSV.write(parameters_path, parameters)
+    
+    # Create a DataFrame for migration rates
+    migration_rates_df = DataFrame(MIGRATION_RATES = migration_rates)
+    
+    # Save the migration rates DataFrame to a CSV file
+    migration_rates_path = joinpath(output_directory, "migration_rates.csv")
+    CSV.write(migration_rates_path, migration_rates_df)
+end
+
+save_parameters_and_migration_rates_to_csv(OUTPUT_DIRECTORY, MIGRATION_RATES)
 
 function main(job_id_arg)
     job_id = parse(Int, job_id_arg)
@@ -105,7 +147,7 @@ function main(job_id_arg)
     mkpath(output_subdirectory)
 
     # Run simulations for all replicates
-    @threads for simulation_number in START_REPLICATE:(START_REPLICATE+NUM_REPLICATES)
+    @threads for simulation_number in START_REPLICATE:(START_REPLICATE+NUM_REPLICATES-1)
         args = (migration_rate_idx, adjacency_matrix_idx, simulation_number)
         run_single_simulation(args)
     end

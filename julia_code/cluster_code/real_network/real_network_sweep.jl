@@ -7,13 +7,13 @@ using DataFrames
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/real_network"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/real_network_PL_with_dx"
 
 println("Number of threads: ", nthreads())
 
 const N0 = 100
-const L = 50.0  # Consider if this needs to be longer
-const dx = 0.3
+const L = 35.0  # Consider if this needs to be longer
+const dx = 0.15
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
@@ -21,11 +21,12 @@ const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
 const D = 0.0042 # make this smaller? 
+const sigma = 2.0
 const DURATION = 80.0
-const DT = 0.05
-const THIN_BY = 20
-const NUM_REPLICATES = 2000
-const START_REPLICATE = 10002
+const DT = 0.05 
+const THIN_BY = 200
+const NUM_REPLICATES = 10000
+const START_REPLICATE = 1
 
 df = CSV.read("cleaned_adjacency_matrix.csv", DataFrame)
 migration_matrix = Matrix(df[:, 1:end-1])  # Assuming the last column is the population sizes vector
@@ -56,7 +57,7 @@ function run_single_simulation(args)
 
     # Create populations
     
-    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, population_sizes[i], viral_densities[i], immune_densities[i]) for i in 1:network_size]
+    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, population_sizes[i], viral_densities[i], immune_densities[i]; sigma=sigma, noise_method=:PL_with_dx) for i in 1:network_size]
 
     # Initialize populations and network with the new migration matrix
     network = Network(populations, migration_matrix)

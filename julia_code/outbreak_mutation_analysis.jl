@@ -12,7 +12,7 @@ using .CoevolutionNetworkBase
 const DIRECTORY_PATH ="C:/Users/Daniel/Desktop/simresults/"
 const OUTPUT_PATH = "plotted_results_new/"
 
-const MIGRATION_RATES = exp10.(LinRange(-7.0, -0.5, 9)) # Example migration rates to sweep over
+const MIGRATION_RATES = exp10.(LinRange(-10.0, -0.5, 9)) # Example migration rates to sweep over
 
 function solve_S(R0::Float64; tol=1e-6, max_iter=1000)
     S = 0.5  # initial guess
@@ -158,3 +158,26 @@ display(p)
 
 # Optionally, save the plot to a file
 savefig(p, "$(OUTPUT_PATH)/cumulative_outbreak_probabilities_migration_rate.png")
+
+using CSV
+using DataFrames
+
+# Create DataFrames for the probabilities and errors
+df_deme1 = DataFrame(MigrationRate = MIGRATION_RATES,
+                     ProbabilityDeme1First = prob_deme1_first_rates,
+                     ErrorDeme1 = error_deme1_rates)
+
+df_deme2 = DataFrame(MigrationRate = MIGRATION_RATES,
+                     ProbabilityDeme2First = prob_deme2_first_rates,
+                     ErrorDeme2 = error_deme2_rates)
+
+df_both = DataFrame(MigrationRate = MIGRATION_RATES,
+                    ProbabilityBothSameTime = prob_both_same_time_rates,
+                    ErrorBoth = error_both_rates)
+
+# Save the data to CSV files
+CSV.write("../final_plots_viral_coev/where_outbreaks_happen/probability_deme1_first.csv", df_deme1)
+CSV.write("../final_plots_viral_coev/where_outbreaks_happen/probability_deme2_first.csv", df_deme2)
+CSV.write("../final_plots_viral_coev/where_outbreaks_happen/probability_both_same_time.csv", df_both)
+
+println("CSV files saved to $(OUTPUT_PATH)")

@@ -8,7 +8,7 @@ using .CoevolutionNetworkBase
 
 include("all_adjacency_matrices.jl")
 
-const DATA_DIRECTORY = "/pool001/dswartz/all_four_deme_results"
+const DATA_DIRECTORY = "/pool001/dswartz/all_four_deme_PL_with_dx"
 const LOCAL_RESULTS_DIRECTORY = "./plotting_data"
 
 const MIGRATION_RATES = exp10.(LinRange(-6, -0.5, 10))

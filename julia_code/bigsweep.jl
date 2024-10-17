@@ -13,7 +13,7 @@ end
 println("Number of threads: ", nthreads())
 
 const L = 40.0
-const dx = 0.3
+const dx = 0.1
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
@@ -22,7 +22,8 @@ const alpha = 1.0
 const gamma = 0.0
 const D = 0.01
 # const D = 0.0001
-const Nh = 3 * 10^6
+const sigma = 2.0 
+const Nh = 2 * 10^6
 const dt = 0.05
 const duration = 80.0
 
@@ -49,14 +50,14 @@ function run_single_simulation(args)
     seed = hash((migration_rate, simulation_number))
     Random.seed!(seed)
 
-    population1 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density)
-    population2 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density2, immune_density)
+    population1 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density, immune_density; sigma=sigma, noise_method=:PL_with_dx)
+    population2 = Population(L, dx, r, M, beta, alpha, gamma, D, Nh, viral_density2, immune_density; sigma=sigma, noise_method=:PL_with_dx)
     
-    # migration_matrix = [0.0 migration_rate; migration_rate 0.0]
+    migration_matrix = [0.0 migration_rate; migration_rate 0.0]
     # Generate off-diagonal terms as iid exponential random variables
-    migration1to2 = rand(Exponential(migration_rate))
-    migration2to1 = rand(Exponential(migration_rate))
-    migration_matrix = [0.0 migration1to2; migration2to1 0.0]
+    # migration1to2 = rand(Exponential(migration_rate))
+    # migration2to1 = rand(Exponential(migration_rate))
+    # migration_matrix = [0.0 migration1to2; migration2to1 0.0]
 
     network = Network([population1, population2], migration_matrix)
     simulation = Simulation(network, dt, duration)
@@ -75,9 +76,9 @@ end
 
 function main()
     # migration_rates = vcat([0.0], exp10.(LinRange(-6, 0.5, 9))) # Example migration rates to sweep over
-    migration_rates = exp10.(LinRange(-7.0, -0.5, 9)) # Example migration rates to sweep over
+    migration_rates = exp10.(LinRange(-10.0, -0.5, 9)) # Example migration rates to sweep over
     start_rep = 1
-    num_replicates = 5000
+    num_replicates = 3000
 
     # Creating a list of tuples with migration rates and simulation numbers
     simulation_args = [(rate, num) for rate in migration_rates for num in start_rep:(start_rep + num_replicates - 1)]

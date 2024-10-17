@@ -3,6 +3,7 @@ export Population, Network, Simulation, run_simulation!, calculate_total_infecte
 
 using Random
 using Distributions
+using LinearAlgebra
 
 """
     Population
@@ -52,6 +53,8 @@ struct Population
     cross_reactive::Vector{Float64}
     susceptibility::Vector{Float64}
     fitness::Vector{Float64}
+    noise_method::Symbol
+    noise_scaling_factor::Float64
 end
 
 """
@@ -72,7 +75,7 @@ Examples:
     pop = Population(1.0, 0.1, 0.5, 10, 0.3, 0.2, 0.1, 0.05, 100, [0.0 for i in 1:10], [0.0 for i in 1:10])
 
 """
-function Population(L::Float64, dx::Float64, r::Float64, M::Int64, beta::Float64, alpha::Float64, gamma::Float64, D::Float64, Nh::Int64, viral_density::Vector{Float64}, immune_density::Vector{Float64}; stochastic::Bool=true, time_stamp::Float64=0.0, sigma=sqrt(20))
+function Population(L::Float64, dx::Float64, r::Float64, M::Int64, beta::Float64, alpha::Float64, gamma::Float64, D::Float64, Nh::Int64, viral_density::Vector{Float64}, immune_density::Vector{Float64}; stochastic::Bool=true, time_stamp::Float64=0.0, sigma::Float64=1.0, noise_method::Symbol=:PL_with_dx)
     xs = collect(-L/2:dx:L/2-dx)  # Creating a vector of spatial discretization points
     num_antigen_points = length(xs)  # Calculating the number of points in the antigen grid
     temporary_data = zeros(num_antigen_points)
@@ -82,8 +85,17 @@ function Population(L::Float64, dx::Float64, r::Float64, M::Int64, beta::Float64
 
     @assert length(viral_density) == num_antigen_points "Viral density vector size mismatch"
     @assert length(immune_density) == num_antigen_points "Immune density vector size mismatch"
-    
-    return Population(L, dx, r, M, beta, alpha, gamma, D, sigma, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points, temporary_data,cross_reactive,susceptibility,fitness)
+
+    noise_scaling_factor = (noise_method==:PL) ? 2 / sigma^2 : 2 * dx / sigma^2
+    if noise_method == :PL_with_dx
+        noise_scaling_factor = 2 * dx / sigma^2
+    elseif noise_method == :PL
+        noise_scaling_factor = 2 / sigma^2
+    else
+        error("noise method chosen is not one of the known methods :PL_with_dx or :PL")
+    end
+
+    return Population(L, dx, r, M, beta, alpha, gamma, D, sigma, Nh, copy(viral_density), copy(immune_density), stochastic, time_stamp, xs, num_antigen_points, temporary_data,cross_reactive,susceptibility,fitness, noise_method, noise_scaling_factor)
 end
 
 
@@ -176,6 +188,7 @@ mutable struct Simulation
     duration_times::Vector{Float64}  # The time points at which the network state is recorded
     simulation_complete::Bool  # A flag to indicate if the simulation is complete
     thin_by::Int64 # Number which knows how much time resultion is requested
+    cross_reactive_kernel::Matrix{Float64}
 end
 
 
@@ -210,10 +223,23 @@ function Simulation(initial_network::Network, dt::Float64, duration::Float64; th
     # Initialize the trajectory with the initial network state
     trajectory = [deepcopy(initial_network) for i in 1:thin_by:num_time_steps]
 
+    # Fill out the cross_reactive_kernel
+    dx = initial_network.populations[1].dx
+    r = initial_network.populations[1].r
+    num_antigen_points = initial_network.populations[1].num_antigen_points
+    cross_reactive_kernel = Matrix{Float64}(undef,  num_antigen_points, num_antigen_points)
+
+    for i = 1:num_antigen_points
+        for j = 1:num_antigen_points
+            diff = min(abs(i - j), num_antigen_points - abs(i - j)) * dx
+            cross_reactive_kernel[j,i] = exp(-diff/r) * dx
+        end
+    end 
+
     # Create and return a new Simulation instance with the initial network, 
     # time step, duration, trajectory, and duration times
     # The simulation_complete flag is initially set to false
-    Simulation(initial_network, dt, duration, trajectory, duration_times, false, thin_by)
+    return Simulation(initial_network, dt, duration, trajectory, duration_times, false, thin_by, cross_reactive_kernel)
 end
 
 
@@ -254,7 +280,7 @@ function run_simulation!(sim::Simulation)
 
     # Iteratively evolve the network at each time step in the duration_times (skipping the initial time)
     for i in 2:length(sim.duration_times)
-        single_step_evolve_network!(sim.initial_network, sim.dt)
+        single_step_evolve_network!(sim.initial_network, sim.dt, sim.cross_reactive_kernel)
         
         if mod(i-1,sim.thin_by)==0
             current_update += 1
@@ -266,7 +292,7 @@ function run_simulation!(sim::Simulation)
     sim.simulation_complete = true
 
     # Make the time vector line up with the saved configurations
-    sim.duration_times = sim.duration_times[1:sim.thin_by:end]
+    sim.duration_times = sim.duration_times[1:sim.thin_by:end];
 end
 
 function copy_network_data!(dest::Network, source::Network)
@@ -423,10 +449,10 @@ Examples:
     new_network = single_step_evolve_network(init_network, 0.1)
 
 """
-function single_step_evolve_network!(network::Network, dt::Float64)
+function single_step_evolve_network!(network::Network, dt::Float64, cross_reactive_kernel::Matrix{Float64})
     # Evolving each population independently using the single_step_evolve function
     for pop in network.populations
-        single_step_evolve!(pop,dt)
+        single_step_evolve!(pop,dt,cross_reactive_kernel)
     end
 
     calculate_migration_effect!(network,dt)
@@ -458,12 +484,12 @@ Example:
     # Evolving the population by a single time step
     new_pop = single_step_evolve(init_pop, 0.1)
 """
-function single_step_evolve!(population::Population, dt::Float64)
+function single_step_evolve!(population::Population, dt::Float64, cross_reactive_kernel::Matrix{Float64})
     # Computing the change in viral density due to mutation (diffusion)
     compute_mutation_effect!(population, dt)
 
     # Computing the cross-reactive field using the convolution method 
-    cross_reactive_convolution!(population)
+    cross_reactive_convolution!(population, cross_reactive_kernel)
 
     # Computing the susceptibility at each antigenic point based on the cross-reactive field
     compute_susceptibility!(population)
@@ -515,33 +541,72 @@ function compute_fitness!(population::Population)
     population.fitness .= population.beta .* population.susceptibility .- population.alpha .- population.gamma
 end
 
+# check if this should have dx in it, it seems like the answer is no
 function apply_stochasticity!(population::Population, dt::Float64)
+    scaling_factor = population.noise_scaling_factor / dt
+
     for i in eachindex(population.viral_density)
-        population.viral_density[i] = rand(Poisson(population.dx * population.viral_density[i] / (dt * population.sigma^2))) * population.sigma^2 * dt / population.dx
+        population.viral_density[i] = rand(Poisson(population.viral_density[i] * scaling_factor)) 
+        population.viral_density[i] = (population.viral_density[i] == 0) ? 0 : rand(Gamma(population.viral_density[i])) / scaling_factor 
     end
 end
 
 
 
-function cross_reactive_convolution!(population::Population)
+# function cross_reactive_convolution!(population::Population, cross_reactive_kernel::Matrix{Float64})
+#     """
+#     Modifies the cross-reactive field c(x,t) in place.
+
+#     Parameters:
+#     population (Population): The population object containing the necessary parameters and fields.
+#     """
+    
+#     population.cross_reactive .= cross_reactive_kernel * population.immune_density
+#     # population.cross_reactive .= 0.0  # Reset the array to zero without creating a new array
+#     # for i in 1:population.num_antigen_points  # Loop through each antigenic point (1-indexed in Julia)
+#     #     for j in 1:population.num_antigen_points  # For each antigenic point, loop through all other antigenic points
+#     #         # Calculate the minimum distance between the current pair of antigenic points, considering the periodic boundary conditions
+#     #         diff = min(abs(i - j), population.num_antigen_points - abs(i - j)) * population.dx  
+#     #         # Increment the cross-reactive value for the i-th point based on the contribution from the j-th point
+#     #         population.cross_reactive[i] += population.immune_density[j] * exp(-diff/population.r) * population.dx
+#     #     end
+#     # end
+# end
+
+function cross_reactive_convolution!(population::Population, cross_reactive_kernel::Matrix{Float64})
     """
     Modifies the cross-reactive field c(x,t) in place.
 
     Parameters:
     population (Population): The population object containing the necessary parameters and fields.
     """
-    
-    population.cross_reactive .= 0.0  # Reset the array to zero without creating a new array
-    for i in 1:population.num_antigen_points  # Loop through each antigenic point (1-indexed in Julia)
-        for j in 1:population.num_antigen_points  # For each antigenic point, loop through all other antigenic points
-            # Calculate the minimum distance between the current pair of antigenic points, considering the periodic boundary conditions
-            diff = min(abs(i - j), population.num_antigen_points - abs(i - j)) * population.dx  
-            # Increment the cross-reactive value for the i-th point based on the contribution from the j-th point
-            population.cross_reactive[i] += population.immune_density[j] * exp(-diff/population.r) * population.dx
+
+    # Perform the matrix-vector multiplication manually and store the result in temporary_data
+    for i in 1:population.num_antigen_points
+        population.temporary_data[i] = 0.0
+        for j in 1:population.num_antigen_points
+            population.temporary_data[i] += cross_reactive_kernel[i, j] * population.immune_density[j]
+            # population.temporary_data[i] += I[i,j] * population.immune_density[j]
         end
     end
+
+    # Copy the result from temporary_data to population.cross_reactive
+    population.cross_reactive .= population.temporary_data
 end
 
+# function cross_reactive_convolution!(population::Population, cross_reactive_kernel::Matrix{Float64})
+#     """
+#     Modifies the cross-reactive field c(x,t) in place using BLAS.gemv!.
+
+#     Parameters:
+#     population (Population): The population object containing the necessary parameters and fields.
+#     """
+    
+#     # BLAS.gemv! performs the operation: y = α*A*x + β*y
+#     # Here, α is 1.0 (default), β is 0.0 (default), A is cross_reactive_kernel,
+#     # x is population.immune_density, and y is population.cross_reactive.
+#     BLAS.gemv!('N', 1.0, cross_reactive_kernel, population.immune_density, 0.0, population.cross_reactive)
+# end
 
 
 # Function to validate the dimensions of the migration matrix

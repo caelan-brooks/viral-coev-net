@@ -5,7 +5,7 @@ using LinearAlgebra
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/viral_coev_mutation_migration_sweep"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/viral_coev_mutation_migration_sweep_2"
 const MIGRATION_RATES = exp10.(LinRange(-7, -0.5, 10))
 const MUTATION_RATES = LinRange(0.001,0.02,10)
 
@@ -13,13 +13,15 @@ println("Number of threads: ", nthreads())
 
 const HOST_POPULATION_PER_DEME = 2 * 10^6
 const L = 40.0
-const dx = 0.3
+const dx = 0.1
 const x = -L/2:dx:L/2-dx
 const r = 3.0
 const M = 15
 const beta = 2.5
 const alpha = 0.0
 const gamma = 1.0
+const sigma = 2.0
+const noise_method = :PL_with_dx
 const DURATION = 80.0
 const DT = 0.05
 const THIN_BY = 20
@@ -53,7 +55,7 @@ function run_single_simulation(args)
     viral_densities[1][index_closest_to_zero] = 100/dx
 
     # Create populations
-    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]) for i in 1:network_size]
+    populations = [Population(L, dx, r, M, beta, alpha, gamma, D, HOST_POPULATION_PER_DEME, viral_densities[i], immune_densities[i]; sigma=sigma, noise_method=noise_method) for i in 1:network_size]
 
 
     # Initialize populations and network with the new migration matrix

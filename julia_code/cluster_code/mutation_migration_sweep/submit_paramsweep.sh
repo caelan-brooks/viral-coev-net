@@ -8,7 +8,10 @@
 # Path to the Julia project/environment
 JULIA_PROJECT_PATH="/home/dswartz/viral-coev-net/julia_code/cluster_code/cluster_project"
 
-module add /home/software/modulefiles/julia/
+# use my local install of julia
+export PATH="~/julia-1.9.0/bin:$PATH"
+# module add /home/software/modulefiles/julia/
+which julia
 
 # Execute your Julia script using the specific project and all available cores
 julia --project=$JULIA_PROJECT_PATH -t auto paramsweep.jl

@@ -5,9 +5,9 @@ using Glob
 using Base.Threads
 using Statistics
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_final"
-const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_final/csv_outputs"  # Directory for CSV outputs
-const MIGRATION_RATES = [0; exp10.(LinRange(-7, -0.5, 10)); 0]
+const OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_with_dx_2_noback"
+const CSV_OUTPUT_DIRECTORY = "/pool001/dswartz/twodeme_PL_with_dx_2_noback/csv_outputs"  # Directory for CSV outputs
+const MIGRATION_RATES = [0; exp10.(LinRange(-10.0, 1.0, 12)); 0]
 
 # Create CSV output directory if it doesn't exist
 isdir(CSV_OUTPUT_DIRECTORY) || mkdir(CSV_OUTPUT_DIRECTORY)
@@ -31,10 +31,11 @@ function process_and_save_histograms(migration_rate_idx::Int64; cutoff = 100)
     number_late_trajectories = 0
 
     for file in replicate_files
-        total_infected_per_deme, antigenic_variance_per_deme = read_data(file)
+        total_infected_per_deme, antigenic_variance_per_deme, duration_times = read_data(file)
         
         # Find indices of maximal infection for each deme because dt = 1/20 and thin by = 20 index corrresponds to "real" time!
-        max_infected_idx_deme1 = argmax(total_infected_per_deme[1, :])
+        time_region = duration_times .< duration_times[end]/4
+        max_infected_idx_deme1 = argmax(total_infected_per_deme[1, time_region])
         min_infected_idx_deme1 = argmin(total_infected_per_deme[1, 6:end])
         
         max_infected_idx_deme2 = argmax(total_infected_per_deme[2, :])
@@ -61,7 +62,7 @@ function process_and_save_histograms(migration_rate_idx::Int64; cutoff = 100)
      
             if total_infected_per_deme[2, max_infected_idx_deme2] > cutoff && first_cross_idx_deme2 <= min_infected_idx_deme1
                 push!(antigenic_variance_deme2, antigenic_variance_per_deme[2, max_infected_idx_deme2])
-                push!(peak_time_difference, max_infected_idx_deme2 - max_infected_idx_deme1)
+                push!(peak_time_difference, duration_times[max_infected_idx_deme2] - duration_times[max_infected_idx_deme1])
                 push!(variance_difference, antigenic_variance_per_deme[2, max_infected_idx_deme2] - antigenic_variance_per_deme[1, max_infected_idx_deme1])
             end
         end
@@ -100,7 +101,7 @@ end
 # Function to process each replicate
 function process_replicate(file_path::String)
     try
-        total_infected_per_deme, _ = read_data(file_path)
+        total_infected_per_deme, _, duration_times = read_data(file_path)
         total_infected = vec(sum(total_infected_per_deme, dims=1))
 
         maximum_infected_deme_1 = maximum(total_infected_per_deme[1,:])
@@ -108,7 +109,7 @@ function process_replicate(file_path::String)
 
         survived = total_infected[end] > 0
         survived_flag = survived ? 1 : 0
-        extinction_time = !survived ? findfirst(total_infected .== 0) : NaN
+        extinction_time = !survived ? duration_times[findfirst(total_infected .== 0)] : NaN
         
         return (survived_flag, extinction_time, maximum_infected_deme_1, maximum_infected_deme_2)
     catch e
