@@ -26,7 +26,7 @@ fig, axs = plt.subplots(2, 2, figsize=(6.5, 5.5))  # Adjust the figure size to b
 labels = ['(a)', '(b)', '(c)', '(d)']
 
 for ax, label in zip(axs.flat, labels):
-    ax.text(-0.01, 1.0, label, transform=ax.transAxes, va='bottom')
+    ax.text(-0.02, 1.05, label, transform=ax.transAxes, va='bottom')
 
 # Adjusting code for panel (a)
 ax = axs.flatten()[0]
@@ -73,7 +73,7 @@ ax.set_ylim(bottom=1)
 
 
 # Adjusting code for panel (b)
-ax = axs.flatten()[2]  # This selects the last panel position in a 3x2 grid
+ax = axs.flatten()[3]  # This selects the last panel position in a 2x2 grid
 
 # Load data from CSV
 data = pd.read_csv("../variances_and_probabilities.csv")
@@ -153,7 +153,7 @@ ax.annotate('', xy=(variance[low_var_idx]/CROSS_REACTIVE_R**2, probability[low_v
 ax.set_xticks(np.linspace(min(variance/CROSS_REACTIVE_R**2), max(variance/CROSS_REACTIVE_R**2), num=4))  # Generate xticks
 
 ax.xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f'{x:.3f}'))  # Format xticks with 1 decimal place
-ax = axs.flatten()[1]
+ax = axs.flatten()[2]
 
 # Parameters for the Gaussians
 mean = 0
@@ -207,7 +207,7 @@ ax.set_yticks([])
 ax.set_xticks([])
 ax.set_ylim(bottom=0)
 
-ax = axs.flatten()[3]
+ax = axs.flatten()[1]
 data = pd.read_csv("../pop_size_scaling.csv")
 ax.scatter(data.HostPopulationSize, data.SurvivalProbability, label=None, color='blue')
 ax.set_xscale("log")
