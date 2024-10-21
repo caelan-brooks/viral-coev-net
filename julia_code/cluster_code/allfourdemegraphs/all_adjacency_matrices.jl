@@ -108,6 +108,9 @@ for i in 1:length(all_adjacency_matrices)
     end
     
     # Normalize the matrix
-    all_adjacency_matrices[i] = normalize_matrix(adj_matrix)
-    println("Matrix $i normalized.")
+    # all_adjacency_matrices[i] = normalize_matrix(adj_matrix)
+    # println("Matrix $i normalized.")
+
+    all_adjacency_matrices[i] = adj_matrix
+    println("Matrix $i is not normalized")
 end
