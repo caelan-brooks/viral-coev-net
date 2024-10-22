@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 import matplotlib.ticker as ticker
+from matplotlib.ticker import FuncFormatter
 import numpy as np
 import ast
 from scipy.stats import norm
@@ -564,7 +565,7 @@ for migration_rate_idx in range(1, len(migration_rates) + 1):
 
 
 ax.set_xlabel(r"mutation rate, $D$")
-ax.set_ylabel("escpape probability")
+ax.set_ylabel("escape probability")
 # ax.set_xlim(5e-3, 1.5e-2)
 # plt.title("Survival Probability vs Mutation Rate for Different Migration Rates")
 ax.set_xscale("linear")
@@ -574,7 +575,7 @@ ax.grid(True)
 ax.xaxis.set_major_formatter(ticker.StrMethodFormatter("{x:.1e}"))
 
 # Create inset plot using ax.inset_axes
-ax_inset = ax.inset_axes([0.155, 0.4, 0.27, 0.5])  # Position and size of inset [x0, y0, width, height]
+ax_inset = ax.inset_axes([0.147, 0.49, 0.27, 0.5])  # Position and size of inset [x0, y0, width, height]
 ax_inset.patch.set_alpha(0.5)  # Set background transparent
 
 # Find the migration rate with the highest survival probability, skipping cases with any survival probability of 0 or 1
@@ -608,8 +609,13 @@ ax_inset.grid(True)
 ax_inset.set_ylim(1.2e-6, 8e-5)
 
 # Adjust tick parameters to make ticks face inward
-ax_inset.tick_params(axis='both', which='major', labelsize=6, direction='in')
+def format_ticks(x, _):
+    return f'{x:.2g}'
 
+# Set custom ticks and formatter for inset
+ax_inset.set_xticks([0.005, 0.01, 0.015])  # Custom tick locations
+ax_inset.xaxis.set_major_formatter(FuncFormatter(format_ticks))
+ax_inset.tick_params(axis='both', which='major', labelsize=6, direction='in')
 
 plt.tight_layout(pad=0.0, h_pad=0.0, w_pad=0.05) 
 # plt.tight_layout()

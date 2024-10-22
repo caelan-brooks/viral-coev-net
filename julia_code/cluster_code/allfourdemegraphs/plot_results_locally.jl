@@ -4,7 +4,7 @@ using Plots
 MIGRATION_RATES = exp10.(LinRange(-6,-0.5,10))
 
 # Load the serialized results
-results_file = "plotting_data/analysis_results.jld2"
+results_file = "plotting_data/analysis_results_unnorm.jld2"
 results = open(deserialize, results_file)
 
 # Prepare data for plotting
