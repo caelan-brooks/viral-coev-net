@@ -39,8 +39,10 @@ def plot_first_subplot():
     for index, row in trajectories_df.iterrows():
         trajectory = ast.literal_eval(row['parent'])  # Convert string representation of list to actual list
         time_points = np.linspace(0, 100, len(trajectory))
-        ax.plot(time_points, trajectory, linewidth=1.5)
-        
+        if trajectory[-1] > 0:
+            ax.plot(time_points, trajectory, linewidth=1.5, color="darkgreen", alpha=0.4)
+        else:
+            ax.plot(time_points, trajectory, linewidth=1.5, color="darkred", alpha=0.15)
         # Update the maximum infected number and the time for the final trajectory
         if index == len(trajectories_df) - 1:
             max_infected_number = max(trajectory)
@@ -60,8 +62,8 @@ def plot_first_subplot():
     start_time = 65
     end_time = 100
 
-    ax.text(x=start_time + (end_time - start_time) / 3.0, y=1e6, s="escape", rotation='horizontal', ha='center', va='center', color='green', fontsize=written_text_fontsize)
-    ax.text(x=end_time * 0.83, y=3, s="extinction", ha='center', va='center', color='red', fontsize=written_text_fontsize)
+    ax.text(x=start_time + (end_time - start_time) / 3.0, y=1e6, s="escape", rotation='horizontal', ha='center', va='center', color='darkgreen', fontsize=written_text_fontsize)
+    ax.text(x=end_time * 0.83, y=3, s="extinction", ha='center', va='center', color='darkred', fontsize=written_text_fontsize)
 
     ax.set_yscale('log')
     ax.set_xlabel(r'time (units: $\gamma^{-1}$)')
@@ -287,7 +289,7 @@ def plot_second_figure_first_subplot():
 
     # Scatter plots
     ax.scatter(middle_df['MigrationRate'], middle_df['SurvivalProbability'], color='saddlebrown', label='two-way migration (1 ↔ 2)', marker='o')
-    ax.scatter(middle_df_new['MigrationRate'], middle_df_new['SurvivalProbability'], color='darkgreen', label='one-way migration (1 → 2)', marker='v')
+    # ax.scatter(middle_df_new['MigrationRate'], middle_df_new['SurvivalProbability'], color='darkgreen', label='one-way migration (1 → 2)', marker='v')
 
     # Horizontal lines and shaded regions
     ax.axhline(y=first['SurvivalProbability'], color=color_first, linestyle='--')
@@ -325,7 +327,7 @@ def plot_second_figure_first_subplot():
     final_probabilities = compute_probabilities(avg_variance_differences, probability_of_spreading, p1, slope)
 
     # Plot the final theoretical probabilities
-    ax.plot(migration_rates, final_probabilities, 'k--', label='theory')
+    # ax.plot(migration_rates, final_probabilities, 'k--', label='theory')
 
     # Customize the plot
     ax.set_xscale('log')
@@ -336,7 +338,7 @@ def plot_second_figure_first_subplot():
     ax.set_ylabel('escape probability')
 
     # Save the figure in the split_figures directory
-    output_path_base = os.path.join(output_dir, 'second_figure_first_subplot')
+    output_path_base = os.path.join(output_dir, 'second_figure_first_subplot_no_theory')
     fig.savefig(f"{output_path_base}.png")
     fig.savefig(f"{output_path_base}.pdf")
     fig.savefig(f"{output_path_base}.svg")
@@ -394,34 +396,34 @@ def plot_second_figure_second_subplot():
     ax.set_xlabel(r'time (units: $\gamma^{-1}$)')
     ax.set_xlim(0,18)
 
-    # # Create an inset figure for the Gaussians
-    # inset_ax = ax.inset_axes([0.05, 0.03, 0.8, 0.45])  # Adjust the position and size of the inset as needed
-    # inset_ax.patch.set_alpha(0.9)
-    # # Generate x values for the Gaussians
-    # x = np.linspace(-1.3, 1.3, 1000)
+    # Create an inset figure for the Gaussians
+    inset_ax = ax.inset_axes([0.05, 0.03, 0.8, 0.45])  # Adjust the position and size of the inset as needed
+    inset_ax.patch.set_alpha(0.9)
+    # Generate x values for the Gaussians
+    x = np.linspace(-1.3, 1.3, 1000)
 
-    # # Gaussian distributions with given variances
-    # mean = 0
-    # y1 = norm.pdf(x, mean, np.sqrt(antigenic_variance_at_max1))
-    # y2 = norm.pdf(x, mean, 1 * np.sqrt(antigenic_variance_at_max2))
+    # Gaussian distributions with given variances
+    mean = 0
+    y1 = norm.pdf(x, mean, np.sqrt(antigenic_variance_at_max1))
+    y2 = norm.pdf(x, mean, 1 * np.sqrt(antigenic_variance_at_max2))
 
-    # # Plotting the Gaussians on the inset axis
-    # inset_ax.plot(x, y1, color='blue', linewidth=2, label=r'$n_1(x,T_1)$')
-    # inset_ax.plot(x, y2, color='green', linewidth=2, label=r'$n_2(x,T_2)$')
+    # Plotting the Gaussians on the inset axis
+    inset_ax.plot(x, y1, color='blue', linewidth=2, label=r'$n_1(x,T_1)$')
+    inset_ax.plot(x, y2, color='green', linewidth=2, label=r'$n_2(x,T_2)$')
 
-    # # Remove ticks
-    # inset_ax.set_xticks([])
-    # inset_ax.set_yticks([])
+    # Remove ticks
+    inset_ax.set_xticks([])
+    inset_ax.set_yticks([])
 
-    # # Set labels
-    # inset_ax.text(0.5, 0.05, r'$x$', transform=inset_ax.transAxes, ha='center', va='center', fontsize=10)
-    # inset_ax.text(0.05, 0.5, r'density, $n$', transform=inset_ax.transAxes, ha='center', va='center', rotation='vertical', fontsize=10)
+    # Set labels
+    inset_ax.text(0.5, 0.05, r'$x$', transform=inset_ax.transAxes, ha='center', va='center', fontsize=10)
+    inset_ax.text(0.05, 0.5, r'density, $n$', transform=inset_ax.transAxes, ha='center', va='center', rotation='vertical', fontsize=10)
 
-    # # Add a legend
-    # inset_ax.legend(loc='best', fontsize=8, frameon=False, handlelength=1)
+    # Add a legend
+    inset_ax.legend(loc='best', fontsize=8, frameon=False, handlelength=1)
 
     # Save the figure in the split_figures directory
-    output_path_base = os.path.join(output_dir, 'second_figure_second_subplot_no_inset')
+    output_path_base = os.path.join(output_dir, 'second_figure_second_subplot')
     fig.savefig(f"{output_path_base}.png")
     fig.savefig(f"{output_path_base}.pdf")
     fig.savefig(f"{output_path_base}.svg")
