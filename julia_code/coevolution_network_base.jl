@@ -1,5 +1,5 @@
 module CoevolutionNetworkBase
-export Population, Network, Simulation, run_simulation!, calculate_total_infected, calculate_total_infected_per_deme, single_step_evolve!, thin_simulation!, plot_spacetime_density, calculate_antigenic_variance_per_deme
+export Population, Network, Simulation, run_simulation!, calculate_total_infected, calculate_total_infected_per_deme, single_step_evolve!, thin_simulation!, plot_spacetime_density, calculate_antigenic_variance_per_deme, calculate_FST
 
 using Random
 using Distributions
@@ -424,6 +424,42 @@ function calculate_antigenic_variance_per_deme(simulation::Simulation)
 
     return variances_per_deme
 end
+
+function calculate_FST(simulation::Simulation)
+    xs = simulation.trajectory[1].populations[1].xs
+    dx = xs[2] - xs[1]
+    num_time_points = length(simulation.duration_times)
+    num_demes = length(simulation.trajectory[1].populations)
+
+    total_infected_per_deme = calculate_total_infected_per_deme(simulation)  # [deme, time]
+    variances_per_deme = calculate_antigenic_variance_per_deme(simulation) 
+
+    FST = zeros(num_time_points)
+
+    for t = 1:num_time_points
+        weights = total_infected_per_deme[:,t] ./ sum(total_infected_per_deme[:,t])
+
+        # Compute total antigenic distribution
+        total_viral_density = zeros(length(xs))
+        for j = 1:num_demes
+            # total_viral_density .+= weights[j] * simulation.trajectory[t].populations[j].viral_density
+            total_viral_density .+= simulation.trajectory[t].populations[j].viral_density
+        end
+        total_viral_density ./= sum(total_viral_density .* dx)  # Normalize
+
+        mean_total = sum(xs .* total_viral_density .* dx)
+        V_total = sum((xs .- mean_total).^2 .* total_viral_density .* dx)
+        V_within = sum(weights .* variances_per_deme[:,t])
+
+        # FST
+        # FST[t] = (V_total - V_within) / V_total
+        FST[t] = V_within / V_total
+    end
+
+    return FST
+end
+
+
 """
     single_step_evolve_network(network::Network, dt)
 
