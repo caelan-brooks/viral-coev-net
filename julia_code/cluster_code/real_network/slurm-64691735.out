@@ -1,0 +1,127 @@
+/home/dswartz/julia-1.9.0/bin/julia
+Number of threads: 6
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.307921245421245
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.630122818358113
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.421816872674907
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.5948928525599895
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.479127957388827
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.467042391570693
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.618520900321544
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.52898093193585
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.568523430592396
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.78
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.320514305571644
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.494550408719346
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.373194411555766
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.937076333628058
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.325026080908775
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.836550655206425
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.33009933009933
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.591669860738469
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+Maximum Extinction Time: 9
+Average Extinction Time: 6.592085235920853
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+10001
+ERROR: LoadError: UndefVarError: `CSV_OUTPUT_DIRECTORY` not defined
+Stacktrace:
+ [1] top-level scope
+   @ /nfs/home/dswartz/viral-coev-net/julia_code/cluster_code/real_network/analyze_real_network.jl:78
+in expression starting at /nfs/home/dswartz/viral-coev-net/julia_code/cluster_code/real_network/analyze_real_network.jl:78
+Maximum Extinction Time: 9
+Average Extinction Time: 6.454401172018069
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
