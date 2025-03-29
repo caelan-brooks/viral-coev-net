@@ -7,7 +7,7 @@ using DataFrames
 include("/home/dswartz/viral-coev-net/julia_code/coevolution_network_base.jl")
 using .CoevolutionNetworkBase
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/real_network_PL_with_dx"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/real_network_PL_with_dx_large"
 
 println("Number of threads: ", nthreads())
 
