@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -N 1                # Number of nodes
-#SBATCH -n 8               # Number of cores
+#SBATCH -n 6               # Number of cores
 #SBATCH -p sched_mit_hill   # Partition name
 #SBATCH -t 0-11:58          # time taken is 4 hrs
 #SBATCH --mem-per-cpu=3000  # Memory per CPU (adjust this based on your requirements)
@@ -15,4 +15,4 @@ export PATH="~/julia-1.9.0/bin:$PATH"
 which julia
 
 # Execute your Julia script using the specific project and all available cores
-julia --project=$JULIA_PROJECT_PATH -t 16 real_network_sweep.jl
+julia --project=$JULIA_PROJECT_PATH -t 12 real_network_sweep.jl
