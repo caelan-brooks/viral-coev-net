@@ -33,7 +33,7 @@ df = CSV.read("bootstrapped_migration_matrix.csv", DataFrame)
 migration_matrix = Matrix(df)  # Assuming the last column is the population sizes vector
 
 println(migration_matrix)
-println(population_sizes)
+# println(population_sizes)
 
 function run_single_simulation(args)
     # Unpack arguments
@@ -45,7 +45,7 @@ function run_single_simulation(args)
     seed = hash((outbreak_deme_idx, simulation_number))
     Random.seed!(seed)
 
-    network_size = length(population_sizes)
+    network_size = 30
 
     # Initialize viral and immune densities
     viral_densities = [zeros(Float64, length(x)) for _ in 1:network_size]
@@ -114,7 +114,7 @@ save_parameters_and_migration_rates_to_csv(OUTPUT_DIRECTORY)
 
 function main(job_id_arg)
     job_id = parse(Int, job_id_arg)
-    total_combinations = length(population_sizes)
+    total_combinations = 30 # length(population_sizes)
     
     # Check if job_id is within the valid range
     if job_id < 1 || job_id > total_combinations
