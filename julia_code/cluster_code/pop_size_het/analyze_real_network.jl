@@ -5,7 +5,7 @@ using Glob
 using Base.Threads
 using Statistics
 
-const OUTPUT_DIRECTORY = "/pool001/dswartz/real_network_PL_with_dx_large"
+const OUTPUT_DIRECTORY = "/pool001/dswartz/pop_size_het"
 const OUTBREAK_DEMES = collect(1:30)
 
 println("Number of threads: ", nthreads())
