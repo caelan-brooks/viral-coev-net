@@ -1,0 +1,106 @@
+/home/dswartz/julia-1.9.0/bin/julia
+Number of threads: 10
+  1.172992 seconds (822.55 k allocations: 63.446 MiB, 446.88% compilation time)
+Analyzing 1
+10000
+Maximum Extinction Time: 55.0
+Average Extinction Time: 23.96520605635215
+number of times greater than 60: 0
+number times greater than 70: 0
+number times greater than 80: 0
+number times greater than 110: 0
+Peak infected in deme 1: 55680.79066920755 +- 3312.8151718816516
+Survival Probability = 0.0027
+  0.859316 seconds (469.72 k allocations: 40.810 MiB)
+Analyzing 2
+10000
+Maximum Extinction Time: 82.5
+Average Extinction Time: 26.090021145906757
+number of times greater than 60: 4
+number times greater than 70: 2
+number times greater than 80: 1
+number times greater than 110: 0
+Peak infected in deme 1: 105168.6362499793 +- 5387.195678665858
+Survival Probability = 0.0069
+  0.681768 seconds (469.08 k allocations: 40.788 MiB)
+Analyzing 3
+10000
+Maximum Extinction Time: 67.5
+Average Extinction Time: 28.34608323133415
+number of times greater than 60: 1
+number times greater than 70: 0
+number times greater than 80: 0
+number times greater than 110: 0
+Peak infected in deme 1: 280608.282719982 +- 10422.773230867813
+Survival Probability = 0.0196
+  0.635153 seconds (467.85 k allocations: 40.747 MiB)
+Analyzing 4
+10000
+Maximum Extinction Time: 87.5
+Average Extinction Time: 30.99377419692372
+number of times greater than 60: 10
+number times greater than 70: 2
+number times greater than 80: 2
+number times greater than 110: 0
+Peak infected in deme 1: 675959.6444234507 +- 7261.237469794737
+Survival Probability = 0.0443
+  0.644949 seconds (464.02 k allocations: 40.619 MiB)
+Analyzing 5
+10000
+Maximum Extinction Time: 95.0
+Average Extinction Time: 34.247895814376704
+number of times greater than 60: 32
+number times greater than 70: 7
+number times greater than 80: 2
+number times greater than 110: 0
+Peak infected in deme 1: 1.4012100920641162e6 +- 40991.43895442407
+Survival Probability = 0.1208
+  0.621423 seconds (455.85 k allocations: 40.344 MiB)
+Analyzing 6
+10000
+Maximum Extinction Time: 90.0
+Average Extinction Time: 37.81328583403185
+number of times greater than 60: 41
+number times greater than 70: 9
+number times greater than 80: 3
+number times greater than 110: 0
+Peak infected in deme 1: 2.4172599568271544e6 +- 151434.9707579825
+Survival Probability = 0.2842
+  0.684071 seconds (441.11 k allocations: 39.849 MiB)
+Analyzing 7
+10000
+Maximum Extinction Time: 87.5
+Average Extinction Time: 42.372297457828466
+number of times greater than 60: 97
+number times greater than 70: 18
+number times greater than 80: 3
+number times greater than 110: 0
+Peak infected in deme 1: 5.407299475026893e6 +- 264736.55061845685
+Survival Probability = 0.5791
+  0.773852 seconds (425.62 k allocations: 39.329 MiB, 15.34% gc time)
+Analyzing 8
+10000
+Maximum Extinction Time: 92.5
+Average Extinction Time: 47.55625562556256
+number of times greater than 60: 56
+number times greater than 70: 14
+number times greater than 80: 2
+number times greater than 110: 0
+Peak infected in deme 1: 1.4022125759338737e7 +- 411634.66316000297
+Survival Probability = 0.8889
+  0.659990 seconds (420.25 k allocations: 39.149 MiB)
+Analyzing 9
+10000
+Maximum Extinction Time: 82.5
+Average Extinction Time: 53.75
+number of times greater than 60: 5
+number times greater than 70: 2
+number times greater than 80: 1
+number times greater than 110: 0
+Peak infected in deme 1: 3.2335275018572778e7 +- 216304.53738586686
+Survival Probability = 0.9962
+  0.661957 seconds (420.06 k allocations: 39.144 MiB)
+Analyzing 10
+10000
+Peak infected in deme 1: 6.325944001359382e7 +- 2.675849007884932e6
+Survival Probability = 1.0
